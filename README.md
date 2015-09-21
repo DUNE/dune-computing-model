@@ -9,5 +9,9 @@ document serves the following needs:
 Historically, it is continuation of the previous planning and documentation effort undertaken by LBNE,
 which produced two document of interest:
 * Software and Computing Plan
-* The "Reqruirements" which were supposed to ensure agreement among the collaborators regarding policies and technology choices to be adapted.
-*
+* The "Requirements" which were supposed to ensure agreement among the collaborators regarding policies and technology choices to be adapted.
+
+## Drivers
+* Challnges in DAQ and its interface to offline
+* Scalability of computing resources
+* Potential reliance on HPC for difficult reconstruction cases
