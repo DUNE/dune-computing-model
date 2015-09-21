@@ -15,3 +15,7 @@ which produced two document of interest:
 * Challnges in DAQ and its interface to offline
 * Scalability of computing resources
 * Potential reliance on HPC for difficult reconstruction cases
+
+## Timeline
+The initial draft of the Computing Model will be completed in the Fall of 2015. It is meant to be a "living document" which will change as DUNE goes through the R&D, prototyping and other stages in its evolution.
+
