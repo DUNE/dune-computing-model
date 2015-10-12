@@ -11,6 +11,7 @@
 \textheight=9.25in
 
 \usepackage[dvips]{graphics}
+\usepackage[nomargin,inline,marginclue,draft]{fixme}
 \usepackage{rotating}
 \usepackage{amssymb,amsmath}
 \usepackage{graphicx}
@@ -21,7 +22,7 @@
 \usepackage{enumerate}
 
 %% draftwatermark causes infinite loop on SL6's ancient TeXLive
-%\usepackage[firstpage]{draftwatermark}
+\usepackage[firstpage]{draftwatermark}
 \usepackage{lipsum}
 \usepackage{tikz}
 
@@ -53,19 +54,17 @@
 
 %\centerline{submitted on behalf of the DUNE collaboration}
 
-%\SetWatermarkText{DRAFT}
-%\SetWatermarkLightness{0.8}
-%\SetWatermarkScale{5}
+\SetWatermarkText{DRAFT}
+\SetWatermarkLightness{0.8}
+\SetWatermarkScale{5}
 
 
-%\begin{abstract}
-
-%\end{abstract}
+%\begin{abstract} \end{abstract}
 
 % --- executive summary section ---
 \newpage
 %\centerline{\textbf{\centerline{\bf{\Large {Executive Summary}}}}} 
-%	\input{execsum}
+%\input{execsum}
 
 \newpage
 \tableofcontents
@@ -76,9 +75,13 @@
 \section{Introduction}
 \input{introduction}
 
+\section{Requirements}
+\input{requirements}
+
 \section{DUNE Data Characteristics}
 \input{data-rates}
 
-
+\section{The Computing Model}
+\input{computing_model}
 
 \end{document}
