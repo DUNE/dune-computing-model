@@ -40,20 +40,29 @@ integrations of systems and components in DUNE.
 
 Another factor that defines the structure and content of the Computing Model are the characteristics of the data to be collected,
 processed and otherwise generated in the experiment. For example, raw data rates will dictate the scale and required capabilities
-of the Data Acquisition System, which in turn will determine the scale and other characeristics of offline system required by DUNE.
+of the Data Acquisition System, which in turn will determine the scale and other characteristics of offline systems required by DUNE.
+The scope and projected volume of Monte Carlo studies will set the scale of CPU and storage resources needed.
 
 
 
-\subsection{Anticipated Evolution of the Computing Model and Implementation Plan}
-
-At the time of writing, DUNE is in the stage of broad and active R\&D effort, supported by the development of appropriate 
+\subsection{Evolution of the Computing Model}
+According to current plans, DUNE will be commissioned in mid-2020s. The decade before the commissioning will be quite busy
+for DUNE, which is currently in the stage of broad and active R\&D effort, supported by the development of appropriate 
 software tools in each area. Extensive simulations are being performed to support design decisions pertaining to the Liquid 
 Argon TPC as well as a number of other detector elements and subsystems (cf. the proposed Near Detector, the Photon Detector, 
-the target complex etc). Background characterization, track and event reconstruction techniques are all under active development. 
-The landscape of DUNE computing will be defined by these and similar tasks for  the next few years, after which the focus will 
-gradually shift towards preparations for actual data taking and analysis. 
-This will include scaling up the data management and processing systems, integration testing, 
-stress testing and  realistic data challenges preceding the commencement of operations.
+the target complex etc). Background characterization, event reconstruction techniques and studies are systematic errors are all under active development.
+
+Importantly, at the time of writing DUNE is actively working on two LArTPC prototypes:
+\begin{itemize}
+\item 35t Liquid Argon TPC situated at FNAL which will start taking cosmic ray data in 2016
+\item The ``Full Scale'' prototype to be placed in a test beam at CERN, scheduled for commissioning in 2017 and actual data taking in early 2018
+\end{itemize}
+
+It follows that although the eventual full detector is still years away, DUNE is effectviely engaged in a vigorous experimental program which
+poses non-trivial requirements from the computing standpoint. The landscape of DUNE computing will be defined by these and similar tasks for the next few years.
+
+After the crucial prototyping stage is completed, the workup to start of data taking in DUNE will include scaling up the data management and processing systems,
+integration testing,  stress testing and  realistic data challenges preceding the commencement of operations.
 
 In order to maintain a well defined structure of our planning documents, it was decided to address the issue of evolution of the Computing Model 
 and the plans based on it by using the following approximation:
