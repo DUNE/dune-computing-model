@@ -1,4 +1,3 @@
-\fxnote{Import the Requirements with necessary edits}
 \subsection{Overview}
 \subsubsection{Purpose, Origin and Scope}
 
@@ -21,7 +20,7 @@ to be addressed in the future.
 
 \subsubsection{Structure}
 
-This section is organized as a set of categories reflecting major responsibilities of the DUNE Computing working group.  Each category will generally contain information including:
+This section is organized as a set of categories reflecting major responsibilities of the DUNE Software working group.  Each category will generally contain information including:
 
 \begin{itemize}
 \item \textbf{Description:} Description and scope of the category.
@@ -42,6 +41,8 @@ Where necessary, each of these items may be placed in an individual subcategory 
 
 In addition, in cases when it helps clarify the scope of a given  requirement, appropriate statements will be made as to what is \textbf{not} required in the context of a particular section.
 
+
+%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \subsection{Data Requirements}
 \label{sec:dunedata}
 
@@ -49,6 +50,7 @@ In addition, in cases when it helps clarify the scope of a given  requirement, a
 This section contains the requirements related to handling a variety of data by the DUNE Collaboration. This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed) datasets and other collections of data (and where necessary, the metadata associated with these items). Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
 
 The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. This is closely related to Section~\ref{sec:dunedc} (Distributed Computing).
+\fxnote{Make sure the referecnce to Dist Comp is correct}
 
 Data Retention policies will aim to provide cost-effective and optimal schedule of data distribution, replication and retirement, in order to maximize
 efficiencies in achieving the scientific objectives of DUNE. On a longer time scale, there is a need to put in place policies and procedures for data preservation.
@@ -336,6 +338,176 @@ Software working group and general management of DUNE.
 \begin{itemize}
 \item Due to a hardware malfunction, a software bug or other such factors, a portion of raw data may fail basic validation. A special decision may be made to retire such data on a short time scale in order to conserve storage space.
 \item Once a particular body of data has been completely migrated to a new format, and properly validated, a special decision may be made to lift the ``backward read capability'' requirement for the software accessing the data, since the old format is effectively no longer required and the new software has full access to data anyhow.
+\end{itemize}
+
+%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Databases}
+\label{sec:dunedb}
+\subsubsection{Description}
+
+Databases are a crucial domain in DUNE, providing the foundation for handling experiment conditions and calibration data, metadata, file catalogs and a variety of information systems.  A large part (but not necessarily all) information held in the experiment databases is typically derived from the experiment data itself (see  Section~\ref{sec:dunedata}, ``Data'') and thus shares some of the same requirement concepts.  However, due to specifics of data handling in this domain, databases are considered distinct enough that their requirements are stated separately.  
+
+\subsubsection{Definitions}
+\begin{itemize}
+\item \textbf{Database (DB):} A database is a collection of data, organized in a way that supports processes and activities requiring that data.
+\item \textbf{RDBMS:} Relational Database Management System.
+\item \textbf{Database server:} A database server is a computer program that provides database services to other computer programs or computers, as defined by the client–server model. Most of the time the server runs on dedicated hardware, in which case the term ``server'' equally applies to that hardware as well.
+\item \textbf{Slave database:} A database in which information is synchronized to a master database, which is considered the authoritative source of data.
+\item \textbf{Master database:} A database which collects and stores information from various sources and serves as the source of data in the master/slave model. A replica residing in a slave may in turn become a master for a different system.
+\item \textbf{Database owner:} A collaborator or group of collaborators responsible for configuring, populating and maintaining a database and making it available to the Collaboration.
+\item \textbf{Collaboration database system:} The ensemble of all databases and their servers on which the collaboration relies.
+\item \textbf{Application-specific databases:} a database which is not required to be distributed because of its tight coupling to a specific application. Such databases are exempt from master/slave distribution mechanism as determined by consensus of the Software working group.
+\item \textbf{noSQL:} A collective term referring to a large and diverse group of new database technologies which are built on principles different from RDBMS and may offer advantages in certain application areas.
+\end{itemize}
+
+\subsubsection{Issues}
+\begin{itemize}
+\item In most physics experiments, RDBMS remains the prevailing technology in use, oftentimes as a legacy platform.
+\item There is no single RDBMS standard, there are multiple solutions and variations of the technologies as well as licensing options attached to it, from free to commercial.
+\item Commercial database solutions have the advantage of proven performance and well understood scalability, but also are often associated with considerable licensing fees, expensive support and implications for interface design.
+\item Data  integrity requires having one definitive DB vs a few receiving same data simultaneously.
+\item Replication is one of core features necessary in many usage scenarios.
+\item DB backup/restore procedures are needed to protect crucial data.
+\item Performance and scalability problems are commonplace in large scale projects.
+\item The noSQL technology has taken root in industry, and should be evaluated for use in DUNE.
+\item Databases utilized in online systems (such as DAQ) represent a special case, as their performance and availability must be prioritized in order for DUNE to achieve maximum data-taking efficiency.
+\item There are multiple ways to access the data residing in the databases, and it needs to be done in a way optimal for each use case.
+\end{itemize}
+
+\subsubsection{Requirements}
+
+\textit{Master Database}
+
+\begin{itemize}
+\item For each specific type of data there shall be only one master database across the Collaboration.
+
+\item Master databases involving multiple servers sharing or copying data among themselves (such as in cases driven by High Availability considerations) shall preserve referential integrity of the data and  have an interface presented to the slave DB servers (and other clients) consistent with that of a single master
+
+\item All master databases shall be available for replication by any appropriately equipped participating computing facility.
+
+\item Replication of master databases shall not have undue performance and/or availability impact on the master DB.
+
+\item Design and implementation for new master databases shall be discussed within DUNE Software working group.  Discussions shall take into
+consideration expertise of and ongoing support by the database owners, performance, scalability and long-term sustainability of the database
+technology as well as integration with collaboration-wide information systems.
+\end{itemize}
+\ 
+\\
+\textit{Slave Databases}
+\begin{itemize}
+\item A slave database shall be replicated from a master.
+
+\item A slave database shall not be modified except as part of the official replication process.
+\end{itemize}
+\ 
+\\
+\textit{Backup and restoration}
+
+\begin{itemize}
+\item Any master database shall be equipped with a backup mechanism or be otherwise reproducible in the event of a technical failure, 
+hardware upgrade and other types data loss.
+\item Specific requirements forthe time limits on restoration of each database shall be defined by the S\&C Organization 
+and its Database Coordinator on case-by-case basis at a later point, so as to not significantly impact ongoing processing and operations in general.
+\end{itemize}
+\ 
+\\
+\textit{Performance and scalability}
+
+\begin{itemize}
+\item Specific metrics defining necessary availability, latency and scalability parameters for each database, such that their use is efficient and does not impede productivity of the Collaboration,  shall be established by the DUNE Software working group.
+
+\item Software working group shall be proactive in monitoring the performance of the Collaboration database systems, identifying bottlenecks and scalability limits.
+
+\item Software working group shall be making plans for data migration, equipment and platform upgrades and any other measures as is 
+necessary to provide adequate level of database services to the Collaboration, in close cooperation with the facilities 
+and support personnel at each participating site.
+\end{itemize}
+\ 
+\\
+\textit{Technology choices}
+\begin{itemize}
+\item Database technologies available to the Collaboration shall be considered on merits such as long term cost and 
+performance characteristics, available expertise and support levels, available interfaces, scalability and other relevant 
+factors such as ease of integration with collaboration-wide information systems.
+
+\item There shall be no fixed requirement to either use or avoid newer technology such as noSQL (or any other) vs RDBMS, 
+and such determination will be made on case-by-case basis based on criteria listed above.
+
+
+\item Decisions pertinent to technology choices shall be made based on discussions within the Software working group.
+\end{itemize}
+\ 
+\\
+\textit{DB Access Methods}
+
+\begin{itemize}
+
+\item The Software working group shall make an concerted effort to ensure that access to DUNE databases it not 
+locked into a particular programming language or software package, i.e. flexible and diverse APIs are available.
+
+\item Existing solutions (coming from industry and open source community) shall be given preference over in-house development if other factors are equal.
+
+\item Where possible, direct DB access shall be deprecated in favor of a network service which is to provide features such as modern and flexible security mechanism, data caching, venues for scalability improvements, better resource utilization  and possibilities to replace the database system itself with a different engine, while preserving access methods (APIs).
+
+\item In general, access to databases utilized by the online systems (DAQ etc) shall be limited to these systems (i.e. no external access), in order to ensure stability, performance and availability essential for efficient data-taking.
+
+\item Procedures shall be be put in place to provide copies of the data contained in the online databases, to offline systems and DUNE researchers.
+
+\end{itemize}
+
+\subsubsection{Justifications}
+\begin{itemize}
+
+\item Allowing replicas to receive updates from sources other than master DB will lead to loss of data integrity.
+
+\item Having a set of robust backup and restoration procedures is crucial for preserving continuity of DUNE operations and minimizing downtime in cases of technical failures and other disruptive events.
+
+\item It is essential to provide wide access to the data in the master DB, in order to leverage the data itself and the effort put into its maintenance.
+
+\item Optimal choices on specific master database location and technology can not be made without considering details of the application and the wider software and user base of the collaboration.
+
+\item Freedom of innovation and efficiency is gained by allowing flexibility in location and technology choices but 
+this may conflict with collaboration wider goals of efficiency, security and consistency, and the right balance needs to be found.
+
+\item Master databases can benefit from geographical proximity to their source of data.
+
+\item Mature database systems provide robust remote replication mechanisms which should not be re-invented by the collaboration.
+
+\item Opening a database connection to the world may lead to a sub-optimal security situation, and this can be mitigated by deploying 
+a web service as an insulation layer.
+
+\end{itemize}
+
+\subsubsection{Deviations}
+\begin{itemize}
+
+\item Certain application-specific databases, such as a small database used in a small, limited use information 
+system (e.g. a specific type of log files of no critical importance, or lookup tables utilized in a simulation, 
+which values can be recalculated if needed) shall not be subject to replication requirements.
+
+
+\item Likewise, certain Web services require databases for their basic functionality, and such database contain information that is not specific or unique to DUNE data, and these cases will also be exempt from the replication requirement.
+
+\item In the interest of guaranteed availability and performance, replication requirements for online systems will be modified (e.g. ongoing automatic replication may be replaced with a managed copying of data, potentially in a different format, to systems that are exposed to users).
+\end{itemize}
+
+\subsubsection{Use cases}
+\begin{itemize}
+
+\item An application needs a straightforward way to read certain data in the conditions DB even when it is run 
+off-line and does not have direct access to the Collaboration database systems. A read-only local replica of the 
+data is created, which is immutable and will not be used to feed other systems.
+
+\item Since the performance of the master DB is critically important for it to be able to receive and process 
+data at rates commensurate with incoming data, certain types of applications will be restricted to replicas of 
+the data located in regional computing centers (as opposed to the master DB itself).
+
+\item A Web service used to provide access to a database incorporates data caching methods which allow the system 
+to avoid repetitive queries by serving pre-fetched data, thus greatly improving performance.
+
+\item After accumulating a large volume of Grid job monitoring data, a RDBMS instance started having 
+performance problems due to unforeseen scalability issues. Based on decisions by the Software working group, a large portion of data is 
+migrated to a noSQL service, thus reducing the load on the principal database.
 \end{itemize}
 
 
