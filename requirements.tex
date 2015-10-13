@@ -1,14 +1,234 @@
 \fxnote{Import the Requirements with necessary edits}
-\subsection{Purpose, Origin and Scope}
+\subsection{Overview}
+\subsubsection{Purpose, Origin and Scope}
 
-These Requirements have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment (LBNE), which is a predecessor of DUNE.
+These Requirements have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment, which was a predecessor of DUNE.
 They constitute one of principal components of the Computing Model. 
 
-This section does not cover specific \textit{functional requirements} for the various Physics Tool software but rather focuses on the foundations of the Software and Computing infrastructure, such as code management, Grid capability, data management etc (and does not concern itself specifically with the application code such as tracking, analysis etc).
+This section does not cover specific \textit{functional requirements} for the various physics toolsl software
+but rather focuses on the foundations of the Software and Computing infrastructure, such as code management, Grid capability, data management etc
+(and does not concern itself specifically with the application code such as tracking, analysis etc).
 
 An effort was made to maintain a relatively high-level view of the DUNE computing issues, and to not go into smaller details which are more likely to change as the project moves forward, while still providing adequate basis for making informed decisions. In cases where it was impossible to establish concrete metrics or parameters for a specific requirement, it is still listed as an item
 to be addressed in the future.
 
-Information necessary for the creation of these Requirements have been collected during a number of LBNE Software and Computing meetings, conference calls and extensive information exchange via e-mail and other means. It is recognized that the Requirements themselves (and the Computing Model) may evolve with time, in order to correctly reflect the status of rapidly evolving technologies and the LBNE organization itself. Such expectation is reinforced by actual experience of large scale HEP collaborations. We anticipate therefore that the requirements will be revised roughly in the middle of the time period between their creation and the commissioning of the experiment, and help evolve the LBNE Computing model such that it continues to meet the needs of the Collaboration.
+%Information necessary for the creation of these Requirements have been collected during a number of DUNE Software and Computing meetings, conference calls and extensive information %exchange via e-mail and other means. It is recognized that the Requirements themselves (and the Computing Model) may evolve with time, in order to correctly reflect the status of rapidly %evolving technologies and the DUNE organization itself. Such expectation is reinforced by actual experience of large scale HEP collaborations. We anticipate therefore that the requirements will %be revised roughly in the middle of the time period between their creation and the commissioning of the experiment, and help evolve the DUNE Computing model such that it continues to meet %the needs of the Collaboration.
 
-Certain  requirements need to be specified by a collaboration including the S\&C Organization and other software organizations in LBNE (i.e. the Physics Tools Group, the Online/DAQ groups etc). In these cases, the S\&C Organization will work with the appropriate group to insure that the requirement addresses the needs of all necessary organizations.  This includes interfacing with various LBNE Project groups in order to assure the seamless cooperation between the online and offline areas.
+%Certain  requirements need to be specified by a collaboration including the S\&C Organization and other software organizations in DUNE
+%(i.e. the Physics Tools Group, the Online/DAQ groups etc). In these cases, the S\&C Organization will work with the appropriate group to insure
+%that the requirement addresses the needs of all necessary organizations.  This includes interfacing with various DUNE Project groups in order
+%to assure the seamless cooperation between the online and offline areas.
+
+\subsubsection{Structure}
+
+This section is organized as a set of categories reflecting major responsibilities of the DUNE Computing working group.  Each category will generally contain information including:
+
+\begin{itemize}
+\item \textbf{Description:} Description and scope of the category.
+\item \textbf{Definitions:} If necessary, specific definitions of certain items are given.
+\item \textbf{Issues:} Statement of issues that requirements in this particular category are expected to address.
+\item \textbf{Requirements:} The requirements themselves, formatted as assertions.
+\end{itemize}
+
+Where necessary, each of these items may be placed in an individual subcategory to better reflect details and granularity of information being presented. A requirement section may be accompanied by one or more of the additional items:
+
+\begin{itemize}
+\item \textbf{Use cases}: Descriptions of any use cases that drive the choice for the requirement.
+\item \textbf{Justifications}: Explanations as to why the requirement was chosen.
+\item \textbf{Accepted risks}: Any known problems with the requirement which are considered acceptable.
+\item \textbf{Alternatives}: Any alternatives that were considered with reasons for rejection.
+\item \textbf{Deviations}: Recognized cases where deviations do not violate the intention.
+\end{itemize}
+
+In addition, in cases when it helps clarify the scope of a given  requirement, appropriate statements will be made as to what is \textbf{not} required in the context of a particular section.
+
+\subsection{Data Requirements}
+\label{sec:dunedata}
+
+\subsubsection{Description}
+This section contains the requirements related to handling a variety of data by the DUNE Collaboration. This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed) datasets and other collections of data (and where necessary, the metadata associated with these items). Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
+
+The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. This is closely related to Section~\ref{sec:dunedc} (Distributed Computing).
+
+Data Retention policies will aim to provide cost-effective and optimal schedule of data distribution, replication and retirement, in order to maximize
+efficiencies in achieving the scientific objectives of DUNE. On a longer time scale, there is a need to put in place policies and procedures for data preservation.
+The principal difference between retention and preservation is that the former concerns itself with optimizing ongoing analyses and other types of data processing,
+whereas the latter addresses the long term storage and documenting and preserving methods of accessing these data (formats, algorithms, application code etc).
+
+
+\subsubsection{Definitions}
+\begin{itemize}
+\item \textbf{Raw Data:} Data saved by a detector (far, near or prototype detector) DAQ or monitoring systems, and information from FNAL beam monitoring.
+
+\item \textbf{Production Software:} the suite of software run to produce an official collaboration result. One example of such software is software used to produce data appearing in a publication. Such software is subject to strict version control, QA and validation, and is utilized in a managed fashion.
+
+\item \textbf{Processed Data:} any data produced by production software (see above) for the collaboration as a whole or to satisfy the needs of working groups.  This includes simulations, data reduction/reconstruction, data skimming and inputs to final analyses. This type of data does not include data samples produced by individual users using software that has not been certified as production software by appropriate Working Groups, Production Managers and if needed by the S\&C Coordinators.
+
+\item \textbf{File catalog:} a general term used to describe a system which performs a range of mapping functions, such as mapping of a Logical File Name (LFN) to one or more physical locations of the file in the distributed data management systems. This functionality is essential for locating physical copies of the data when needed, optimal matching of distributed data to available computing resources, storage accounting and various other aspects of distributed data management. File catalog may also incorporate functionality related to Metadata (see next item).
+
+\item \textbf{Metadata:} data that describes other data.
+
+\item \textbf{Dataset:} a collection of files (potentially in differing formats) and corresponding metadata (uniform across the set) that forms a coherent unit of data used in a computation, and is accounted for as such.
+\end{itemize}
+
+\subsubsection{Issues}
+The following is a short list of issues that DUNE will need to address in its data handling:
+\begin{itemize}
+\item Data replication strategy for each major class of data needs to be created.
+
+\item Data retention policies are an important tool to assure cost-effectiveness and overall efficiency of the  data infrastructure.
+
+\item Long-term data preservation policies and procedures need to be properly planned.
+
+\item General rules of access for DUNE collaborators, and for the general public need to be understood in order to assure efficiencies and compliance.
+
+\item Data distribution and access methods will play a major role in resource availability and overall efficiency of resource utilization.
+
+\item The file catalog is one of the central elements of many architectures for handling data, and its performance characteristics are of utmost importance.
+
+\item File and dataset metadata: management of the large and heterogeneous volume of data in DUNE  (e.g. Monte Carlo samples, raw data, processed data in any stage of analysis or transformation etc) requires creation, storage and appropriate use of coherent metadata, which must allow identification, location and retrieval of collections of data necessary for specific purposes. It is crucial that the design of the metadata and any system for its utilization is such that it allows for truly distributed, highly scalable and symmetric strategy of data placement.
+
+\item Loss of information contained in the file catalog and/or metadata system may have pernicious effects such as appearance of ``orphaned" or ``dark" data, i.e. data 
+residing in storage that cannot be efficiently located and utilized by the Collaboration.
+
+\item Data design and formats: having a consistent approach to data design and policies to maintain relevant standards and interfaces is crucial for efficient and reliable software development processes and operations of DUNE.
+
+\item Raw data collected by DUNE  online systems (such as DAQ) will be stored (buffered) at a facility located close to the Far Detector, then transmitted to central mass storage via the network. Efficient interface for exchange of data between the online and offline systems needs to be established.
+
+\end{itemize}
+
+\subsubsection{DAQ Data Interface Requirements}
+\begin{itemize}
+\item Data formats, schemas and other crucial parameters pertaining to data recorded by DUNE  data acquisition systems shall 
+be formulated and documented in close cooperation between the Software working group and Online Software/DAQ Group.
+
+\item Handling of the data being recorded by DAQ systems shall become responsibility of the Software working group once such 
+data is first deposited into a general purpose mass storage system, having passed necessary validation steps.
+
+\end{itemize}
+
+\subsubsection{Replication Requirements}
+\textit{Raw data replication}
+
+\begin{itemize}
+\item Facilities storing official copies of the raw data shall possess adequate storage capacity, availability (i.e. minimal downtime), network connectivity and bandwidth as well as other relevant infrastructure characteristics to be determined by the Software working group.
+
+\item The number of raw data replicas at any given time shall be sufficient to protect the raw data as a whole from data loss, by utilizing a variety of techniques such as redundancy inherent in replication, automated error detection, automated data repairs and others.
+
+
+\item Raw data replicas shall not be required to reside in a single storage facility and may be divided in managed datasets distributed to a few designated DUNE computing centers chosen based on agreements with member institution and taking into account their infrastructure characteristics.
+
+\item Latency of replication of raw data shall be within a 24 hour period, counting from arrival of new data to the initial storage location (buffer), and to the point where transmitted data is deposited in mass storage at the remote location, and validated and accounted for in the data handling system.
+
+\item Any storage system or host selected for the official copy (replica) of the raw data shall employ storage technology with an expected loss of no more than one unit of data per million per year.
+
+\end{itemize}
+
+\textit{Processed data replication}
+
+\begin{itemize}
+
+\item The processed data shall be generated at, and distributed to DUNE computing facilities at participating institutions 
+based on a combination of factors such as research interests of the corresponding working group operating at a particular location, 
+resource availability and scheduling policies of the Workload Management System employed by DUNE.
+
+\item The number of replicas of the processed data shall not be subject to a fixed minimum. 
+
+\item The number and placement of replicas of the processed data shall be determined dynamically based on requests of a particular processing campaign, with priorities set by collective decisions of the Physics Working Groups and the Software working group.
+\end{itemize}
+
+\textit{General replication}
+
+\begin{itemize}
+\item Mechanisms shall be put in place to assert validity of the data being replicated and/or transmitted.
+
+\item One mechanism for validating data replication shall be checksum controls.
+
+\item Control of data placement, volume, status and other characteristics shall be available.
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{Data Retention and Preservation Requirements}
+
+\textit{Raw data retention}
+\begin{itemize}
+\item Raw data shall be stored at least for the duration of the experiment.
+
+\item Exceptions to the raw data retention requirement shall be made by the Collaboration.
+
+\item Any part of raw data shall always be readable by software available to the Collaboration, for the duration of its existence.
+
+\end{itemize}
+\ 
+\\
+\textit{Processed data retention}
+\begin{itemize}
+\item Specific policies shall be created by the Software working groups conveners and the Data Management Coordinators reporting to them, who will be tasked with collecting information regarding requests for specific data types and segments, monitoring capacity, access patterns and other relevant data for effective decision-making. 
+
+\item Processed data shall have no fixed retention time.
+\end{itemize}
+\ 
+\\
+\textit{Data preservation}
+\label{sec:lbnepres}
+\begin{itemize}
+\item The Software working group shall develop a long-term data preservation strategy in compliance with regulations put in place by the funding agencies and utilizing best practices in science and industry.
+
+\item The funding and support model for long-term DUNE data preservation shall exist by the time of commissioning of the detector, and shall be established in consultation with the funding agencies.
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{General Rules of Access to DUNE Data}
+
+\begin{itemize}
+\item Access to raw or processed data by official members of DUNE Collaboration  shall not be limited by any specific policies.
+
+\item Technical implementations shall not unduly restrict access by any member of the Collaboration.
+
+\item Each member institution and individual member of  DUNE shall abide by the data access and distribution rules contained in this document.
+
+\item The Software working group shall develop a long-term public data access strategy in compliance with regulations put in place by the funding agencies and utilizing best practices in science and industry.
+
+\item The long-term public data access strategy shall exist by the time of commissioning of the detector, and shall be established in consultation with the funding agencies.
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{Data Distribution and Access Methods}
+\textit{Raw Data}
+
+The raw data volume and characteristics make it very distinct from other data types, and it is helpful to consider it separately from the processed data in the context of this section. 
+\begin{itemize}
+\item Raw data shall be distributed to institutions in a managed manner, based on specific requests, in cases not already covered by the raw data replication strategy.
+
+\item Immediate (low latency) access to raw data held in official replicas outside of actively managed production processing streams shall not be guaranteed.
+\end{itemize}
+\ 
+\\
+\textit{Processed Data}
+
+\begin{itemize}
+\item A highly symmetrical placement strategy for the processed data shall exist, i.e. in principle both input and output data for any job or application can reside at any site or host which is a part of the DUNE distributed data network.
+
+\item Processed data shall not be required to be copied to a single principal location.
+
+\item A single principal location shall not be relied upon as a sole source of input data.
+
+\item Processed data at any location, regardless of its provenance,  shall be accessible to DUNE users via submitted jobs or applications from any other DUNE site.
+\end{itemize}
+\ 
+\\
+\textit{All Data}
+\begin{itemize}
+\item Direct access to high capacity, high latency back-end storage e.g. tape, from running jobs or applications, shall not be allowed.
+
+\item When accessed remotely, data shall be made available using standard interfaces and protocols compatible with Grid and Cloud technology as implemented in widely available software stacks (cf. the Open Science Grid).
+
+\item Where practical, sites without extensive local storage (e.g. without the Storage Element capability) shall be made available for deployment of DUNE 
+computational payload by utilizing appropriate network-based methods of data retrieval and upload to and from the worker node.
+
+\item In deciding details of data placement strategy, the S\&C Organization shall take into account the infrastructure characteristics and support level at participating sites, as well as potential legal or policy barriers impacting systems and individuals based on nationality or location.
+
+
+\end{itemize}
+
+
