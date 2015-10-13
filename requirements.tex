@@ -170,7 +170,7 @@ resource availability and scheduling policies of the Workload Management System 
 \ 
 \\
 \textit{Data preservation}
-\label{sec:lbnepres}
+\label{sec:dunepres}
 \begin{itemize}
 \item The Software working group shall develop a long-term data preservation strategy in compliance with regulations put in place by the funding agencies and utilizing best practices in science and industry.
 
@@ -226,9 +226,116 @@ The raw data volume and characteristics make it very distinct from other data ty
 \item Where practical, sites without extensive local storage (e.g. without the Storage Element capability) shall be made available for deployment of DUNE 
 computational payload by utilizing appropriate network-based methods of data retrieval and upload to and from the worker node.
 
-\item In deciding details of data placement strategy, the S\&C Organization shall take into account the infrastructure characteristics and support level at participating sites, as well as potential legal or policy barriers impacting systems and individuals based on nationality or location.
+\item In deciding details of data placement strategy, the Software working group shall take into account the infrastructure characteristics
+and support level at participating sites, as well as potential legal or policy barriers impacting systems and individuals based on nationality or location.
 
 
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{File Catalog Requirements}
+
+\begin{itemize}
+\item A file catalog system shall be put in place by the DUNE Software working group.
+
+
+\item The file catalog system shall be protected from data loss to the greatest extent possible, by utilizing redundancy, replication and backup and restore systems.
+
+
+\item The file catalog system shall have interfaces which are flexible and extensible enough to cover the range of data storage and distribution technologies employed in DUNE.
+
+\item The file catalog system shall cover the totality of distributed storage used by DUNE, i.e. it won't just describe data at a single site, but instead will allow its clients to locate potentially multiple replicas of the data at multiple sites, thus opening optimization possibilities.
+
+\item The file catalog system shall need to have verifiable scalability properties which should allow it to scale up to the necessary level of data volume and throughput, in order to meet the needs of DUNE data processing throughout the lifetime of the experiment.
+
+\item At a minimum, the file catalog system shall incorporate handling of checksum information in order to facilitate detection of errors and sanity checks during operations on data.
+
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{File and Dataset Metadata Requirements}
+
+\begin{itemize}
+\item A metadata system shall be created to support the distributed data processing capabilities of DUNE.
+
+\item The metadata shall cover the data managed by all participating sites, utilizing a variety of middleware and storage media.
+
+\item The metadata system shall not be coupled to a particular storage solution or architecture, so as to allow flexibility and ways to evolve DUNE data storage.
+
+\item Guaranteed scalability of DUNE metadata system shall be assured according to parameters set by Software working group.
+
+\item Information contained in the metadata system shall be protected from data loss to the greatest extent possible, by utilizing redundancy, replication and backup and restore systems.
+
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{Data Design and Format Requirements}
+
+\begin{itemize}
+\item Raw data shall be created according to formats which have been explicitly accepted for use by the Collaboration.
+
+\item Processed data shall be created according to formats which have been explicitly accepted for use by the Collaboration.
+
+\item Data formats shall be developed according to specific mandates set by the Software working group.
+
+\item Data formats shall be subject to peer review, before their acceptance.
+
+\item Simplicity of design and straightforward unpacking and access algorithms shall be part of requirements for any data format.
+
+\item The Software working group shall be proactive in evaluation of existing and potential future data formats.
+
+\item The Software working group shall assure that obsolete and/or inefficient formats are phased out on a schedule that is not disruptive to crucial data processing streams.
+
+\item Any collection of data (e.g. contained in a file) shall have methods put in place for identification of the data format and its version.
+
+\item Any collection of data (e.g. contained in a file) shall be self-describing.
+
+\item Any collection of data (e.g. contained in a file) shall contain provenance information.
+
+\item Full backward compatibility for raw data shall be guaranteed at any time, e.g. via maintenance of legacy interfaces, or by bulk conversion to a new format, with subsequent rigorous validation.
+\end{itemize}
+
+%%% --------------------------------------------------------------------
+\subsubsection{Use cases}
+\begin{itemize}
+\item A working group wants to reprocess all raw data in order to perform searches for new physics or rare events that would be missed by pre-existing standard analyses.  To accommodate technology changes over time, the Software working group has rewritten very old data into new formats and with each software release has performed validation checks to assure that any changes to the raw data file formats have been accommodated.
+
+\item A research group from a member institution located outside of the United States requested a large portion of raw data to be placed at their facility, in order to run various preliminary analyses. Upon working out the schedule of data movement, the DUNE Data Management  monitors progress of data transmission which is performed using one of the Grid protocols.
+
+\item DUNE secured access to a computing facility which unfortunately does not have significant local storage capability. Utilizing ``data in the Grid'' technology, the Workload Management System makes it possible for the worker nodes at this facility to download input data and upload results to a different location, utilizing high bandwidth networks.
+
+\item A user needs to locate datasets produced in a few Monte Carlo simulation runs, produced under specific conditions, for further analysis. Finding this data is made possible by the Metadata and File Catalog Systems.
+
+\item After a long processing campaign, results of a particular simulation run have been fully analyzed and the campaign declared a success. To conserve storage space, a decision is made to retire the data (i.e. make it eligible for deletion as necessary) since the new simulation wave will use an improved version of geometry, which will be adopted going forward.
+
+
+\item A user received a request for a subset of DUNE data from an institution that is not a member of DUNE. According to the rules, the user then refers the requestor to the
+Software working group and general management of DUNE.
+\end{itemize}
+%%% --------------------------------------------------------------------
+\subsubsection{Justifications}
+\begin{itemize}
+\item Having geographically distributed multiple replicas of "precious" data is a common and standard way to ensure it's not lost during the normal course of operations where occasional localized technical faults cannot be excluded, and also in case of natural disasters where a single data center may suffer damage and data loss.
+
+\item The File Catalog provides functionality that is very useful in a number of architectures of data management systems, which forms the basis for the corresponding requirement.
+
+\item Having the ability to always read raw data no matter when and how it was produced (including the format) is essential to meet requirements of Section~\ref{sec:dunepres} (data preservation).
+\item The value of '24 hours' for raw data replication requirements needs additional justification. 
+\end{itemize}
+%%% --------------------------------------------------------------------
+\subsubsection{Accepted Risks}
+\begin{itemize}
+\item Having to implement a system such as File Catalog leads to creation of a potential bottleneck and/or single point of failure. This will need to be countered with rigorous scalability analysis, robust implementation, backup procedures and adequate operational support.
+
+\item It is likely that at least part of the additional raw data replicas will be stored outside of the United States.
+
+\item Errors in decisions related to data retention will potentially result in necessity to reproduce large datasets.
+\end{itemize}
+%%% --------------------------------------------------------------------
+\subsubsection{Deviations}
+\begin{itemize}
+\item Due to a hardware malfunction, a software bug or other such factors, a portion of raw data may fail basic validation. A special decision may be made to retire such data on a short time scale in order to conserve storage space.
+\item Once a particular body of data has been completely migrated to a new format, and properly validated, a special decision may be made to lift the ``backward read capability'' requirement for the software accessing the data, since the old format is effectively no longer required and the new software has full access to data anyhow.
 \end{itemize}
 
 
