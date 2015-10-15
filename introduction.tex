@@ -23,24 +23,31 @@ signal produced by ionizing patciles traveling in Liquid Argon.
 
 
 
-\subsection{About the Computing Model}
+\subsection{About this Document}
 \label{sec:modelrole}
 
-The DUNE Computing Model plays central role in the design of the computing infrastructure of the experiment, as well as
-planning and organization of its software effort. It aims to guide the evolution of the DUNE computing platform in the direction
-optimal for achieving its scientific goals. It will also serve
-as an instrument to inform the funding agencies about the scope of work and rate of progress of the DUNE  
+This central part of this document is the \textit{Computing Model}. The DUNE Computing Model plays central role in the design of the computing infrastructure
+of the experiment, as well as planning and organization of its software effort. It aims to guide the evolution of the DUNE computing platform in the direction
+optimal for achieving its scientific goals. It will also serve as an instrument to inform the funding agencies about the scope of work and rate of progress of the DUNE  
 Computing Organization.
 
-The Computing Model contains the \textit{Software and Computing Requirements} that define a set of rules and principles by which technologies
-are selected and specific practices and policies implemented in DUNE computing. The benefit of having the \textit{Requirements} in place is that they reflect a broad consensus
-within the Collaboration regarding what it needs from its computing sector and its components, thus fostering cooperation and better
-integrations of systems and components in DUNE.
+In addition to the Computing Model itself, this \textit{Report} documents the prerequisites on which the Model is built:
+\begin{itemize}
+\item \textit{Software and Computing Requirements}
+\item \textit{Data Characteristics}
+\end{itemize}
 
-Another factor that defines the structure and content of the Computing Model are the characteristics of the data to be collected,
-processed and otherwise generated in the experiment. For example, raw data rates will dictate the scale and required capabilities
-of the Data Acquisition System, which in turn will determine the scale and other characteristics of offline systems required by DUNE.
-The scope and projected volume of Monte Carlo studies will set the scale of CPU and storage resources needed.
+The former defines a set of rules and principles by which technologies are selected and specific practices and policies implemented in DUNE computing.
+The benefit of having the \textit{Requirements} in place is that they reflect a broad consensus within the Collaboration regarding what it needs from
+its computing sector and its components, thus fostering cooperation and better integrations of systems and components in DUNE.
+
+The latter describes the characteristics of the data to be collected, processed and otherwise generated in the experiment.
+For example, raw data rates will dictate the scale and required capabilities of the Data Acquisition System (DAQ). 
+Characteristics of the data coming out of DAQ will in turn determine the scale of data storage, network and other characteristics of the
+distributed computing system required by DUNE. Another factor in this will be the scope and projected volume of Monte Carlo studies 
+will affect the scale of CPU and storage resources needed by DUNE.
+
+% In summary, the Computing Model
 
 
 
