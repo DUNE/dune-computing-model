@@ -1,47 +1,38 @@
 \label{sec:protodune}
 \subsubsection{Overview}
 
-The name ``protoDUNE'' was given to the ``full-scale'' single-phase LArTPC prototype
-to be deployed at CERN in 2017 for measurements with a test beam provided by a 
-purpose-built target and beamline at CERN SPS. It will serve to validate various DUNE technology aspects
-before proceeding with the construction of the principal DUNE detector, and will also provide an
-important platform for realistic LArTPC detector characterization (e.g. PID, shower response etc) utilizing controlled conditions of a test-beam experimental setup.
+The name ``protoDUNE'' was given to the ``full-scale'' single-phase LArTPC prototype to be deployed at CERN in 2017.
+It is designed for measurements with a test beam provided by a purpose-built target and beamline at CERN SPS,
+and will serve to validate various DUNE technology aspects before proceeding with the construction of the principal DUNE detector.
+ProtoDUNE will also provide an important platform for realistic LArTPC detector characterization (e.g. PID, shower response etc) utilizing
+controlled conditions of a test-beam experimental setup.
 
+In contrast to DUNE which will be well shielded at its underground location, cosmic ray muons have a very large impact on the
+protoDUNE data rate and volume due to the large detector dimensions and surface operation.
 It is foreseen that the total amount of data to be produced in protoDUNE will be of the
 order of 1PB (including comissioning runs with cosmic rays). Processing these data and conducting
-Monte Carlo studies connected to the experiment will require substantial resources and planning.
-The ``protoDUNE'' experiment will not be shielded like DUNE (to be built in a deep cavern) and thus will be subject to substantial occupancy from the cosmic ray muons,
-resulting in background conditions and data characteristics quite different from those of the eventual full detector.
+Monte Carlo studies connected to the experiment require substantial resources and planning.
 
 The experiment will leverage elements of technology developed for the 35t LArTPC prototype at Fermilab (see~\ref{sec:35t}).
 This includes components of the front-end electronics, design of data acquisition and some other systems.
-It is also expected that for the most part, Monte Carlo studies necessary to support this program will be conducted using software evolved from current (2015) tools. Likewise,
-event reconstruction software and analysis tools will rely on the evolving software tools developed for DUNE.
 
-The volume of the recorded data will depend on the number of events to be collected in each measurement,
-as specified in the run plan (see Table FIXME). 
-\fxnote{Decide whether a detailed table is needed at all}
-Cosmic ray muons have a very large impact on the data volume due to the large detector dimensions and surface operation.
-
-It is optimal to first stage the data collected from DUNE-PT on disk at CERN and then save it to tape also at CERN,
-while simultaneously performing replication to data centers in the US. For the latter, Fermilab will be the primary site, with additional data centers at Brookhaven National Laboratory (BNL) and the National Energy Research Scientific Computing Center (NERSC) facility as useful additional locations for better redundancy and more efficient access to the data from a greater number of locations.
+To ensure reliable capture of experimental data in protoDUNE, it is optimal to first stage it on disk at CERN (as opposed to direct transmission
+from protoDUNE DAQ to data centers elsewhere). After that, the data are to be committed to tape storage also at CERN,
+and replicated to data centers in the US. For the latter, Fermilab will be the primary site, with additional data centers at Brookhaven National Laboratory (BNL) and the National Energy Research Scientific Computing Center (NERSC) facility as useful additional locations for better redundancy and more efficient access to the data from a greater number of locations.
 
 
-
-%\subsubsection{Cosmic ray muons and readout window}
-%\label{readout_windows}
 \subsubsection{Event size estimate and data volume}
 
-The data volume will be dominated by the TPC data. Even though the photon detector as well as other elements of the experimental apparatus (muon counters, trigger systems) contribute to the data stream their contributions to the data volume are expected to be sufficiently small such that realistic data volume estimates can be obtained from the TPC event data sizes alone.
+In addition to the Liquid Argon TPC, protoDUNE will include a photon detector as well as other detectors such as muon counters, trigger and PID systems etc.
+However, estimates indicate that the data rate and volume will be dominated by the TPC, so only these data will be considered in this section.
 
 Event sizes can be estimated from "first principles" under the assumption of some event topology and noting the significant amount of cosmic contamination at sea level.  As was shown in Sec.~\ref{calibration}, there is expected to be on average $\sim$68 cosmic muon track segments per readout window and on top of the actual beam event.  Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in a readout window will result in the readout of 6~MB per beam event.  
 %This assumes that you have 80~kbyte per 4 GeV mip and that cosmic muons at the surface have an averagae enegy of 4 GeV
 %Multiply by (68 muons + 1 beam particle) we get 5.5 MB
-In addition to the data associated with the individual particles in the event, channel overhead information needs to be accounted for.   Experience from the 35 t detector at Fermilab indicates that with zero suppression the event overhead amounts to 6~kB per channel for a readout of three drift windows.
-%
 %This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels.  There are 15,360 channels inn the CERN prototype, corresponding to the proposed TPC which consists of 6 APAs with 2560 channels each. 
 %
-Since there are 15,360 channels in DUNE-PT, the expected overhead corresponds to 92~MB per event.  The resulting total event size from overhead and charge from individual particles is 100~MB. 
+
+
 %Background tracks due to cosmic ray particles must be properly identified and accounted for, in order to ensure high quality of the measurements and subsequent detector characterization. Since overlay of cosmic ray muons over beam events is stochastic in nature, the optimal way to achieve this is by recording signals which were produced ``just before'' and ``just after'' the arrival of the test particle from the beam line.  It will be possible because the design of the DAQ contains buffer memory that can be accessed after the trigger decision is made.  This technique will enable us to record and reconstruct either partial or complete background tracks present in the ``main'' event.
 
 
