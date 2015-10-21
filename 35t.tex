@@ -1,10 +1,98 @@
 \label{sec:35t}
 
+The 35-ton prototype has two operating periods, called Phase~I and Phase~II.  Phase~I, which took place
+in 2014, was designed to demonstrate that a sufficiently high electron lifetime is achievable in a non-evacuated
+membrane cryostat. A lifetime of $\sim$3~ms was achieved.  For Phase~II, TPC elements were installed, and
+a data acqusition system developed.  The detector is segmented into four two-sided APA's for eight drift volumes.
+Its total channel count is 2048 wires, 92 (check!) photon detector channels reading out six independent photon
+detection devices, and ?? scintillator paddles arranged outside of the cryostat.
+
+The purposes of Phase~II of the 35-ton run include re-demonstrating that a suffcientnly high electron
+lifetime can be achieved with TPC equipment in the cryostat, and to characterize the performace of the
+detector design.  The unique elements of the DUNE far detector design which are replicated in the 35-ton
+prototype are:  modular TPC elements (multiple APA's instead of just one wire frame in other LArTPC 
+detectors), wrapped induction wires, photon detectors inside the APA frames, two-sided APA's reading
+drift volumes with opposing electric fields, and gaps between the APA's.  Cold electronics similar to the
+far detector's electronics design are also being tested.  The 35-ton prototype detector has no
+input beam; it relies on cosmic rays for the signal used to characterize the detector.  A large amount
+of data is required in order to fully exercize the data acquisition and characterize the 
+performance of the detector under several operating conditions.  Analysis topics include --
+determination of the electron drift velocity, the electron lifetime, the signal and noise characteristics
+of the TPC channels, and the signal and noise characteristics of the photon detectors.  The external
+trigger paddles will be used to identify samples of cosmic rays that are particularly useful in determining
+detector characteristics.
+
+As of this writing (October 2015), the 35-ton prototype is scheduled to fill with liquid argon
+in early December 2015, commission, and take data for two or three months, lasting until early 2016.
+The prototype detector will be expected to run in a variety of different operating conditions, as
+the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
+scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
+rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
+at specific distances from the wire planes.  We anticipate of order 100~TBytes of raw data to be collected
+by the 35-ton prototype during its run, not including processed versions of the data.
+The sections below describe the computing model needed
+to collect and analyze the data from the 35-ton Phase~II prototype.
+
 \subsubsection{Online Computing Model}
 
+Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
+and digitize it.  These data are sent to sixteen Recofigurable Compute Elements (RCE's), each of which
+processes the data from 128 channels.  The RCE's format the data, apply trigger decisions, and send the
+data along ethernet connections to the DAQ computers.  The RCE's will perform zero suppression for
+much of the data to be collected.  The performance of the zero-suppression algorithm depends on the
+noise and other artifacts of the data, such as the rate of stuck bits.
+
+Data from the photon detectors are assembled
+by SSP's (translate acronym), and sent from there via ethernet connections to the DAQ computers.  The
+triggering is implemented in the Penn Board, which inputs signals from the scintillator paddles.  Data
+from the Penn board is also included in the event data stream.
+There are seven DAQ server nodes, which are
+connected to each other via a private network, as well as to two gateway nodes.  The two gateway nodes
+are also connected via a 1~GBit/sec link to the Fermilab campus network.  The two gateway nodes are
+administered by Fermilab's Scientific Computing Division, and the seven DAQ servers are administered
+by their owners at Sussex and Oxford.  The DAQ nodes run
+{\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
+physics experiments.  {\it Artdaq} also provides features for examining data as it is collected for
+purposes of monitoring the data quality and providing diagnostic tools for shift takers and detector
+experts.
+
+Two of the DAQ computers, lbnedaq6 and lbnedaq7, each contain 10~TB of buffer disk.  This disk will
+be used to store the first copy of the data and monitoring histograms before being transferred
+to permanent storage.  The data are in {\it art}-formatted rootfiles, with compression enabled.
+The first gateway node has 234~GB of disk space for buffering data, while
+the second gateway node has a 7.2~TB buffer disk.  These disks on the gateway nodes are also mounted
+on lbnedaq6 and lbnedaq7, where a cron job can copy the data to the second gateway.  The second gateway
+node then extracts metadata from each new DAQ file, including also metadata obtained from the online
+database, which stores the run configuration state.  Processes on the second gateway node
+ register this metadata with Fermilab's 
+Sequential Access via Metadata (SAM) system, and then copy the DAQ files to a File Transfer Service
+(FTS) dropbox.  Three dropboxes have currently been set up -- one on dCache, at the location
+/pnfs/lbne/scratch/lbnepro/dropbox/data, and two on BlueArc disks:  /lbne/data/lbnepro/dropbox/data and
+/lbne/data2/lbnepro/dropbox/data.
+
+When the data have been stored in persistent storage and the files are no longer needed online,
+the copies on the DAQ node and the gateway node can be retired.  Copies are validated by checking
+the checksums and the total byte counts.
+
+Online monitoring processing is included in the {\it artdaq} suite, with experiment-specific modules
+provided by the DUNE 35-ton collaboration.  Histograms are stored as root files and also
+images for display on web servers are produced at the end of a run.  These are copied to a NFS disk
+for web display.  This web disk area is mounted on both of the gateway nodes.  The online
+monitoring histograms and files are backed up to permanent storage.
+
 \subsubsection{Offline Computing Model}
+
+Once the data are copied to one of the dropboxes, it is migrated via FTS to Enstore, Fermilab's tape-handling
+system.  A separate copy may also be found in dCache, a large disk pool used in order increase the
+efficiency of access to large datasets which reside on tape.  Files are requested using SAM, which
+issues commands for reading data off of tape and into dCache, where they can be then transferred
+to batch worker nodes or read directly.  
 
 calibration runs -- long events (1/3 minute).
 
 \subsubsection{Resource Requirements}
 
+The initial estimate of the amount of data to be collected by the 35-ton Phase~II run is 100~TBytes,
+although there is significant uncertainty on this number.  The amount of raw data collected
+depends strongly on the running time, the run plan, the zero-suppression strategy, and the
+compressibility of the data.
