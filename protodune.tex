@@ -2,7 +2,10 @@
 \subsubsection{Overview}
 
 The name ``protoDUNE'' was given to the ``full-scale'' single-phase LArTPC prototype to be deployed at CERN in 2017.
-It is designed for measurements with a test beam provided by a purpose-built target and beamline at CERN SPS,
+There will be 15,360 channels in the protoDUNE LArTPC, corresponding to the proposed configuration of 6 Anode Plane Assemblies with 2,560 channels each.
+Each channel will be instrumented with a shaping amplifier and a 12-bit ADC operating at 2MHz digitization frequency.
+
+ProtoDUNE is designed for measurements with a test beam provided by a purpose-built target and beamline complex at CERN SPS,
 and will serve to validate various DUNE technology aspects before proceeding with the construction of the principal DUNE detector.
 ProtoDUNE will also provide an important platform for realistic LArTPC detector characterization (e.g. PID, shower response etc) utilizing
 controlled conditions of a test-beam experimental setup.
@@ -17,19 +20,39 @@ The experiment will leverage elements of technology developed for the 35t LArTPC
 This includes components of the front-end electronics, design of data acquisition and some other systems.
 
 To ensure reliable capture of experimental data in protoDUNE, it is optimal to first stage it on disk at CERN (as opposed to direct transmission
-from protoDUNE DAQ to data centers elsewhere). After that, the data are to be committed to tape storage also at CERN,
-and replicated to data centers in the US. For the latter, Fermilab will be the primary site, with additional data centers at Brookhaven National Laboratory (BNL) and the National Energy Research Scientific Computing Center (NERSC) facility as useful additional locations for better redundancy and more efficient access to the data from a greater number of locations.
+from protoDUNE DAQ to data centers elsewhere). After that, the data are to be committed to tape storage also at CERN (as a custodial copy),
+and replicated to data centers in the US. For the latter, Fermilab will be the primary site, keeping both a tape copy of the data and providing
+sufficient disk storage for production and analysis activities. Data centers at Brookhaven National Laboratory (BNL) and the
+National Energy Research Scientific Computing Center (NERSC) facility are being considered useful additional locations for the data
+for better redundancy and more efficient access to the data from a greater number of locations.
 
 
 \subsubsection{Event size estimate and data volume}
-
 In addition to the Liquid Argon TPC, protoDUNE will include a photon detector as well as other detectors such as muon counters, trigger and PID systems etc.
-However, estimates indicate that the data rate and volume will be dominated by the TPC, so only these data will be considered in this section.
+However, estimates indicate that the data rate and volume will be dominated by the TPC, so only the TPC data will be considered in this section.
+
+
+There will be a trigger and PID system for characterization of incoming beam particles. However, the following factors will have decisive effect on the detector event rate:
+\begin{itemize}
+\item Large active volume: 7.0m(L)$\times$7.2m(W)$\times$5.9m(H)
+\item Nominal cosmic ray muon flux at sea level, in absence of shielding
+\item Drift length of 3.6m, which translates into total electron collection time (drift time), that  determines the scale of the readout window for each trigger: 2.2ms
+\end{itemize}
+
+Estimates based on the above parameters indicate that there will be $\sim$23 track segments in the TPC due to cosmic muons in each readout window
+triggered by a beam particle. Ionization from these tracks will create signals which will constitute the bulk of the data recorded by the DAQ, which the beam
+component being a small fraction of the data.
+
+\subsubsection{Zero Suppression and Compression}
+Given the number of channels, the readout window duration and the ADC clock frequency, it's easy to see that recording the ``full stream'' of data
+in protoDUNE would be an enormous challenge and far beyond the resources that can be allocated to the experiment. What's more important,
+even in the conditions of the cosmic muon background, at any given time during the readout window only a fraction of wires will carry signals
+above the level of natural radiological sources, i.e. the occupancy per channel won't be large if a threshold is applied. For that reason, the data can be ``zero suppressed''.
 
 Event sizes can be estimated from "first principles" under the assumption of some event topology and noting the significant amount of cosmic contamination at sea level.  As was shown in Sec.~\ref{calibration}, there is expected to be on average $\sim$68 cosmic muon track segments per readout window and on top of the actual beam event.  Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in a readout window will result in the readout of 6~MB per beam event.  
 %This assumes that you have 80~kbyte per 4 GeV mip and that cosmic muons at the surface have an averagae enegy of 4 GeV
 %Multiply by (68 muons + 1 beam particle) we get 5.5 MB
-%This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels.  There are 15,360 channels inn the CERN prototype, corresponding to the proposed TPC which consists of 6 APAs with 2560 channels each. 
+%This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels. 
 %
 
 
