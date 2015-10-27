@@ -1,17 +1,15 @@
 \subsection{Overview}
 
 A number of parameters from DUNE/LBNF requirements, design documents,  and studies are used  as input
-for estimations of the data rates in DUNE. In cases when derived parameters need to be generated based on these inputs
-this is accomplished using the software package \textit{dune-params}\cite{duneparams}
-developed specifically for this purpose.
-As the inputs and estimations are refined the results presented in
-this annex can be regenerated at will.
+for estimations of the data rates in DUNE.
 
-Because the triggering and readout strategy and algorithms of the DAQ and
-analyses are under development and far from their final state of readiness,
-the data rate estimations involve some broad assumptions and leave open some choices.
+%In cases when derived parameters need to be generated based on these inputs this is accomplished using
+%the software package \textit{dune-params}\cite{duneparams}
+%developed specifically for this purpose. As the inputs and estimations are refined the results presented in this annex can be regenerated at will.
+
+Triggering and readout strategy and algorithms of the DAQ as well as analyses are complex R\&D items and far from their final state of readiness.
+For that reason, the data rate estimations involve some broad assumptions and leave open some choices.
 This is described in more detail in the following subsections.
-
 
 
 \subsection{Thresholds for the LArTPC Data Rate Estimations}
@@ -40,10 +38,10 @@ FS data is data where every time bin (as defined by the ADC clock) on every chan
 \end{description}
 
 \subsection{Assumption on the DAQ}
-
+For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}. One of the central components of DAQ are the \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
+which offer very high readout speeds and enable flexibility in optimally configuring the system.
 The data rate estimates make the following assumptions on the DAQ capabilities.
-In discussion with the DAQ experts they are expected to be satisfied.
-More information on the DAQ is available in the Volume 4 of the CDR.
+% In discussion with the DAQ experts they are expected to be satisfied. More information on the DAQ is available in the Volume 4 of the CDR.
 
 \begin{itemize}
 \item The DAQ trigger farm will be able to identify isolated activity
