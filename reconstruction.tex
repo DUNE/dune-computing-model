@@ -1,4 +1,5 @@
 \section{Reconstruction}
+\label{sec:reconstruction}
 \subsection{Implications of Wire Readout in the Liquid Argon Time Projection Chamber}
 Time Projection Chambers used in experiments like STAR at RHIC and ALICE at the LHC~\cite{alice}  feature
 pad-based readout scheme, which allows for a relatively straightforward reconstruction of 2D patterns in
@@ -6,9 +7,7 @@ a given time slice. However, using pads in larger detectors is not practical due
 (and requisite cooling requirements), excessive cost of readout electronics and other factors. For this reason,
 due to its sheer size, the DUNE LArTPC features wire-based readout to cover its extremely large fiducial volume
 while keeping the channel count realistic. This makes its large scale possible, but also leads to a loss of spatial information being available
-for reconstruction (when compared to pads).
-
-In order to properly describe the problem of event reconstruction in DUNE, it is helpful to explain this in more detail.
+for reconstruction (when compared to pads). In order to properly describe the problem of event reconstruction in DUNE, it is helpful to explain this in more detail.
 We start with a diagram in Fig.~\ref{fig:signal-0}, the meaning of which will be detailed in the following.
 \label{sec:wirecell}
 \begin{figure}[h!]
@@ -62,4 +61,80 @@ TBD
 
 \subsection{Wire Cell}
 \label{sec:wirecell}
+\subsubsection{The Inverse Problem}
+
+The LArTPC acts an imaging device, i.e. the physics information about the processes taking place in the detector volume is extracted by
+analysing the 3D structures (images) of ionization patterns produced by particles participating in these processes. The only source of information
+available for reconstruction of these images are amplitudes of signals coming from the wires in (U,V,Y) recorded as a function of time
+as described above. It follows that the event reconstruction problem in DUNE TPC is a fairly typical case of the \textit{Inverse Problem},
+where a 3D structure must be calculated based on a set of observables.
+
+Because of time quantization inherent in operation of ADC, the 3D image effectively becomes an assembly of 2D slices.
+In a given time slice, the 2D charge density distribution is observed via three different projections along the axes (U,V,Y) (see Fig.~\ref{fig:3projections}).
+There is significant similaritiy between this type of inverse problem and Computed Tomography (CT) with limited projection data.
+This similarity becomes even more prominent as we observe that in a given slice the charge signals on wires are essentially linear integrals
+of the 2D charge density along each of the three observation axes. Common with many tomographic applications, the reconstruction strategy
+then consists of calculating patterns in each 2D slice and then combining them into a full 3D structure. There are many event types and topologies
+in DUNE, one example of a simulated neutral-current event in presented in Fig.~\ref{fig:ncc-example-1}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ncc-example-1.png}
+	\caption{An example of a neutrino-induced reaction in Liquid Argon ( simulation)}
+	\label{fig:ncc-example-1}
+\end{figure}
+
+It's easy to see that (again, similar to majority of tomographic application) the reconstruction problem in DUNE is an ill-posed one,
+due to the very limited set of observation angles (three). At the most basic level, this issue manifests itself as ``ghost hits'' (well known
+in HEP), which is an ambiguity inherent in stereo projection measurements.
+
+The ``Wire Cell'' approach to the problemis based on the following:
+\begin{itemize}
+\item ``Voxelization'' of the TPC volume by treating each 2D slice as a tessellation (i.e. consisting of polygon-shaped tiles)
+\item Solving an optmization problem which maximizes the likelihood of a given configuration of tiles (with charge associated with them) producing the observed
+signal distribution on the wires
+\item In reference to the optimization problem described above: regularization based on testing hypotheses about the object topology, e.g. that it's a track in a given portion of the volume
+\end{itemize}
+
+To make this approach possible, there is one prerequisite that must be met, and that is a precise measurement of charge on each wire. This involves
+proper calibration of the detector as well as solution of yet another inverse problem -- deconvolution of the detector and electronics reponse while
+reconstructing the original shape of the charge signal. This is done in conditions of non-zero noise and involves applicaiton of digital filtering techniques.
+
+\subsubsection{Wire Cell Components}
+
+The flow of data in Wire Cell is presented in Fig.TBD (see Appendix)
+
+%One of the basic ideas in Wire Cell is to map the LArTPC wire planes to a specially
+%designed tessellation (a collection of tiles of specific shapes),
+%which allows to manage complexity while reducing the number of objects on which the algorithm
+%has to operate, while retaining spatial granularity of data treatment at the desired level.
+
+Full description of Wire Cell is  beyond the scope and size limitations of this document,
+so presented below is annotations for those elements of the data flow (see the diagram for specific
+names) which are significant and/or present most computational challenges.
+
+\begin{description}
+\item[Slicer:] takes one "time frame" or a "readout" of raw data from DAQ (or simulated source)
+and separates it in time bins.  Each bin contains ADC values for all the channels
+(i.e. wires) with signal above a certain threshold that span the time bin.
+	
+\item[Cell Finder:] takes as a time bin and identifies ``cells'' (groups of adjacent tiles).
+	
+\item[Optimization Solver (aka Matrix Solver):] optimizes the likelihood of the charge contained in contiguous groups of cells
+with respect to producing the observed signals on wires, utilizing a model where this relationship is expressed as a matrix.
+	
+\item[Clustering:] aggregates groups of cells over multiple time bins, thus creating 3D objects (``clusters'').
+	
+\item[Tracking:] connects clusters according to certain geometry rules, forming track candidates
+	
+\item[PID:] determines the type of particle based on ionization pattern, as defined by
+charge depositions along the particle trajectory
+	
+\end{description}
+
+Elements listed above are computationally complex for a number of different reasons. For example,
+the \textit{Cell Finder} performs a search on an array of tiles and given the large number
+of those may face a combinatorial challenge. The \textit{Matrix Solver} has to solve an optimization
+problem involving a sparse matrix. The \textit{Tracking} component has again to find relations
+between multiple pieces of data based on applications of certain rules.
 
