@@ -513,5 +513,285 @@ to avoid repetitive queries by serving pre-fetched data, thus greatly improving 
 performance problems due to unforeseen scalability issues. Based on decisions by the Software working group, a large portion of data is 
 migrated to a noSQL service, thus reducing the load on the principal database.
 \end{itemize}
+%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Software}
+\subsubsection{Description}
+The requirements in this section cover a variety of software used by the collaboration for producing its scientific results. Emphasis is made on architectural compliance and on managing the development cycle, validation in particular. Requirements in this section do include the software required for collaborative work. Not included are engineering or administrative software.
+
+
+\subsubsection{Definitions}
+
+\begin{itemize}
+\item \textbf{LBNE Offline Software:} The subset of simulation, reconstruction, analysis and production software which is written for the LBNE collaboration.
+
+\item \textbf{External Software:}  Software on which the LBNE Offline Software relies.  Also referred to as ``externals'' or ``third party software''.
+
+\item \textbf{Supported Platform:} A computing platform (OS, compiler and CPU architecture) which the S\&C Infrastructure Group agrees to support.
+
+\item \textbf{User Friendly:} The ability to make use of something with only a reasonably minimal amount of effort by the intended qualified user.
+
+\item \textbf{Revision control:} (also known as version control and source control) is the management of changes to documents, computer programs, web sites, and other collections of information.
+
+\item \textbf{Production Software:} the suite of software run to produce an official collaboration result. One example of such software is software used to produce data appearing in a publication. Such software is subject to strict revision control, QA and validation, and is utilized in a managed fashion.
+
+\end{itemize}
+
+\subsubsection{Issues}
+\begin{itemize}
+
+\item To ensure quality and maintainability of LBNE software, emphasis must be put on well defined and optimal architectural patterns.
+
+\item Ensuring architectural compliance is difficult due to wide scope and complexity of LBNE Offline Software. 
+Effort needs to be expended to track compliance throughout the software.
+
+\item Revision control and release methodology are critically important tools for managing all stages of software life cycle.
+
+\item CASE and debugging tools boost productivity.
+
+\item Collaborator and public access to repositories and commit privileges should be subject to specific policies.
+
+\item LBNE Offline Software installation procedures must be robust and well documented.
+
+\item Supported platforms must be clearly defined.
+
+\item There are different classes of applications, e.g. laptop or workstation applications vs. production code meant to run on a cluster etc. This affects the methods utilizied in software distribution in each case.
+
+\item Adoption of external tools must be subject of a review process.
+
+\item Adoption of software produced by LBNE collaborators  must be subject of a review process.
+
+\item Software documentation must be adequately maintained.
+
+\item Proprietary software acceptance in LBNE needs proper justification and review.
+
+
+\end{itemize}
+
+\subsection{Software Architecture and Architectural Compliance Requirements}
+
+\begin{itemize}
+
+\item All components of production software shall be created according to appropriately chosen architectural patterns, aimed at maximizing maintainability and adaptability.
+
+% \fxnote{EB: can this be reword to be more simply stated?}
+% -mxp- will try
+\item Basic Architectural Compliance shall be ensured by establishing a code review process and subsequent testing (see Section~\ref{sec:lbnecodeman}), taking into account implementation of components, interfaces and behaviors.
+
+\end{itemize}
+
+\subsubsection{External Software Requirements}
+\begin{itemize}
+\item Provenance: all third party software available in source form shall be able to be compiled from pristine upstream releases.
+
+\item Provenance: all third party software patches shall be obtained from trusted sources.
+
+\item Provenance: the responsibility for assuring the provenance requirements shall be held by the S\&C Organization.
+
+\item Source code archival: a copy of the source code used to build external software for official releases shall be archived in order to allow for reproducing results at a later time.
+
+\item Reliance on third party binaries: reliance on external software which is available only in binary form shall be kept to an absolute minimum and considered on a case-by-case basis.
+%  \fxnote{EB: are there requirements that the 3rd party software binaries need to meet to be considered?}
+% -mxp- that may be too much detail, after we said it will be minimal.
+
+
+\end{itemize}
+
+
+\subsubsection{Requirements for Supported Platforms and Versions}
+
+\begin{itemize}
+
+\item The S\&C Organization shall develop a policy for supported platforms, based on the needs of the Collaboration.  
+
+\item The supported platform policy shall include the mechanisms by which platforms are selected for support, retired from
+ the supported status and what levels of support and methods for its delivery will be provided.
+ 
+\item The S\&C Organization shall determine the supported versions of software, taking into account the computing needs of the Collaboration.
+\end{itemize}
+
+\subsection{Documentation Requirements}
+\begin{itemize}
+
+\item A documentation system shall be selected by the S\&C Organization (see Section~\ref{sec:lbnecolltools}).
+
+\item LBNE Offline Software design, development, commissioning and operation shall be documented using this documentation system.
+
+\end{itemize}
+
+
+\subsubsection{General Code Management Requirements}
+\label{sec:lbnecodeman}
+\begin{itemize}
+\item The S\&C Organization shall develop and document a set of coding standards to be followed by all LBNE Offline Software.
+
+\item All production software shall be subject to code review.
+
+%  \fxnote{EB the term 'production software' needs to be defined.}
+% -mxp- done, in the beginning of the section
+
+\item The S\&C Organization and the TAC shall determine additional software which shall be subject to code review.
+
+\item Code reviews shall aim to satisfy the requirements of Architectural Compliance and coding standards.
+
+
+%  \fxnote{EB: more benefits can come from reviews than just this. for example  this needs to be coordinated with the physics tools groups need for reviewing functional aspects.}
+% -mxp- good point - but the PT will need to handle that, not S&C. Will add a line.
+
+\item Where warranted, code reviews shall be coordinated with the Physics Tools Group in order to ensure proper functionality and characteristics of the code.
+
+
+\item Code review feedback and results shall be documented according to general documentation requirements, in order to facilitate access to this information and its usefulness for making corrections.
+
+\item All LBNE Production Software source code shall be maintained in a revision control system.
+
+\item All LBNE Production Software shall be subject to backup and restore procedures to counter possible loss of source code due to technical failures.
+
+\item Contributors to those elements of the Offline Software code base which are not included into the Production Software shall be encouraged to adopt a revision control system as well.
+
+\item Debugging, CASE and other automated tools shall be chosen/accepted by the S\&C Organization for use in various sectors of software development in LBNE.
+
+\item Any code used directly in LBNE production software or representing a dependency for it for shall be preserved (possibly in archived form) for the lifetime of the Collaboration, in order to guarantee its ability to reproduce all and any of its results at any given time.
+
+% \fxnote{EB: what does 'preserved' mean. this should be defined. are all results over the lifetime of the project included here?  this requirement seems a little strong.}
+% -mxp- OK, softened it a little
+
+\item A review process shall be implemented to determine which parts of LBNE Offline Software are no longer required and/or used.
+
+\item LBNE Offline Software that is no longer required and/or used shall be subject to decisions on whether and how to decommission and remove such software in a way that is not disruptive to LBNE and does not contravene other stipulations of these Requirements.
+
+\item A release mechanism shall be put in place, including defined release periods for LBNE Offline Software and externals.
+
+\item A policy on long term software maintenance shall be put in place in order to address eventual rotation of personnel and departure of software developers from the Collaboration.
+
+\item A policy on long term knowledge management shall be put in place in order to address eventual rotation of personnel and departure of software developers from the Collaboration.
+
+\item Software build and installation from source: an installation mechanism based primarily on the source code shall be provided for the LBNE Offline Software and externals which can be run on compatible platforms, 
+
+\item The installation mechanism shall be capable of being run in an automated fashion by collaborators.
+
+\item The installation mechanism shall be documented, including user documentation.
+
+\item An established and documented process shall be established which developers of new LBNE Offline Software packages should follow in order to integrate a package into the greater code base.
+
+\item Software binaries shall be provided in a form that is ready to use (e.g. executable binaries, libraries, properly placed Python modules or scripts).
+
+\item Supplying software binaries shall be the responsibility of the S\&C Organization.
+
+\item A documented installation mechanism shall exist for all supported software binaries.
+\end{itemize}
+
+
+\subsubsection{Validation, Unit Testing and Continuous Integration }
+\textit{Definitions}
+
+\begin{itemize}
+% -mxp- softened the physics bit
+\item \textbf{Validation:} in this context, we define it as software quality control which may include validation of physics functionality.
+
+\item  \textbf{Validation criteria:} a set of characteristics and/or parameters the software must comply with in order to be declared valid (i.e. passed validation).
+
+\item \textbf{Unit Test:} a method by which individual units of source code, sets of one or more computer program modules together with associated control data, usage procedures, and operating procedures are tested to determine if they are fit for use.
+
+\item \textbf{Continuous Integration:} frequent updates of the code in the common repository, combined with running unit tests in an ongoing and coordinated manner.
+
+\item \textbf{Test Harness:} a system supporting the creation and execution of unit tests.
+
+
+\end{itemize}
+
+\subsubsection{General Validation Requirements}
+\begin{itemize}
+\item Testing procedures shall be designed in a way which allows them to be run in fully automatic as well as more interactive, user-controlled mode.
+
+\item All of the Production Software used in LBNE must pass validation criteria on all supported platforms.
+%  \fxnote{EB: what does 'valid' mean?}
+% -mxp- added clarification
+
+\item For a given unit version or release, or an external package, to be declared valid, all of its components shall compile in the LBNE environment, without compiler warnings, set at a level to be defined at a later date.
+% \fxnote{EB: i think the requirement shall be to compile without warnings.}
+% -mxp- for one, this will depend on debug/warning level
+
+% \item For an application or program to be declared valid after build procedures are complete, there shall be no errors introduced in the process.
+
+% \fxnote{EB: what does it mean to introduce no errors in the process?}
+% -mxp- I'm puzzled by this as well. Hmm. I'll comment this out.
+
+\item Methods shall be provided to reproduce results from prior runs of the same program.
+
+%  \fxnote{EB: prior runs going how far back?}
+% -mxp- very good question but maybe too detailed. We declared already that any version must be accessible if we want to reproduce a certain result, so in a sense anything must be available. Won't be so in practice maybe.
+
+\item Regression test failures shall be thoroughly investigated and result in one of the following:
+\begin{itemize}
+\item Bugs introduced since the last successful regression test shall be identified and reported.
+
+\item Expected new behavior due to code changes shall result in updating the test suit.
+
+\item New features of the environment, which shall be accounted for, documented and taken into account while updating the test suite.
+\end{itemize}
+
+\item The LBNE suite of tests shall test LBNE Offline Software (where necessary) for compliance and compatibility with evolution of data schemas and formats.
+
+\item Validation test results shall be available for viewing by the collaboration.
+
+\item The validation suite shall be tailored for each supported platform to insure it validates what is the approved usage of that platform.
+
+\end{itemize}
+
+\subsubsection{Unit Testing and Continuous Integration}
+\begin{itemize}
+\item Every LBNE Offline Software package shall provide unit testing capability.
+
+\item There will be a Continuous Integration System (CIS), which shall cover all supported platforms and include necessary test harness capability.
+
+\item The CIS shall rely on the unit tests coming with the packages it covers.
+
+\item Resolution of issues (e.g. bugs) shall be confirmed through unit testing.
+
+\item The CIS and the unit test upon which it relies shall include checks for basic validity of the code (e.g. it doesn't crash).
+
+\item The CIS and the unit test upon which it relies shall include checks for the physics content of the code (e.g. a particular observable being calculated matches the expected vlaue according to set criteria).
+
+\item The CIS and if necessary, individual unit tests, shall be linked to the Issue Tracking System deployed by the Collaboration (see Section~\ref{sec:lbnecolltools}).
+
+\item Full diagnostic information generated by CIS shall be stored such that it is accessible to the members of the Collaboration.
+
+\item The full retention policy for diagnostic information generated by CIS shall be determined by the S\&C Organization.
+\end{itemize}
+
+
+\subsection{Software Distribution and Configuration}
+\subsubsection{Description}
+Software distribution is the mechanism by which the software intended to run on a particular host or facility is being made available for this purpose. This is a non-exclusive list of methods that can be employed for this:
+
+\begin{itemize}
+\item Local installation from source code, as described above, resulting in placement of binaries and other components in a local file system accessible to the Worker Nodes, desktops and other computing devices and services at a particular location.
+
+\item Building the binaries from source at a central facility, for all supported platforms, and subsequent managed ``push'' (copy) of the software pre-built in this manner to remote sites.
+
+\item Using network file systems such as CVMFS and others, to make the software accessible to the target computer without having completed local deployment.
+\end{itemize}
+
+\subsubsection{Requirements}
+\begin{itemize}
+\item A distribution system shall be created where software is built in a centralized manner and then distributed to remote computing centers (this does not imply that it's the only available or endorsed method).
+
+\item The responsibility for implementation of the distribution system shall be held by the LBNE S\&C Organization.
+
+\item A common configuration mechanism shall exist to ensure proper functioning of the software on each site.
+
+\item Where practical, a mechanism for Worker Nodes to gain accesses to software binaries even in absence of local installation at a particular site shall be provided (i.e. by utilizing network distribution methods whereby binaries can be accessed over WAN).
+
+\end{itemize}
+
+\subsection{Use Cases}
+\begin{itemize}
+\item During a code review, the S\&C reviewers identified hardcoded values for certain geometrical parameters. Findings are documented and later used to rectify the problem by creating an appropriate interface to the geometry database.
+
+\item In the process of a nightly build, a recently added module failed to compile. According to the S\&C policy, the entire release is not considered valid and cannot be used in production.
+
+\item A request is received from one of the users to provide help in installing LBNE Offline Software on a new version of Linux they installed on a desktop system. Since this platform is not officially supported, action is deferred and assistance provided as situation permits on best effort basis.
+
+\end{itemize}
 
 
