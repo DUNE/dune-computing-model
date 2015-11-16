@@ -699,7 +699,7 @@ Effort needs to be expended to track compliance throughout the software.
 
 \end{itemize}
 
-\subsubsection{General Validation Requirements}
+\textit{General Validation Requirements}
 \begin{itemize}
 \item Testing procedures shall be designed in a way which allows them to be run in fully automatic as well as more interactive, user-controlled mode.
 
@@ -760,8 +760,8 @@ Effort needs to be expended to track compliance throughout the software.
 \end{itemize}
 
 
-\subsection{Software Distribution and Configuration}
-\subsubsection{Description}
+\subsubsection{Software Distribution and Configuration}
+\textit{Description}
 Software distribution is the mechanism by which the software intended to run on a particular host or facility is being made available for this purpose. This is a non-exclusive list of methods that can be employed for this:
 
 \begin{itemize}
@@ -772,7 +772,7 @@ Software distribution is the mechanism by which the software intended to run on 
 \item Using network file systems such as CVMFS and others, to make the software accessible to the target computer without having completed local deployment.
 \end{itemize}
 
-\subsubsection{Requirements}
+\textit{Requirements}
 \begin{itemize}
 \item A distribution system shall be created where software is built in a centralized manner and then distributed to remote computing centers (this does not imply that it's the only available or endorsed method).
 
@@ -784,7 +784,7 @@ Software distribution is the mechanism by which the software intended to run on 
 
 \end{itemize}
 
-\subsection{Use Cases}
+\subsubsection{Use Cases}
 \begin{itemize}
 \item During a code review, the S\&C reviewers identified hardcoded values for certain geometrical parameters. Findings are documented and later used to rectify the problem by creating an appropriate interface to the geometry database.
 
@@ -794,4 +794,136 @@ Software distribution is the mechanism by which the software intended to run on 
 
 \end{itemize}
 
+\subsection{Distributed Computing}
+\label{sec:dunedc}
+\textit{Definitions}
+\begin{itemize}
+	\item \textbf{Grid computing:}  technology that allows a collection of computer resources from multiple locations to reach a common goal.
+	
+	\item \textbf{Cloud computing:} distributed computing technology with emphasis on network connectivity, virtualization and elasticity of resource allocation.
+	
+	\item \textbf{Workload Management System (WMS):} a system that enables automated placement of computational payload jobs submitted by its users on distributed resources, using the underlying Grid layer, and makes subsequent record keeping, accounting, elements of data management and general monitoring available to the user.
+	
+	\item \textbf{Monitoring:} in this context, it represents a system which stores the state of individual jobs, groups of jobs, data transmission and other objects vital for Workload Management, while providing appropriate interfaces to end-users and operators of a WMS.
+\end{itemize}
 
+\subsubsection{Grid and Cloud Computing Capabilities}
+
+\textit{Description}
+
+Described here are basic design principles and approaches in the area of organizing the distributed computing resources being utilized by the Collaboration. In the past decade, Grid/Cloud and Distributed
+Data technology has been embraced by most major scientific projects, for reasons of scalability,
+better access to resources and their efficient utilization. DUNE needs to closely examine its
+approach to this domain and create  a strategy for integration of Grid and Cloud Computing capabilities
+into its infrastructure base.
+\ 
+\\
+\ 
+\\
+\textit{Issues}
+\begin{itemize}
+	\item We aim for most efficient utilization of all resources available to the Collaboration, which includes both efficient use of all 
+	available hardware, and the ability of all LBNE members to access the resource in a transparent, agile and efficient manner.
+	
+	\item Hedging against significant uncertainties inherent in estimating and planning resource allocation over the next 
+	10 years, against the backdrop of the quickly evolving technology landscape.
+	
+	\item Grid Sites may have a wide range of capabilities, interfaces and other configuration parameters that need to be accounted for in order for these Sites to be properly interfaced and integrated.
+	
+	\item DUNE is a large and geographically dispersed Collaboration, therefore there is a need to properly integrate a variety of distributed 
+	computing resources in order to optimize utilization of all hardware and personnel.
+\end{itemize}
+\ 
+\\
+\textit{Requirements}
+\begin{itemize}
+	\item A widely distributed computing infrastructure, featuring a network of federated resources (including Grid- and Cloud-based resources) shall be implemented.
+	
+	\item This widely distributed computing infrastructure shall be put in place by the DUNE S\&C Organization in close cooperation with participating computing sites, institutions and agencies (cf. the Open Science Grid etc).
+
+	
+	\item The distributed resources shall include processing facilities, storage, network hubs and their combinations (e.g. Grid sites with large available storage capacity).
+	
+	\item Necessary tools and procedures shall be provided, for streamlined incorporation of new facilities as they become available, efficient use of opportunistic resources 
+	
+	\item The effort and expertise across all of the Collaboration shall be leveraged in order to provide adequate operational support with a minimum of manpower.
+	
+	\item Details of site capabilities, interfaces, configuration and other crucial information will be gathered and preserved as documents and database records, and made available through appropriate information systems (often termed Grid Information System).
+\end{itemize}
+
+\subsubsection{Workload Management System}
+\textit{Description}
+
+Workload Management Systems serve as a force multiplier for the user of Grid and Cloud technology. They insulate individual users from specific configuration details and certain failure modes of Grid sites, and provide substantial automation in managing the user's computational payload on the Grid. A good WMS also must provide adequate monitoring capabilities (down to the job level) which serve as a valuable debugging tool, and represent an essential toolkit for the operational support teams.
+
+A WMS is also a valuable tool for managing software deployment, keeping proper accounting information regarding releases and document configuration (e.g. release) of the software used for a specific production run, thus satisfying one of core requirements related to processed data in DUNE.
+\ 
+\\
+\textit{Issues}
+\begin{itemize}
+	\item Due to a very large number of individual computational payload jobs, wide variations of their type, requirements, environment and other vital characteristics, having access to Grid facilities in itself does not guarantee acceptable degree of efficient utilization and availability of resources, and/or functioning Operational Support.
+	
+	\item Agility in resource allocation and sufficient monitoring capability is not included in the typical basic Grid middleware stack, while being essential for efficient operation of the experiment.
+	\item A robust and user-friendly web information system, allowing individual researchers and working groups to track the execution of 
+	their payload submitted to the Grid, and to identify potential issues related to their workflows, will increase overall productivity and help ensure validity of results obtained.
+\end{itemize}
+\ 
+\\
+\textit{Requirements}
+\begin{itemize}
+	\item DUNE  shall implement a Workload Management System (WMS) for resource management and brokerage functionality 
+	which will govern  distribution of most types of computational workload in DUNE (e.g. production jobs, group analysis etc) 
+	across variety of resources available to the Collaboration.
+	
+	\item The DUNE WMS shall be capable of keeping precise record of the software configuration used for each and every job deployed on the Grid, including, among other things, the DUNE Offline Software Release information.
+	
+	\item The DUNE WMS shall be capable of quickly suspending participating sites due to outages, network congestion or potential security issues.
+	
+	\item The DUNE WMS shall be augmented with a Workflow Management layer, which will help create and manage large groups of Grid tasks supporting the scientific workflows.
+	
+	\item An DUNE WMS Monitoring System shall be implemented to allow efficient operation of the WMS, by helping ascertain correct execution of Grid jobs, accounting of resource utilization, identification and debugging of failure modes etc.
+	
+	\item The DUNE WMS Monitoring System shall keep status records for individual jobs and their groups, information related to data I/O and transmission, and include the ``big picture'' performance monitoring data for entire Grid sites utilized by DUNE.
+	
+	\item The DUNE WMS Monitoring System shall have interfaces conducive to integration with both Web UI for users and operators, and with automated systems needing the WMS data.
+\end{itemize}
+
+\subsubsection{Technology trends in Distributed Computing}
+\textit{Description}
+
+Technology is progressing at a brisk pace and it's virtually impossible to cover its various implications for DUNE Distributed Computing within the scope of this document. We shall itemize, however, a few directions that we'll need to explore in the next few years, such as High-Performance Computing (HPC), multi-core and multi-threaded processing, GPUs etc.
+\ 
+\\
+\textit{Issues}
+\begin{itemize}
+	\item High-Performance Computing (HPC) platforms have very different characteristics from the High-Throughput (HTC) systems commonly used in HEP.
+	
+	\item Multi-core technology has become a standard feature of the hardware utilized at data centers everywhere, and its efficient utilization clearly remains a challenge.
+	
+	\item GPUs continue to offer exceptional performance in a few application domains, while requiring specialized software development approaches, tools and architectures.
+	
+\end{itemize}
+\ 
+\\
+\textit{Requirements}
+\begin{itemize}
+	\item DUNE shall be proactive in its assessment of multi-core and other multiprocessor technology in order to assure efficient resource utilization and leveraging available technologies for better performance of its physics tools software.
+	
+	\item The S\&C Organization in cooperation with the DUNE Physics Tools Group shall work to explore potential use of GPUs and HPC facilities for DUNE needs.
+	
+	\item The S\&C TAC shall be tasked with making recommendations for multi-core implementations of DUNE Offline Software and specific approaches and standards that must be followed in this area.
+	
+\end{itemize}
+
+\subsubsection{Use Cases}
+\begin{itemize}
+	\item  An  DUNE member institution prefers to be able to host and process significant parts of the data, and to run some new type of analyses locally for expediency and efficiency, while still retaining the possibility of using larger opportunistic resources available to DUNE as a whole, if necessary. This is made possible by using the DUNE Workload Management System and its distributed data handling mechanism.
+	
+	\item  While running managed production at FNAL, it is discovered that the deadline for delivering results to an important conference cannot be met assuming only local resources are available. At the same time, certain member institutions possess extra computing power that can be used to mitigate the shortage. Additional Grid jobs are dispatched, thus filling the need for more resources.
+	
+	\item A small team of researchers are running an important MC simulation on their very limited local resources, and need to accumulate a lot more statistics than can be reasonably expected with what is available to them. They take advantage of facilities at FNAL, which is made possible by transparency of access and data handling, and user-friendly Grid interfaces.
+	
+	\item A user observes that a large portion of her jobs started failing according to the monitoring data coming from the WMS. Using the job-level monitoring facilities provided by DUNE, she's able to pinpoint and fix the problem.
+	
+	\item There is a new and intermittent problem with network connectivity to one of the DUNE sites, resulting in excessive data transmission times and inefficient resource utilization. This condition is recognized by DUNE Operations Team and the site is suspended for WMS purposes while the problem is worked on.
+\end{itemize}
