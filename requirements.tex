@@ -823,7 +823,7 @@ into its infrastructure base.
 \textit{Issues}
 \begin{itemize}
 	\item We aim for most efficient utilization of all resources available to the Collaboration, which includes both efficient use of all 
-	available hardware, and the ability of all LBNE members to access the resource in a transparent, agile and efficient manner.
+	available hardware, and the ability of all DUNE members to access the resource in a transparent, agile and efficient manner.
 	
 	\item Hedging against significant uncertainties inherent in estimating and planning resource allocation over the next 
 	10 years, against the backdrop of the quickly evolving technology landscape.
@@ -927,3 +927,165 @@ Technology is progressing at a brisk pace and it's virtually impossible to cover
 	
 	\item There is a new and intermittent problem with network connectivity to one of the DUNE sites, resulting in excessive data transmission times and inefficient resource utilization. This condition is recognized by DUNE Operations Team and the site is suspended for WMS purposes while the problem is worked on.
 \end{itemize}
+
+
+\subsection{Geometry}
+\subsubsection{Description}
+
+Managing geometry description and model presents a challenge to most experiments, and DUNE is no exception. Ideally, there is ``one source'' geometry description which feeds both Monte Carlo simulations and reconstruction of data, and potentially takes advantage of interfaces to CAD systems etc. The obvious benefits include assurance of the integrity of the geometry data, and leveraging visualization systems across various sectors of the experiment. In practice, such complete integration is hard to achieve. Nevertheless, we identify  a few requirements in this area that should be met.
+
+\subsubsection{Definitions}
+\begin{itemize}
+	\item  \textbf{Geometry description:} a collection of information sufficient for creation of the geometry model of the detector, for the purposes of either simulation, reconstruction or both.
+	\item  \textbf{Geometry model:} a collection of data structures plus the code to manipulate these structures, which together provide the functionality required by the application (simulation etc, cf. the geometry model in Geant4).
+\end{itemize}
+
+\subsubsection{Issues}
+\begin{itemize}
+	
+	\item  There is a variety of domains utilizing geometry data, such as simulation, reconstruction, packages specific to the Far and Near Detectors, beamline description, overburden maps, interaction packages.
+	
+	\item  Legacy code and ad hoc solutions are already utilized in these work areas.
+	
+	\item There are compelling advantages of a single, unified system, such as referential integrity of geometrical data.
+	
+	\item Placing geometry under proper revision control reduces possibilities of errors when studying various configurations 
+	or making improvements in geometry description.
+	
+	\item  Use of object replicas and symmetry exploitation in the geometry description and model in simulations is 
+	contrasted with the ``real'' geometry where infividual objects have alignement properties which may effectively 
+	break the symmetry -- this is relevant mostly for reconstruction code.
+	
+	\item Proper use of the geometry model and description depends on validation mechanisms: visual, overlaps detection, tracking tests.
+	
+	\item One must consider interfaces that need to be built to existing and future tracking and visualization packages.
+	
+\end{itemize}
+
+\subsubsection{Requirements}
+\begin{itemize}
+	\item DUNE S\&C Organization shall develop a  geometry data management system from which specific applications may derive their geometry information.
+	
+	\item The Geometry Description formats and interfaces shall be chosen in a way that is not restricted to a single 
+	software package or toolkit when building the Geometry Model.
+	
+	\item Provision shall be made to accomodate non-ideal, ``distorted'' or ``perturbed'' versions of geometry description, 
+	containing the realistic alignment parameters (e.g. as determined by a survey \textit{in situ}).
+	
+	\item The geometry data management system shall support reliable storage and  revision control of any set of geometry information.
+	
+\end{itemize}
+
+\subsection{Visualization}
+\subsubsection{Description}
+
+This section describes requirements related to visualization tools used to produce graphics as required by DUNE. CAD and other engineering systems are not included here. Visualization in this context is the process of displaying both the structure of various components of the DUNE apparatus, and optionally also the event data. A special case of combined visual representation of both is often referred to as ``event display''.
+
+\subsubsection{Issues}
+\begin{itemize}
+	
+	\item Visualization tools are important for many types of research, development and data analysis work in DUNE.
+	
+	\item There is a variety of legacy geometry descriptions, split across the detector subsystems, and variety of models that need to be interfaced.
+	
+	\item The Liquid Argon TPC is a precision tracking apparatus and by its very nature a ``visual'' detector, and 
+	its capabilities can be leveraged by having robust and versatile ways to display the event data.
+	
+	\item The role of visualization tools in the development of tracking algorithms of DUNE is especially important.
+\end{itemize}
+
+\subsubsection{Requirements}
+\begin{itemize}
+	\item Applications and supporting tools to visualize the DUNE geometry and event data shall be provided by the S\&C Organization.
+	
+	\item A visualization toolkit available to DUNE shall be created.
+	
+	\item The visualization toolkit shall cover a range of functionalities, including interactive event displays, and capability to produce publication-grade graphics.
+	
+	\item Specific needs of simulation work shall be accommodated, such as displaying ``Monte Carlo truth'' information.
+	
+	\item The visualization toolkit shall cover the needs of expert users (such as during event scanning studies) as well as general needs of the collaborators who do not necessarily possess significant programming expertise.
+	
+\end{itemize}
+
+\subsection{Networks}
+
+\subsubsection{Description}
+The network infrastructure of DUNE is important for two main reasons. One, “traditional” reason is that DUNE will depend on the networks for distribution of  data to storage facilities and computing centers located at its member institutions, as well as for distribution and management of its computational workload on the Grid. This will require a focused effort necessary for design, deployment and continuous monitoring and maintenance of the DUNE networking infrastructure.
+
+The other and somewhat more unusual reason  is due to the fact that the Far Detector is situated at a remote location and indeed very far from the target and the beam infrastructure,  and importantly the storage facility at FNAL. Thus the network link to the remote site, carrying information like ``beam on target'' is of vital importance to DUNE, and so is a reliable and high bandwidth network connection to transmit data from the Far Detector to the principal storage facility.
+
+\subsubsection{Far Site Connectivity}
+\textit{Issues}
+
+\begin{itemize}
+	
+	\item ``Beam on target'' network signal containing timing information about the beam will be used by the online systems.
+	
+	\item Raw data will be transmitted from the Far Detector (FD) to the principal storage facility tentatively located at FNAL, which also ties into the topic of buffering the data at the FD location to compensate for occasional problems with the network connectivity issues and performance.
+	
+\end{itemize}
+\ 
+\\
+\textit{Requirements}
+\begin{itemize}
+	\item A R\&D effort shall be undertaken to design and create the necessary infrastructure, including software and requisite systems integration, 
+	for the ``Beam on Target'' signal.
+	
+	\item Research to establish performance parameters for the primary data network connection between the Far Detector and  DUNE data storage centers (e.g. FNAL) shall be conducted by the S\&C Organization.
+	
+\end{itemize}
+
+\subsubsection{DUNE Data Network}
+\textit{Issues}
+\begin{itemize}
+	\item DUNE will utilize a global and complex network to distribute, collect and otherwise manage its data across multiple data centers around the globe.
+	
+	\item Individual elements of the networks utilized by DUNE will have vastly varying performance and reliability characteristics, subject to change in time.
+	
+	\item In order to use available resources in an efficient manner, DUNE will need to be agile and adaptive in its utilization of networks.
+\end{itemize}
+\ 
+\\
+\textit{Requirements}
+\begin{itemize}
+	
+	\item A network monitoring system shall be put in place to continuously gauge the bandwidth, 
+	availability and other vital parameters of network connections established among participating DUNE sites.
+	
+	\item Network metrics shall be collected and stored in a database for analysis, and used for debugging and optimizing data distribution algorithms and policies.
+	
+	\item The network monitoring system and its associated databases  shall be equipped with appropriate interfaces to make the monitoring and performance data available to DUNE data distribution and Workload Management systems .
+	
+\end{itemize}
+\ 
+\\
+\textit{Justifications}
+
+\begin{itemize}
+	
+	\item Site-to-site network performance does not always stay constant. Ignoring the current network characteristics 
+	may result in suboptimal distribution of computational payload among participation sites, resulting in longer time to task 
+	completion.
+	
+	\item Having a network monitoring system is helpful in detecting and reporting outright failures.
+	
+\end{itemize}
+\ 
+\\
+\textit{Use Cases}
+\begin{itemize}
+	\item A data processing campaign is under way, and input data needs to be shipped to a few sites. 
+	The monitoring system deployed by DUNE collects network performance metrics that indicate that it
+	won't be optimal to transmit data to a few sites due to insufficient bandwidth, and these sites are 
+	subsequently used mainly for Monte Carlo studies. At a later point, when the network problems are resolved, primary data transmission is resumed.  The net result is better efficiency of the overall system.
+	
+	\item A sudden connectivity glitch between two remote sites is detected by an automated system,
+	and a  notification is sent to DUNE Operations Support.
+\end{itemize}
+\ 
+\\
+\textit{Alternatives}
+
+In case a centralized network monitoring system is not created, monitoring the network
+functionality and performance can  be delegated to personnel located at individual sites.
