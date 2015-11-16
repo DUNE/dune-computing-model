@@ -70,9 +70,8 @@ where a 3D structure must be calculated based on a set of observables.
 
 Because of time quantization inherent in operation of ADC, the 3D image effectively becomes an assembly of 2D slices.
 In a given time slice, the 2D charge density distribution is observed via three different projections along the axes (U,V,Y) (see Fig.~\ref{fig:3projections}).
-There is significant similaritiy between this type of inverse problem and Computed Tomography (CT) with limited projection data.
-This similarity becomes even more prominent as we observe that in a given slice the charge signals on wires are essentially linear integrals
-of the 2D charge density along each of the three observation axes. Common with many tomographic applications, the reconstruction strategy
+There is substantial similaritiy between this type of inverse problem and Computed Tomography (CT) with limited projection data. This similarity becomes even more prominent as we observe that in a
+given slice the charge signals on wires are essentially linear integrals of the 2D charge density along each of the three observation axes. Common with many tomographic applications, the reconstruction strategy
 then consists of calculating patterns in each 2D slice and then combining them into a full 3D structure. There are many event types and topologies
 in DUNE, one example of a simulated neutral-current event in presented in Fig.~\ref{fig:ncc-example-1}.
 
@@ -84,15 +83,17 @@ in DUNE, one example of a simulated neutral-current event in presented in Fig.~\
 \end{figure}
 
 It's easy to see that (again, similar to majority of tomographic application) the reconstruction problem in DUNE is an ill-posed one,
-due to the very limited set of observation angles (three). At the most basic level, this issue manifests itself as ``ghost hits'' (well known
-in HEP), which is an ambiguity inherent in stereo projection measurements.
+due to the very limited set of just three observation angles. At the most basic level, this issue
+manifests itself as ``ghost hits'' (well known in HEP), which is an ambiguity inherent in stereo
+projection measurements.
 
-The ``Wire Cell'' approach to the problemis based on the following:
+The ``Wire Cell'' approach to this problem is based on the following:
 \begin{itemize}
-\item ``Voxelization'' of the TPC volume by treating each 2D slice as a tessellation (i.e. consisting of polygon-shaped tiles)
-\item Solving an optmization problem which maximizes the likelihood of a given configuration of tiles (with charge associated with them) producing the observed
-signal distribution on the wires
-\item In reference to the optimization problem described above: regularization based on testing hypotheses about the object topology, e.g. that it's a track in a given portion of the volume
+\item ``Voxelization'' of the TPC volume by treating each 2D slice as a tessellation (i.e. consisting of polygon-shaped tiles).
+
+\item Solving an optimization problem which maximizes the likelihood of a given configuration of tiles (with charge associated with them) producing the observed signal distribution on the wires.
+
+\item In reference to the optimization problem described above: regularization based on testing hypotheses about the object topology, e.g. that it's a track in a given portion of the volume. For example, cells in adjacent time slices can be tested for proximity in 2D.
 \end{itemize}
 
 To make this approach possible, there is one prerequisite that must be met, and that is a precise measurement of charge on each wire. This involves
@@ -101,13 +102,7 @@ reconstructing the original shape of the charge signal. This is done in conditio
 
 \subsubsection{Wire Cell Components}
 
-The flow of data in Wire Cell is presented in Fig.TBD (see Appendix)
-
-%One of the basic ideas in Wire Cell is to map the LArTPC wire planes to a specially
-%designed tessellation (a collection of tiles of specific shapes),
-%which allows to manage complexity while reducing the number of objects on which the algorithm
-%has to operate, while retaining spatial granularity of data treatment at the desired level.
-
+The flow of data in Wire Cell is presented in Fig.~\ref{fig:wirecell-diagram} (Appendix).
 Full description of Wire Cell is  beyond the scope and size limitations of this document,
 so presented below is annotations for those elements of the data flow (see the diagram for specific
 names) which are significant and/or present most computational challenges.
