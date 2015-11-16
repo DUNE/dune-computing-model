@@ -2,12 +2,11 @@
 \subsection{Overview}
 \subsubsection{Purpose, Origin and Scope}
 
-These \textit{Requirements} are in essence rules and guidelines for setting policies, putting in place practices (for example related to data handling)
-and making technology choices in DUNE. They do not cover specific \textit{functional requirements} for the various physics tools software
-or specific parameters (storage capacity, bandwidth, CPU hours etc) of DUNE computing, which are to be addressed in the Computing Model proper.
-Instead, the focus of this section is on the foundations of the Software and Computing infrastructure, such as code management, Grid capability, data management etc.
-An effort was made to maintain a relatively high-level view of the DUNE computing issues. In cases where it was impossible to establish concrete metrics or parameters
-for a specific requirement, it is still listed as an item to be addressed in the future.
+These \textit{Requirements} are in essence rules and guidelines for setting policies,
+putting in place practices (for example related to data handling)
+and making technology choices in DUNE. They do not cover specific \textit{functional requirements}
+for the various physics tools software or specific parameters (storage capacity, bandwidth, CPU hours etc) of DUNE computing, which are to be addressed in the Computing Model proper.
+Instead, the focus of this section is on the foundations of the Software and Computing infrastructure, such as code management, Grid capability, data management etc. An effort was made to maintain a relatively high-level view of the DUNE computing issues. In cases where it was impossible to establish concrete metrics or parameters for a specific requirement, it is still listed as an item to be addressed in the future.
 %, and to not go into smaller details which are more likely to change as the project moves forward, while still providing adequate basis for making informed decisions.
 
 The \textit{Requirements} have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment, which was a predecessor of DUNE.
@@ -54,7 +53,7 @@ In addition, in cases when it helps clarify the scope of a given  requirement, a
 This section contains the requirements related to handling a variety of data by the DUNE Collaboration. This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed) datasets and other collections of data (and where necessary, the metadata associated with these items). Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
 
 The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. This is closely related to Section~\ref{sec:dunedc} (Distributed Computing).
-\fxnote{Make sure the referecnce to Dist Comp is correct}
+\fxnote{Make sure the reference to Dist Comp is correct}
 
 Data Retention policies will aim to provide cost-effective and optimal schedule of data distribution, replication and retirement, in order to maximize
 efficiencies in achieving the scientific objectives of DUNE. On a longer time scale, there is a need to put in place policies and procedures for data preservation.
@@ -522,9 +521,9 @@ The requirements in this section cover a variety of software used by the collabo
 \subsubsection{Definitions}
 
 \begin{itemize}
-\item \textbf{LBNE Offline Software:} The subset of simulation, reconstruction, analysis and production software which is written for the LBNE collaboration.
+\item \textbf{DUNE Offline Software:} The subset of simulation, reconstruction, analysis and production software which is written for the DUNE collaboration.
 
-\item \textbf{External Software:}  Software on which the LBNE Offline Software relies.  Also referred to as ``externals'' or ``third party software''.
+\item \textbf{External Software:}  Software on which the DUNE Offline Software relies.  Also referred to as ``externals'' or ``third party software''.
 
 \item \textbf{Supported Platform:} A computing platform (OS, compiler and CPU architecture) which the S\&C Infrastructure Group agrees to support.
 
@@ -539,9 +538,9 @@ The requirements in this section cover a variety of software used by the collabo
 \subsubsection{Issues}
 \begin{itemize}
 
-\item To ensure quality and maintainability of LBNE software, emphasis must be put on well defined and optimal architectural patterns.
+\item To ensure quality and maintainability of DUNE software, emphasis must be put on well defined and optimal architectural patterns.
 
-\item Ensuring architectural compliance is difficult due to wide scope and complexity of LBNE Offline Software. 
+\item Ensuring architectural compliance is difficult due to wide scope and complexity of DUNE Offline Software. 
 Effort needs to be expended to track compliance throughout the software.
 
 \item Revision control and release methodology are critically important tools for managing all stages of software life cycle.
@@ -550,7 +549,7 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item Collaborator and public access to repositories and commit privileges should be subject to specific policies.
 
-\item LBNE Offline Software installation procedures must be robust and well documented.
+\item DUNE Offline Software installation procedures must be robust and well documented.
 
 \item Supported platforms must be clearly defined.
 
@@ -558,16 +557,16 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item Adoption of external tools must be subject of a review process.
 
-\item Adoption of software produced by LBNE collaborators  must be subject of a review process.
+\item Adoption of software produced by DUNE collaborators  must be subject of a review process.
 
 \item Software documentation must be adequately maintained.
 
-\item Proprietary software acceptance in LBNE needs proper justification and review.
+\item Proprietary software acceptance in DUNE needs proper justification and review.
 
 
 \end{itemize}
 
-\subsection{Software Architecture and Architectural Compliance Requirements}
+\subsubsection{Software Architecture and Architectural Compliance Requirements}
 
 \begin{itemize}
 
@@ -609,12 +608,13 @@ Effort needs to be expended to track compliance throughout the software.
 \item The S\&C Organization shall determine the supported versions of software, taking into account the computing needs of the Collaboration.
 \end{itemize}
 
-\subsection{Documentation Requirements}
+\subsubsection{Documentation Requirements}
 \begin{itemize}
 
 \item A documentation system shall be selected by the S\&C Organization (see Section~\ref{sec:lbnecolltools}).
+\fxnote{make sure there is a valid reference}
 
-\item LBNE Offline Software design, development, commissioning and operation shall be documented using this documentation system.
+\item DUNE Offline Software design, development, commissioning and operation shall be documented using this documentation system.
 
 \end{itemize}
 
@@ -622,7 +622,7 @@ Effort needs to be expended to track compliance throughout the software.
 \subsubsection{General Code Management Requirements}
 \label{sec:lbnecodeman}
 \begin{itemize}
-\item The S\&C Organization shall develop and document a set of coding standards to be followed by all LBNE Offline Software.
+\item The S\&C Organization shall develop and document a set of coding standards to be followed by all DUNE Offline Software.
 
 \item All production software shall be subject to code review.
 
@@ -642,36 +642,36 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item Code review feedback and results shall be documented according to general documentation requirements, in order to facilitate access to this information and its usefulness for making corrections.
 
-\item All LBNE Production Software source code shall be maintained in a revision control system.
+\item All DUNE Production Software source code shall be maintained in a revision control system.
 
-\item All LBNE Production Software shall be subject to backup and restore procedures to counter possible loss of source code due to technical failures.
+\item All DUNE Production Software shall be subject to backup and restore procedures to counter possible loss of source code due to technical failures.
 
 \item Contributors to those elements of the Offline Software code base which are not included into the Production Software shall be encouraged to adopt a revision control system as well.
 
-\item Debugging, CASE and other automated tools shall be chosen/accepted by the S\&C Organization for use in various sectors of software development in LBNE.
+\item Debugging, CASE and other automated tools shall be chosen/accepted by the S\&C Organization for use in various sectors of software development in DUNE.
 
-\item Any code used directly in LBNE production software or representing a dependency for it for shall be preserved (possibly in archived form) for the lifetime of the Collaboration, in order to guarantee its ability to reproduce all and any of its results at any given time.
+\item Any code used directly in DUNE production software or representing a dependency for it for shall be preserved (possibly in archived form) for the lifetime of the Collaboration, in order to guarantee its ability to reproduce all and any of its results at any given time.
 
 % \fxnote{EB: what does 'preserved' mean. this should be defined. are all results over the lifetime of the project included here?  this requirement seems a little strong.}
 % -mxp- OK, softened it a little
 
-\item A review process shall be implemented to determine which parts of LBNE Offline Software are no longer required and/or used.
+\item A review process shall be implemented to determine which parts of DUNE Offline Software are no longer required and/or used.
 
-\item LBNE Offline Software that is no longer required and/or used shall be subject to decisions on whether and how to decommission and remove such software in a way that is not disruptive to LBNE and does not contravene other stipulations of these Requirements.
+\item DUNE Offline Software that is no longer required and/or used shall be subject to decisions on whether and how to decommission and remove such software in a way that is not disruptive to DUNE and does not contravene other stipulations of these Requirements.
 
-\item A release mechanism shall be put in place, including defined release periods for LBNE Offline Software and externals.
+\item A release mechanism shall be put in place, including defined release periods for DUNE Offline Software and externals.
 
 \item A policy on long term software maintenance shall be put in place in order to address eventual rotation of personnel and departure of software developers from the Collaboration.
 
 \item A policy on long term knowledge management shall be put in place in order to address eventual rotation of personnel and departure of software developers from the Collaboration.
 
-\item Software build and installation from source: an installation mechanism based primarily on the source code shall be provided for the LBNE Offline Software and externals which can be run on compatible platforms, 
+\item Software build and installation from source: an installation mechanism based primarily on the source code shall be provided for the DUNE Offline Software and externals which can be run on compatible platforms, 
 
 \item The installation mechanism shall be capable of being run in an automated fashion by collaborators.
 
 \item The installation mechanism shall be documented, including user documentation.
 
-\item An established and documented process shall be established which developers of new LBNE Offline Software packages should follow in order to integrate a package into the greater code base.
+\item An established and documented process shall be established which developers of new DUNE Offline Software packages should follow in order to integrate a package into the greater code base.
 
 \item Software binaries shall be provided in a form that is ready to use (e.g. executable binaries, libraries, properly placed Python modules or scripts).
 
@@ -703,11 +703,11 @@ Effort needs to be expended to track compliance throughout the software.
 \begin{itemize}
 \item Testing procedures shall be designed in a way which allows them to be run in fully automatic as well as more interactive, user-controlled mode.
 
-\item All of the Production Software used in LBNE must pass validation criteria on all supported platforms.
+\item All of the Production Software used in DUNE must pass validation criteria on all supported platforms.
 %  \fxnote{EB: what does 'valid' mean?}
 % -mxp- added clarification
 
-\item For a given unit version or release, or an external package, to be declared valid, all of its components shall compile in the LBNE environment, without compiler warnings, set at a level to be defined at a later date.
+\item For a given unit version or release, or an external package, to be declared valid, all of its components shall compile in the DUNE environment, without compiler warnings, set at a level to be defined at a later date.
 % \fxnote{EB: i think the requirement shall be to compile without warnings.}
 % -mxp- for one, this will depend on debug/warning level
 
@@ -730,7 +730,7 @@ Effort needs to be expended to track compliance throughout the software.
 \item New features of the environment, which shall be accounted for, documented and taken into account while updating the test suite.
 \end{itemize}
 
-\item The LBNE suite of tests shall test LBNE Offline Software (where necessary) for compliance and compatibility with evolution of data schemas and formats.
+\item The DUNE suite of tests shall test DUNE Offline Software (where necessary) for compliance and compatibility with evolution of data schemas and formats.
 
 \item Validation test results shall be available for viewing by the collaboration.
 
@@ -740,7 +740,7 @@ Effort needs to be expended to track compliance throughout the software.
 
 \subsubsection{Unit Testing and Continuous Integration}
 \begin{itemize}
-\item Every LBNE Offline Software package shall provide unit testing capability.
+\item Every DUNE Offline Software package shall provide unit testing capability.
 
 \item There will be a Continuous Integration System (CIS), which shall cover all supported platforms and include necessary test harness capability.
 
@@ -776,7 +776,7 @@ Software distribution is the mechanism by which the software intended to run on 
 \begin{itemize}
 \item A distribution system shall be created where software is built in a centralized manner and then distributed to remote computing centers (this does not imply that it's the only available or endorsed method).
 
-\item The responsibility for implementation of the distribution system shall be held by the LBNE S\&C Organization.
+\item The responsibility for implementation of the distribution system shall be held by the DUNE S\&C Organization.
 
 \item A common configuration mechanism shall exist to ensure proper functioning of the software on each site.
 
@@ -790,7 +790,7 @@ Software distribution is the mechanism by which the software intended to run on 
 
 \item In the process of a nightly build, a recently added module failed to compile. According to the S\&C policy, the entire release is not considered valid and cannot be used in production.
 
-\item A request is received from one of the users to provide help in installing LBNE Offline Software on a new version of Linux they installed on a desktop system. Since this platform is not officially supported, action is deferred and assistance provided as situation permits on best effort basis.
+\item A request is received from one of the users to provide help in installing DUNE Offline Software on a new version of Linux they installed on a desktop system. Since this platform is not officially supported, action is deferred and assistance provided as situation permits on best effort basis.
 
 \end{itemize}
 
