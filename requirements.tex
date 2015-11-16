@@ -1089,3 +1089,42 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 
 In case a centralized network monitoring system is not created, monitoring the network
 functionality and performance can  be delegated to personnel located at individual sites.
+
+\subsection{Cybersecurity}
+\subsubsection{Description}
+Attacks on scientific computing facilities by malevolent agents are a reality that needs to be countered. Due to users being lax in fully implementing security protocols, improper site configuration and other factors, these attacks are successful at times.
+
+\subsubsection{Issues}
+\begin{itemize}
+	\item It is impossible to prevent malevolent entities from attacking the DUNE computing facilities, such attacks are commonplace.
+	
+	\item There are proven methodologies, policies and approaches as well as rules put in place by the agencies, that minimize the success rate of such attacks, and these policies and rules must be fully followed.
+\end{itemize}
+
+\subsubsection{Requirements}
+\begin{itemize}
+	\item DUNE S\&C shall establish close cooperation with Cybersecurity personnel at participating sites.
+	
+	\item Participating sites shall be required to report all DUNE security related incidents to S\&C on a monthly basis or more frequently in a crisis situation.
+	
+	\item All rules and policies set forth by DOE and other authoritative sources shall be implemented.
+	
+	\item Protocols shall be established to stop and mitigate attacks.
+	
+	\item The DUNE S\&C Organization shall periodically review the configuration and security features of its member sites.
+	
+	\item Creation and use of ``production accounts'', i.e. user identities associated with automated services, agents and other such type of computer processes, shall be kept to absolute minimum, reviewed on case-by-case basis and subject to strict information protection.
+	
+	\item A blacklisting capability in the DUNE Workload Management System shall be created which will make it possible to block compromised or abused accounts on short notice.
+	
+	\item Blacklisting capability in additional DUNE Offline Software systems shall be determined necessary by the DUNE S\&C Organization.
+	
+\end{itemize}
+
+\subsubsection{Use Cases}
+\begin{itemize}
+	\item Unusual activity is detected on one of DUNE distributed sites. Local personnel determines that this is a case of a hijacked account used to mount a DOS attack. Corresponding processes are located and eliminated, while the account in question is blacklisted until further investigation and corrective measures.
+	
+	\item DUNE interacts with organizations like the Open Science Grid in order to conduct an internal review of its Cybersecurity protocols and implement best practices going forward.
+\end{itemize}
+

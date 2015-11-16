@@ -1,14 +1,13 @@
-\section{Reconstruction}
+\section{Event Reconstruction for the Liquid Argon Time Projection Chamber}
 \label{sec:reconstruction}
-\subsection{Implications of Wire Readout in the Liquid Argon Time Projection Chamber}
+\subsection{Implications of Wire Readout}
 Time Projection Chambers used in experiments like STAR at RHIC and ALICE at the LHC~\cite{alice}  feature
 pad-based readout scheme, which allows for a relatively straightforward reconstruction of 2D patterns in
 a given time slice. However, using pads in larger detectors is not practical due to power consumption considerations
-(and requisite cooling requirements), excessive cost of readout electronics and other factors. For this reason,
-due to its sheer size, the DUNE LArTPC features wire-based readout to cover its extremely large fiducial volume
-while keeping the channel count realistic. This makes its large scale possible, but also leads to a loss of spatial information being available
-for reconstruction (when compared to pads). In order to properly describe the problem of event reconstruction in DUNE, it is helpful to explain this in more detail.
-We start with a diagram in Fig.~\ref{fig:signal-0}, the meaning of which will be detailed in the following.
+(and requisite cooling requirements), excessive cost of readout electronics and other factors. For this reason, due to its sheer size, the DUNE LArTPC features wire-based readout to cover its extremely large fiducial volume while keeping the channel count realistic. This makes its large scale possible, but also leads to a loss of spatial information being available for reconstruction (when compared to pads).
+
+In order to properly describe the problem of event reconstruction in DUNE, it is helpful to explain
+features and implications of the wire readout. We start with a diagram in Fig.~\ref{fig:signal-0}, the meaning of which will be detailed below.
 \label{sec:wirecell}
 \begin{figure}[h!]
 	\centering
@@ -26,8 +25,8 @@ correspond to a particle track). Importantly, the shape of the signals on the el
 direction (hence the term ``Time Projection Chamber''). For example, ionization electrons which are closer to the collection electrode will arrive to it sooner than
 more distant ones, therefore time evolution of the signals on the affected wires will reflect distribution of the charge along the drift axis.
 
-Current design of large scale LArTPC devices features planar arrays of wire electrodes supported by frames.
-Such design contains an essential element called \textit{Anode Plane Assembly} (APA), which includes the ``collection plane'' (anode)
+Current design of large scale LArTPC devices features planar arrays of wire electrodes supported by
+rectangular frames. Such design contains an essential element called \textit{Anode Plane Assembly} (APA), which includes the ``collection plane'' (anode)
 and two planes of sensor wires, called ``induction planes'', oriented at stereo angles with respect to each other and the collection plane.
 Due to stereo angles, such arrangement allows for 2D measurement of the charge density distribution in the APA plane.
 This is illustrated in Fig.~\ref{fig:signal-0}, which schematically shows the drift volume (to the left), the induction planes ``U'' and ``V'' and
