@@ -232,7 +232,7 @@ Estimations of different sources of ZS data are summarized in table~\ref{tab:zs-
 \centering
 \begin{tabular}{| p{1.25in} | p{0.95in} | p{0.75in} | p{1in} | p{0.75in} |}		\hline		
 Source & Event Rate & Event Size & Data Rate & Annual Data Volume \\ \hline
-all $^{39}Ar$ & 11.2 MHz & 150B & 1.6 GB/s &  53 PB \\ \hline
+all $^{39}$Ar & 11.2 MHz & 150B & 1.6 GB/s &  53 PB \\ \hline
 all in-spill & & & & 159 TB \\ \hline
 with-beam-$\nu$ & & & & 79 GB \\ \hline
 cosmic-$\mu$ & 0.259 Hz &2.5 MB & 647.4 kB/s & 20 TB \\	\hline
@@ -240,123 +240,127 @@ beam-$\nu$ & 8770 year$^{-1}$ & 2.5 MB & 0.69 kB/s & 22 GB \\ \hline
 SNB cand. (ZS) & 12 year$^{-1}$ & 16.7 GB & 6366 B/s & 201 GB \\ \hline
 SNB cand. (FS) & 12 year$^{-1}$ & 46.1 TB & 17.5 MB/s & 553 TB \\ \hline
 \end{tabular}
-\caption{Data rate estimations for ZS data from various sources. An additional FS data estimation is given for supernova burst (SNB).}
+\caption{Data rate estimations for ZS data from various sources.
+An additional FS data estimation is given for supernova burst (SNB).}
 \label{tab:zs-volume}
 \end{table}
 
 
-\subsubsection{$^{39}Ar$ Decays}
-
-The $^{39}Ar$ decay could potentially dominate the data volume.
-The end point of the $^{39}Ar$ decay is at 565keV and about
+\subsubsection{$^{39}$Ar Decays}
+\label{sec:ar39decays}
+Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the data volume.
+The end point of the $^{39}$Ar decay is at 565keV and about
 25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
 The expected total decay rate is 1.0 hertz per kilogram \cite{ar39bkg}.
 
-The $^{39}Ar$ ionization is very localized and it is assumed that any
-dispersion will not spread the charge out to any extent larger than a
-wire pitch nor the distance the charge will drift over one sample.
-Based on the expected shaping time that the electronics imposes on the
-signal the resulting waveform will be spread over
-10 microsecond or 20 samples.
-Because offline signal processing is sensitive to tails of waveforms,
-even more time samples may be required.
-Finally, it is assumed a single collection wire and two induction
+Ionization due to $^{39}Ar$ decays is very localized and it is reasonable to assume
+that spatial dispersion of the charge will be no larger than the wire pitch,
+and for the most part no larger than the distance drifted during the time span
+corresponding to one ADC sample.
+Based on the likely value of shaping time to be set for the electronics (1-3 ${\mu}s$),
+the resulting waveform will be spread over $\sim$10$\mu$s or $\sim$20 samples. Because offline signal
+processing is sensitive to tails of waveforms, even more time samples may be required.
+Finally, it is assumed that due to localization of charge a single collection wire and two induction
 wires in each view will register an appreciable signal.
 
-As small as these events are, they are numerous enough that their data
-volume is not justified given their relative lack of physics importance.
-Some mitigation is required and will be developed.
-
-The simplest mitigation is to increase the ZS threshold to be above
-the decay endpoint.
-This will produce a negative impact in removing small energy
+Based on preliminary estimates such as given in table ~\ref{tab:zs-volume},
+due to scale of the DUNE TPC the $^{39}$Ar decays generate a very large volume of data, recording which
+is not justified given their relative lack of physics importance.
+Some mitigation is required and will be developed. The simplest solution is to increase the ZS
+threshold to be above the decay endpoint.
+This may have a negative effect on detector performance due to removing small energy
 depositions associated with larger events and thus will only be
 considered if absolutely required to mitigate the rate.
 
 A better approach is the one that drives the requirement on the DAQ
 that the trigger farm be capable of identifying isolated activity
-consistent with $^{39}Ar$ on a per-APA basis in order to veto its
-recording.
-The DAQ is expected to be able to provide this functionality.
-This then leaves $^{39}Ar$ which is accidentally coincident in the
+consistent with $^{39}$Ar on a per-APA basis in order to veto its
+recording. The DAQ is expected to be able to provide this functionality.
+This then leaves $^{39}$Ar which is accidentally coincident in the
 same APA with readouts from other activity such as beam-$\nu$
 interaction and cosmic muons.
-The annual number of above ZS-threshold $^{39}Ar$ decay events
+The annual number of above ZS-threshold $^{39}$Ar decay events
 coincident anywhere in the DUNE detector with beam-$\nu$ activity is
-given in table~{ref:zs-volume} as betainbeamyear.
-Of that only 3\% are coincident in the same APA bringing the added
-data rate to about 10\% that of the beam-$\nu$ activity.
+given in table~\ref{tab:zs-volume} as 79 GB. Of that only 3\% are coincident
+in the same APA bringing the added data rate to about 10\% that of the beam-$\nu$ activity.
 
 \subsubsection{Supernova Burst}
 
 The Supernova Burst (SNB) data is estimated assuming a
-\textit{false-positive} SNB rate of snbcandrate and a readout time of
-snbreadouttime.
-It should be emphasized that both these parameters are subject to
+\textit{false-positive} SNB rate of 12 year$^{-1}$ and a readout time of
+10s. It should be emphasized that both these parameters are subject to
 modification and are used simply to provide benchmark examples.
 
-On possible source of false positive SNB triggers may be an upward
-fluctuation in the rate of $^{39}Ar$ decays.
-Whatever initiates, it is assumed that the data volume of a
-false-positive SNB trigger is dominated by $^{39}Ar$ decays.
+The SNB events are predicted to have a unique signature whereby
+neutrino interactions will produce on order of 1000 events across
+the Far Detector modules over a time around ten seconds and with a
+neutrino spectrum up to 100MeV. Under this circumstances, 
+the most likely source of a false positive SNB trigger may be an upward
+fluctuation in the registered rate of $^{39}$Ar decays.
+It can therefore be assumed that the data volume of a
+false-positive SNB trigger is dominated by $^{39}$Ar decays.
 
-In the case of an actual SNB, its neutrino interactions will produce
-on order of 1000 events across the far detector modules over a time
-around ten seconds and with a neutrino spectrum up to 100MeV.
-Given the importance of collecting SNB neutrinos, the same
-trigger-based reduction of $^{39}Ar$ will not be employed and thus it
-will dominate the data volume.
-These addition data volume due to the SNB events themselves is not
-significant.
+In order to ensure optimal efficiency of detection for the SNB neutrinos,
+an  additional trigger stream must be put in place in which
+reduction of $^{39}$Ar background (such as described in \ref{sec:ar39decays}) will not be employed, as it would potentially impact the SNB neutrinos. Hence, this background 
+will dominate the data volume. The data volume due to the SNB events themselves is not significant.
 
 Further, a lower ZS threshold may be considered for saving such
-candidate SNB occurrences.
-The possible data rate of SNB candidates is thus bound by the nominal
-ZS $^{39}Ar$ rate and the FS rate.
-The exact strategy for saving SNB candidates requires additional study
+candidate SNB occurrences. The possible data rate of SNB candidates is thus bound by the nominal
+ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates requires additional study
 and may have implications on DAQ hardware.
 
 \subsection{Noise}
 
 % fixme: is this remotely true?
-The nominal ZS threshold of chargezsthreshold is based on an older
-requirement of a 9:1 signal to noise ratio for a 1 MIP.
-The most likely MIP is 1.8MeV/cm or 0.9MeV per wire pitch.
-This implies an RMS noise requirement equivalent to 0.1MeV and
-then the 0.5MeV equivalent ZS threshold represents a $5\sigma$ cut.
-Across the dunenumberchannels channels and the
-daqreadoutchannelsamples per readout gives about 5000 samples
-above the nominal ZS threshold.
-Their distributed nature and isolated appearance make them subject to
-the same rejection criteria as isolated $^{39}Ar$ and thus can be
-ignored for the purposes of data volume estimates.
+The nominal ZS threshold of 0.5MeV is based on an older requirement of a
+9:1 signal to noise ratio for a 1 MIP. The most likely MIP is 1.8MeV$\times$cm$^{-1}$ or 0.9 MeV per wire pitch.
+This implies an RMS noise requirement equivalent to 0.1 MeV and then the 0.5 MeV equivalent ZS
+threshold represents a $5\sigma$ cut. Across the 1,536,000 channels and the 10,800 samples
+per readout this gives about 5,000 samples above the nominal ZS threshold. Their distributed
+nature and isolated pattern of appearance make them subject to the same rejection criteria as
+$^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
 
 
 \subsection{High-energy Threshold}
 
 For the purpose of these estimates the  high-energy (HE) threshold is chosen at the level above 
-the energy scale of the radiological backgrounds relevant for the LArTPC, and set at  chargehethreshold.
+the energy scale of the radiological backgrounds relevant for the LArTPC, and set at  10.0MeV.
 A more careful study is needed to determine a potentially more optimal value for this threshold.
 The data rates with the HE threshold applied are summarized in table~\ref{tab:he-volume}.
+
+	
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{1.25in} | p{0.95in} | p{0.75in} | p{1in} | p{0.75in} |}		\hline	
+Source & Event Rate & Event Size & Data Rate & Annual Data \\ \hline
+$^{39}Ar$ & - & - & - & -\\	\hline
+cosmic-$\mu$ & 0.259Hz & 2.5MB & 647.4 kB/s & 20TB \\ \hline
+beam-$\nu$ & 8770 year$^{-1}$ & 2.5MB & 0.69kB/s & 22GB \\
+\hline
+SNB cand. & - & - & - & -\\ \hline
+\end{tabular}
+\caption{Data rate estimations for data from activity above the high-energy (HE) threshold from
+various sources.}
+\label{tab:he-volume}
+\end{table}
+
 
 %\input{annex-rate/generated/he-volume-table}
 
 With the HE threshold in place, activity from the $^{39}$Ar events and any SNB
-candidates will not be visible (i.e. will be rejected in DAQ).
-Although actual SNB events may result in neutrino with energies as high as
-100MeV applying such a high threshold to SNB candidates won't be optimal and is not being considered at this point.
+candidates will not be visible (i.e. will be rejected in DAQ). Although actual SNB
+events may result in neutrino with energies as high as 100MeV applying such a high
+threshold to SNB candidates won't be optimal and is not being considered at this point.
 For this reason, contribution from SNB to these data is not calculated for this threshold setting.
 
 
 \subsection{Compression}
 
-The above estimates assume that the only compression employed is the
-lossy removal of data below some threshold.
-In addition, a lossless compression is possible.
-The DAQ can employ Huffman encoding during readout or the compression
-features provided by ROOT may be provided during file writing.
-In order to estimate the effects of compression, specific particle
-types and energies were simulated using LArSoft.
+The above estimates assume that the only method of data volume reduction to be employed is the
+lossy compression by removal of data below some threshold. However, in addition to that
+a lossless compression is possible. For example, the DAQ system can employ Huffman encoding during readout, or compression features built into ROOT may be used during writing data to files. In order to estimate
+the effects of compression, specific particle types and energies were simulated using LArSoft.
 The initial kinematics for the simulated samples covered a matrix of
 particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
 (100MeV to 6GeV).
