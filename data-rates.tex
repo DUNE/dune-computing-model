@@ -2,33 +2,71 @@
 
 A number of parameters from DUNE/LBNF requirements, design documents,  and studies are used  as input
 for estimations of the data rates in DUNE.
-
 %In cases when derived parameters need to be generated based on these inputs this is accomplished using
 %the software package \textit{dune-params}\cite{duneparams}
 %developed specifically for this purpose. As the inputs and estimations are refined the results presented in this annex can be regenerated at will.
+Buffering, triggering and readout strategy and algorithms of the DAQ
+are complex R\&D items and are far from their final design and state of
+readiness at the time of writing. Same applies to various analysis software.
+For that reason, the data rate estimations involve some broad assumptions
+and leave open some choices. This is described in more detail in the following subsections.
 
-Triggering and readout strategy and algorithms of the DAQ as well as analyses are complex R\&D items and far from their final state of readiness.
-For that reason, the data rate estimations involve some broad assumptions and leave open some choices.
-This is described in more detail in the following subsections.
+\subsection{Fundamental Parameters of the LArTPC}
 
+This section provides a selection of fundamental parameters used as
+input to the data rate estimations. The parameters are summarized in table~\ref{tab:fundamental-parameters}.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{| p{2.5in} | p{1in} |}
+		\hline
+		\textbf{Parameter} & \textbf{Value} \\ \hline
+		Full height (module) & 12.0m \\ \hline
+		Full width (module) & 14.5m \\ \hline
+		Full length (module) & 58.0m \\ \hline
+		\# of detector modules & 4 \\ \hline
+		\hline
+		channels per APA & 2,560 \\ \hline
+		APAs per module & 150 \\ \hline
+		Active height (APA) & 6.0m \\ \hline
+		Active width (APA) & 2.3m \\ \hline  \hline
+		Drift distance in Liquid Argon & 3.6m \\
+		\hline
+		Drift velocity & 1.6mm/$\mu$s \\ \hline
+		Drift time & 2.25ms \\ \hline
+		\hline
+		bytes/sample & 1.5 \\ \hline
+		sample rate & 2.0MHz \\ \hline
+		\# drifts/readout & 2.4 \\ \hline
+		\hline
+		readout time & 5.4ms \\ \hline
+		samples/readout & 10,800 \\
+		\hline \hline
+		Total \# of channels & 1,536,000 \\
+		\hline
+	\end{tabular}
+	\caption{Fundamental parameters of DUNE Far Detector LArTPC.}
+	\label{tab:fundamental-parameters}
+\end{table}
 
 \subsection{Thresholds for the LArTPC Data Rate Estimations}
 
-There are three threshold levels considered for the purposes of characterizing the LArTPC data rates.
-These thresholds are assumed to be applied ``per-wire'' and on the basis of ADC values (which can be translated
-to units like MeV with proper calibration).
-Optimizing these thresholds for physics require additional study and
-are used here only to provide benchmarks for the data rate estimations.
+Signals produced by individual wires in the TPC readout scheme have a substantial
+dynamic range. Each segment of this dynamic range will be characterized by a
+respective data rate. For that reason, it is helpful to consider three threshold levels
+for the purposes of characterizing the LArTPC data rates. These thresholds are assumed to be applied ``per-wire'' and on the basis of ADC values (reflecting the collected charge,
+which can be translated to units like MeV with proper calibration). Optimizing these thresholds for physics require additional study and are used here only to provide benchmarks for the data rate estimations.
 The data produced at each threshold are termed:
 
 \begin{description}
-\item[full-stream] The full-stream (FS) threshold means there is no threshold at all.
-FS data is data where every time bin (as defined by the ADC clock) on every channel is read out.
-\item[zero-suppressed] The zero-suppression (ZS) threshold is an ADC
-  level roughly corresponding to what an chargezsthreshold deposition
-  would produce in a single time bin on a single wire.
-  All bins with ADC counts below this threshold are remove from the
-  data stream.
+	
+\item[full-stream] The full-stream (FS) threshold means there is no threshold at all, i.e.
+FS data is data produced when every time bin (as defined by the ADC clock) on every channel is read out.
+
+\item[zero-suppressed] The zero-suppression (ZS) threshold is an ADC value (in a single time bin,
+on a single wire) roughly corresponding to ionization charge due to a 0.5MeV energy deposition.
+All bins with ADC counts below this threshold are discarded from the data stream.
+
 \item[high-energy] A high-energy (HE) threshold is assumed which is
   such that all signals from radioactive decays are suppressed but low
   enough to not impact activity from beam neutrino interactions or
@@ -36,6 +74,7 @@ FS data is data where every time bin (as defined by the ADC clock) on every chan
   Further studies are needed to determine this threshold but currently
   it is taken, without rigor, to be 1MeV--10MeV.
 \end{description}
+
 
 \subsection{Assumption on the DAQ}
 For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}. One of the central components of DAQ are the \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
@@ -59,26 +98,53 @@ The data rate estimates make the following assumptions on the DAQ capabilities.
 The data rate estimates are produced considering a specific sources of
 data.
 
-\begin{description}
-\item[in-spill] Any activity in the detector which is coincident with
-  the passage of beam neutrinos through the detector.
-\item[with-beam-$\nu$] A subset of \textit{in-spill} where activity is
-  consistent with a beam-$\nu$ interacting in the detector.
-\item[cosmic-$\mu$] Activity due to the passing of cosmic-ray muons
-  through the detector.
-\item[radioactivity] Activity due to the decay of radioactive
-  isotopes.
-\item[atm-$\nu$] Activity consistent with interactions from
-  atmospheric neutrinos.
-\item[noise] Fluctuation in electronics noise (common-mode not considered).
-\end{description}
 
-\subsection{Fundamental Parameters of the LArTPC}
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{| p{1in} | p{4.5in} |}
+		\hline
+	\textbf{Type} & \textbf{Description} \\ \hline
+		
+	in-spill & Any activity in the detector which is coincident with
+	the passage of beam neutrinos through the detector \\ \hline
+	
+	with-beam-$\nu$ & A subset of \textit{in-spill} where activity is
+	consistent with a beam-$\nu$ interacting in the detector \\ \hline
+	
+	cosmic-$\mu$ & Activity due to the passing of cosmic-ray muons
+	through the detector \\ \hline
+	
+	radioactivity & Activity due to the decay of radioactive
+	isotopes \\ \hline
+	
+	atm-$\nu$ & Activity consistent with interactions from
+	atmospheric neutrinos \\ \hline
+	
+	noise & Electronics noise (common-mode not considered) \\ \hline
 
-This section provides a selection of fundamental parameters used as
-input to the data rate estimations.
-The parameters are summarized in
-table~\ref{tab:fundamental-parameters}
+	\end{tabular}
+	\caption{Sources of data in the LArTPC.}
+	\label{tab:dune-data-sources}
+\end{table}
+
+%\begin{description}
+%\item[in-spill] Any activity in the detector which is coincident with
+%  the passage of beam neutrinos through the detector.
+%\item[with-beam-$\nu$] A subset of \textit{in-spill} where activity is
+%  consistent with a beam-$\nu$ interacting in the detector.
+%\item[cosmic-$\mu$] Activity due to the passing of cosmic-ray muons
+%  through the detector.
+%\item[radioactivity] Activity due to the decay of radioactive
+%  isotopes.
+%\item[atm-$\nu$] Activity consistent with interactions from
+%  atmospheric neutrinos.
+%\item[noise] Fluctuation in electronics noise (common-mode not considered).
+%\end{description}
+
+
+
+
+
 
 %\input{annex-rate/generated/fundamental-parameters-table}
 
