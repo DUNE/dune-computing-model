@@ -1,6 +1,6 @@
 \label{sec:35t}
 
-The 35-ton prototype has two operating periods, called Phase~I and Phase~II.  Phase~I, which took place
+The 35-ton prototype of the DUNE LArTPC has two operating periods, called Phase~I and Phase~II.  Phase~I, which took place
 in 2014, was designed to demonstrate that a sufficiently high electron lifetime is achievable in a non-evacuated
 membrane cryostat. A lifetime of $\sim$3~ms was achieved.  For Phase~II, TPC elements were installed, and
 a data acqusition system developed.  The detector is segmented into four two-sided APA's for eight drift volumes.
@@ -8,19 +8,32 @@ Its total channel count is 2048 wires, 92 (check!) photon detector channels read
 detection devices, and ?? scintillator paddles arranged outside of the cryostat.
 \fxnote{fix the number of pads}
 
-The purposes of Phase~II of the 35-ton run include re-demonstrating that a suffcientnly high electron
-lifetime can be achieved with TPC equipment in the cryostat, and to characterize the performace of the
-detector design.  The unique elements of the DUNE Far Detector design which are replicated in the 35-ton
-prototype are:  modular TPC elements (multiple APA's instead of just one wire frame in other LArTPC 
-detectors), wrapped induction wires, photon detectors inside the APA frames, two-sided APA's reading
-drift volumes with opposing electric fields, and gaps between the APA's.  Cold electronics similar to the
-far detector's electronics design are also being tested.  The 35-ton prototype detector has no
-input beam; it relies on cosmic rays for the signal used to characterize the detector.  A large amount
-of data is required in order to fully exercize the data acquisition and characterize the 
-performance of the detector under several operating conditions.  Analysis topics include --
-determination of the electron drift velocity, the electron lifetime, the signal and noise characteristics
-of the TPC channels, and the signal and noise characteristics of the photon detectors.  The external
-trigger paddles will be used to identify samples of cosmic rays that are particularly useful in determining
+The purposes of Phase~II of the 35-ton run include continued demonstration of a suffcientnly high electron
+lifetime with TPC hardware present in the cryostat, and characterization of the detector performace.
+The unique elements of the DUNE Far Detector design which are replicated in the 35-ton
+prototype are:
+\begin{itemize}
+\item  modular TPC elements (multiple APA's instead of just one wire frame in other LArTPC 
+detectors)
+\item wrapped induction wires
+\item photon detectors inside the APA frames
+\item two-sided APA's reading drift volumes with opposing electric fields
+\item gaps between the APA's
+\item cold electronics similar to the Far Detector's design
+\end{itemize}
+
+The 35-ton prototype detector is not to be used with a test beam, and instead relies on cosmic rays as
+a particle source used to characterize the detector.  A large amount
+of data is required in order to fully exercise the data acquisition and characterize the 
+performance of the detector under several operating conditions.  Measurement and analysis topics include
+\begin{itemize}
+\item  determination of the electron drift velocity
+\item the electron lifetime
+\item the signal and noise characteristics of the TPC channels
+\item the signal and noise characteristics of the photon detectors
+\end{itemize}
+
+The external trigger paddles will be used to identify samples of cosmic rays that are particularly useful in determining
 detector characteristics.
 
 As of this writing (October 2015), the 35-ton prototype is scheduled to fill with liquid argon
@@ -37,49 +50,53 @@ to collect and analyze the data from the 35-ton Phase~II prototype.
 \subsubsection{Online Computing Model}
 
 Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
-and digitize it.  These data are sent to sixteen Recofigurable Compute Elements (RCE's), each of which
+and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCE's), each of which
 processes the data from 128 channels.  The RCE's format the data, apply trigger decisions, and send the
-data along ethernet connections to the DAQ computers.  The RCE's will perform zero suppression for
-much of the data to be collected.  The performance of the zero-suppression algorithm depends on the
-noise and other artifacts of the data, such as the rate of stuck bits.
+data along ethernet connections to the DAQ computers.  The RCE's perform zero suppression for
+much of the data to be collected.
+
+% -mxp- Immaterial for this section
+%The performance of the zero-suppression algorithm depends on the noise and other artifacts of the data, such as the rate of stuck bits.
 
 Data from the photon detectors are assembled
-by SSP's (translate acronym), and sent from there via ethernet connections to the DAQ computers.  The
-triggering is implemented in the Penn Board, which inputs signals from the scintillator paddles.  Data
-from the Penn board is also included in the event data stream.
-There are seven DAQ server nodes, which are
-connected to each other via a private network, as well as to two gateway nodes.  The two gateway nodes
-are also connected via a 1~GBit/sec link to the Fermilab campus network.  The two gateway nodes are
-administered by Fermilab's Scientific Computing Division, and the seven DAQ servers are administered
-by their owners at Sussex and Oxford.  The DAQ nodes run
-{\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
-physics experiments.  {\it Artdaq} also provides features for examining data as it is collected for
-purposes of monitoring the data quality and providing diagnostic tools for shift takers and detector
-experts.
+by SSP's (Silicon Photomultiplier Signal Processor), and sent from there via ethernet connections to the DAQ computers.  The
+triggering is implemented in the so-called ``Penn Board'', which inputs signals from the scintillator paddles.  Data
+from the Penn Board is also included in the event data stream.
 
-Two of the DAQ computers, lbnedaq6 and lbnedaq7, each contain 10~TB of buffer disk.  This disk will
-be used to store the first copy of the data and monitoring histograms before being transferred
-to permanent storage.  The data are in {\it art}-formatted rootfiles, with compression enabled.
-The first gateway node has 234~GB of disk space for buffering data, while
-the second gateway node has a 7.2~TB buffer disk.  These disks on the gateway nodes are also mounted
-on lbnedaq6 and lbnedaq7, where a cron job can copy the data to the second gateway.  The second gateway
-node then extracts metadata from each new DAQ file, including also metadata obtained from the online
-database, which stores the run configuration state.  Processes on the second gateway node
- register this metadata with Fermilab's 
-Sequential Access via Metadata (SAM) system, and then copy the DAQ files to a File Transfer Service
-(FTS) dropbox.  Three dropboxes have currently been set up -- one on dCache, at the location
-/pnfs/lbne/scratch/lbnepro/dropbox/data, and two on BlueArc disks:  /lbne/data/lbnepro/dropbox/data and
-/lbne/data2/lbnepro/dropbox/data.
+There are seven DAQ server nodes, which are connected to each other via a private network, as well as to two gateway nodes. 
+These two gateway nodes are also connected via a 1~GBit/sec link to the Fermilab campus network thus providing the way
+to ship out the data. The DAQ nodes run {\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
+physics experiments. 
 
+% {\it Artdaq} also provides features for examining data as it is collected for
+%purposes of monitoring the data quality and providing diagnostic tools for shift takers and detector experts.
+
+Two of the DAQ computers each contain 10~TB of buffer disk.  This disk is used to store the first copy of
+the data and monitoring histograms before being transferred to permanent storage.
+%The data are in {\it art}-formatted rootfiles, with compression enabled.
+%The first gateway node has 230~GB of disk space for buffering data, while
+%the second gateway node has a 7~TB buffer disk.
+
+%  These disks on the gateway nodes are also mounted
+%on lbnedaq6 and lbnedaq7, where a cron job can copy the data to the second gateway. 
+
+One of the gateway nodes extracts metadata from each new DAQ file, including metadata obtained from the online
+database, which stores the run configuration.  The metadata is then registered with Fermilab's  SAM system
+(``Sequential Access via Metadata''), and then the data is moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
+%copy the DAQ files to a File Transfer Service (FTS) dropbox.
+%Three dropboxes have currently been set up -- one on dCache, at the location
+%/pnfs/lbne/scratch/lbnepro/dropbox/data, and two on BlueArc disks:  /lbne/data/lbnepro/dropbox/data and
+%/lbne/data2/lbnepro/dropbox/data.
 When the data have been stored in persistent storage and the files are no longer needed online,
-the copies on the DAQ node and the gateway node can be retired.  Copies are validated by checking
-the checksums and the total byte counts.
+the copies on the DAQ and gateway node can be retired, which is done after validation by checksum and
+total byte count comparison.
 
 Online monitoring processing is included in the {\it artdaq} suite, with experiment-specific modules
 provided by the DUNE 35-ton collaboration.  Histograms are stored as root files and also
-images for display on web servers are produced at the end of a run.  These are copied to a NFS disk
-for web display.  This web disk area is mounted on both of the gateway nodes.  The online
-monitoring histograms and files are backed up to permanent storage.
+images for display on web servers are produced at the end of a run, and are backed up to a permanent storage.
+
+%These are copied to a NFS disk for web display.  This web disk area is mounted on both of the gateway nodes.  The online
+%monitoring histograms and files are backed up to permanent storage.
 
 \subsubsection{Offline Computing Model}
 
@@ -89,7 +106,8 @@ efficiency of access to large datasets which reside on tape.  Files are requeste
 issues commands for reading data off of tape and into dCache, where they can be then transferred
 to batch worker nodes or read directly.  
 
-calibration runs -- long events (1/3 minute).
+\fxnote{calibration runs -- long events (1/3 minute) - Tom, can you improve that?}
+
 
 \subsubsection{Resource Requirements}
 
