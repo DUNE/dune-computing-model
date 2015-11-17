@@ -3,17 +3,25 @@
 \subsubsection{Purpose, Origin and Scope}
 
 These \textit{Requirements} are in essence rules and guidelines for setting policies,
-putting in place practices (for example related to data handling)
-and making technology choices in DUNE. They do not cover specific \textit{functional requirements}
-for the various physics tools software or specific parameters (storage capacity, bandwidth, CPU hours etc) of DUNE computing, which are to be addressed in the Computing Model proper.
-Instead, the focus of this section is on the foundations of the Software and Computing infrastructure, such as code management, Grid capability, data management etc. An effort was made to maintain a relatively high-level view of the DUNE computing issues. In cases where it was impossible to establish concrete metrics or parameters for a specific requirement, it is still listed as an item to be addressed in the future.
-%, and to not go into smaller details which are more likely to change as the project moves forward, while still providing adequate basis for making informed decisions.
+putting in place practices (for example related to data handling) and making technology choices in DUNE.
+They describe approach employed by DUNE to issues such as  code management, Grid and Cloud capability, data management etc.
+As such  the \textit{Requirements} form the foundation of the DUNE Computing Model. They do not however cover specific \textit{functional requirements}
+for the various physics tools software or specific parameters (storage capacity, bandwidth, CPU hours etc) of DUNE computing,
+which are to be addressed in the Computing Model proper.
 
-The \textit{Requirements} have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment, which was a predecessor of DUNE.
-They constitute one of principal components of the Computing Model. 
+An effort was made to maintain a relatively high-level view of the DUNE computing issues. In cases where it was impossible to establish concrete metrics or
+parameters for a specific requirement, it is still listed as an item to be addressed in the future.
+
+%The \textit{Requirements} have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment, which was a predecessor of DUNE.
+%They constitute one of principal components of the Computing Model. 
 
 
-%Information necessary for the creation of these Requirements have been collected during a number of DUNE Software and Computing meetings, conference calls and extensive information %exchange via e-mail and other means. It is recognized that the Requirements themselves (and the Computing Model) may evolve with time, in order to correctly reflect the status of rapidly %evolving technologies and the DUNE organization itself. Such expectation is reinforced by actual experience of large scale HEP collaborations. We anticipate therefore that the requirements will %be revised roughly in the middle of the time period between their creation and the commissioning of the experiment, and help evolve the DUNE Computing model such that it continues to meet %the needs of the Collaboration.
+%Information necessary for the creation of these Requirements have been collected during a number of DUNE Software and Computing meetings, conference calls
+%and extensive information %exchange via e-mail and other means. It is recognized that the Requirements themselves (and the Computing Model) may
+%evolve with time, in order to correctly reflect the status of rapidly
+%evolving technologies and the DUNE organization itself. Such expectation is reinforced by actual experience of large scale HEP collaborations.
+%We anticipate therefore that the requirements will be revised roughly in the middle of the time period between their creation and the commissioning
+% of the experiment, and help evolve the DUNE Computing model such that it continues to meet the needs of the Collaboration.
 
 %Certain  requirements need to be specified by a collaboration including the S\&C Organization and other software organizations in DUNE
 %(i.e. the Physics Tools Group, the Online/DAQ groups etc). In these cases, the S\&C Organization will work with the appropriate group to insure
@@ -52,8 +60,7 @@ In addition, in cases when it helps clarify the scope of a given  requirement, a
 \subsubsection{Description}
 This section contains the requirements related to handling a variety of data by the DUNE Collaboration. This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed) datasets and other collections of data (and where necessary, the metadata associated with these items). Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
 
-The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. This is closely related to Section~\ref{sec:dunedc} (Distributed Computing).
-\fxnote{Make sure the reference to Dist Comp is correct}
+The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. Processing of the data is described in Section~\ref{sec:dunedc} (Distributed Computing).
 
 Data Retention policies will aim to provide cost-effective and optimal schedule of data distribution, replication and retirement, in order to maximize
 efficiencies in achieving the scientific objectives of DUNE. On a longer time scale, there is a need to put in place policies and procedures for data preservation.
@@ -752,7 +759,7 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item The CIS and the unit test upon which it relies shall include checks for the physics content of the code (e.g. a particular observable being calculated matches the expected vlaue according to set criteria).
 
-\item The CIS and if necessary, individual unit tests, shall be linked to the Issue Tracking System deployed by the Collaboration (see Section~\ref{sec:lbnecolltools}).
+\item The CIS and if necessary, individual unit tests, shall be linked to the Issue Tracking System deployed by the Collaboration.
 
 \item Full diagnostic information generated by CIS shall be stored such that it is accessible to the members of the Collaboration.
 
@@ -854,7 +861,7 @@ into its infrastructure base.
 \subsubsection{Workload Management System}
 \textit{Description}
 
-Workload Management Systems serve as a force multiplier for the user of Grid and Cloud technology. They insulate individual users from specific configuration details and certain failure modes of Grid sites, and provide substantial automation in managing the user's computational payload on the Grid. A good WMS also must provide adequate monitoring capabilities (down to the job level) which serve as a valuable debugging tool, and represent an essential toolkit for the operational support teams.
+Workload Management Systems serve as a force multiplier for the user of Grid and Cloud technology. They insulate individual users from specific configuration details and certain failure modes of Grid sites and networks, and provide substantial automation in managing the user's computational payload on the Grid. A good WMS also must provide adequate monitoring capabilities (down to the job level) which serve as a valuable debugging tool, and represent an essential toolkit for the operational support teams.
 
 A WMS is also a valuable tool for managing software deployment, keeping proper accounting information regarding releases and document configuration (e.g. release) of the software used for a specific production run, thus satisfying one of core requirements related to processed data in DUNE.
 \ 
