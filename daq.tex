@@ -1,9 +1,11 @@
+%%%% This section is in essense a restructured and slightly modified chapter of the CDR
+%%%% on same subject. Giles was reportedly not available to write new stuff, and it's not clear if it's
+%%%% really needed at this point   ---mxp--- 
+
 \section{The Data Acquisition (DAQ) System and Monitoring}
 \label{sec:daq}
 
 \subsection{Overview}
-
-
 
 The scope of the DAQ and monitoring includes the design, procurement,
 fabrication, testing, delivery and installation. It is required to:
@@ -31,29 +33,20 @@ fabrication, testing, delivery and installation. It is required to:
 This section outlines a conceptual design intended to meet the required performance for the DAQ
 for the DUNE far detector. 
 
-%  GB - No, what I am saying is subtly different, the reader has to think
-%  to get the subtlety (and is not missing out if they don't take the
-%  time to think \fixme{To reduce the deadtime of the overall DUNE detector sufficiently to meet the requirements... AH}
+
+\subsection{The DAQ Architecture}
+
 To reduce considerably the times when none of the parts of DUNE are
 collecting data (particularly important for supernova detection); and
 to allow the designs of the DAQ in the different 10-kt sections to be
 entirely different if desired, the DUNE DAQ employs a decoupled 
-design. 
-%\fixme{(but less coupled or more uncoupled to/from what? -AH, original phrasing: a less coupled design than has ever been used in data acquisition before is employed. } 
-% GB - I am trying to say the parts within the DAQ are less coupled
-% with each other
-The synchronization, triggering, data collection and run-state in the
+design. The synchronization, triggering, data collection and run-state in the
 different 10-kt modules are completely independent in real time and
 are only coupled by processes running asynchronously (in the same fashion
-as a batch queue) in the hour or so after data collection (see section
-4.11 of 
+as a batch queue) in the hour or so after data collection.
 
-\fxnote{anxlbnefd}.
-
- This allows one portion of the
-detector module to be restarted without interrupting data collection in the
-others.
-
+This allows one portion of the detector module to be restarted without interrupting
+data collection in the others.
 
 The layout of the DAQ is shown schematically in
 Figure~\ref{fig:fddaqblock}.  To collect full detail of the
@@ -62,6 +55,8 @@ deposition of 100\,MeV and above), while avoiding tricky communication
 to flag neighboring channels to those that have large hits, a model is used
 in which the digitised data are collected twice from the initial data
 storage that is associatated with each peice of hardware. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GB - I can't think of anything better, unless we expand this section
 % a lot, which whould give it too much emphasis.  Ideally we DO want
 % to flag neighbouring channels to those with big hits, but it is
@@ -69,42 +64,34 @@ storage that is associatated with each peice of hardware.
 % comunications between all the boards which is very tricky.
 %\fixme{Previous sentence not clear: you want to flag channels that have large hits and NOT flagneighboring channels?  What's the `tricky communication'?}
 
-The first collection
-supplies a centralized software-based trigger farm continuously with
-zero-suppressed information (a threshold on each channel detects hits
-above the noise level; this causes the ADC samples to be kept in a
-time window around the hit).  
-The second collection reads the full data at the times and
-in the regions %of interest that have been 
-selected by the
-trigger. This is similar to the multi-level triggering in a collider experiment,
-but with only one level of triggering.
-%\fixme{in other words, here we have one trigger + two collections; in
-%  collider expt, two of each? Please clarify sentence.} 
-The software trigger farm also
+The first collection supplies a centralized software-based trigger farm continuously with
+zero-suppressed information (a threshold on each channel detects hits above the noise level;
+this causes the ADC samples to be kept in a time window around the hit).  
+The second collection reads the full data at the times and in the regions %of interest that have been 
+selected by the trigger. This is similar to the multi-level triggering in a collider experiment,
+but with only one level of triggering. The software trigger farm also
 records the continuous stream of zero-suppressed hits in an archival
 ring buffer on disk to allow later analysis of supernova candidates.
 
 %%%%%%%%%%%%%%%
-\fxnote{Block Diagram here}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{daq-block-diagram.png}
+	\caption{Block diagram layout of the main components of the DAQ subsystem.}
+	\label{fig:fddaqblock}
+\end{figure}
 
 
-{\bf LArTPC detector readout} The LArTPC signals are digitized in the
-cold in a
-continuous flash-ADC stream at 2\,MHz, (not zero-suppressed) and
-serialized on 12,000 high-speed links per 10-kt module that exit the
-cryostat.
-% GB - agreed, lets just leave this stuff about costs out
-% (costed separately in the cold-electronics WBS). \fixme{Do we want to refer to costs here?
-%And which thing falls under CE, the links? Maybe say `(the links are
-%covered in Section~\ref{sec:detectors-fd-ref-ce})'} 
-The data
-are received by LArTPC data processors called RCEs (Reconfigurable
-Computing Elements) %which are 
-housed in
-industry-standard aTCA crates on COB (cluster-on-board) motherboards that are designed at SLAC
-for a wide range of applications.  The RCEs are part of a network of
-field programmable gate arrays (FPGAs) that buffer the full raw data,
+\subsection{Hardware and Software Components of the DAQ}
+\subsubsection{LArTPC detector readout}
+
+The LArTPC signals are digitized in the cold in a continuous flash-ADC stream at 2\,MHz, (not zero-suppressed)
+and serialized on 12,000 high-speed links per 10-kt module that exit the cryostat.
+
+The data are received by LArTPC data processors called RCEs (Reconfigurable
+Computing Elements) housed in industry-standard aTCA crates on COB (cluster-on-board)
+motherboards that are designed at SLAC for a wide range of applications.  The RCEs are part of a
+network of field programmable gate arrays (FPGAs) that buffer the full raw data,
 zero-suppress it for passing to the trigger and accept requests for
 data-fetching from the trigger.  The FPGAs in the RCEs are from the
 Xilinx Zynq family and contain a full Linux processor system on the
@@ -114,13 +101,15 @@ network using the Ethernet protocol is used on the COBs and in the
 aTCA crates to allow for development of more sophisticated zero-suppression algorithms
 for improved supernova acquisition.
 
-{\bf Photon detector readout} is performed by the SiPM signal
-processor (SSP) described in
+\subsubsection{Photon detector readout}
+
+It  is performed by the SiPM signal processor (SSP) described in
 section~\ref{sec:detectors-fd-ref-pd-refsystem}.  The additional
 buffering required for the separate trigger and data collection paths
 is implemented in the SSP frontend computers.
 
-{\bf Computer farm} Both the LArTPC and photon detector data are
+\subsubsection{Computer farm}
+Both the LArTPC and photon detector data are
 received in commodity Linux computers, with no deadtime, from where
 the data are routed to the trigger and full-data collection farms of
 computers.  Although the front-end computers are logically distinct as
@@ -128,7 +117,9 @@ shown in Figure~\ref{fig:fddaqblock}, one physical computer is
 sufficient for all the processes for each rack of APA readout
 electronics. 
 
-{\bf artDAQ software toolkit} (from Fermilab) supplies the real-time
+\subsubsection{artDAQ software toolkit}
+
+(from Fermilab) supplies the real-time
 data collection functionality (buffering, matching event parts,
 synchronization, inter-process communication, etc.) in a modern
 design that facilitates the efficient use of multicore commodity
@@ -140,7 +131,9 @@ with detector-specific triggering (also UK).  The architecture
 provided by artDAQ can be tailored for each experiment and is entirely
 suitable for the ``collect-twice'' architecture envisioned for DUNE.
 
-{\bf Run Control and Slow Control software framework} manages the
+\subsubsection{ Run Control and Slow Control software framework}
+
+manages the
 control, status display and status archival of the experiment.  It is
 based on the ICECube design.  This
 exploits a combination of readily available, well-supported packages
@@ -151,7 +144,8 @@ customized views and historical views.  The database of slow-control
 measurements is exported to the host lab to give access for offline
 programs.
 
-{\bf Timing system} To acomplish the software-based deadtimeless data
+\subsubsection{Timing system}
+To acomplish the software-based deadtimeless data
 acquisition in DUNE, it is necessary to synchronize the clock across
 all readout boards.  This is accomplished in two stages, the main
 cavern-wide distribution uses the design from the NO$\nu$A experiments
@@ -162,7 +156,8 @@ over optical fiber.  The synchronization is transferred from the COBs
 to the electronics in the cryostat over the same cabling as provides
 the data links.
 
-{\bf Calibration system} The calibration is done in three stages: (1)
+\subsubsection{Calibration system}
+The calibration is done in three stages: (1)
 Pedestal and charge-injection pulser events are used to calibrate and
 remove drifting of the individual electronic channel responses. (2)
 External UV lasers are directed into the cryostat through glass-tube
@@ -173,6 +168,8 @@ the determination of the energy scale and for calibration
 cross-checks.
 
 
+
+\subsection{The Time Sequence}
 \fxnote{Step Diagram Here}
 %%%%%%%%%%%%%%%%%%%%%%%
 
