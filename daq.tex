@@ -189,7 +189,7 @@ As shown in Figure~\ref{fig:fddaqtime}, prior to the trigger time and
 independently in each detector module, the detector readout assembles
 packets of data corresponding to fixed time intervals and sends them
 to the trigger event builders.  Both the LArTPC readout and the SSP
-readout send zero-suppressed data, suitable for triggering, to a set
+readout (\ref{sec:pd}) send zero-suppressed data, suitable for triggering, to a set
 of event-builder processes that run in parallel, each accepting all
 the data from the entire 10-kt module for a specific time interval and
 performing trigger algorithms on them.  All time intervals are
@@ -205,15 +205,18 @@ To maximize data collection for a supernova, the continuous
 zero-suppressed trigger data is kept in a large buffer area on disk.
 Ways to collect data that are cropped more gently than the zero-suppressed 
 data stream during the extended period of a supernova are
-under study: The non-zero-suppressed ring buffers on the current
-design of RCEs are
-sufficient for 0.4\,s of buffering; the trigger farm can send
+under study: the non-zero-suppressed ring buffers on the current
+design of RCEs are sufficient for 0.4\,s of buffering; the trigger farm can send
 instructions in the trigger messages to manage storage of data in
 these buffers during a supernova. Two possible extensions
-are (a) extend the memory to buffer longer, either on the RCEs or
-elsewhere in the aTCA crate, or (b) use the powerful intercommunications between
-RCEs to cause neighboring channels to be kept around the time of a
-potential supernova event candidate. 
+are
+\begin{itemize}
+\item extend the buffer memory , either on the RCEs or elsewhere in the aTCA crate, or
+
+\item use the powerful intercommunications between RCEs to cause neighboring
+channels to be kept around the time of a potential supernova event candidate. 
+
+\end{itemize}
 
 %\begin{cdrtable}[Estimated data rates]{lcc}{daqrefrates}{Estimated data  rates in the DAQ system}  %The third argument (reads {cc}) can use c, l, r or p{some length} % but please do %not include lines like “|c|l|l|”. It CAN look like {cll} or {llp{3cm}}, for instance.
 %Process & Rate (kHz/APA) & Data rate (MBytes/s) \\ \toprowrule
@@ -223,28 +226,26 @@ potential supernova event candidate.
 %Electronics noise (not common mode) & $\sim 1$ & 0.03 \\
 %\end{cdrtable}
 
-At the 4850L, the data rate in the trigger is dominated by
-radioactivity from $^{39}$Ar and $^{85}$Kr.  The cosmic-rays that
-occur about once per minute are the major source of events that should
-be collected on the data stream; the physics beam events, atmospheric
-netrinos and other candidate contained events are included in this
-data budget.  
-Table~\ref{tab:daqrefrates}) gives estimates of the
-rate of occurence of these events and the expected ``steady-state'' data rate
-(after the derandomisation provided by the buffering in the front-end
-computers).  The requirements are met in this conceptual design by
-the very high throughput provided by modern off-the-shelf components 
-and the parallelism provided by artDAQ, which
-makes the design extendable to avoid bottolenecks.  The triggering
+%At the 4850L, the data rate in the trigger is dominated by
+%radioactivity from $^{39}$Ar and $^{85}$Kr.  The cosmic-rays that
+%occur about once per minute are the major source of events that should
+%be collected on the data stream; the physics beam events, atmospheric
+%netrinos and other candidate contained events are included in this data budget.  
+%Table~\ref{tab:daqrefrates}) gives estimates of the
+%rate of occurence of these events and the expected ``steady-state'' data rate
+%(after the derandomisation provided by the buffering in the front-end
+%computers).
+
+The requirements for handling radiological and other backgrounds (e.g. $^{39}$Ar decays as described
+in~\ref{sec:ar39decays}) are met in this conceptual design by the very high throughput provided by modern
+off-the-shelf components  and the parallelism provided by artDAQ, which makes the design extendable to avoid bottolenecks.  The triggering
 allows the zero-suppression to be tuned to optimise for the final
 level of noise, while retaining the maximum level of information for
 the important physics events.
 
-This DAQ design is being prototyped for the 35t tests in 2015, with
-two COBs (containing 16 RCEs) and eight SSPs.  The artDAQ software
-toolkit is being used to implement the readout, event-building and
-triggering, although we are not implementing the ``collect-twice''
-model for the 35t.
+%This DAQ design is being prototyped for the 35t tests in 2015, with
+%two COBs (containing 16 RCEs) and eight SSPs.  The artDAQ software
+%toolkit is being used to implement the readout, event-building and
+%triggering, although we are not implementing the ``collect-twice''
+%model for the 35t.
 
-%Here is a sample table:
-%
