@@ -11,10 +11,17 @@ readiness at the time of writing. Same applies to various analysis software.
 For that reason, the data rate estimations involve some broad assumptions
 and leave open some choices. This is described in more detail in the following subsections.
 
-\subsection{Fundamental Parameters of the LArTPC}
+DUNE contains a number of major detector subsystems. The Liquid Argon TPC will present most challenges from
+the standoint of real-time data processing and triggering, and can potentially dominate the data volume.
+It incorporates the Photon Detector (PD) which while important produces less data so it won't be our focus
+for the purpose of the data rate and volume estimates. There is also the Near
+Detector Systems (see~\ref{sec:nds-params}).
 
-This section provides a selection of fundamental TPC parameters used as
-input to the data rate estimations. These parameters are summarized in
+\subsection{DUNE Detectors and Subsystems}
+
+\subsubsection{Fundamental Parameters of the LArTPC}
+
+The fundamental TPC parameters most relvant as input to the data rate estimations are summarized in
 table~\ref{tab:fundamental-parameters}.
 
 \begin{table}[ht!]
@@ -22,9 +29,9 @@ table~\ref{tab:fundamental-parameters}.
 	\begin{tabular}{| p{2.5in} | p{1in} |}
 		\hline
 		\textbf{Parameter} & \textbf{Value} \\ \hline
-		Full height (module) & 12.0m \\ \hline
-		Full width (module) & 14.5m \\ \hline
-		Full length (module) & 58.0m \\ \hline
+		Full height (single module) & 12.0m \\ \hline
+		Full width (single module) & 14.5m \\ \hline
+		Full length (single module) & 58.0m \\ \hline
 		\# of detector modules & 4 \\ \hline
 		\hline
 		channels per APA & 2,560 \\ \hline
@@ -50,7 +57,47 @@ table~\ref{tab:fundamental-parameters}.
 	\label{tab:fundamental-parameters}
 \end{table}
 
-\subsection{Thresholds for the LArTPC Data Rate Estimations}
+\subsubsection{The Photon Detector}
+\label{sec:pd}
+The Photon Detector (PD) which is built into the Far Detector LArTPC takes advantage of the fact that Liquid Argon
+is an excellent scintillating medium.
+The most significant requirements for the PD include determination of t0 of an event relative to the TPC timing ---
+resolution better than 1 $\mu$s (event position resolution along drift direction of a few mm), and sufficient light
+collection efficiency to allow triggering on neutrinos coming from a supernova, with the capability of detecting neutrinos with energies as
+low as 20 MeV.
+
+Light produced by Liquid Argon Stintillation is collected from the TPC volume by the wavelength shifter and transported
+by the light guide to the Silicon Photo-Multiplier (SiPMs) mounted at its end. A single whole assembly is mounted on each  APA frame.
+The SiPMs are read out using shielded twisted-pair cables and the signal is passed to the module called SSP (the SiPM Signal
+Processor). Digitized data is processed by a  Field-Programmable Gate Array (FPGA). The use
+of the FPGA processing allows for a significant amount of customization of the SSP operation.
+
+
+\subsubsection{The Near Detector Systems}
+\label{sec:nds-params}
+For sake of brevity, only basic information will be provided for the Near Detector Systems (NDS) which are under active development
+at the time of writing and for which there is no final design yet. The main NDS components are:
+
+\begin{itemize}
+\item Near neutrino detector (NND), and its major component, the fine-Grained Tracker (FGT)
+\item Beamline Measurement System (BLM)
+\end{itemize}
+\ 
+\\
+Some basic parameters of the NDS are presented in Table~\ref{tab:nds-params}.
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{1in} | p{1in} | p{1in} |}		\hline		
+\textbf{Detector} & \textbf{Mass} & \textbf{Channels} \\ \hline
+SST & 8t & 215,040 \\ \hline
+ECAL & 93t & 52,224 \\ \hline
+MuID & 100t & 165,888 \\ \hline
+\end{tabular}
+\caption{Main parameters of the Near Detector Systems}
+\label{tab:nds-params}
+\end{table}
+
+\subsection{Thresholds for the Far Detector LArTPC Data Rate Estimations}
 
 Signals produced by individual wires in the DUNE TPC will have a substantial
 dynamic range. For example, $\beta$-decay of naturally occurring isotope $^{39}Ar$ has the endpoint of
