@@ -7,27 +7,24 @@
 
 \subsection{Overview}
 
-The scope of the DAQ and monitoring includes the design, procurement,
-fabrication, testing, delivery and installation. It is required to:
+The scope of the DAQ and monitoring includes the design, procurement, fabrication, testing, delivery and installation. It is required to:
 \begin{itemize}
-\item collect data with a very high uptime (the goal is $> 99\%$)
-\item collect beam neutrino, atmospheric neutrino and proton
-  decay candidates (generally all interactions with total energy deposition
-  above about 100\,MeV) with a high resolution (smart or no
-  zero-suppression) with no dead-time.
-\item have the capability to collect interactions with total energy
-  below $100$\,MeV with some
+\item collect data with a very high uptime (the goal is $>99\%$)
+
+\item collect beam neutrino, atmospheric neutrino and proton  decay candidates (generally all interactions
+with total energy deposition above about 100\,MeV) with a high resolution (smart or no   zero-suppression) with no dead-time.
+
+\item have the capability to collect interactions with total energy  below $100$\,MeV with some
  low amount of zero-suppression loss.
-\item have the ability to trigger at the time of the beam pulses,
-  irrespective of how little energy is deposited in the detector.
-\item collect data with the most favorable zero-suppression possible over a
-  period of >10\,s (supernova trigger)
-\item assemble data from sub-detectors into a unified
-  event for offline analysis.
-\item provide access to the shift operator and others to control and
-  monitor the data collection and detector status, view online
-  histograms and monitor (and provide for offline use) historical
-  status of measured detector parameters. 
+
+\item have the ability to trigger at the time of the beam pulses,  irrespective of how little energy is deposited in the detector.
+
+\item collect data with the most favorable zero-suppression possible over a  period of >10\,s (supernova trigger)
+
+\item assemble data from sub-detectors into a unified  event for offline analysis.
+\item provide access to the shift operator and others to control and   monitor the data collection and detector status, view online
+  histograms and monitor (and provide for offline use) historical  status of measured detector parameters. 
+
 \end{itemize}
 %The design presented here   AH: this sounded too bold, somehow.
 This section outlines a conceptual design intended to meet the required performance for the DAQ
@@ -36,15 +33,10 @@ for the DUNE far detector.
 
 \subsection{The DAQ Architecture}
 
-To reduce considerably the times when none of the parts of DUNE are
-collecting data (particularly important for supernova detection); and
-to allow the designs of the DAQ in the different 10-kt sections to be
-entirely different if desired, the DUNE DAQ employs a decoupled 
-design. The synchronization, triggering, data collection and run-state in the
-different 10-kt modules are completely independent in real time and
-are only coupled by processes running asynchronously (in the same fashion
-as a batch queue) in the hour or so after data collection.
-
+To reduce downtime considerably (i.e. time periods when none of the DUNE modules are collecting data, which impacts supernova detection)
+and to allow the DAQ technology in the different 10-kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
+design. The synchronization, triggering, data collection and run-state in the different 10-kt modules are completely independent in real time and
+are only coupled by processes running asynchronously (in the same fashion as a batch queue) in the hour or so after data collection.
 This allows one portion of the detector module to be restarted without interrupting
 data collection in the others.
 
@@ -73,7 +65,6 @@ but with only one level of triggering. The software trigger farm also
 records the continuous stream of zero-suppressed hits in an archival
 ring buffer on disk to allow later analysis of supernova candidates.
 
-%%%%%%%%%%%%%%%
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]{daq-block-diagram.png}
@@ -157,21 +148,30 @@ to the electronics in the cryostat over the same cabling as provides
 the data links.
 
 \subsubsection{Calibration system}
-The calibration is done in three stages: (1)
-Pedestal and charge-injection pulser events are used to calibrate and
-remove drifting of the individual electronic channel responses. (2)
-External UV lasers are directed into the cryostat through glass-tube
+At the time of writing, the calibration system is in the R\&D stage and its design will
+evolve as the experiment is being built. Very roughly, there will be three stages:
+\begin{enumerate}
+\item Pedestal and charge-injection pulser events are used to calibrate and
+remove drifting of the individual electronic channel responses.
+
+\item External UV lasers are directed into the cryostat through glass-tube
 ports, and swivelling mirrors select the trajectories of the beams
 through the cryostat to provide calibration of the field
-non-uniformities and attenuation. (3) Cosmic-ray muons are used for
-the determination of the energy scale and for calibration
+non-uniformities and attenuation.
+
+\item Cosmic-ray muons are used for the determination of the energy scale and for calibration
 cross-checks.
+\end{enumerate}
 
 
 
 \subsection{The Time Sequence}
-\fxnote{Step Diagram Here}
-%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{daq-steps.png}
+	\caption{Main DAQ steps displayed relative to the event time.}
+	\label{fig:fddaqtime}
+\end{figure}
 
 The time sequence, trigger deadlines and buffering of the readout are all
 shown in Figure~\ref{fig:fddaqtime}.  This figure shows time in the
