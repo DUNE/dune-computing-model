@@ -1,3 +1,4 @@
+\section{DUNE Data Characteristics}
 \subsection{Overview}
 
 A number of parameters from DUNE/LBNF requirements, design documents,  and studies are used  as input
@@ -77,14 +78,17 @@ of the FPGA processing allows for a significant amount of customization of the S
 \label{sec:nds-params}
 For sake of brevity, only basic information will be provided for the Near Detector Systems (NDS) which are under active development
 at the time of writing and for which there is no final design yet. The main NDS components are:
-
 \begin{itemize}
 \item Near neutrino detector (NND), and its major component, the fine-Grained Tracker (FGT)
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-\\
-Some basic parameters of the NDS are presented in Table~\ref{tab:nds-params}.
+In the reference design at the time of writing, a Fine-Grained Tracker (FGT) near detector consists of a straw-tube
+tracking detector (STT) and electromagnetic calorimeter (ECAL) inside of a 0.4T dipole magnet.
+In addition, Muon Identifiers (MuIDs) are located in the steel of the magnet, as well as upstream
+and downstream of the STT. The FGT is designed to make precision measurements of the neutrino
+fluxes, cross sections, signal and background rates at the percent level. Some basic parameters of the
+NDS are presented in Table~\ref{tab:nds-params}.
 \begin{table}[ht!]
 \centering
 \begin{tabular}{| p{1in} | p{1in} | p{1in} |}		\hline		
@@ -97,7 +101,13 @@ MuID & 100t & 165,888 \\ \hline
 \label{tab:nds-params}
 \end{table}
 
-\subsection{Thresholds for the Far Detector LArTPC Data Rate Estimations}
+The Beamline Measurement System (BLM) will be located in the region of the Absorber Complex
+at the downstream end of the decay region to measure the muon fluxes from hadron decay.
+It is not anticipated to produce large amounts of data when compared to other detectors in DUNE.
+
+\subsection{Considerations for the Far Detector LArTPC Data}
+
+\subsubsection{Thresholds}
 
 Signals produced by individual wires in the DUNE TPC will have a substantial
 dynamic range. For example, $\beta$-decay of naturally occurring isotope $^{39}Ar$ has the endpoint of
@@ -130,7 +140,7 @@ All bins with ADC counts below this threshold are discarded from the data stream
 \end{description}
 
 
-\subsection{Assumption on the DAQ}
+\subsubsection{Assumptions on the Far Detector TPC DAQ}
 For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}. One of the central components of DAQ are the \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
 which offer very high readout speeds and enable flexibility in optimally configuring the system.
 The data rate estimates make the following assumptions on the DAQ capabilities.
@@ -147,7 +157,7 @@ The data rate estimates make the following assumptions on the DAQ capabilities.
 \item RCE-local data storage is left open as a possibility.
 \end{itemize}
 
-\subsection{Sources of Data in the TPC}
+\subsubsection{Sources of Data in the TPC}
 
 Data rate estimates are produced considering specific sources of
 data as presented in table~\ref{tab:dune-data-sources}.
@@ -185,7 +195,7 @@ data as presented in table~\ref{tab:dune-data-sources}.
 
 %\input{annex-rate/generated/fundamental-parameters-table}
 
-\subsection{Full-stream Data}
+\subsubsection{Full-stream Data}
 
 Full-stream (FS) data corresponds to reading all data in every ADC channel without
 application of any threshold. Estimating its rate is an exact calculation based on
@@ -224,12 +234,8 @@ table~\ref{tab:full-stream-parameters}.
 	\caption{Parameters pertaining to full-stream data rates.}
 	\label{tab:full-stream-parameters}
 \end{table}
-
-
 The expected data rates for two scenarios of FS data are given
 in table~\ref{tab:full-stream-volume}.
-
-
 \begin{table}[ht!]
 	\centering
 	\begin{tabular}{| p{3in} | p{2.5in} |}
@@ -245,9 +251,6 @@ in table~\ref{tab:full-stream-volume}.
 	\caption{Data volumes and rates for full-stream data acquisition.}
 	\label{tab:full-stream-volume}
 \end{table}
-
-
-
 The first row gives the data size corresponding to one DAQ readout cycle (5.4ms).
 The second is appropriate for any strategy that intends to record FS data for each beam spill.
 The third contains two numbers that characterize data volume relevant to a strategy which aims
@@ -257,7 +260,7 @@ These numbers are not meant to imply ongoing recording of full-stream
 data to permanent storage and are only given to better define the problem of recording data in DUNE.
 
 
-\subsection{Zero-suppressed Data}
+\subsubsection{Zero-suppressed Data}
 
 There are options in choosing the exact zero-suppression (ZS) procedure,
 and the final choice has not been made. For these data rate estimates a very
@@ -357,7 +360,7 @@ candidate SNB occurrences. The possible data rate of SNB candidates is thus boun
 ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates requires additional study
 and may have implications on DAQ hardware.
 
-\subsection{Noise}
+\subsubsection{Noise}
 
 % fixme: is this remotely true?
 The nominal ZS threshold of 0.5MeV is based on an older requirement of a
@@ -369,7 +372,7 @@ nature and isolated pattern of appearance make them subject to the same rejectio
 $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
 
 
-\subsection{High-energy Threshold}
+\subsubsection{High-energy Threshold}
 
 For the purpose of these estimates the  high-energy (HE) threshold is chosen at the level above 
 the energy scale of the radiological backgrounds relevant for the LArTPC, and set at  10.0MeV.
@@ -402,7 +405,7 @@ threshold to SNB candidates won't be optimal and is not being considered at this
 For this reason, contribution from SNB to these data is not calculated for this threshold setting.
 
 
-\subsection{Compression}
+\subsubsection{Compression}
 
 The above estimates assume that the only method of data volume reduction to be employed is the
 lossy compression by removal of data below some threshold. However, in addition to that
@@ -412,6 +415,17 @@ The initial kinematics for the simulated samples covered a matrix of
 particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
 (100MeV to 6GeV).
 The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-compression}.
+
+The flow of data in Wire Cell is presented in Fig.~\ref{fig:wirecell-diagram}.
+\begin{figure}
+%[h!]
+%	\centering
+	\includegraphics[width=0.32\textwidth]{btot.png}
+	\includegraphics[width=0.32\textwidth]{bzip.png}
+	\includegraphics[width=0.32\textwidth]{brat.png}
+	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before (left) and after (center)  compression and their ratios (right).}
+	\label{fig:data-compression}
+\end{figure}
 
 %\begin{cdrfigure}[Event size estimations.]{data-compression}{Estimation of DUNE zero-suppressed event sizes for
 %    different particles and momenta before (left) and after (center)
@@ -448,9 +462,8 @@ event size is only a minor function of event momenta and particle types.
 It is believed that LArSoft is saving additional overhead for all
 channels, even those that have been fully zero-suppressed.
 
-The simulation used a detector module consisting of 300000 wires and
-thus naively the event size in the full reference detector would be some 5 times
-larger.
+The simulation used a detector module consisting of 300k wires and thus naively the event
+size in the full reference detector would be some 5 times larger.
 However, given the arguments above, it is expected that this leads to
 a gross over-estimate, possibly by one or two orders of magnitude from
 what should be expected if even just a little effort is put into
@@ -464,8 +477,23 @@ We identify this with being the zero-suppressed data produced by just
 activity due to beam interactions or similar energy events and accept
 the large over-estimation as a generous safety factor.
 
+\subsection{Considerations for the Near Detector Data}
+At the time of writing, there are many parameters of the NDS that are yet to be well defined.
+Table~\ref{tab:nds-event-rates} summarizes current estimates of the event rates
+in the ND systems from various sources.
 
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{1in} | p{1in} |}		\hline		
+\textbf{Source} & \textbf{Rate} (Hz)\\ \hline
+Beam-$\nu$ & 40.2 \\ \hline
+Rock & 10.0 \\ \hline
+Cosmic & 0.04 \\ \hline
+Total & 50.2 \\ \hline
+\end{tabular}
+\caption{Summary of combined DUNE Near Detector system event rate estimations.}
+\label{tab:nds-event-rates}
+\end{table}
 
-
-
-
+Based on these rates and occupancy estimated in preliminary Monte Carlo Studies, the projected
+data rate from the NDS will be in the megabytes per second range.
