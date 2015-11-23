@@ -79,7 +79,15 @@ HEP, such as GPU or other co-processor acceleration and/or massively parallel sy
 
 \subsection{Pandora}
 \label{sec:pandora}
-TBD
+ Pandora is a toolkit for implementing pattern recognition algorithms for fine-grain detectors, based on the so-called ``particle flow'' approach~\cite{pandora}.
+It was conceived as a way to improve resolution of calorimetric measurements by taking advantage of the detector granularity. Pandora incorporates a
+number of algorithms for different stages of event reconstruction, such as clustering algorithm, topological association algorithms, track-cluster association
+algorithms and others, while providing a framework to utilize and manage these components. The framework also deals with memory management
+and is designed to minimize external dependencies.
+
+Pandora was adopted for event reconstruction in LBNE and now continues as a DUNE effort. It has been incorporated into the LArSoft sofware toolkit
+as a package.
+
 
 
 \subsection{Wire Cell}
