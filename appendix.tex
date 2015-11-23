@@ -24,7 +24,10 @@
 Time Projection Chambers used in experiments like STAR at RHIC and ALICE at the LHC~\cite{alice}  feature
 pad-based readout scheme, which allows for a relatively straightforward reconstruction of 2D patterns in
 a given time slice. However, using pads in larger detectors is not practical due to power consumption considerations
-(and requisite cooling requirements), excessive cost of readout electronics and other factors. For this reason, due to its sheer size, the DUNE LArTPC features wire-based readout to cover its extremely large fiducial volume while keeping the channel count realistic. This makes its large scale possible, but also leads to a loss of spatial information being available for reconstruction (when compared to pads).
+(and requisite cooling requirements), excessive cost of readout electronics and other factors. For this reason, due
+to its sheer size, the DUNE LArTPC features wire-based readout to cover its extremely large fiducial volume while
+keeping the channel count realistic. This makes its large scale possible, but also leads to a loss of spatial information
+being available for reconstruction (when compared to pads).
 
 In order to properly describe the problem of event reconstruction in DUNE, it is helpful to explain
 features and implications of the wire readout. We start with a diagram in Fig.~\ref{fig:signal-0}, the meaning of which will be detailed below.
@@ -64,7 +67,7 @@ represented conceptually as a view along the direction of the drift.
 Using just three projections to reconstruct an extended object (ionization charge density) presents challenges for event reconstruction.
 Reliability and thorough characterization of the algorithms employed in this area will be critical for the systematics and other performance characteristics of DUNE.
 
-There are a few approaches currenlty in development for event reconstruction. The ``Pandora'' toolkit, which
+There are a few approaches currenlty in development for event reconstruction. The ``Pandora'' toolkit (\ref{sec:wirecell}), which
 originated as R\&D for fine-grained calorimetry at ILC~\cite{pandora}, is being adopted to reconstruct LArTPC events.
 In addition, there is a ``projection matching algorithm'' which will be used for test-beam studies with protoDUNE detector.
 
@@ -75,6 +78,7 @@ It is likely that meeting the demands of such calculations will require adopting
 HEP, such as GPU or other co-processor acceleration and/or massively parallel systems such as HPC facilities.
 
 \subsection{Pandora}
+\label{sec:pandora}
 TBD
 
 
