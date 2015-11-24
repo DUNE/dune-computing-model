@@ -42,7 +42,7 @@ The prototype detector will be expected to run in a variety of different operati
 the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
 scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
 rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
-at specific distances from the wire planes.  We anticipate of order 100~TBytes of raw data to be collected
+at specific distances from the wire planes.  We anticipate of order 100TB of raw data to be collected
 by the 35-ton prototype during its run, not including processed versions of the data.
 The sections below describe the computing model needed
 to collect and analyze the data from the 35-ton Phase~II prototype.
@@ -64,7 +64,7 @@ triggering is implemented in the so-called ``Penn Board'', which inputs signals 
 from the Penn Board is also included in the event data stream.
 
 There are seven DAQ server nodes, which are connected to each other via a private network, as well as to two gateway nodes. 
-These two gateway nodes are also connected via a 1~GBit/sec link to the Fermilab campus network thus providing the way
+These two gateway nodes are also connected via a 1gbps link to the Fermilab campus network thus providing the way
 to ship out the data. The DAQ nodes run {\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
 physics experiments. 
 
