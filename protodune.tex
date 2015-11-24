@@ -49,14 +49,19 @@ in protoDUNE would be an enormous challenge and far beyond the resources that ca
 even in the conditions of the cosmic muon background, at any given time during the readout window only a fraction of wires will carry signals
 above the level of natural radiological sources, i.e. the occupancy per channel won't be large if a threshold is applied. For that reason, the data can be ``zero suppressed''.
 
-Event sizes can be estimated from "first principles" under the assumption of some event topology and noting the significant amount of cosmic contamination at sea level.  As was shown in Sec.~\ref{calibration}, there is expected to be on average $\sim$68 cosmic muon track segments per readout window and on top of the actual beam event.  Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in a readout window will result in the readout of 6~MB per beam event.  
+Event sizes can be estimated from "first principles" under the assumption of some event topology
+and noting the significant amount of cosmic ray background at sea level.
+%  As was shown in Sec.~\ref{calibration},
+Due to nominal values of the cosmic ray muon flux and the dimensions of the protoDUNE TPC,
+there is expected to be on average $\sim$68 cosmic muon track segments per readout window and on top of the actual beam event.
+Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in
+a readout window will result in the readout of 6~MB per beam event. 
+
 %This assumes that you have 80~kbyte per 4 GeV mip and that cosmic muons at the surface have an averagae enegy of 4 GeV
-%Multiply by (68 muons + 1 beam particle) we get 5.5 MB
-%This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels. 
-%
+%Multiply by (68 muons + 1 beam particle) we get 5.5 MB. This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels. 
+%Background tracks due to cosmic ray particles must be properly identified and accounted for, in order to ensure high quality of the measurements and subsequent detector characterization. 
 
-
-%Background tracks due to cosmic ray particles must be properly identified and accounted for, in order to ensure high quality of the measurements and subsequent detector characterization. Since overlay of cosmic ray muons over beam events is stochastic in nature, the optimal way to achieve this is by recording signals which were produced ``just before'' and ``just after'' the arrival of the test particle from the beam line.  It will be possible because the design of the DAQ contains buffer memory that can be accessed after the trigger decision is made.  This technique will enable us to record and reconstruct either partial or complete background tracks present in the ``main'' event.
+Since overlay of cosmic ray muons over beam events is stochastic in nature, the optimal way to achieve this is by recording signals which were produced ``just before'' and ``just after'' the arrival of the test particle from the beam line.  It will be possible because the design of the DAQ contains buffer memory that can be accessed after the trigger decision is made.  This technique will enable us to record and reconstruct either partial or complete background tracks present in the ``main'' event.
 
 
 %\subsection{Event size estimate and data volume}
@@ -101,7 +106,11 @@ Event sizes can be estimated from "first principles" under the assumption of som
 %electron of 4GeV/c momentum MC calculations indicate an average event size of $\sim$2MB, after zero-suppression.
 %This is less than 1\% of the estimate quoted above. 
 
-The total particle statistics in the preliminary run plan (Table~\ref{tab:RunPlan}) is approximately 5M events in total.  Taking into account the data load per event, this leads to the estimate of $\sim$500 TB of nominal data volume to be collected in this experiment. 
+\fxnote{please review the event size and statistics once more}
+The total particle statistics in the preliminary run plan
+% (Table~\ref{tab:RunPlan})
+ is approximately 5M events in total.  Taking into account the data load per event,
+this leads to the estimate of $\sim$500 TB of nominal data volume to be collected in this experiment. 
 
 In summary, we expect that tape storage of $O(1 $PB$)$ size will be required and a somewhat more modest disk space for raw data staging at CERN, for replication purposes.  We envisage storing the primary copy of raw data at CERN, with replicas at additional locations. 
 %
