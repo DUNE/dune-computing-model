@@ -140,7 +140,7 @@ The volume of data stored in these databases is expected to be modest and of the
 %\label{distr_proc}
 
 Fermilab provides the bulk of computational power to DUNE via Fermigrid and other facilities. 
-We plan to leverage these resources to process the data coming from the DUNE-PT and beam test.
+We plan to leverage these resources to process the data coming from the protoDUNE and beam test.
 
 One of the principal goals will be quick validation of the data collected in each measurement, in
 order to be able to make adjustments during the run as necessary. 
@@ -163,7 +163,9 @@ As an example, we have had good experience working with the Open Science Grid Co
 In addition to the raw data preparations being made for offline data handling, processing and storage.
 The offline data can be classified as follows:
 \begin{itemize}
-\item Monte Carlo data, which will contain multiple event samples to cover various event types and other conditions during the measurements with DUNE-PT
+\item Monte Carlo data, which will contain multiple event samples to cover various event types and other conditions during the measurements
+with protoDUNE
+
 \item Data derived from Monte Carlo events, and produced with a variety of tracking and pattern recognition algorithms in order to create a basis for the detector characterization
 \item Intermediate calibration files, derived from calibration data
 \item Processed experimental data, which will likely exist in several parallel branches corresponding to different reconstruction algorithms being applied, with the purpose of evaluating the performance of the different algorithms.
@@ -194,7 +196,7 @@ technology has been evolving rapidly in the past few years, and solutions have b
 
 In order to act on the latter item, we plan to implement a global XRootD redirector, which will make it possible to transparently access data from anywhere.
 A concrete technical feature of storage at Fermilab is the dCache network which has substantial capacity and can be leveraged
-for the needs of the DUNE-PT data analysis. This dCache instance is equipped with a XRootD ``door'' which makes it accessible to the outside world, subject
+for the needs of the protoDUNE data analysis. This dCache instance is equipped with a XRootD ``door'' which makes it accessible to the outside world, subject
 to proper configuration, authentication and authorization.
 
 
@@ -204,7 +206,7 @@ These two institutions have substantial expertise  in the field of data handling
 
 \subsubsection{Software infrastructure}
 
-The DUNE-PT effort will benefit from utilizing simulation toolkits, tracking and other reconstruction
+The protoDUNE effort will benefit from utilizing simulation toolkits, tracking and other reconstruction
 that have and continue to be developed for DUNE, the 35 t detector and the short baseline program at Fermilab as well as the 
 neutrino platform development efforts and in particular the WA105 experiment.
 
