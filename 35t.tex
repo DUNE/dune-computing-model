@@ -4,8 +4,8 @@ The 35-ton prototype of the DUNE LArTPC has two operating periods, called Phase~
 in 2014, was designed to demonstrate that a sufficiently high electron lifetime is achievable in a non-evacuated
 membrane cryostat. A lifetime of $\sim$3~ms was achieved.  For Phase~II, TPC elements were installed, and
 a data acqusition system developed.  The detector is segmented into four two-sided APA's for eight drift volumes.
-Its total channel count is 2048 wires, 92 (check!) photon detector channels reading out six independent photon
-detection devices, and ?? scintillator paddles arranged outside of the cryostat.
+Its total channel count is 2048 wires, 92 photon detector channels reading out six independent photon
+detection devices, and 97 scintillator paddles arranged outside of the cryostat.
 \fxnote{fix the number of pads}
 
 The purposes of Phase~II of the 35-ton run include continued demonstration of a suffcientnly high electron
@@ -31,13 +31,14 @@ performance of the detector under several operating conditions.  Measurement and
 \item the electron lifetime
 \item the signal and noise characteristics of the TPC channels
 \item the signal and noise characteristics of the photon detectors
+\item distortions due to buildup of space charge
 \end{itemize}
 
 The external trigger paddles will be used to identify samples of cosmic rays that are particularly useful in determining
 detector characteristics.
 
 As of this writing (October 2015), the 35-ton prototype is scheduled to fill with liquid argon
-in early December 2015, commission, and take data for two or three months, lasting until early 2016.
+in December 2015, commission, and take data for two or three months, lasting until early 2016.
 The prototype detector will be expected to run in a variety of different operating conditions, as
 the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
 scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
@@ -63,7 +64,7 @@ by SSP's (Silicon Photomultiplier Signal Processor), and sent from there via eth
 triggering is implemented in the so-called ``Penn Board'', which inputs signals from the scintillator paddles.  Data
 from the Penn Board is also included in the event data stream.
 
-There are seven DAQ server nodes, which are connected to each other via a private network, as well as to two gateway nodes. 
+There are seven DAQ server nodes, which are connected to each other via a private network, as well as two gateway nodes. 
 These two gateway nodes are also connected via a 1gbps link to the Fermilab campus network thus providing the way
 to ship out the data. The DAQ nodes run {\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
 physics experiments. 
@@ -106,7 +107,39 @@ efficiency of access to large datasets which reside on tape.  Files are requeste
 issues commands for reading data off of tape and into dCache, where they can be then transferred
 to batch worker nodes or read directly.  
 
-\fxnote{calibration runs -- long events (1/3 minute) - Tom, can you improve that?}
+The online database is replicated offline, and the offline replica handles queries.  A conditions database
+stores calibration parameters such as pedestals and gains.
+
+Offline jobs first unpack the data and then split the data into events that are convenient to analyze.
+Depending on the run mode, the data records produced by the DAQ may correspond to as many as ten
+drift times or longer, while offline reconstruction and even event visualization is more convenient with
+smaller slices of time.  Events then are defined by the offline event-slicer, whose behavior is configurable
+depending on the type of events sought.  DAQ records in adjacent time slices may be ``stitched'' together
+to form offline events that span DAQ records.  Standard LArSoft data calibration and reconstruction tools
+as described in the DUNE CDR will then run on the data, producing both reconstructed event data and an
+analysis tree consisting of high-level objects which are easy to interpret by analysis teams measuring
+the performance of the detector.
+
+Some runs, which use ``scope mode'', will collect data that is unusual for LArSoft to analyze.  A small subset
+of channels is intended to be read out continously for a very long time, of order seconds, in order to measure
+low-frequency noise and look for electronics effects that may take longer than a normal readout window.
+These data can be exported to standalone programs for purposes of producing the appropriate deliverables.
+
+The primary data store will be Fermilab's enstore tape system, with access via SAM and tape staging in
+dCache.  Directly reading tapes by jobs are not permitted.  Data will be transferred to local disk on grid
+worker nodes via ifdh tools.  Data in dCache will also be available via XRootD and other protocols.
+
+The primary reconstruction is expected to be done using FermiGrid computing resources.  The capability
+of using OSG compute nodes is planned.  The DUNE simulation and reconstruction software, along with the
+dependencies LArSoft, root, GEANT4, and other packages, are all copied to CVMFS repositories for use on
+OSG nodes.  If the CPU requirements become large and urgent, then the tools are in place to start using
+OSG CPU, although some operational debugging and testing is still required for this avenue to be in smooth
+production.
+
+The data will be reconstructed using LArSoft, which contains general-purpose LArTPC reconstruction algorithms,
+as well as DUNE-specific pieces, which mainly address the specific issues of geometry and data formatting.
+In addition to distributing pre-built code on CVMFS, both pre-built libraries and source-code distributions
+are available via {\tt http://scisoft.fnal.gov}.
 
 
 \subsubsection{Resource Requirements}
@@ -114,4 +147,14 @@ to batch worker nodes or read directly.
 The initial estimate of the amount of data to be collected by the 35-ton Phase~II run is 100~TBytes,
 although there is significant uncertainty on this number.  The amount of raw data collected
 depends strongly on the running time, the run plan, the zero-suppression strategy, and the
-compressibility of the data.
+compressibility of the data.  Noise sources, unstable pedestals, and conservative choices for zero-suppression
+thresholds and leading and trailing sampling times will increase the data volume.
+The expected volume of raw data to be stored on tape is approximately 100 TBytes, though as much as a factor
+of four may be stored depending on the abovementioned unknowns.
+
+The reconstruction of each event is expected to take less than one minute of CPU time.  The rate at which
+a CPU core can process data has not evolved much in the last seven years.  An estimate of approximately
+4~Million CPU hours per year will be needed to reconstruct and analyze 35-ton data.  Storage adequate for
+two versions of reconstruction, which contain copies of the raw data, should be available at any given time.
+Simulation samples are expected to be of a similar size or smaller than the data sample, as many anaysis
+topics will be data-driven in order to characterize detector performance.
