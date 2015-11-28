@@ -28,6 +28,7 @@ for better redundancy and more efficient access to the data from a greater numbe
 
 
 \subsubsection{Event size estimate and data volume}
+\label{sec:protodune-data-volume}
 In addition to the Liquid Argon TPC, protoDUNE will include a photon detector as well as other detectors such as muon counters, trigger and PID systems etc.
 However, estimates indicate that the data rate and volume will be dominated by the TPC, so only the TPC data will be considered in this section.
 
@@ -52,8 +53,8 @@ above the level of natural radiological sources, i.e. the occupancy per channel 
 Event sizes can be estimated from "first principles" under the assumption of some event topology
 and noting the significant amount of cosmic ray background at sea level.
 %  As was shown in Sec.~\ref{calibration},
-Due to nominal values of the cosmic ray muon flux and the dimensions of the protoDUNE TPC,
-there is expected to be on average $\sim$68 cosmic muon track segments per readout window and on top of the actual beam event.
+As already mentioned in \ref{sec:protodune-data-volume}, due to nominal values of the cosmic ray muon flux and the parameters of the protoDUNE TPC,
+there is expected to be on average $\sim$23 cosmic muon track segments per readout window and on top of the actual beam event.
 Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in
 a readout window will result in the readout of 6~MB per beam event. 
 
@@ -149,12 +150,13 @@ This is common practice in other experiments which have "express streams" to ass
 
 Given that tracking, reconstruction and other algorithms are in a stage of development with significant improvements
 and optimizations expected, the required scale of CPU power needed to process the data are rough estimates.
-The estimates we have at this point range from 10 to 100 seconds required by a typical
-CPU to reconstruct a single event. 
-This means that utilizing a few thousand cores through Grid facilities, it will be possible to ensure timely processing of these data.
+The estimates we have at this point range from 10 to 100 seconds required by a typical Worker Node to reconstruct
+a single event.  This means that a few thousand cores are made available to protoDUNE through Grid facilities, it will be
+possible to ensure timely processing of these data (i.e. at about same rate as it is produced).
 
-To ensure adequate capacity, we envisage a distributed computing model where Grid resources are utilized in addition to Fermilab's computing resources.
-As an example, we have had good experience working with the Open Science Grid Consortium.
+To ensure adequate capacity, we envisage a distributed computing model where Grid resources are
+utilized in addition to Fermilab's computing resources. As an example, we have had good experience working
+with the Open Science Grid Consortium.
 
 
 \subsubsection{Data processing}
@@ -166,9 +168,13 @@ The offline data can be classified as follows:
 \item Monte Carlo data, which will contain multiple event samples to cover various event types and other conditions during the measurements
 with protoDUNE
 
-\item Data derived from Monte Carlo events, and produced with a variety of tracking and pattern recognition algorithms in order to create a basis for the detector characterization
+\item Data derived from Monte Carlo events, and produced with a variety of tracking and pattern recognition algorithms
+in order to create a basis for the detector characterization
+
 \item Intermediate calibration files, derived from calibration data
-\item Processed experimental data, which will likely exist in several parallel branches corresponding to different reconstruction algorithms being applied, with the purpose of evaluating the performance of the different algorithms.
+
+\item Processed experimental data, which will likely exist in several parallel branches corresponding to different reconstruction
+algorithms being applied, with the purpose of evaluating the performance of the different algorithms.
 \end{itemize}
 
 In the latter, there will likely be more than one processing step, thus multiplying data volume. 
@@ -180,9 +186,9 @@ $\sim$ $O($1 PB$)$ of tape storage to keep the processed data.
 For efficient processing, disk storage will be necessary
 to stage a considerable portion of both raw data (inputs) and one or a few steps in processing (outputs).
 
-Extrapolating from our previous experience running Monte Carlo for the former LBNE Far Detector, we estimate that we will need a few hundred TB of continuously available
-disk space. In summary, we expect the need for a few~PB of disk storage at Fermilab to ensure optimal data availability and 
-processing efficiency. 
+Extrapolating from our previous experience running Monte Carlo for the former LBNE Far Detector, it is estimated
+that  a few hundred TB of continuously available disk space will be needed. It is expected that protoDUNE will require
+a few~PB of disk storage at Fermilab to ensure optimal data availability and  processing efficiency. 
 
 \subsubsection{Data distribution}
 We foresee that data analysis (both experimental data and Monte Carlo) will be performed by collaborators residing in many 

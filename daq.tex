@@ -1,4 +1,4 @@
-\section{The Data Acquisition (DAQ) System and Monitoring}
+\section{Data Acquisition (DAQ) and Monitoring}
 \label{sec:daq}
 
 \subsection{Overview}
@@ -30,8 +30,8 @@ for the DUNE far detector.
 \subsection{The DAQ Architecture}
 
 To reduce downtime considerably (i.e. time periods when none of the DUNE modules are collecting data, which impacts supernova detection)
-and to allow the DAQ technology in the different 10-kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
-design. The synchronization, triggering, data collection and run-state in the different 10-kt modules are completely independent in real time and
+and to allow the DAQ technology in the different 10kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
+design. The synchronization, triggering, data collection and run-state in the different 10kt modules are completely independent in real time and
 are only coupled by processes running asynchronously (in the same fashion as a batch queue) in the hour or so after data collection.
 This allows one portion of the detector module to be restarted without interrupting
 data collection in the others.
@@ -73,7 +73,7 @@ ring buffer on disk to allow later analysis of supernova candidates.
 \subsubsection{LArTPC detector readout}
 
 The LArTPC signals are digitized in the cold in a continuous flash-ADC stream at 2\,MHz, (not zero-suppressed)
-and serialized on 12,000 high-speed links per 10-kt module that exit the cryostat.
+and serialized on 12,000 high-speed links per 10kt module that exit the cryostat.
 
 The data are received by LArTPC data processors called RCEs (Reconfigurable
 Computing Elements) housed in industry-standard aTCA crates on COB (cluster-on-board)
