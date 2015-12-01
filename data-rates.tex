@@ -144,18 +144,23 @@ All bins with ADC counts below this threshold are discarded from the data stream
 %One of the central components of DAQ are the \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
 %which offer very high readout speeds and enable flexibility in optimally configuring the system.
 For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}.
-The data rate estimates make the following assumptions on the DAQ capabilities.
-
+The data rate estimates depend on a set of  assumptions about the DAQ capabilities, in particular as they
+apply to Zero Suppression and rejection of $^{39}$Ar decays (see \ref{sec:zs-data} and \ref{sec:ar39decays}
+respectively). Examples of relevant DAQ characteristics to be considered are:
 
 \begin{itemize}
-\item The DAQ trigger farm will be able to identify isolated activity
+\item Whether the DAQ trigger farm will be able to identify isolated activity
   collected in a single APA consistent with $^{39}$Ar decay in order
   to suppress reading it to the DAQ data farm.
-\item The RCEs will be able to apply a zero suppression
-  algorithms with a given threshold to data sent to the trigger farm.
-\item The RCEs will be able to apply trigger-specific zero suppression
-  algorithms and thresholds to the data sent to the data farm.
-\item RCE-local data storage is left open as a possibility.
+
+\item Ability of the RCEs to apply zero suppression algorithms
+with a given threshold to real-time data sent to the trigger farm.
+
+\item Trigger-specific zero suppression algorithms and thresholds to be applied
+in the RCS to the data sent to the data farm.
+
+\item  Possibility of RCE-local data storage.
+
 \end{itemize}
 
 \subsubsection{Sources of Data in the TPC}
@@ -262,10 +267,10 @@ data to permanent storage and are only given to better define the problem of rec
 
 
 \subsubsection{Zero-suppressed Data}
-
+\label{sec:zs-data}
 There are options in choosing the exact zero-suppression (ZS) procedure,
-and the final choice has not been made. For these data rate estimates a very
-simple procedure is assumed: in each channel, all digitized time bins in which the ADC
+and the final choice has not been made. The simplest procedure may be implemented
+as follows: in each channel, all digitized time bins in which the ADC
 values are below the given threshold are removed. More discussion on possible alternative
 ZS methods and their impact on the data rate are given below.
 
@@ -304,7 +309,7 @@ The end point of the $^{39}$Ar decay is at 565keV and about
 25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
 The expected total decay rate is 1.0 hertz per kilogram \cite{ar39bkg}.
 
-Ionization due to $^{39}Ar$ decays is very localized and it is reasonable to assume
+Ionization due to $^{39}$Ar decays is very localized and it is reasonable to assume
 that spatial dispersion of the charge will be no larger than the wire pitch,
 and for the most part no larger than the distance drifted during the time span
 corresponding to one ADC sample.
@@ -410,20 +415,20 @@ For this reason, contribution from SNB to these data is not calculated for this 
 
 The above estimates assume that the only method of data volume reduction to be employed is the
 lossy compression by removal of data below some threshold. However, in addition to that
-a lossless compression is possible. For example, the DAQ system can employ Huffman encoding during readout, or compression features built into ROOT may be used during writing data to files. In order to estimate
+a lossless compression is possible. For example, the DAQ system can employ Huffman encoding
+during readout, or compression features built into ROOT may be used during writing data to files. In order to estimate
 the effects of compression, specific particle types and energies were simulated using LArSoft.
 The initial kinematics for the simulated samples covered a matrix of
 particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
 (100MeV to 6GeV).
 The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-compression}.
 
-The flow of data in Wire Cell is presented in Fig.~\ref{fig:wirecell-diagram}.
 \begin{figure}
 %[h!]
-%	\centering
-	\includegraphics[width=0.33\textwidth]{btot.png}
-	\includegraphics[width=0.33\textwidth]{bzip.png}
-	\includegraphics[width=0.33\textwidth]{brat.png}
+	\centering
+	\includegraphics[width=0.6\textwidth]{btot.png}
+	\includegraphics[width=0.6\textwidth]{bzip.png}
+	\includegraphics[width=0.6\textwidth]{brat.png}
 	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before (left) and after (center)  compression and their ratios (right).}
 	\label{fig:data-compression}
 \end{figure}

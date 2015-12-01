@@ -103,27 +103,24 @@ shown in Figure~\ref{fig:fddaqblock}, one physical computer is
 sufficient for all the processes for each rack of APA readout
 electronics. 
 
-\subsubsection{artDAQ software toolkit}
+\subsubsection{The \textit{artdaq} software toolkit}
 
-(from Fermilab) supplies the real-time
+The \textit{artdaq} toolkit developed at  Fermilab supplies the real-time
 data collection functionality (buffering, matching event parts,
 synchronization, inter-process communication, etc.) in a modern
 design that facilitates the efficient use of multicore commodity
 computers running on the Linux computer farms.  The multi-core
 functionality is crucial in the high data-rate environment on DUNE.  
-The detector-specific
-code is supplied by DUNE groups (this is centered in the UK), along
-with detector-specific triggering (also UK).  The architecture
-provided by artDAQ can be tailored for each experiment and is entirely
+The detector-specific code is supplied by DUNE groups (this is centered in the UK),
+along with detector-specific triggering (also UK).  The architecture
+provided by \textit{artdaq} can be tailored for each experiment and is entirely
 suitable for the ``collect-twice'' architecture envisioned for DUNE.
 
-\subsubsection{ Run Control and Slow Control software framework}
+\subsubsection{Run Control and Slow Control software framework}
 
-manages the
-control, status display and status archival of the experiment.  It is
-based on the ICECube design.  This
-exploits a combination of readily available, well-supported packages
-[message passing (zeroMQ), a web-framework (Django), databases (postgres)] 
+This framework manages the control, status display and status archival of the experiment,
+and is based on the ICECube design.  This exploits a combination of readily available, proven and
+well-supported packages (e.g. zeroMQ for message passing, Django for web-framework etc) 
 to give the shift operator a unified view of the status
 of the running experiment, and views of the monitoring data including
 customized views and historical views.  The database of slow-control
@@ -135,7 +132,7 @@ To acomplish the software-based deadtimeless data
 acquisition in DUNE, it is necessary to synchronize the clock across
 all readout boards.  This is accomplished in two stages, the main
 cavern-wide distribution uses the design from the NO$\nu$A experiments
-which distributes a 64-MHz clock, synchronization pulses and
+which distributes a 64MHz clock, synchronization pulses and
 cable-delay correction on RJ45 cables.  The overall clock is
 synchronized using a GPS receiver and transferred from the surface
 over optical fiber.  The synchronization is transferred from the COBs
@@ -146,6 +143,7 @@ the data links.
 At the time of writing, the calibration system is in the R\&D stage and its design will
 evolve as the experiment is being built. Very roughly, there will be three stages:
 \begin{enumerate}
+
 \item Pedestal and charge-injection pulser events are used to calibrate and
 remove drifting of the individual electronic channel responses.
 
@@ -156,6 +154,7 @@ non-uniformities and attenuation.
 
 \item Cosmic-ray muons are used for the determination of the energy scale and for calibration
 cross-checks.
+
 \end{enumerate}
 
 
@@ -169,7 +168,7 @@ cross-checks.
 \end{figure}
 
 The time sequence, trigger deadlines and buffering of the readout are all
-shown in Figure~\ref{fig:fddaqtime}.  This figure shows time in the
+shown in Fig.~\ref{fig:fddaqtime}.  This figure shows time in the
 horizontal direction on a logarithmic scale to indicate how long after
 the particles appear in the detector each process can start and must
 finish.  There is one level of triggering, with a trigger deadline
@@ -181,13 +180,13 @@ neutrino spill with the actual time in order that the detector can be
 triggered independently of any signals in the detector.  This
 operation has been used succesfully on MINOS for many years.  
 
-As shown in Figure~\ref{fig:fddaqtime}, prior to the trigger time and
+As shown in Fig.~\ref{fig:fddaqtime}, prior to the trigger time and
 independently in each detector module, the detector readout assembles
 packets of data corresponding to fixed time intervals and sends them
 to the trigger event builders.  Both the LArTPC readout and the SSP
 readout (\ref{sec:pd}) send zero-suppressed data, suitable for triggering, to a set
 of event-builder processes that run in parallel, each accepting all
-the data from the entire 10-kt module for a specific time interval and
+the data from the entire 10kt module for a specific time interval and
 performing trigger algorithms on them.  All time intervals are
 processed so that the trigger has no dead time.  The data from the LArTPC and SSP
 are also stored in ring buffers
@@ -234,13 +233,13 @@ channels to be kept around the time of a potential supernova event candidate.
 
 The requirements for handling radiological and other backgrounds (e.g. $^{39}$Ar decays as described
 in~\ref{sec:ar39decays}) are met in this conceptual design by the very high throughput provided by modern
-off-the-shelf components  and the parallelism provided by artDAQ, which makes the design extendable to avoid bottolenecks.  The triggering
+off-the-shelf components  and the parallelism provided by \textit{artdaq}, which makes the design extendable to avoid bottolenecks.  The triggering
 allows the zero-suppression to be tuned to optimise for the final
 level of noise, while retaining the maximum level of information for
 the important physics events.
 
 %This DAQ design is being prototyped for the 35t tests in 2015, with
-%two COBs (containing 16 RCEs) and eight SSPs.  The artDAQ software
+%two COBs (containing 16 RCEs) and eight SSPs.  The \textit{artdaq} software
 %toolkit is being used to implement the readout, event-building and
 %triggering, although we are not implementing the ``collect-twice''
 %model for the 35t.
