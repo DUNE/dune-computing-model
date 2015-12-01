@@ -21,6 +21,7 @@ Detector Systems (see~\ref{sec:nds-params}).
 \subsection{DUNE Detectors and Subsystems}
 
 \subsubsection{Fundamental Parameters of the LArTPC}
+\label{sec:fundamental-parameters}
 
 The fundamental TPC parameters most relvant as input to the data rate estimations are summarized in
 table~\ref{tab:fundamental-parameters}.
@@ -46,7 +47,7 @@ table~\ref{tab:fundamental-parameters}.
 		\hline
 		bytes/sample & 1.5 \\ \hline
 		sample rate & 2.0MHz \\ \hline
-		\# drifts/readout & 2.4 \\ \hline
+		\# drifts/readout factor & 2.4 \\ \hline
 		\hline
 		readout time & 5.4ms \\ \hline
 		samples/readout & 10,800 \\
@@ -58,12 +59,22 @@ table~\ref{tab:fundamental-parameters}.
 	\label{tab:fundamental-parameters}
 \end{table}
 
+Two of the parameters listed above (``drifts/readout'' and ``readout time'') need an additional comment.
+The nominal readout time of 5.4ms is chosen such that additional time windows are covered just before and just
+after the nominal $t_0$ (trigger) window. The value of 5.4ms is 2.4 times larger than the nominal drift of 2.25,
+and it's listed in the table as the ``drifts/readout'' factor. This factor is not calculated precisely but was chosen based
+on the experience with the 35t prototype (\ref{sec:35t}). The motivation behind this exta readout it to caputure
+potential activity in the TPC just before and just after the event of interest, so as to characterize this extraneous
+ionization which for example can manifest itself as track segments due to cosmic rays background. It is quite
+possible that the readout time will be revised as the final detector design is progressing, however the value of 5.4ms
+was fixed in this document as nominal, in order to provide consistency of various estimates related to the data.
+
 \subsubsection{The Photon Detector}
 \label{sec:pd}
 The Photon Detector (PD) which is built into the Far Detector LArTPC takes advantage of the fact that Liquid Argon
 is an excellent scintillating medium.
 The most significant requirements for the PD include determination of $t_0$ of an event relative to the TPC timing ---
-resolution better than 1 $\mu$s (event position resolution along drift direction of a few mm), and sufficient light
+resolution better than 1\,$\mu$s (event position resolution along drift direction of a few mm), and sufficient light
 collection efficiency to allow triggering on neutrinos coming from a supernova, with the capability of detecting neutrinos with energies as
 low as 20 MeV.
 
@@ -111,7 +122,7 @@ It is not anticipated to produce large amounts of data when compared to other de
 
 Signals produced by individual wires in the DUNE TPC will have a substantial
 dynamic range. For example, $\beta$-decay of naturally occurring isotope $^{39}$Ar has the endpoint of
-565keV, whereas signals due to interactions of energetic neutrinos can produce signals
+565\,keV, whereas signals due to interactions of energetic neutrinos can produce signals
 equivalent to a few MeV energy deposition depending on the event topology.
 
 Each segment of the dynamic range will be characterized by a respective data rate. 
@@ -212,14 +223,14 @@ table~\ref{tab:full-stream-parameters}.
 
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{| p{3in} | p{2.5in} |}
+	\begin{tabular}{| p{3in} | p{1.1in} |}
 		\hline
 
 	\textbf{Parameter} & \textbf{Value} \\ \hline
 	
 	Bytes per sample & 1.5 \\ \hline
 	
-	DAQ sample rate & 2.0Mhz \\ \hline
+	DAQ sample rate & 2.0\,Mhz \\ \hline
 	
 	Channels per APA & 2,560 \\ \hline
 	
@@ -227,13 +238,15 @@ table~\ref{tab:full-stream-parameters}.
 	
 	Number of modules & 4 \\ \hline
 	
-	Total channels in DUNE & 1,536,000 \\ \hline
+	Total channels in DUNE & 1,536,000 \\ \hline \hline
 	
 	Drifts per readout & 2.4 \\ \hline
 	
-	Drift time & 2.25 ms \\ \hline
+	Drift time & 2.25\,ms \\ \hline
+
+	Total readout window & 5.4\,ms \\ \hline \hline
 	
-	Beam spill repetition rate & 0.83Hz \\ \hline
+	Beam spill repetition rate & 0.83\,Hz \\ \hline
 	
 	Annual run time fraction & 0.667 \\ \hline
 	\end{tabular}
@@ -244,20 +257,20 @@ The expected data rates for two scenarios of FS data are given
 in table~\ref{tab:full-stream-volume}.
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{| p{3in} | p{2.5in} |}
+	\begin{tabular}{| p{3in} | p{1.1in} |}
 		\hline	
 	
 	\textbf{Parameter} & \textbf{Value} \\ \hline
-	Full-stream readout size & 24.9 GB \\ \hline
-	Full-stream in-spill data rate & 436 PB/year \\ \hline
-	Full-stream 1 second data volume & 4.6 TB \\
-	Full-stream 1 minute data volume & 276.5 TB \\	\hline
-	Full-stream 1 year data volume & 145.4 EB \\ \hline
+	Full-stream readout size & 24.9\,GB \\ \hline
+	Full-stream 1 year in-spill data volume & 436\,PB \\ \hline
+	Full-stream 1 second data volume & 4.6\,TB \\
+	Full-stream 1 minute data volume & 276.5\,TB \\	\hline
+	Full-stream 1 year data volume & 145.4\,EB \\ \hline
 	\end{tabular}
 	\caption{Data volumes and rates for full-stream data acquisition.}
 	\label{tab:full-stream-volume}
 \end{table}
-The first row gives the data size corresponding to one DAQ readout cycle (5.4ms).
+The first row gives the data size corresponding to one DAQ readout cycle (5.4ms, as explained in \ref{sec:fundamental-parameters}).
 The second is appropriate for any strategy that intends to record FS data for each beam spill.
 The third contains two numbers that characterize data volume relevant to a strategy which aims
 to record FS data for Supernova Burst candidates. The final row  shows the total annual data
@@ -280,21 +293,20 @@ ionized wire is collected by a single wire.
 It is assumed that the application of zero-suppression at this
 threshold completely removes ADC counts due to just noise although an
 estimate of data rates due to noise is given.
-
 Estimations of different sources of ZS data are summarized in table~\ref{tab:zs-volume}.
 
 	
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1.25in} | p{0.95in} | p{0.75in} | p{1in} | p{0.75in} |}		\hline		
-Source & Event Rate & Event Size & Data Rate & Annual Data Volume \\ \hline
-all $^{39}$Ar & 11.2 MHz & 150B & 1.6 GB/s &  53 PB \\ \hline
-all in-spill & & & & 159 TB \\ \hline
-with-beam-$\nu$ & & & & 79 GB \\ \hline
-cosmic-$\mu$ & 0.259 Hz &2.5 MB & 647.4 kB/s & 20 TB \\	\hline
-beam-$\nu$ & 8770 year$^{-1}$ & 2.5 MB & 0.69 kB/s & 22 GB \\ \hline
-SNB cand. (ZS) & 12 year$^{-1}$ & 16.7 GB & 6366 B/s & 201 GB \\ \hline
-SNB cand. (FS) & 12 year$^{-1}$ & 46.1 TB & 17.5 MB/s & 553 TB \\ \hline
+\begin{tabular}{| p{1.2in} | p{0.9in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline		
+Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
+all $^{39}$Ar & 11.2\,MHz & 150\,B & 1.6 GB/s &  53\,PB \\ \hline
+all in-spill & & & & 159\,TB \\ \hline
+with-beam-$\nu$ & & & & 79\,GB \\ \hline
+cosmic-$\mu$ & 0.259\,Hz &2.5\,MB & 647.4\,kB/s & 20\,TB \\	\hline
+beam-$\nu$ & 8770\,year$^{-1}$ & 2.5\,MB & 0.69 kB/s & 22 GB \\ \hline
+SNB cand. (ZS) & 12 year$^{-1}$ & 16.7\,GB & 6366\,B/s & 201\,GB \\ \hline
+SNB cand. (FS) & 12 year$^{-1}$ & 46.1\,TB & 17.5\,MB/s & 553\,TB \\ \hline
 \end{tabular}
 \caption{Data rate estimations for ZS data from various sources.
 An additional FS data estimation is given for supernova burst (SNB).}
@@ -305,7 +317,7 @@ An additional FS data estimation is given for supernova burst (SNB).}
 \subsubsection{$^{39}$Ar Decays}
 \label{sec:ar39decays}
 Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the data volume.
-The end point of the $^{39}$Ar decay is at 565keV and about
+The end point of the $^{39}$Ar decay is at 565\,keV and about
 25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
 The expected total decay rate is 1.0 hertz per kilogram \cite{ar39bkg}.
 
@@ -313,13 +325,13 @@ Ionization due to $^{39}$Ar decays is very localized and it is reasonable to ass
 that spatial dispersion of the charge will be no larger than the wire pitch,
 and for the most part no larger than the distance drifted during the time span
 corresponding to one ADC sample.
-Based on the likely value of shaping time to be set for the electronics (1-3 ${\mu}s$),
-the resulting waveform will be spread over $\sim$10$\mu$s or $\sim$20 samples. Because offline signal
+Based on the likely value of shaping time to be set for the electronics (1-3\,${\mu}s$),
+the resulting waveform will be spread over $\sim$10\,$\mu$s or $\sim$20 samples. Because offline signal
 processing is sensitive to tails of waveforms, even more time samples may be required.
 Finally, it is assumed that due to localization of charge a single collection wire and two induction
 wires in each view will register an appreciable signal.
 
-Based on preliminary estimates such as given in table ~\ref{tab:zs-volume},
+Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
 due to scale of the DUNE TPC the $^{39}$Ar decays generate a very large volume of data, recording which
 is not justified given their relative lack of physics importance.
 Some mitigation is required and will be developed. The simplest solution is to increase the ZS
@@ -337,7 +349,7 @@ same APA with readouts from other activity such as beam-$\nu$
 interaction and cosmic muons.
 The annual number of above ZS-threshold $^{39}$Ar decay events
 coincident anywhere in the DUNE detector with beam-$\nu$ activity is
-given in table~\ref{tab:zs-volume} as 79 GB. Of that only 3\% are coincident
+given in table~\ref{tab:zs-volume} as 79\,GB. Of that only 3\% are coincident
 in the same APA bringing the added data rate to about 10\% that of the beam-$\nu$ activity.
 
 \subsubsection{Supernova Burst}
@@ -388,8 +400,8 @@ The data rates with the HE threshold applied are summarized in table~\ref{tab:he
 	
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1.25in} | p{0.95in} | p{0.75in} | p{1in} | p{0.75in} |}		\hline	
-Source & Event Rate & Event Size & Data Rate & Annual Data \\ \hline
+\begin{tabular}{| p{1.2in} | p{0.95in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline	
+Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
 $^{39}Ar$ & - & - & - & -\\	\hline
 cosmic-$\mu$ & 0.259Hz & 2.5MB & 647.4 kB/s & 20TB \\ \hline
 beam-$\nu$ & 8770 year$^{-1}$ & 2.5MB & 0.69 kB/s & 22GB \\
@@ -414,14 +426,7 @@ For this reason, contribution from SNB to these data is not calculated for this 
 \subsubsection{Compression}
 
 The above estimates assume that the only method of data volume reduction to be employed is the
-lossy compression by removal of data below some threshold. However, in addition to that
-a lossless compression is possible. For example, the DAQ system can employ Huffman encoding
-during readout, or compression features built into ROOT may be used during writing data to files. In order to estimate
-the effects of compression, specific particle types and energies were simulated using LArSoft.
-The initial kinematics for the simulated samples covered a matrix of
-particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
-(100MeV to 6GeV).
-The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-compression}.
+lossy compression by removal of data below some threshold.
 
 \begin{figure}
 %[h!]
@@ -432,6 +437,16 @@ The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-com
 	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before (left) and after (center)  compression and their ratios (right).}
 	\label{fig:data-compression}
 \end{figure}
+
+However, in addition to that
+a lossless compression is possible. For example, the DAQ system can employ Huffman encoding
+during readout, or compression features built into ROOT may be used during writing data to files. In order to estimate
+the effects of compression, specific particle types and energies were simulated using LArSoft.
+The initial kinematics for the simulated samples covered a matrix of
+particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
+(100MeV to 6GeV).
+The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-compression}.
+
 
 %\begin{cdrfigure}[Event size estimations.]{data-compression}{Estimation of DUNE zero-suppressed event sizes for
 %    different particles and momenta before (left) and after (center)
@@ -490,7 +505,7 @@ in the ND systems from various sources.
 
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1in} | p{1in} |}		\hline		
+\begin{tabular}{| p{0.8in} | p{0.8in} |}		\hline		
 \textbf{Source} & \textbf{Rate} (Hz)\\ \hline
 Beam-$\nu$ & 40.2 \\ \hline
 Rock & 10.0 \\ \hline
