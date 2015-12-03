@@ -30,14 +30,14 @@ for the DUNE far detector.
 \subsection{The DAQ Architecture}
 
 To reduce downtime considerably (i.e. time periods when none of the DUNE modules are collecting data, which impacts supernova detection)
-and to allow the DAQ technology in the different 10kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
+and to allow the DAQ technology in the different 10\,kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
 design. The synchronization, triggering, data collection and run-state in the different 10kt modules are completely independent in real time and
 are only coupled by processes running asynchronously (in the same fashion as a batch queue) in the hour or so after data collection.
 This allows one portion of the detector module to be restarted without interrupting
 data collection in the others.
 
 The layout of the DAQ is shown schematically in
-Figure~\ref{fig:fddaqblock}.  To collect full detail of the
+Fig.~\ref{fig:fddaqblock}.  To collect full detail of the
 most important events (deadtimeless detection of all those with energy
 deposition of 100\,MeV and above), while avoiding tricky communication
 to flag neighboring channels to those that have large hits, a model is used
@@ -53,8 +53,7 @@ storage that is associatated with each peice of hardware.
 %\fixme{Previous sentence not clear: you want to flag channels that have large hits and NOT flagneighboring channels?  What's the `tricky communication'?}
 
 The first collection supplies a centralized software-based trigger farm continuously with
-zero-suppressed information (a threshold on each channel detects hits above the noise level;
-this causes the ADC samples to be kept in a time window around the hit).  
+zero-suppressed information (a threshold on each channel detects hits above the noise level, also see \ref{sec:zs-data}).  
 The second collection reads the full data at the times and in the regions %of interest that have been 
 selected by the trigger. This is similar to the multi-level triggering in a collider experiment,
 but with only one level of triggering. The software trigger farm also
