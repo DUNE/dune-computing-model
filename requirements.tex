@@ -54,6 +54,7 @@ In addition, in cases when it helps clarify the scope of a given  requirement, a
 
 
 %%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\newpage
 \subsection{Data Requirements}
 \label{sec:dunedata}
 
@@ -351,6 +352,7 @@ Software working group and general management of DUNE.
 \end{itemize}
 
 %%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\newpage
 \subsection{Databases}
 \label{sec:dunedb}
 \subsubsection{Description}
@@ -520,6 +522,7 @@ performance problems due to unforeseen scalability issues. Based on decisions by
 migrated to a noSQL service, thus reducing the load on the principal database.
 \end{itemize}
 %%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\newpage
 \subsection{Software}
 \subsubsection{Description}
 The requirements in this section cover a variety of software used by the collaboration for producing its scientific results. Emphasis is made on architectural compliance and on managing the development cycle, validation in particular. Requirements in this section do include the software required for collaborative work. Not included are engineering or administrative software.
@@ -618,8 +621,7 @@ Effort needs to be expended to track compliance throughout the software.
 \subsubsection{Documentation Requirements}
 \begin{itemize}
 
-\item A documentation system shall be selected by the S\&C Organization (see Section~\ref{sec:lbnecolltools}).
-\fxnote{make sure there is a valid reference}
+\item A documentation system shall be selected by the Collaboration and its Software Organization.
 
 \item DUNE Offline Software design, development, commissioning and operation shall be documented using this documentation system.
 
@@ -633,16 +635,10 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item All production software shall be subject to code review.
 
-%  \fxnote{EB the term 'production software' needs to be defined.}
-% -mxp- done, in the beginning of the section
 
 \item The S\&C Organization and the TAC shall determine additional software which shall be subject to code review.
 
 \item Code reviews shall aim to satisfy the requirements of Architectural Compliance and coding standards.
-
-
-%  \fxnote{EB: more benefits can come from reviews than just this. for example  this needs to be coordinated with the physics tools groups need for reviewing functional aspects.}
-% -mxp- good point - but the PT will need to handle that, not S&C. Will add a line.
 
 \item Where warranted, code reviews shall be coordinated with the Physics Tools Group in order to ensure proper functionality and characteristics of the code.
 
@@ -659,8 +655,6 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item Any code used directly in DUNE production software or representing a dependency for it for shall be preserved (possibly in archived form) for the lifetime of the Collaboration, in order to guarantee its ability to reproduce all and any of its results at any given time.
 
-% \fxnote{EB: what does 'preserved' mean. this should be defined. are all results over the lifetime of the project included here?  this requirement seems a little strong.}
-% -mxp- OK, softened it a little
 
 \item A review process shall be implemented to determine which parts of DUNE Offline Software are no longer required and/or used.
 
@@ -769,6 +763,8 @@ Effort needs to be expended to track compliance throughout the software.
 
 \subsubsection{Software Distribution and Configuration}
 \textit{Description}
+
+\noindent
 Software distribution is the mechanism by which the software intended to run on a particular host or facility is being made available for this purpose. This is a non-exclusive list of methods that can be employed for this:
 
 \begin{itemize}
@@ -779,6 +775,7 @@ Software distribution is the mechanism by which the software intended to run on 
 \item Using network file systems such as CVMFS and others, to make the software accessible to the target computer without having completed local deployment.
 \end{itemize}
 
+\noindent
 \textit{Requirements}
 \begin{itemize}
 \item A distribution system shall be created where software is built in a centralized manner and then distributed to remote computing centers (this does not imply that it's the only available or endorsed method).
@@ -801,6 +798,7 @@ Software distribution is the mechanism by which the software intended to run on 
 
 \end{itemize}
 
+\newpage
 \subsection{Distributed Computing}
 \label{sec:dunedc}
 \textit{Definitions}
@@ -815,10 +813,12 @@ Software distribution is the mechanism by which the software intended to run on 
 \end{itemize}
 
 \subsubsection{Grid and Cloud Computing Capabilities}
-
+\noindent
 \textit{Description}
 
-Described here are basic design principles and approaches in the area of organizing the distributed computing resources being utilized by the Collaboration. In the past decade, Grid/Cloud and Distributed
+\noindent
+Described here are basic design principles and approaches in the area of organizing the distributed computing resources being
+utilized by the Collaboration. In the past decade, Grid/Cloud and Distributed
 Data technology has been embraced by most major scientific projects, for reasons of scalability,
 better access to resources and their efficient utilization. DUNE needs to closely examine its
 approach to this domain and create  a strategy for integration of Grid and Cloud Computing capabilities
@@ -866,6 +866,8 @@ Workload Management Systems serve as a force multiplier for the user of Grid and
 A WMS is also a valuable tool for managing software deployment, keeping proper accounting information regarding releases and document configuration (e.g. release) of the software used for a specific production run, thus satisfying one of core requirements related to processed data in DUNE.
 \ 
 \\
+\ 
+\\
 \textit{Issues}
 \begin{itemize}
 	\item Due to a very large number of individual computational payload jobs, wide variations of their type, requirements, environment and other vital characteristics, having access to Grid facilities in itself does not guarantee acceptable degree of efficient utilization and availability of resources, and/or functioning Operational Support.
@@ -898,7 +900,10 @@ A WMS is also a valuable tool for managing software deployment, keeping proper a
 \subsubsection{Technology trends in Distributed Computing}
 \textit{Description}
 
+\noindent
 Technology is progressing at a brisk pace and it's virtually impossible to cover its various implications for DUNE Distributed Computing within the scope of this document. We shall itemize, however, a few directions that we'll need to explore in the next few years, such as High-Performance Computing (HPC), multi-core and multi-threaded processing, GPUs etc.
+\ 
+\\
 \ 
 \\
 \textit{Issues}
@@ -935,7 +940,7 @@ Technology is progressing at a brisk pace and it's virtually impossible to cover
 	\item There is a new and intermittent problem with network connectivity to one of the DUNE sites, resulting in excessive data transmission times and inefficient resource utilization. This condition is recognized by DUNE Operations Team and the site is suspended for WMS purposes while the problem is worked on.
 \end{itemize}
 
-
+\newpage
 \subsection{Geometry}
 \subsubsection{Description}
 
@@ -983,6 +988,7 @@ Managing geometry description and model presents a challenge to most experiments
 	
 \end{itemize}
 
+\newpage
 \subsection{Visualization}
 \subsubsection{Description}
 
@@ -1094,9 +1100,12 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 \\
 \textit{Alternatives}
 
+\noindent
 In case a centralized network monitoring system is not created, monitoring the network
 functionality and performance can  be delegated to personnel located at individual sites.
 
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\newpage
 \subsection{Cybersecurity}
 \subsubsection{Description}
 Attacks on scientific computing facilities by malevolent agents are a reality that needs to be countered. Due to users being lax in fully implementing security protocols, improper site configuration and other factors, these attacks are successful at times.
