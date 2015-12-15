@@ -23,20 +23,22 @@ signal produced by ionizing patciles traveling in Liquid Argon.
 
 Providing extensive detail on the physics, design and operation of DUNE detectors  is beyond the scope of this document.
 At the time of writing, the definitive source of such information is the DUNE Conceptual Design Report Vol.4 ~\cite{cdr_vol4_docdb}, and 
-it was used to set direction of this Technical Design Report.
+it was used to set direction of this document.
 
 
 \subsection{About this Document}
 \label{sec:modelrole}
 
-This central part of this document is the \textit{Computing Model} (Sec.\ref{sec:computing_model}).
-It lays out general design of DUNE computing infrastructure as well as planning and organization of
-its software development effort. It aims to guide the evolution of the DUNE computing platform in the
-direction optimal for achieving the scientific goals of the experiment. It will also serve to inform funding
-agencies about the scope of work, resource requirements and rate of progress of  DUNE Software
-and Computing sector.
+This document had the \textit{Computing Model} (Sec.\ref{sec:computing_model}) as its central part, and also
+includes supporting materials that help quantify parameters of the model and explain its policies and
+solutions.
+The Computing Model lays out general design of DUNE computing infrastructure as well as planning and
+organization of its software development effort. It aims to guide the evolution of the DUNE computing
+platform in the direction optimal for achieving the scientific goals of the experiment, and will also serve
+to inform funding agencies about the scope of work, resource requirements and rate of progress of 
+DUNE Software and Computing sector.
 
-This \textit{Report} contains two crucial prerequisites on which the Computing Model is built:
+The supporting materials contain two crucial parts:
 \begin{itemize}
 \item \textit{Software and Computing Requirements}
 \item \textit{DUNE Data Characteristics}
@@ -54,7 +56,6 @@ volume of Monte Carlo studies  will affect the scale of CPU and storage resource
 reconstruction software will have an effect on both experimental data processing and Monte Carlo studies, and therefore ofn the
 Computing Model as well.
 
-% In summary, the Computing Model
 
 
 \subsection{The DUNE Timeline and Evolution of the Computing Model}
@@ -67,26 +68,21 @@ the target complex etc). Background characterization, event reconstruction techn
 Importantly, at the time of writing DUNE is actively working on two LArTPC prototypes:
 \begin{itemize}
 \item 35t Liquid Argon TPC situated at FNAL which will start taking cosmic ray data in 2016
-\item The ``Full Scale'' prototype to be placed in a test beam at CERN, scheduled for commissioning in 2017 and actual data taking in early 2018
+\item The ``Full Scale'' prototype (``protoDUNE/NP04'') to be placed in a test beam at CERN, scheduled for commissioning in 2017 and actual data taking in early 2018
 \end{itemize}
-
-It follows that although commissioning and operation of the eventual complete detector is still years away, DUNE is effectviely engaged
+\noindent
+It is obvious that although commissioning and operation of the eventual complete detector is still years away, DUNE is effectviely engaged
 in a vigorous experimental program which poses non-trivial requirements from the computing standpoint. The landscape of DUNE
 computing will be defined by these and similar tasks for the next few years.
 
-After the crucial prototyping stage is completed, the workup to start of data taking in DUNE will include scaling up the data management and processing systems,
-integration testing,  stress testing and  realistic data challenges preceding the commencement of operations. For this reasons it is obvious that the DUNE
-Computing Model will undergo considerable evolution. In the present document, this is addressed  by using the following approximation and structure:
+After the crucial prototyping stage is completed some time before the year 2020, DUNE will start preparations for data taking with the
+actual full apparatus, including the Far Detector at the Sanford facility. It will involce scaling up the data management and processing systems,
+integration testing,  stress testing and  realistic data challenges which must precedethe commencement of operations.
+It is obvious therefore that the DUNE Computing Model will undergo considerable evolution in the following decade. In the present document,
+this is addressed  by having separate sections for the computing for DUNE prototypes, and for the final DUNE experiment itself.
 
-\begin{itemize}
-
-\item The time period between the year 2014 and the commissioning of DUNE (its timing being uncertain as of now but assumed to be around 2026) is divided into two parts of roughly equal duration, i.e. 2014-2020 and 2020-2026. This segments will be referred to as \textbf{T1} and \textbf{T2}.
-
-
-\item Where warranted, major sections of the Computing Model will contain separate subsections reflecting these two time periods.
-
-\end{itemize}
- 
-It is obvious that rapid evolution of software and computing technologies, combined with dynamic nature of R\&D in DUNE (and other  projects with potential impact on DUNE) and a variety of other factors makes precise formulation of the Computing Model and subsequent plans very difficult over the foreseen extended timeline. It  therefore likely that it will become necessary to evaluate the Computing Model and make adjustments at some point in time. We estimate that the transition between T1 and T2 periods (i.e. roughly 2020) will be an appropriate point in time to revisit the Computing Mode, develop its next
-iteration and adjust the plans derived from it.
+Aside from this obvious distinction, this Computing Model is essentially a living document: 
+the rapid evolution of modern software and computing technologies, combined with dynamic nature of R\&D in DUNE
+and a variety of other factors make it likely that it will become necessary to re-evaluate the Computing Model and make adjustments at
+some point in time. We estimate that this may happen roughly around 2020.
 

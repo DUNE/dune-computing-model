@@ -174,14 +174,14 @@ in terms of ADC values (reflecting the collected charge, which can be translated
 Using this concept the dynamic range can be considered with three distinct settings:
 \begin{description}
 	
-\item[full-stream] The full-stream (FS) threshold means \textit{there is no threshold at all}, i.e.
+\item[full-stream] The full-stream \textbf{(FS)} threshold means \textit{there is no threshold at all}, i.e.
 FS data is effectively read out in every time bin (as defined by the ADC clock) and from every channel.
 
-\item[zero-suppressed] The zero-suppression (ZS) threshold is an ADC value (in a single time bin,
+\item[zero-suppressed] The zero-suppression \textbf{(ZS)} threshold is an ADC value (in a single time bin,
 on a single wire) roughly corresponding to ionization charge due to a 0.5\,MeV energy deposition.
 All bins with ADC counts below this threshold are discarded from the data stream.
 
-\item[high-energy] A high-energy (HE) threshold is assumed to be high enough so that
+\item[high-energy] A high-energy \textbf{(HE)} threshold is assumed to be high enough so that
   that all electronics noise signals from radioactive decays are suppressed but low
   enough to not impact activity from beam neutrino interactions or potential nucleon decay activity.
   Further studies are needed to determine this threshold but currently
@@ -263,6 +263,7 @@ of recording data in DUNE.
 
 
 \subsubsection{Potential capabilities of the Far Detector TPC DAQ system}
+\label{sec:daq-assumptions}
 For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}. One of its central components
 is an array of \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1}, which offer very high
 readout speeds, considerable real-time computing power and flexibility of system configuration.
@@ -352,15 +353,20 @@ will be revised downward.
 
 \subsubsection{$^{39}$Ar Decays}
 \label{sec:ar39decays}
-Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the data volume.
-The end point of the $^{39}$Ar decay is at 565\,keV and about
+Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the data volume,
+due to the following:
+\begin{itemize}
+\item The end point of the $^{39}$Ar $\beta$-decay is at 565\,keV and about
 25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
-The expected total decay rate is 1.0 hertz per kilogram \cite{ar39bkg}.
 
-Ionization due to $^{39}$Ar decays is very localized and it is reasonable to assume
-that spatial dispersion of the charge will be no larger than the wire pitch,
-and for the most part no larger than the distance drifted during the time span
-corresponding to one ADC sample.
+\item The expected decay rate of $^{39}$Ar is 1.0 hertz per kilogram of natural Ar\cite{ar39bkg}.
+\end{itemize}
+\noindent
+Due to relatively low energy, ionization due to $^{39}$Ar decays is very localized.
+It is reasonable to assume that spatial dispersion of the charge will be no larger than the wire pitch
+in the direction perpedicular to the drift, and for the most part no larger than the distance drifted
+during one ADC ``time bin''.
+
 Based on the likely value of shaping time to be set for the electronics (1-3\,${\mu}s$),
 the resulting waveform will be spread over $\sim$10\,$\mu$s or $\sim$20 samples. Because offline signal
 processing is sensitive to tails of waveforms, even more time samples may be required.
@@ -368,10 +374,10 @@ Finally, it is assumed that due to localization of charge a single collection wi
 wires in each view will register an appreciable signal.
 
 Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
-due to scale of the DUNE TPC the $^{39}$Ar decays generate a very large volume of data, recording which
-is not justified given their relative lack of physics importance.
-Some mitigation is required and will be developed. The simplest solution is to increase the ZS
-threshold to be above the decay endpoint.
+due to scale of the DUNE TPC the $^{39}$Ar background can generate a very large volume
+of data which is of little interest. Recording these data s not justified given their relative lack
+of physics importance, so some mitigation is required and will be developed. The simplest solution
+is to increase the ZS threshold to be above the decay endpoint.
 This may have a negative effect on detector performance due to removing small energy
 depositions associated with larger events and thus will only be
 considered if absolutely required to mitigate the rate.
@@ -379,7 +385,8 @@ considered if absolutely required to mitigate the rate.
 A better approach is the one that drives the requirement on the DAQ
 that the trigger farm be capable of identifying isolated activity
 consistent with $^{39}$Ar on a per-APA basis in order to veto its
-recording. The DAQ is expected to be able to provide this functionality.
+recording. The DAQ is expected to be able to provide this functionality
+(see~\ref{sec:daq-assumptions}).
 This then leaves $^{39}$Ar which is accidentally coincident in the
 same APA with readouts from other activity such as beam-$\nu$
 interaction and cosmic muons.
@@ -417,13 +424,13 @@ and may have implications on DAQ hardware.
 \subsubsection{Noise}
 
 % fixme: is this remotely true?
-The nominal ZS threshold of 0.5MeV is based on an older requirement of a
-9:1 signal to noise ratio for a 1 MIP. The most likely MIP is 1.8MeV$\times$cm$^{-1}$ or 0.9 MeV per wire pitch.
-This implies an RMS noise requirement equivalent to 0.1 MeV and then the 0.5 MeV equivalent ZS
-threshold represents a $5\sigma$ cut. Across the 1,536,000 channels and the 10,800 samples
-per readout this gives about 5,000 samples above the nominal ZS threshold. Their distributed
-nature and isolated pattern of appearance make them subject to the same rejection criteria as
-$^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
+The nominal ZS threshold of 0.5MeV is based on an older (historical) requirement of a
+9:1 signal to noise ratio for a 1 MIP. The most likely MIP is 1.8MeV$\times$cm$^{-1}$ or 0.9 MeV
+per wire pitch. This implies an RMS noise requirement equivalent to 0.1 MeV and then the 0.5 MeV
+equivalent ZS threshold represents a $5\sigma$ cut. Across the 1,536,000 channels and the
+10,800 samples per readout this gives about 5,000 samples above the nominal ZS threshold.
+Their distributed nature and isolated pattern of appearance make them subject to the same rejection
+criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
 
 
 \subsubsection{High-energy Threshold}
