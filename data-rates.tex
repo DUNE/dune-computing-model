@@ -24,7 +24,7 @@ Detector Systems (see~\ref{sec:nds-params}).
 \subsubsection{Fundamental Parameters of the LArTPC}
 \label{sec:fundamental-parameters}
 
-The fundamental TPC parameters most relvant as input to the data rate estimations are summarized in
+The fundamental TPC parameters most relevant as input to the data rate estimations are summarized in
 table~\ref{tab:fundamental-parameters}.
 
 \begin{table}[ht!]
@@ -89,15 +89,30 @@ of the FPGA processing allows for a significant amount of customization of the S
 For sake of brevity, only basic information will be provided for the Near Detector Systems (NDS) which are under active development
 at the time of writing and for which there is no final design yet. The main NDS components are:
 \begin{itemize}
-\item Near neutrino detector (NND), and its major component, the fine-Grained Tracker (FGT)
+\item Near neutrino detector (NND), and its major component, the Fine-Grained Tracker (FGT)
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-In the reference design at the time of writing, a Fine-Grained Tracker (FGT) near detector consists of a straw-tube
-tracking detector (STT) and electromagnetic calorimeter (ECAL) inside of a 0.4\,T dipole magnet.
-In addition, Muon Identifiers (MuIDs) are located in the steel of the magnet, as well as upstream
-and downstream of the STT. The FGT is designed to make precision measurements of the neutrino
-fluxes, cross sections, signal and background rates at the percent level. Some basic parameters of the
+In the reference design at the time of writing, the FGT) near consists of a straw-tube
+tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimeter (ECAL), all placed inside of a 0.4\,T dipole magnet.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{2in} | p{2in} |}		\hline		
+\textbf{Item} & \textbf{Specification} \\ \hline
+Straw Tube Geometry & $\diameter$1\,cm$\times$3.5\,m length \\ \hline
+Number of straw tubes & 107,520\\ \hline
+Straw tubes per plane & 336 \\ \hline
+Planes per module & 4 \\ \hline
+Number of modules & 80 \\ \hline
+Number of channels & 215,040 \\ \hline
+\end{tabular}
+\caption{Main parameters of the FGT}
+\label{tab:fgt-params}
+\end{table}
+
+The FGT is designed to make precision measurements of the neutrino
+fluxes, cross sections, signal and background rates at the percent level. A summary of basic parameters of the
 NDS are presented in Table~\ref{tab:nds-params}.
 \begin{table}[ht!]
 \centering
