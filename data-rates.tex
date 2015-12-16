@@ -158,19 +158,15 @@ Due to their rare (and generally speaking, potential) occurance they will be con
 Signals produced by individual wires in the DUNE TPC will have a substantial
 dynamic range. For example, $\beta$-decay of naturally occurring isotope $^{39}$Ar has the endpoint of
 565\,keV, whereas signals due to interactions of energetic neutrinos can produce signals
-equivalent to a few MeV energy deposition in a given channel depending on the event topology.
+equivalent up to a few MeV energy deposition in a given channel depending on the event topology.
 
 Each segment of the dynamic range will reflect certain types of events and this
 be characterized by a respective data rate. For a systematic approach to estimates
-and to reflect the physics of the detector,
-it is helpful to consider three such segments when characterizing the LArTPC data and describe
-them in terms of ``thresholds'' that may be applied to signals on ``per-wire'' basis and which can be
-defined for example
+and to reflect the physics of the detector, it is helpful to consider three such segments when characterizing the LArTPC data.
+To set the scale for these segments we can assign ``thresholds''corresponding to each of them.
+The threshold values can be applied to signals on ``per-wire'' basis and defined for example
 in terms of ADC values (reflecting the collected charge, which can be translated to units like MeV with proper calibration).
-%Optimizing these thresholds
-%for optimal detector performance will require additional studies, so here they are used simply
-%to distinguish separate domains of the signal dynamic range and to provide benchmarks for the data
-%rate estimations. The data produced at each threshold are termed:
+These are not meant to be precise values used in data collection and are given here for orientation purposes only.
 Using this concept the dynamic range can be considered with three distinct settings:
 \begin{description}
 	
@@ -185,7 +181,7 @@ All bins with ADC counts below this threshold are discarded from the data stream
   that all electronics noise signals from radioactive decays are suppressed but low
   enough to not impact activity from beam neutrino interactions or potential nucleon decay activity.
   Further studies are needed to determine this threshold but currently
-  it is taken, without rigor, to be 1$\div$10\,MeV.
+  it is taken, without rigor, to be $O(1)$\,MeV.
 
 \end{description}
 
@@ -317,10 +313,10 @@ time windows before and after the ``main'' pulse which exceeds the nominal ZS th
 is a subject of R\&D at the time of writing. Obviously, implementation of such scheme will lead
 to an increase in the recorded data volume compared to minimalistic version. Assuming that
 each extra window is comparable in duration to the peak of the signal above the threshold,
-a rough estimate is that this factor could be on the scale of a factor of 2. However, given
+a rough estimate is that this factor could be on the scale of a factor of 2 or 3. However, given
 that the design of this and other compression algorithms is still ongoing, and for better consistency
-and ease of reference, this is not included in the ZS data estimates presented Table~\ref{tab:zs-volume}
-and in the following sections. Also not included is lossless data compression that may be applied
+and ease of reference, this is not included in the ZS data estimates presented Table~\ref{tab:zs-volume}.
+The table also does not include the lossless data compression that may be applied
 in addition to the lossy ZS algorithm (see \ref{sec:data-compression}).
 	
 \begin{table}[ht!]
@@ -436,8 +432,9 @@ criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of 
 \subsubsection{High-energy Threshold}
 
 For the purpose of these estimates the  high-energy (HE) threshold is chosen at the level above 
-the energy scale of the radiological backgrounds relevant for the LArTPC, and set at  10.0MeV.
-A more careful study is needed to determine a potentially more optimal value for this threshold.
+the energy scale of the radiological backgrounds relevant for the LArTPC.
+%, and set at  10.0MeV.
+%A more careful study is needed to determine a potentially more optimal value for this threshold.
 The data rates with the HE threshold applied are summarized in table~\ref{tab:he-volume}.
 
 	
@@ -471,7 +468,11 @@ For this reason, contribution from SNB to these data is not calculated for this 
 
 The above estimates assume that the only method of data volume reduction to be employed is the
 lossy compression by removal of data below some threshold.
-
+However, in addition to that
+a lossless compression is possible. For example, the DAQ system can employ Huffman encoding
+during readout, or compression features built into ROOT may be used during writing data to files.
+In fact ROOT compression is in place in many application currently used in DUNE because of its
+convenience and efficiency.
 \begin{figure}
 %[h!]
 	\centering
@@ -481,31 +482,10 @@ lossy compression by removal of data below some threshold.
 	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before (left) and after (center)  compression and their ratios (right).}
 	\label{fig:data-compression}
 \end{figure}
-
-However, in addition to that
-a lossless compression is possible. For example, the DAQ system can employ Huffman encoding
-during readout, or compression features built into ROOT may be used during writing data to files.
-In fact ROOT compression is in place in many application currently used in DUNE because of its
-convenience and efficiency.
 In order to estimate the effects of compression, specific particle types and energies were simulated using LArSoft.
 The initial kinematics for the simulated samples covered a matrix of
 particles ($e$, $\mu$, $\tau$, $\pi^+$, $\pi^-$, $\pi^0$ and proton) and momenta
-(100MeV to 6GeV).
-The uncompressed and compressed sizes are summarized in figure~\ref{fig:data-compression}.
-
-
-%\begin{cdrfigure}[Event size estimations.]{data-compression}{Estimation of DUNE zero-suppressed event sizes for
-%    different particles and momenta before (left) and after (center)
-%   compression and their ratios (right).
-%   Each line represents one particle type.
-%    The samples were generated with LArSoft assuming
-%   10 kilo tonne detector module with 300000 channels.}
-
-%  \includegraphics[width=0.3\textwidth]{btot.pdf}
-%  \includegraphics[width=0.3\textwidth]{bzip.pdf}
-%  \includegraphics[width=0.3\textwidth]{brat.pdf}
-
-%\end{cdrfigure}
+(100\,MeV to 6\,GeV). The uncompressed and compressed sizes are summarized in Fig.~\ref{fig:data-compression}.
 
 This exercise discovered a few types of inefficiencies in the design of data structures
 currently used, which is unsurprising given that the DUNE software is undergoing active development
@@ -517,27 +497,47 @@ There are also additional data elements which are likely superfluous or
 repeated more frequently than is likely to be required.
 For example, in some types of the LArSoft output, even though zero suppression is applied, every
 channel has an associated a pedestal and a sigma. There are other bits of superfluous data, but
-they are not included in Fig.~\ref{fig:data-compression}.
-
-Finally, as can be seen in Fig.~\ref{fig:data-compression}, the change in uncompressed
-event size is only a minor function of event momenta and particle types.
-It is believed that LArSoft is saving additional overhead for all
+they are not included in Fig.~\ref{fig:data-compression}. From the data presented in these
+plots, the change in uncompressed event size is only a minor function of event momenta and
+particle types. This is likely to be due to LArSoft saving additional overhead for all
 channels, even those that have been fully zero-suppressed.
 
-The simulation used a detector module consisting of 300,000 wires and thus naively the event
-size in the full reference detector would be some 5 times larger.
-However, given the arguments above, it is expected that this leads to
-a gross over-estimate, possibly by one or two orders of magnitude from
-what should be expected if even just a little effort is put into
-designing a better storage schema.
-Once compression is assumed, the problems with this sub-optimal
-storage schema are lessened.
-We then select the uncompressed event size to be beameventsize and
-the compressed event size of 0.1\,MB based
-on data presented in Fig.~\ref{fig:data-compression}.
-We identify this with being the zero-suppressed data produced by just
-activity due to beam interactions or similar energy events and accept
-the large over-estimation as a generous safety factor.
+The simulation used to create these estimated included a detector module with
+300,000 wires. The fact that the channel count in the full reference detector is
+some 5 times larger will not change these estimates by a considerable margin
+since it is assumed that DAQ/online systems will be capable of
+not only of zero-suppression and compression, but also of suppression
+of diffuse radiological backgrounds (see~\ref{sec:daq-assumptions}).
+In other words, under normal conditions a cosmic $\mu$ or a beam
+neutrino interaction will result in a localized ionization pattern (which
+however may include long tracks) and the resulting data will not
+scale linearly with the total channel count of the detector (which
+sill still be effectively ``empty'' after suppression of $^{39}$Ar
+background).
+
+We then select the uncompressed event size to be 2.5\,MB and
+the compressed event size of 0.2\,MB based
+on data presented in Fig.~\ref{fig:data-compression} and
+introducing a ``safety factor'' of 2 since the exact performance
+of the data structures used in the final detactor cannot be precisely predicted at this time.
+
+\subsubsection{High-threshold data volume summary}
+Taking into account arguments presented above, and uncertainties of up to factor of 3 in the Zero Suppression
+performance to be realized in the final system (see~\ref{sec:zs-data}), we summarize data volume estimate for
+the high energy domain in Table~\ref{tab:fd-data-volume-summary}.
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{1.2in} | p{0.95in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline	
+Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
+cosmic-$\mu$ & 0.259Hz & 0.6\,MB & 155.4\,kB/s & 4.8\,TB \\ \hline
+beam-$\nu$ & 8770 year$^{-1}$ & 0.6\,MB & 0.17 kB/s & 5.3\,GB \\
+\hline
+\end{tabular}
+\caption{Summary of revised data rate and volume estimations corresponding to (HE) threshold.}
+\label{tab:fd-data-volume-summary}
+\end{table}
+
+
 
 \subsection{The Near Detector Data}
 At the time of writing, there are many parameters of the NDS that are yet to be well defined.
