@@ -3,6 +3,8 @@
 
 \begin{description}
 \item[APA] Anode Plave Assembly
+\item[\textit{art}] Physics Software Framework developed at FNAL
+\item[\textit{artdaq}] Data Acquisition Toolkit based on \textit{art}
 \item[CIS] Continuous Integration System
 \item[CVMFS] CERN Virtual Machine File System (network-based method of data delivery)
 \item[FS] Full Stream (data collected with zero threshold)
@@ -19,6 +21,7 @@
 \end{description}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Event Reconstruction for the Liquid Argon TPC}
 \label{sec:reconstruction}
 \subsection{Implications of Wire Readout}
@@ -68,7 +71,7 @@ represented conceptually as a view along the direction of the drift.
 Using just three projections to reconstruct an extended object (ionization charge density) presents challenges for event reconstruction.
 Reliability and thorough characterization of the algorithms employed in this area will be critical for the systematics and other performance characteristics of DUNE.
 
-There are a few approaches currenlty in development for event reconstruction. The ``Pandora'' toolkit (\ref{sec:wirecell}), which
+There are a few approaches currenlty in development for event reconstruction. The ``Pandora'' toolkit (\ref{sec:pandora}), which
 originated as R\&D for fine-grained calorimetry at ILC~\cite{pandora}, is being adopted to reconstruct LArTPC events.
 In addition, there is a ``projection matching algorithm'' which will be used for test-beam studies with protoDUNE detector.
 
@@ -134,17 +137,10 @@ proper calibration of the detector as well as solution of yet another inverse pr
 reconstructing the original shape of the charge signal. This is done in conditions of non-zero noise and involves applicaiton of digital filtering techniques.
 
 \subsubsection{Wire Cell Components}
-The flow of data in Wire Cell is presented in Fig.~\ref{fig:wirecell-diagram}.
-\begin{figure}[h!]
-	\centering
-	\includegraphics[height=0.8\textheight]{wirecell-dataflow-conceptual.png}
-	\caption{Components of Wirecell Reconstruction Software}
-	\label{fig:wirecell-diagram}
-\end{figure}
+The flow of data in Wire Cell is presented in Fig.~\ref{fig:wirecell-diagram} in~\ref{sec:wc-diagram}.
 Full description of Wire Cell is  beyond the scope and size limitations of this document,
-so presented below is annotations for those elements of the data flow (see the diagram for specific
+so presented below is an annotated list of those elements of the data flow (see the diagram for specific
 names) which are significant and/or present most computational challenges.
-
 \begin{description}
 \item[Slicer:] takes one "time frame" or a "readout" of raw data from DAQ (or simulated source)
 and separates it in time bins.  Each bin contains ADC values for all the channels
@@ -152,7 +148,7 @@ and separates it in time bins.  Each bin contains ADC values for all the channel
 	
 \item[Cell Finder:] takes as a time bin and identifies ``cells'' (groups of adjacent tiles).
 	
-\item[Optimization Solver (aka Matrix Solver):] optimizes the likelihood of the charge contained in contiguous groups of cells
+\item[Optimization Solver (``Matrix Solver''):] optimizes the likelihood of the charge contained in contiguous groups of cells
 with respect to producing the observed signals on wires, utilizing a model where this relationship is expressed as a matrix.
 	
 \item[Clustering:] aggregates groups of cells over multiple time bins, thus creating 3D objects (``clusters'').
@@ -161,15 +157,24 @@ with respect to producing the observed signals on wires, utilizing a model where
 	
 \item[PID:] determines the type of particle based on ionization pattern, as defined by
 charge depositions along the particle trajectory
-	
 \end{description}
 
+\noindent
 Elements listed above are computationally complex for a number of different reasons. For example,
 the \textit{Cell Finder} performs a search on an array of tiles and given the large number
 of those may face a combinatorial challenge. The \textit{Matrix Solver} has to solve an optimization
 problem involving a sparse matrix. The \textit{Tracking} component has again to find relations
 between multiple pieces of data based on applications of certain rules.
-
+\newpage
+\subsubsection{Wire Cell Diagram}
+\label{sec:wc-diagram}
+%\newpage
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.8\textheight]{wirecell-dataflow-conceptual.png}
+	\caption{Components of Wirecell Reconstruction Software}
+	\label{fig:wirecell-diagram}
+\end{figure}
 
 
 \newpage
