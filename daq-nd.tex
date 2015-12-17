@@ -21,7 +21,7 @@ LBNF, shown here in other colors (blue, light red, tan).}
 \label{fig:nds-daq-block}
 \end{figure}
 
-\subsubsection{NDS Master DAQ} 
+\subsection{NDS Master DAQ} 
 \label{cdrsec:nd-master-daq}
 
 The NDS Master DAQ (NDS-MDAQ) is designed to provide a high-level user
@@ -39,13 +39,13 @@ The NDS-MDAQ includes hardware two-way triggering for both the NND-DAQ
 and BLM-DAQ, and GPS hardware for precision time-stamping and global
 clock synchronization.  The design is currently based on a channel
 count estimate of approximately 433,000 from the near neutrino
-detector, plus $<$1,000 from the beamline detectors.  Custom
+detector and additional $\sim$1,000 from the beamline detectors.  Custom
 electronic components for the NDS-DAQ are based on existing custom
-designs from other experiments, e.g., T2K and ATLAS, and implement
+designs from other experiments, e.g. T2K and ATLAS, and implement
 commercial components for the trigger modules, clock and timing
 synchronization, GPS and environmental monitoring.
 
-\subsubsection{Near Neutrino Detector DAQ (NND-DAQ)} 
+\subsection{Near Neutrino Detector DAQ (NND-DAQ)} 
 \label{cdrsec:nd:nnd:daq}
 
 
@@ -88,5 +88,29 @@ NND subdetector DAQs.  A slave-clock electronics module, similar to
 the master-clock module in the NDS-MDAQ, distributes clock- and
 time-synchronization signals from the NDS-MDAQ to all NND
 subdetectors.
+
+\subsection{Beamline Measurements DAQ (BLM-DAQ)}
+
+The BLM-DAQ will mainly consist of a scalable back-end computer array,
+inter-connected to the individual beamline measurement detector DAQs
+via Gigabit Ethernet and specialized electronics modules for trigger
+processing and clock synchronization. It interfaces to the NDS-MDAQ
+for run control and data collection. It will also have its own local
+run-control setup, consisting of a number of desktop workstations to
+allow independent local runs that include beamline measurement
+detectors only; this is useful during detector commissioning,
+calibration runs, stand-alone cosmic runs or other runs where the beam
+is stopped or not needed.
+
+
+\subsection{NDS Computing}
+\label{sec:nd-gdaq-global-computing}
+
+The computing system encompasses two major activities: online
+computing with required slow-control systems, and offline computing
+for data analysis and event simulation.  The computing components are
+based on currently available commercial computing and gigabit
+networking technology, which is likely to improve over the next years
+without driving costs up for the final design.
 
 \fxnote{Work in progress!}
