@@ -89,16 +89,16 @@ of the FPGA processing allows for a significant amount of customization of the S
 For sake of brevity, only basic information will be provided for the Near Detector Systems (NDS) which are under active development
 at the time of writing and for which there is no final design yet. The main NDS components are:
 \begin{itemize}
-\item Near neutrino detector (NND), and its major component, the Fine-Grained Tracker (FGT)
+\item Near neutrino detector (NND), and its major component, the Fine-Grained Tracker
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-In the reference design at the time of writing, the FGT) near consists of a straw-tube
+In the reference design at the time of writing, the Fine-Grained Tracker (FGT) near consists of a straw-tube
 tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimeter (ECAL), all placed inside of a 0.4\,T dipole magnet.
 
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{2in} | p{2in} |}		\hline		
+\begin{tabular}{| p{2in} | p{1.5in} |}		\hline		
 \textbf{Item} & \textbf{Specification} \\ \hline
 Straw Tube Geometry & $\diameter$1\,cm$\times$3.5\,m length \\ \hline
 Number of straw tubes & 107,520\\ \hline
@@ -371,7 +371,7 @@ due to the following:
 \item The end point of the $^{39}$Ar $\beta$-decay is at 565\,keV and about
 25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
 
-\item The expected decay rate of $^{39}$Ar is 1.0 hertz per kilogram of natural Ar\cite{ar39bkg}.
+\item The expected decay rate of $^{39}$Ar is approximately one decay per second per kilogram of natural Ar\cite{ar39bkg}.
 \end{itemize}
 \noindent
 Due to relatively low energy, ionization due to $^{39}$Ar decays is very localized.
@@ -408,7 +408,7 @@ given in table~\ref{tab:zs-volume} as 79\,GB. Of that only 3\% are coincident
 in the same APA bringing the added data rate to about 10\% that of the beam-$\nu$ activity.
 
 \subsubsection{Supernova Burst}
-
+\label{sec:snb-data}
 The Supernova Burst (SNB) data is estimated assuming a
 \textit{false-positive} SNB rate of 12 year$^{-1}$ and a readout time of
 10s. It should be emphasized that both these parameters are subject to
@@ -576,9 +576,8 @@ Total & 50.2 \\ \hline
 \label{tab:nds-event-rates}
 \end{table}
 \noindent
-Based on these rates and occupancy estimated in preliminary Monte Carlo Studies, the projected
-data rate from the NDS will be in the $O(1)$\,MB per second range. More information will
+The projected data rate from the NDS is based on these event rates and occupancy estimated in preliminary Monte Carlo Studies,
+and estimated number of samples to be read out per trigger ($\sim$4000). Preliminary size of each sample is 5B, resulting in an estimate
+of $O(1)$\,MB per second data rate from the NDS. More information will
 be added to these estimates as the R\&D in this area progresses.
-
-%, and effectively well below
-%the levels characteristic of the Far Detector.
+\fxnote{More development needed here and more information from the ND people}
