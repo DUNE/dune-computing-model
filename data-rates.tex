@@ -166,8 +166,8 @@ be a major factor influencing the rate and volume of data produced in DUNE.
 \end{table}
 
 Not included in this table are two of the more exotic sources of signal, the Supernova Burst and Nucleon decay.
-Due to their rare (and generally speaking, potential) occurance they will be considered separately as needed.
-
+Due to their rare (and generally speaking, potential) occurance and differing characeristics they will be considered separately
+in~\ref{sec:snb-data} and \ref{sec:pdk-data}.
 
 \subsubsection{Segments of the Dynamic Range of the TPC signals}
 
@@ -425,13 +425,30 @@ false-positive SNB trigger is dominated by $^{39}$Ar decays.
 
 In order to ensure optimal efficiency of detection for the SNB neutrinos,
 an  additional trigger stream must be put in place in which
-reduction of $^{39}$Ar background (such as described in \ref{sec:ar39decays}) will not be employed, as it would potentially impact the SNB neutrinos. Hence, this background 
-will dominate the data volume. The data volume due to the SNB events themselves is not significant.
+reduction of $^{39}$Ar background (such as described in \ref{sec:ar39decays}) will not be employed,
+as it would potentially impact the SNB neutrinos. Hence, this background 
+will dominate the data volume. Contribution to the data volume due to the SNB events
+themselves is not significant.
 
 Further, a lower ZS threshold may be considered for saving such
 candidate SNB occurrences. The possible data rate of SNB candidates is thus bound by the nominal
 ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates requires additional study
 and may have implications on DAQ hardware.
+
+\subsubsection{Nucleon Decay}
+\label{sec:pdk-data}
+In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\nu$ is considered the most promising
+from the discovery point of view. Kaons from free proton decay are expected to have a kinetic
+energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic energy of a kaon
+emitted from an Ar nucleus  is expected to be in the range 0 to 200 MeV~\cite{muon_bkgd_pdk}.
+
+Backgrounds for this decay mode do exist and are due for example to cascades
+initiated by cosmic $\mu$ outside of the fiducial volume, with $K_L^0$ getting into the LArTPC
+and participating in a charge exchange reaction. The relatively low cross-section of this reaction
+combined with muon flux estimates lead to the conclusion that the rates for such background events are rather low
+(expected value of less than one event per year if extrapolating from~\cite{muon_bkgd_pdk}).
+
+% Accorind to recent analysis ~\cite{muon_bkgd_pdk}, the rates for such background events are rather low
 
 \subsubsection{Noise}
 
