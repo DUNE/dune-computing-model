@@ -32,8 +32,8 @@ volume from a few dozen to a hundred TB.
 In summary, it is anticipated that under assumptions presented above the total volume of data in DUNE to be
 committed to storage will be up to 1PB per year of data taking.
 
-\subsection{Far Detector Data Management}
-\subsubsection{The Big Picture}
+\subsection{Far Detector Data Handling}
+\subsubsection{Conceptual Design of Data Flow}
 A high-level conceptual diagram of the data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}.
 The top section of the diagram (labeled ``A'') represents systems and data flow at the Far Site.
 The mid-section ``B'' depicts the DUNE data storage network. FNAL is the main data center
@@ -49,7 +49,7 @@ Replication of the data will be done as per requirements formulated in \ref{sec:
 \label{fig:DUNEdataflow}
 \end{figure}
 
-\subsubsection{Data Handling at the Far Site}
+\subsubsection{Data Buffering and Merging at the Far Site}
 Data Acquisition systems will be located in the specially built rooms in the detector vicinity, i.e. deep in the cavern (commonly referred to as 4850L).
 The undergound location is to be connected to surface by 96-strand fiber optic cable, but this does not imply that all strands will be
 utilized at any given time. The scale of bandwidth of an individual fiber is 10gbps. It can be therefore expected that there will be ample headroom
@@ -75,4 +75,11 @@ for the merging to take place since it needs to be equipped with storage for buf
 \fxnote{Just a placeholder at this point}
 The Near Site is located within the boundaries of Fermilab and therefore it is easier to provide networking and other services for data handling.
 
+\subsection{DUNE Data Management}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{monarc-model.png}
+\caption{MONARC model of data distribution.}
+\label{fig:monarc}
+\end{figure}
