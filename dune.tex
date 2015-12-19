@@ -6,9 +6,10 @@ The main purpose of the Computing Model is to guide the creation of DUNE computi
 hardware, middleware and various software components. Such fabric would give to all members of the DUNE
 Collaboration unhindered access -- regardless of their location -- to reconstructed data for analysis, monitoring facilities,
 calibration and any other activities as required by the scientific objectives of the experiment. To meet these goals,
+and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
 the model presented here has in its core distributed data management and Grid and Cloud Computing concepts.
 
-\subsection{Summary of data rate and volume estimates}
+\subsection{Summary of raw data rate and volume estimates}
 Rate and volume of the data to be produced by DUNE detector systems are the major driver determining the parameters
 of the DUNE computing model. These characteristics  have been presented and discussed in detail in Sec.~\ref{sec:fd-data-overview}.
 
@@ -19,8 +20,9 @@ presented in subsections~\ref{sec:daq-assumptions},~\ref{sec:zs-data} and \ref{s
 A distinguishing characteristic of the data flow in DUNE Far Detector is a significant data reduction factor to be achieved
 in the Far Detector DAQ, as evidenced by the numbers presented in Tables~\ref{tab:full-stream-volume} and \ref{tab:zs-volume}.
 The key assumption in this is the capability of DAQ to distinguish low energy signals  due to $^{39}$Ar decays spread
-across the volume of the detector from more interesting physics phenomena. This and similar capabilities will be provided
-by deploying appropriate algorithms on the DAQ online farm utilizing about a hundred computers (estimated).
+across the volume of the detector from more interesting physics phenomena (see~\ref{sec:ar39decays}).
+This and similar capabilities will be provided
+by deploying appropriate algorithms on the DAQ RCE and online farm utilizing about a hundred computers (estimated).
 Estimates of volume of data due to high-energy interaction (cosmic $\mu$ and beam neutrinos) are presented in
 Table~\ref{tab:fd-data-volume-summary} and are quite modest.
 
@@ -33,7 +35,7 @@ volume of data is significant and is currently estimated as just over half a PB 
 flagged by DAQ as candidate should not be discarded as it can be used to better understand and improve online algorithms.
 
 Identifying candidate nucleon decay events will also require algorithms that would set the trigger condition consistent
-with signatures such as $p \rightarrow K^+\nu$. As argued in \ref{sec:pdk-data}, the volume of data due to such candidate
+with signatures such as $p \rightarrow K^+\nu$. As shown in \ref{sec:pdk-data}, the volume of data due to such candidate
 events is not expected to be appreciable compared to other sources.
 
 The Near Detector is quite different from the Far Detector in all of its characteristics, and it includes a number of subdetectors
@@ -90,6 +92,9 @@ for the merging to take place since it needs to be equipped with storage and net
 The Near Site is located within the boundaries of Fermilab and therefore it is easier to provide networking and other services for data handling.
 
 \subsection{DUNE Data Management}
+\subsubsection{Types of data}
+Principal types of data in DUNE will include raw and processed data (see \ref{sec:req-data-definitions}),
+the latter term also applying to Monte Carlo data.
 
 \begin{figure}[h!]
 \centering
@@ -97,3 +102,11 @@ The Near Site is located within the boundaries of Fermilab and therefore it is e
 \caption{MONARC model of data distribution.}
 \label{fig:monarc}
 \end{figure}
+
+\subsection{DUNE Analysis}
+\subsubsection{Analysis Procedures and Data Flow}
+\subsubsection{The Analysis Model}
+\subsubsection{Distributed Analysis}
+
+\subsection{Simulation}
+\subsection{Calibration}
