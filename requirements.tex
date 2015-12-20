@@ -13,9 +13,6 @@ which are to be addressed in the Computing Model proper.
 An effort was made to maintain a relatively high-level view of the DUNE computing issues. In cases where it was impossible to establish concrete metrics or
 parameters for a specific requirement, it is still listed as an item to be addressed in the future.
 
-%The \textit{Requirements} have been developed based in part on prior planning work done for the Long-Baseline Neutrino Experiment, which was a predecessor of DUNE.
-%They constitute one of principal components of the Computing Model. 
-
 
 %Information necessary for the creation of these Requirements have been collected during a number of DUNE Software and Computing meetings, conference calls
 %and extensive information %exchange via e-mail and other means. It is recognized that the Requirements themselves (and the Computing Model) may
@@ -111,7 +108,6 @@ residing in storage that cannot be efficiently located and utilized by the Colla
 \item Raw data collected by DUNE  online systems (such as DAQ) will be stored (buffered) at a facility located close to the Far Detector, then transmitted to central mass storage via the network. Efficient interface for exchange of data between the online and offline systems needs to be established.
 
 \end{itemize}
-
 \subsubsection{DAQ Data Interface Requirements}
 \begin{itemize}
 \item Data formats, schemas and other crucial parameters pertaining to data recorded by DUNE  data acquisition systems shall 
@@ -127,10 +123,11 @@ data is first deposited into a general purpose mass storage system, having passe
 \textit{Raw data replication}
 
 \begin{itemize}
-\item Facilities storing official copies of the raw data shall possess adequate storage capacity, availability (i.e. minimal downtime), network connectivity and bandwidth as well as other relevant infrastructure characteristics to be determined by the Software working group.
+\item Facilities storing official copies of the raw data shall possess adequate storage capacity, availability (i.e. minimal downtime),
+network connectivity and bandwidth as well as other relevant infrastructure characteristics to be determined by the Software working group.
 
-\item The number of raw data replicas at any given time shall be sufficient to protect the raw data as a whole from data loss, by utilizing a variety of techniques such as redundancy inherent in replication, automated error detection, automated data repairs and others.
-
+\item The number of raw data replicas at any given time shall be sufficient to protect the raw data as a whole from data loss,
+by utilizing a variety of techniques such as redundancy inherent in replication, automated error detection, automated data repairs and others.
 
 \item Raw data replicas shall not be required to reside in a single storage facility and may be divided in managed datasets distributed to a few designated DUNE computing centers chosen based on agreements with member institution and taking into account their infrastructure characteristics.
 
@@ -139,9 +136,7 @@ data is first deposited into a general purpose mass storage system, having passe
 \item Any storage system or host selected for the official copy (replica) of the raw data shall employ storage technology with an expected loss of no more than one unit of data per million per year.
 
 \end{itemize}
-
 \textit{Processed data replication}
-
 \begin{itemize}
 
 \item The processed data shall be generated at, and distributed to DUNE computing facilities at participating institutions 
@@ -152,7 +147,6 @@ resource availability and scheduling policies of the Workload Management System 
 
 \item The number and placement of replicas of the processed data shall be determined dynamically based on requests of a particular processing campaign, with priorities set by collective decisions of the Physics Working Groups and the Software working group.
 \end{itemize}
-
 \textit{General replication}
 
 \begin{itemize}
@@ -165,7 +159,6 @@ resource availability and scheduling policies of the Workload Management System 
 
 %%% --------------------------------------------------------------------
 \subsubsection{Data Retention and Preservation Requirements}
-
 \textit{Raw data retention}
 \begin{itemize}
 \item Raw data shall be stored at least for the duration of the experiment.
@@ -175,16 +168,14 @@ resource availability and scheduling policies of the Workload Management System 
 \item Any part of raw data shall always be readable by software available to the Collaboration, for the duration of its existence.
 
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Processed data retention}
 \begin{itemize}
 \item Specific policies shall be created by the Software working groups conveners and the Data Management Coordinators reporting to them, who will be tasked with collecting information regarding requests for specific data types and segments, monitoring capacity, access patterns and other relevant data for effective decision-making. 
 
 \item Processed data shall have no fixed retention time.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Data preservation}
 \label{sec:dunepres}
 \begin{itemize}
@@ -219,8 +210,7 @@ The raw data volume and characteristics make it very distinct from other data ty
 
 \item Immediate (low latency) access to raw data held in official replicas outside of actively managed production processing streams shall not be guaranteed.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Processed Data}
 
 \begin{itemize}
@@ -232,8 +222,7 @@ The raw data volume and characteristics make it very distinct from other data ty
 
 \item Processed data at any location, regardless of its provenance,  shall be accessible to DUNE users via submitted jobs or applications from any other DUNE site.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{All Data}
 \begin{itemize}
 \item Direct access to high capacity, high latency back-end storage e.g. tape, from running jobs or applications, shall not be allowed.
@@ -407,16 +396,14 @@ Databases are a crucial domain in DUNE, providing the foundation for handling ex
 consideration expertise of and ongoing support by the database owners, performance, scalability and long-term sustainability of the database
 technology as well as integration with collaboration-wide information systems.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Slave Databases}
 \begin{itemize}
 \item A slave database shall be replicated from a master.
 
 \item A slave database shall not be modified except as part of the official replication process.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Backup and restoration}
 
 \begin{itemize}
@@ -425,8 +412,7 @@ hardware upgrade and other types data loss.
 \item Specific requirements forthe time limits on restoration of each database shall be defined by the S\&C Organization 
 and its Database Coordinator on case-by-case basis at a later point, so as to not significantly impact ongoing processing and operations in general.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Performance and scalability}
 
 \begin{itemize}
@@ -438,8 +424,7 @@ and its Database Coordinator on case-by-case basis at a later point, so as to no
 necessary to provide adequate level of database services to the Collaboration, in close cooperation with the facilities 
 and support personnel at each participating site.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Technology choices}
 \begin{itemize}
 \item Database technologies available to the Collaboration shall be considered on merits such as long term cost and 
@@ -452,8 +437,7 @@ and such determination will be made on case-by-case basis based on criteria list
 
 \item Decisions pertinent to technology choices shall be made based on discussions within the Software working group.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{DB Access Methods}
 
 \begin{itemize}
@@ -586,8 +570,6 @@ Effort needs to be expended to track compliance throughout the software.
 
 \item All components of production software shall be created according to appropriately chosen architectural patterns, aimed at maximizing maintainability and adaptability.
 
-% \fxnote{EB: can this be reword to be more simply stated?}
-% -mxp- will try
 \item Basic Architectural Compliance shall be ensured by establishing a code review process and subsequent testing (see Section~\ref{sec:lbnecodeman}), taking into account implementation of components, interfaces and behaviors.
 
 \end{itemize}
@@ -603,9 +585,6 @@ Effort needs to be expended to track compliance throughout the software.
 \item Source code archival: a copy of the source code used to build external software for official releases shall be archived in order to allow for reproducing results at a later time.
 
 \item Reliance on third party binaries: reliance on external software which is available only in binary form shall be kept to an absolute minimum and considered on a case-by-case basis.
-%  \fxnote{EB: are there requirements that the 3rd party software binaries need to meet to be considered?}
-% -mxp- that may be too much detail, after we said it will be minimal.
-
 
 \end{itemize}
 
@@ -709,22 +688,14 @@ Effort needs to be expended to track compliance throughout the software.
 \item Testing procedures shall be designed in a way which allows them to be run in fully automatic as well as more interactive, user-controlled mode.
 
 \item All of the Production Software used in DUNE must pass validation criteria on all supported platforms.
-%  \fxnote{EB: what does 'valid' mean?}
-% -mxp- added clarification
 
-\item For a given unit version or release, or an external package, to be declared valid, all of its components shall compile in the DUNE environment, without compiler warnings, set at a level to be defined at a later date.
-% \fxnote{EB: i think the requirement shall be to compile without warnings.}
-% -mxp- for one, this will depend on debug/warning level
+\item For a given unit version or release, or an external package, to be declared valid, all of its components shall compile in the DUNE environment,
+without compiler warnings, set at a level to be defined at a later date.
 
 % \item For an application or program to be declared valid after build procedures are complete, there shall be no errors introduced in the process.
 
-% \fxnote{EB: what does it mean to introduce no errors in the process?}
-% -mxp- I'm puzzled by this as well. Hmm. I'll comment this out.
-
 \item Methods shall be provided to reproduce results from prior runs of the same program.
 
-%  \fxnote{EB: prior runs going how far back?}
-% -mxp- very good question but maybe too detailed. We declared already that any version must be accessible if we want to reproduce a certain result, so in a sense anything must be available. Won't be so in practice maybe.
 
 \item Regression test failures shall be thoroughly investigated and result in one of the following:
 \begin{itemize}
@@ -784,7 +755,7 @@ Software distribution is the mechanism by which the software intended to run on 
 \begin{itemize}
 \item A distribution system shall be created where software is built in a centralized manner and then distributed to remote computing centers (this does not imply that it's the only available or endorsed method).
 
-\item The responsibility for implementation of the distribution system shall be held by the DUNE S\&C Organization.
+\item The responsibility for implementation of the distribution system shall be held by the DUNE Software working group.
 
 \item A common configuration mechanism shall exist to ensure proper functioning of the software on each site.
 
@@ -868,10 +839,8 @@ into its infrastructure base.
 Workload Management Systems serve as a force multiplier for the user of Grid and Cloud technology. They insulate individual users from specific configuration details and certain failure modes of Grid sites and networks, and provide substantial automation in managing the user's computational payload on the Grid. A good WMS also must provide adequate monitoring capabilities (down to the job level) which serve as a valuable debugging tool, and represent an essential toolkit for the operational support teams.
 
 A WMS is also a valuable tool for managing software deployment, keeping proper accounting information regarding releases and document configuration (e.g. release) of the software used for a specific production run, thus satisfying one of core requirements related to processed data in DUNE.
-\ 
-\\
-\ 
-\\
+
+\noindent
 \textit{Issues}
 \begin{itemize}
 	\item Due to a very large number of individual computational payload jobs, wide variations of their type, requirements, environment and other vital characteristics, having access to Grid facilities in itself does not guarantee acceptable degree of efficient utilization and availability of resources, and/or functioning Operational Support.
@@ -880,25 +849,29 @@ A WMS is also a valuable tool for managing software deployment, keeping proper a
 	\item A robust and user-friendly web information system, allowing individual researchers and working groups to track the execution of 
 	their payload submitted to the Grid, and to identify potential issues related to their workflows, will increase overall productivity and help ensure validity of results obtained.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Requirements}
 \begin{itemize}
 	\item DUNE  shall implement a Workload Management System (WMS) for resource management and brokerage functionality 
 	which will govern  distribution of most types of computational workload in DUNE (e.g. production jobs, group analysis etc) 
 	across variety of resources available to the Collaboration.
 	
-	\item The DUNE WMS shall be capable of keeping precise record of the software configuration used for each and every job deployed on the Grid, including, among other things, the DUNE Offline Software Release information.
+	\item The DUNE WMS shall be capable of keeping precise record of the software configuration used for each and every
+	job deployed on the Grid, including, among other things, the DUNE Offline Software Release information.
 	
 	\item The DUNE WMS shall be capable of quickly suspending participating sites due to outages, network congestion or potential security issues.
 	
 	\item The DUNE WMS shall be augmented with a Workflow Management layer, which will help create and manage large groups of Grid tasks supporting the scientific workflows.
 	
-	\item An DUNE WMS Monitoring System shall be implemented to allow efficient operation of the WMS, by helping ascertain correct execution of Grid jobs, accounting of resource utilization, identification and debugging of failure modes etc.
+	\item An DUNE WMS Monitoring System shall be implemented to allow efficient operation of the WMS, by helping ascertain
+	correct execution of Grid jobs, accounting of resource utilization, identification and debugging of failure modes etc.
 	
-	\item The DUNE WMS Monitoring System shall keep status records for individual jobs and their groups, information related to data I/O and transmission, and include the ``big picture'' performance monitoring data for entire Grid sites utilized by DUNE.
+	\item The DUNE WMS Monitoring System shall keep status records for individual jobs and their groups, information
+	related to data I/O and transmission, and include the ``big picture'' performance monitoring data for entire Grid sites utilized by DUNE.
 	
-	\item The DUNE WMS Monitoring System shall have interfaces conducive to integration with both Web UI for users and operators, and with automated systems needing the WMS data.
+	\item The DUNE WMS Monitoring System shall have interfaces conducive to integration with both Web UI for users and operators,
+	and with automated systems needing the WMS data.
+
 \end{itemize}
 
 \subsubsection{Technology trends in Distributed Computing}
@@ -906,10 +879,7 @@ A WMS is also a valuable tool for managing software deployment, keeping proper a
 
 \noindent
 Technology is progressing at a brisk pace and it's virtually impossible to cover its various implications for DUNE Distributed Computing within the scope of this document. We shall itemize, however, a few directions that we'll need to explore in the next few years, such as High-Performance Computing (HPC), multi-core and multi-threaded processing, GPUs etc.
-\ 
-\\
-\ 
-\\
+\noindent
 \textit{Issues}
 \begin{itemize}
 	\item High-Performance Computing (HPC) platforms have very different characteristics from the High-Throughput (HTC) systems commonly used in HEP.
@@ -919,41 +889,61 @@ Technology is progressing at a brisk pace and it's virtually impossible to cover
 	\item GPUs continue to offer exceptional performance in a few application domains, while requiring specialized software development approaches, tools and architectures.
 	
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Requirements}
 \begin{itemize}
-	\item DUNE shall be proactive in its assessment of multi-core and other multiprocessor technology in order to assure efficient resource utilization and leveraging available technologies for better performance of its physics tools software.
+	\item DUNE shall be proactive in its assessment of multi-core and other multiprocessor technology in order to assure efficient
+	resource utilization and leveraging available technologies for better performance of its physics tools software.
 	
 	\item The S\&C Organization in cooperation with the DUNE Physics Tools Group shall work to explore potential use of GPUs and HPC facilities for DUNE needs.
 	
-	\item The S\&C TAC shall be tasked with making recommendations for multi-core implementations of DUNE Offline Software and specific approaches and standards that must be followed in this area.
+	\item The S\&C TAC shall be tasked with making recommendations for multi-core implementations of DUNE Offline Software
+	and specific approaches and standards that must be followed in this area.
 	
 \end{itemize}
 
 \subsubsection{Use Cases}
 \begin{itemize}
-	\item  An  DUNE member institution prefers to be able to host and process significant parts of the data, and to run some new type of analyses locally for expediency and efficiency, while still retaining the possibility of using larger opportunistic resources available to DUNE as a whole, if necessary. This is made possible by using the DUNE Workload Management System and its distributed data handling mechanism.
+	\item  An  DUNE member institution prefers to be able to host and process significant parts of the data,
+	and to run some new type of analyses locally for expediency and efficiency, while still retaining the possibility
+	of using larger opportunistic resources available to DUNE as a whole, if necessary. This is made possible by
+	using the DUNE Workload Management System and its distributed data handling mechanism.
 	
-	\item  While running managed production at FNAL, it is discovered that the deadline for delivering results to an important conference cannot be met assuming only local resources are available. At the same time, certain member institutions possess extra computing power that can be used to mitigate the shortage. Additional Grid jobs are dispatched, thus filling the need for more resources.
+	\item  While running managed production at FNAL, it is discovered that the deadline for delivering results
+	to an important conference cannot be met assuming only local resources are available. At the same time,
+	certain member institutions possess extra computing power that can be used to mitigate the shortage.
+	Additional Grid jobs are dispatched, thus filling the need for more resources.
 	
-	\item A small team of researchers are running an important MC simulation on their very limited local resources, and need to accumulate a lot more statistics than can be reasonably expected with what is available to them. They take advantage of facilities at FNAL, which is made possible by transparency of access and data handling, and user-friendly Grid interfaces.
+	\item A small team of researchers are running an important MC simulation on their very limited local resources,
+	and need to accumulate a lot more statistics than can be reasonably expected with what is available to them.
+	They take advantage of facilities at FNAL, which is made possible by transparency of access and data handling,
+	and user-friendly Grid interfaces.
 	
-	\item A user observes that a large portion of her jobs started failing according to the monitoring data coming from the WMS. Using the job-level monitoring facilities provided by DUNE, she's able to pinpoint and fix the problem.
+	\item A user observes that a large portion of her jobs started failing according to the monitoring data coming from
+	the WMS. Using the job-level monitoring facilities provided by DUNE, she's able to pinpoint and fix the problem.
 	
-	\item There is a new and intermittent problem with network connectivity to one of the DUNE sites, resulting in excessive data transmission times and inefficient resource utilization. This condition is recognized by DUNE Operations Team and the site is suspended for WMS purposes while the problem is worked on.
+	\item There is a new and intermittent problem with network connectivity to one of the DUNE sites, resulting in
+	excessive data transmission times and inefficient resource utilization. This condition is recognized by DUNE
+	Operations Team and the site is suspended for WMS purposes while the problem is worked on.
 \end{itemize}
 
 \newpage
 \subsection{Geometry}
 \subsubsection{Description}
 
-Managing geometry description and model presents a challenge to most experiments, and DUNE is no exception. Ideally, there is ``one source'' geometry description which feeds both Monte Carlo simulations and reconstruction of data, and potentially takes advantage of interfaces to CAD systems etc. The obvious benefits include assurance of the integrity of the geometry data, and leveraging visualization systems across various sectors of the experiment. In practice, such complete integration is hard to achieve. Nevertheless, we identify  a few requirements in this area that should be met.
+Managing geometry description and model presents a challenge to most experiments, and DUNE is no exception.
+Ideally, there is ``one source'' geometry description which feeds both Monte Carlo simulations and reconstruction of data,
+and potentially takes advantage of interfaces to CAD systems etc. The obvious benefits include assurance of the integrity
+of the geometry data, and leveraging visualization systems across various sectors of the experiment. In practice, such complete
+integration is hard to achieve. Nevertheless, we identify  a few requirements in this area that should be met.
 
 \subsubsection{Definitions}
 \begin{itemize}
-	\item  \textbf{Geometry description:} a collection of information sufficient for creation of the geometry model of the detector, for the purposes of either simulation, reconstruction or both.
-	\item  \textbf{Geometry model:} a collection of data structures plus the code to manipulate these structures, which together provide the functionality required by the application (simulation etc, cf. the geometry model in Geant4).
+	\item  \textbf{Geometry description:} a collection of information sufficient for creation of the geometry model of the detector,
+	for the purposes of either simulation, reconstruction or both.
+
+	\item  \textbf{Geometry model:} a collection of data structures plus the code to manipulate these structures,
+	which together provide the functionality required by the application (simulation etc, cf. the geometry model in Geant4).
 \end{itemize}
 
 \subsubsection{Issues}
@@ -1042,8 +1032,7 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 	\item Raw data will be transmitted from the Far Detector (FD) to the principal storage facility tentatively located at FNAL, which also ties into the topic of buffering the data at the FD location to compensate for occasional problems with the network connectivity issues and performance.
 	
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Requirements}
 \begin{itemize}
 	\item A R\&D effort shall be undertaken to design and create the necessary infrastructure, including software and requisite systems integration, 
@@ -1062,8 +1051,7 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 	
 	\item In order to use available resources in an efficient manner, DUNE will need to be agile and adaptive in its utilization of networks.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Requirements}
 \begin{itemize}
 	
@@ -1075,8 +1063,7 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 	\item The network monitoring system and its associated databases  shall be equipped with appropriate interfaces to make the monitoring and performance data available to DUNE data distribution and Workload Management systems .
 	
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Justifications}
 
 \begin{itemize}
@@ -1088,8 +1075,7 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 	\item Having a network monitoring system is helpful in detecting and reporting outright failures.
 	
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Use Cases}
 \begin{itemize}
 	\item A data processing campaign is under way, and input data needs to be shipped to a few sites. 
@@ -1100,10 +1086,8 @@ The other and somewhat more unusual reason  is due to the fact that the Far Dete
 	\item A sudden connectivity glitch between two remote sites is detected by an automated system,
 	and a  notification is sent to DUNE Operations Support.
 \end{itemize}
-\ 
-\\
+\noindent
 \textit{Alternatives}
-
 \noindent
 In case a centralized network monitoring system is not created, monitoring the network
 functionality and performance can  be delegated to personnel located at individual sites.
