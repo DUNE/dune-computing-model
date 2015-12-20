@@ -14,12 +14,14 @@ NND-DAQ and BLM-DAQ.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{daq-nd-block-diagram.png}
-\caption{Near Detector System DAQ block diagram: The NDS-DAQ consists of the NDS Master
-DAQ (green blocks), the Beamline Measurement DAQ (yellow summary block) and the Near Neutrino
-Detectors DAQ (orange summary block). The NDS-DAQ connects to other portions of DUNE and
-LBNF, shown here in other colors (blue, light red, tan).}
+\caption{Near Detector System DAQ block diagram.}
 \label{fig:nds-daq-block}
 \end{figure}
+%: The NDS-DAQ consists of the NDS Master
+%DAQ (green blocks), the Beamline Measurement DAQ (yellow summary block) and the Near Neutrino
+%Detectors DAQ (orange summary block). The NDS-DAQ connects to other portions of DUNE and
+%LBNF, shown here in other colors (blue, light red, tan)
+
 
 \subsection{NDS Master DAQ} 
 \label{cdrsec:nd-master-daq}
@@ -45,7 +47,7 @@ designs from other experiments, e.g. T2K and ATLAS, and implement
 commercial components for the trigger modules, clock and timing
 synchronization, GPS and environmental monitoring.
 
-\subsection{Near Neutrino Detector DAQ (NND-DAQ)} 
+\subsection{Near Neutrino Detector DAQ} 
 \label{cdrsec:nd:nnd:daq}
 
 
@@ -57,7 +59,7 @@ shown in Figure~\ref{fig:nds-daq-block}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{daq-nnd-block-diagram.png}
-\caption{NND DAQ.}
+\caption{Near Neutrino Detector DAQ.}
 \label{fig:nds-daq-block}
 \end{figure}
 
@@ -89,10 +91,10 @@ the master-clock module in the NDS-MDAQ, distributes clock- and
 time-synchronization signals from the NDS-MDAQ to all NND
 subdetectors.
 
-\subsection{Beamline Measurements DAQ (BLM-DAQ)}
+\subsection{Beamline Measurements DAQ}
 
-The BLM-DAQ will mainly consist of a scalable back-end computer array,
-inter-connected to the individual beamline measurement detector DAQs
+The Beamline Measurements DAQ (BLM-DAQ) will mainly consist of a scalable back-end computer array,
+interconnected to the individual beamline measurement detector DAQs
 via Gigabit Ethernet and specialized electronics modules for trigger
 processing and clock synchronization. It interfaces to the NDS-MDAQ
 for run control and data collection. It will also have its own local

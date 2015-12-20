@@ -4,10 +4,10 @@
 \subsection{Introduction}
 The main purpose of the Computing Model is to guide the creation of DUNE computing fabric, spanning
 hardware, middleware and various software components. Such fabric would give to all members of the DUNE
-Collaboration unhindered access -- regardless of their location -- to reconstructed data for analysis, monitoring facilities,
-calibration and any other activities as required by the scientific objectives of the experiment. To meet these goals,
+Collaboration unhindered access -- regardless of their location -- to reconstructed data for analysis, to various monitoring facilities,
+to raw data for calibration and any other activities as required by the scientific objectives of the experiment. To meet these goals,
 and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
-the model presented here has in its core distributed data management and Grid and Cloud Computing concepts.
+the model presented here has at  its core distributed data management and Grid and Cloud Computing concepts.
 
 \subsection{Summary of raw data rate and volume estimates}
 Rate and volume of the data to be produced by DUNE detector systems are the major driver determining the parameters
@@ -24,13 +24,13 @@ across the volume of the detector from more interesting physics phenomena (see~\
 This and similar capabilities will be provided
 by deploying appropriate algorithms on the DAQ RCE and online farm utilizing about a hundred computers (estimated).
 Estimates of volume of data due to high-energy interaction (cosmic $\mu$ and beam neutrinos) are presented in
-Table~\ref{tab:fd-data-volume-summary} and are quite modest.
+Table~\ref{tab:fd-data-volume-summary} (page \pageref{tab:fd-data-volume-summary}) and are quite modest.
 
 Processing required to identify candidate SNB and nucleon decay events will also be handled by the DAQ system and its online farm.
 As discussed in subsection \ref{sec:snb-data}, once a SNB trigger condition has been established, the data must
 be recorded without zero suppression in order to capture the characteristically low energy and scattered ionization
-clusters in the detector volume as expected in a supernova burst event. As shown in Table~ \ref{tab:zs-volume}, the resulting
-volume of data is significant and is currently estimated as just over half a PB annually, given the premise of accepting roughly
+clusters in the detector volume as expected in a supernova burst event. As shown in Table~\ref{tab:zs-volume} (page~\pageref{tab:zs-volume}),
+the resulting volume of data is significant and is currently estimated as just over half a PB annually, given the premise of accepting roughly
 12 false positives per year. While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
 flagged by DAQ as candidate should not be discarded as it can be used to better understand and improve online algorithms.
 
@@ -49,19 +49,20 @@ committed to storage will be up to 1PB per year of data taking.
 \subsection{Far Detector Data Handling}
 \subsubsection{Conceptual Design of Data Flow}
 A high-level conceptual diagram of the data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}.
-The top section of the diagram (labeled ``A'') represents systems and data flow at the Far Site.
-The mid-section ``B'' depicts the DUNE data storage network. FNAL is the main data center
-hosting tape storage for the primary copy of all data, as well as distributed disk (such as dCache).
-It is expected that the Metadata system will also be deployed and operated at FNAL.
-Additional Grid sites at participating institutions will have replicas of the data.
-Replication of the data will be done as per requirements formulated in \ref{sec:req-raw-data-replication}.
-
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{DUNEdataflow.png}
 \caption{Conceptual Diagram of the Data Flow in DUNE.}
 \label{fig:DUNEdataflow}
 \end{figure}
+
+\noindent
+The top section of the diagram (labeled ``A'') represents systems and data flow at the Far Site.
+The mid-section ``B'' depicts the DUNE data storage network. FNAL is the main data center
+hosting tape storage for the primary copy of all data, as well as distributed disk (such as dCache).
+It is expected that the Metadata system will also be deployed and operated at FNAL.
+Additional Grid sites at participating institutions will have replicas of the data.
+Replication of the data will be done as per requirements formulated in \ref{sec:req-raw-data-replication}.
 
 \subsubsection{Data Buffering and Merging at the Far Site}
 Data Acquisition systems will be located in the specially built rooms in the detector vicinity, i.e. deep in the cavern (commonly referred to as 4850L).
@@ -81,8 +82,9 @@ size of each buffer (the online farm and the surface facility as drawn in sectio
 can therefore be estimated as $\sim$50\,TB.
 
  There are additional considerations due to the modular structure of the DUNE Far Detector
-which is conceived as four individual TPC modules. In order to minimize down time and the number of potential single points of failure,
-DAQ will be segmented into four individual  systems each collecting data from a respective module. To ensure
+which is conceived as four individual TPC modules. In order have to have more flexibility and to minimize down time
+and the number of potential single points of failure the DAQ will be segmented into four individual  systems each collecting
+data from their respective module~(see \ref{sec:daq-architecture}). To ensure
 consistency and simplicity of processing, it is desirable to merge the data streams coming from individual detectors' DAQ systems
 at some point so that data is written to files contains readout for the full 4-module DUNE detector. The surface facility is the optimal location
 for the merging to take place since it needs to be equipped with storage and networking equipment for buffering purposes in any scenario.

@@ -15,15 +15,14 @@ Detector} deep underground, 1,300 km downstream from the source of neutrinos loc
 \end{enumerate}
 
 The Near Detector will comprise a ``fine-gran tracker'' (FGT) and a calorimeter, with channel count of the order of O($10^{5}$).
-
 The Far Detector will be installed at the Sanford Underground Research Facility in Lead, South Dakota.
 Its sensitive volume will be formed by a total of 40kt of Liquid Argon instrumented with $\sim$1.5 million readout
-channels to detect ionization. It will also incorporate a photon detector which will detect scintillation
-signal produced by ionizing patciles traveling in Liquid Argon.
+channels to detect ionization signal resulting from interactions in the detector. It will also incorporate a photon detector which will detect scintillation
+signal due to ionizing particles traveling within the Liquid Argon volume.
 
-Providing extensive detail on the physics, design and operation of DUNE detectors  is beyond the scope of this document.
+Providing extensive detail on the physics, design and operation of DUNE detectors  is beyond the scope of the Computing Model.
 At the time of writing, the definitive source of such information is the DUNE Conceptual Design Report Vol.4 ~\cite{cdr_vol4_docdb}, and 
-it was used to set direction of this document.
+it was used to set direction of the present document.
 
 
 \subsection{About this Document}
@@ -59,11 +58,15 @@ This structure of the document allows a considerable amount of detail to be incl
 while making the Computing Model iteself a more concise and readable source of information, with
 references to details provided as necessary, pointing at the supporting materials.
 
-The Computing Model lays out general design of DUNE computing infrastructure as well as planning and
+The Computing Model lays out the general design of DUNE computing infrastructure as well as planning and
 organization of its software development effort. It aims to guide the evolution of the DUNE computing
 platform in the direction optimal for achieving the scientific goals of the experiment, and will also serve
 to inform funding agencies about the scope of work, resource requirements and rate of progress of 
 DUNE Software and Computing sector.
+
+There is a glossary of terms and abbreviations provided in Appendix~\ref{sec:appendix-glossary}. In addition,
+there are ``Definitions'' subsections in the Requirements section of the document~(Sec.\ref{sec:requirements}) where
+many relevant terms are defined.
 
 \subsection{Timeline and Evolution of the Computing Model}
 According to current plans, DUNE will be commissioned in mid-2020s. The decade before the commissioning will be quite busy
@@ -74,7 +77,7 @@ the target complex etc). Background characterization, event reconstruction techn
 
 At the time of writing a very high priority in DUNE is assigned to two LArTPC prototypes:
 \begin{itemize}
-\item 35t Liquid Argon TPC situated at FNAL which will start taking cosmic ray data in 2016
+\item The ``35t prototype'' --- a Liquid Argon TPC situated at FNAL which will start taking cosmic ray data in 2016
 \item The ``Full Scale'' prototype (``protoDUNE/NP04'') to be placed in a test beam at CERN, scheduled for commissioning in 2017 and actual data taking in early 2018
 \end{itemize}
 \noindent
@@ -83,7 +86,8 @@ already engaged in a substantial experimental program which poses non-trivial re
 landscape of DUNE computing will be defined by these and similar tasks for the next few years.
 
 After the crucial prototyping stage is completed some time before the year 2020, DUNE will start preparations for data taking with the
-actual full apparatus, including the Far Detector at the Sanford facility. It will involce scaling up the data management and processing systems,
+actual full apparatus, including the Far Detector at the Sanford facility and the Near Neutrino Detector and its associated systems
+located at FNAL. It will involce scaling up the data management and processing systems,
 integration testing,  stress testing and  realistic data challenges which must precedethe commencement of operations.
 It is obvious therefore that the DUNE Computing Model will undergo considerable evolution in the following decade. In the present document,
 this is addressed  by having separate sections for the computing for DUNE prototypes, and for the final DUNE experiment itself.

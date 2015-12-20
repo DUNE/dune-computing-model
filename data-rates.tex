@@ -348,7 +348,7 @@ SNB cand. (ZS) & 12 year$^{-1}$ & 16.7\,GB & 6366\,B/s & 201\,GB \\ \hline
 SNB cand. (FS) & 12 year$^{-1}$ & 46.1\,TB & 17.5\,MB/s & 553\,TB \\ \hline
 \end{tabular}
 \caption{Data rate estimations for ZS data from various sources.
-An additional FS data estimation is given for supernova burst (SNB).}
+An additional FS data estimation is given for the Supernova Burst (SNB).}
 \label{tab:zs-volume}
 \end{table}
 \noindent
@@ -387,7 +387,8 @@ wires in each view will register an appreciable signal.
 
 Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
 due to scale of the DUNE TPC the $^{39}$Ar background can generate a very large volume
-of data which is of little interest. Recording these data s not justified given their relative lack
+of data which is of little interest and far in excess of what can be potentially useful for data QA and
+calibration. Recording these data s not justified given their relative lack
 of physics importance, so some mitigation is required and will be developed. The simplest solution
 is to increase the ZS threshold to be above the decay endpoint.
 This may have a negative effect on detector performance due to removing small energy
@@ -474,7 +475,7 @@ Their distributed nature and isolated pattern of appearance make them subject to
 criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
 
 
-\subsubsection{High-energy Threshold}
+\subsubsection{High-Energy Threshold}
 
 For the purpose of these estimates the  high-energy (HE) threshold is chosen at the level above 
 the energy scale of the radiological backgrounds relevant for the LArTPC.
@@ -493,8 +494,8 @@ beam-$\nu$ & 8770 year$^{-1}$ & 2.5MB & 0.69 kB/s & 22GB \\
 \hline
 SNB cand. & - & - & - & -\\ \hline
 \end{tabular}
-\caption{Data rate estimations for data from activity above the high-energy (HE) threshold from
-various sources.}
+\caption{Data rate estimations for activity due to
+various sources above the High-Energy threshold.}
 \label{tab:he-volume}
 \end{table}
 
@@ -524,7 +525,7 @@ convenience and efficiency.
 	\includegraphics[width=0.6\textwidth]{btot.png}
 	\includegraphics[width=0.6\textwidth]{bzip.png}
 	\includegraphics[width=0.6\textwidth]{brat.png}
-	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before (left) and after (center)  compression and their ratios (right).}
+	\caption{Estimation of DUNE zero-suppressed event sizes for different particles and momenta before and after compression, and their ratios.}
 	\label{fig:data-compression}
 \end{figure}
 In order to estimate the effects of compression, specific particle types and energies were simulated using LArSoft.
@@ -566,7 +567,7 @@ on data presented in Fig.~\ref{fig:data-compression} and
 introducing a ``safety factor'' of 2 since the exact performance
 of the data structures used in the final detactor cannot be precisely predicted at this time.
 
-\subsubsection{High-threshold data volume summary}
+\subsubsection{High-Threshold data volume summary}
 \label{sec:fd-data-volume-summary}
 Taking into account arguments presented above, and uncertainties of up to factor of 3 in the Zero Suppression
 performance to be realized in the final system (see~\ref{sec:zs-data}), we summarize data volume estimate for
@@ -579,7 +580,7 @@ cosmic-$\mu$ & 0.259Hz & 0.6\,MB & 155.4\,kB/s & 4.8\,TB \\ \hline
 beam-$\nu$ & 8770 year$^{-1}$ & 0.6\,MB & 0.17 kB/s & 5.3\,GB \\
 \hline
 \end{tabular}
-\caption{Summary of revised data rate and volume estimations corresponding to (HE) threshold.}
+\caption{Revised data rate and volume estimations for the High-Energy threshold.}
 \label{tab:fd-data-volume-summary}
 \end{table}
 

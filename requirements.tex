@@ -26,7 +26,7 @@ parameters for a specific requirement, it is still listed as an item to be addre
 %that the requirement addresses the needs of all necessary organizations.  This includes interfacing with various DUNE Project groups in order
 %to assure the seamless cooperation between the online and offline areas.
 
-\subsubsection{Structure}
+\subsubsection{Structure of the Requirements}
 
 The \textit{Requirements} are organized as a set of categories reflecting major responsibilities of the DUNE Software working group.  Each category will generally
 contain information including:
@@ -57,7 +57,10 @@ In addition, in cases when it helps clarify the scope of a given  requirement, a
 \label{sec:dunedata}
 
 \subsubsection{Description}
-This section contains the requirements related to handling a variety of data by the DUNE Collaboration. This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed) datasets and other collections of data (and where necessary, the metadata associated with these items). Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
+This section contains the requirements related to handling a variety of data by the DUNE Collaboration.
+This includes data produced by DUNE primary detectors and monitoring systems, as well as derived (processed)
+datasets and other collections of data -- and where necessary, the metadata associated with these items.
+Databases and related technologies will be covered separately in Section~\ref{sec:dunedb}.
 
 The principal requirement for data distribution and access methods is that they need to support a coordinated and widely (indeed globally) distributed network of computing centers and research groups located at DUNE member institutions. Processing of the data is described in Section~\ref{sec:dunedc} (Distributed Computing).
 
@@ -101,7 +104,7 @@ The following is a short list of issues that DUNE will need to address in its da
 \item File and dataset metadata: management of the large and heterogeneous volume of data in DUNE  (e.g. Monte Carlo samples, raw data, processed data in any stage of analysis or transformation etc) requires creation, storage and appropriate use of coherent metadata, which must allow identification, location and retrieval of collections of data necessary for specific purposes. It is crucial that the design of the metadata and any system for its utilization is such that it allows for truly distributed, highly scalable and symmetric strategy of data placement.
 
 \item Loss of information contained in the file catalog and/or metadata system may have pernicious effects such as appearance of ``orphaned" or ``dark" data, i.e. data 
-residing in storage that cannot be efficiently located and utilized by the Collaboration.
+residing in storage that cannot be efficiently located and utilized by the Collaboration while still taking up valuable space.
 
 \item Data design and formats: having a consistent approach to data design and policies to maintain relevant standards and interfaces is crucial for efficient and reliable software development processes and operations of DUNE.
 
@@ -115,6 +118,7 @@ be formulated and documented in close cooperation between the Software working g
 
 \item Handling of the data being recorded by DAQ systems shall become responsibility of the Software working group once such 
 data is first deposited into a general purpose mass storage system, having passed necessary validation steps.
+% -mxp this needs to be re-written - we'll be harvesting data from DAQ in protoDUNE at an earlier stage.
 
 \end{itemize}
 
@@ -147,6 +151,8 @@ resource availability and scheduling policies of the Workload Management System 
 
 \item The number and placement of replicas of the processed data shall be determined dynamically based on requests of a particular processing campaign, with priorities set by collective decisions of the Physics Working Groups and the Software working group.
 \end{itemize}
+
+\noindent
 \textit{General replication}
 
 \begin{itemize}
@@ -171,7 +177,10 @@ resource availability and scheduling policies of the Workload Management System 
 \noindent
 \textit{Processed data retention}
 \begin{itemize}
-\item Specific policies shall be created by the Software working groups conveners and the Data Management Coordinators reporting to them, who will be tasked with collecting information regarding requests for specific data types and segments, monitoring capacity, access patterns and other relevant data for effective decision-making. 
+\item Specific policies shall be created by the Software working groups conveners and the
+Data Management Coordinators reporting to them, who will be tasked with collecting information
+regarding requests for specific data types and datasets/segments of data, monitoring capacity,
+access patterns and other relevant data for effective decision-making. 
 
 \item Processed data shall have no fixed retention time.
 \end{itemize}
@@ -202,8 +211,10 @@ resource availability and scheduling policies of the Workload Management System 
 
 %%% --------------------------------------------------------------------
 \subsubsection{Data Distribution and Access Methods}
+\label{sec:req-data-distribution-and-access}
 \textit{Raw Data}
 
+\noindent
 The raw data volume and characteristics make it very distinct from other data types, and it is helpful to consider it separately from the processed data in the context of this section. 
 \begin{itemize}
 \item Raw data shall be distributed to institutions in a managed manner, based on specific requests, in cases not already covered by the raw data replication strategy.
@@ -321,17 +332,26 @@ Software working group and general management of DUNE.
 %%% --------------------------------------------------------------------
 \subsubsection{Justifications}
 \begin{itemize}
-\item Having geographically distributed multiple replicas of "precious" data is a common and standard way to ensure it's not lost during the normal course of operations where occasional localized technical faults cannot be excluded, and also in case of natural disasters where a single data center may suffer damage and data loss.
+\item Having geographically distributed multiple replicas of "precious" data is a common and standard way
+to ensure it iss not lost during the normal course of operations where occasional localized technical
+faults cannot be excluded, and also in case of natural disasters where a single data center may suffer
+a sudden power outage, and/or damage and data loss.
 
-\item The File Catalog provides functionality that is very useful in a number of architectures of data management systems, which forms the basis for the corresponding requirement.
+\item The File Catalog provides functionality that is very useful (and often crucial) in a number of architectures
+of data management systems, which forms the basis for the corresponding requirement.
 
-\item Having the ability to always read raw data no matter when and how it was produced (including the format) is essential to meet requirements of Section~\ref{sec:dunepres} (data preservation).
+\item Having the ability to always read raw data no matter when and how it was produced (including the format)
+is essential to meet requirements of Section~\ref{sec:dunepres} (data preservation).
+
 \item The value of '24 hours' for raw data replication requirements needs additional justification. 
 \end{itemize}
+
 %%% --------------------------------------------------------------------
 \subsubsection{Accepted Risks}
 \begin{itemize}
-\item Having to implement a system such as File Catalog leads to creation of a potential bottleneck and/or single point of failure. This will need to be countered with rigorous scalability analysis, robust implementation, backup procedures and adequate operational support.
+\item Having to implement a system such as File Catalog leads to creation of a potential bottleneck
+and/or single point of failure. This will need to be countered with rigorous scalability analysis,
+robust implementation, backup procedures and adequate operational support.
 
 \item It is likely that at least part of the additional raw data replicas will be stored outside of the United States.
 
@@ -340,8 +360,13 @@ Software working group and general management of DUNE.
 %%% --------------------------------------------------------------------
 \subsubsection{Deviations}
 \begin{itemize}
-\item Due to a hardware malfunction, a software bug or other such factors, a portion of raw data may fail basic validation. A special decision may be made to retire such data on a short time scale in order to conserve storage space.
-\item Once a particular body of data has been completely migrated to a new format, and properly validated, a special decision may be made to lift the ``backward read capability'' requirement for the software accessing the data, since the old format is effectively no longer required and the new software has full access to data anyhow.
+\item Due to a hardware malfunction, a software bug or other such factors, a portion of raw data may fail basic validation.
+A special decision may be made to retire such data on a short time scale in order to conserve storage space.
+
+\item Once a particular body of data has been completely migrated to a new format, and properly validated,
+a special decision may be made to lift the ``backward read capability'' requirement for the software accessing
+the data, since the old format is effectively no longer required and the new software has full access to data anyhow.
+The data kept in the old format can then be deleted to free up storate space.
 \end{itemize}
 
 %%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -350,19 +375,41 @@ Software working group and general management of DUNE.
 \label{sec:dunedb}
 \subsubsection{Description}
 
-Databases are a crucial domain in DUNE, providing the foundation for handling experiment conditions and calibration data, metadata, file catalogs and a variety of information systems.  A large part (but not necessarily all) information held in the experiment databases is typically derived from the experiment data itself (see  Section~\ref{sec:dunedata}, ``Data'') and thus shares some of the same requirement concepts.  However, due to specifics of data handling in this domain, databases are considered distinct enough that their requirements are stated separately.  
+Databases are a crucial domain in DUNE, providing the foundation for handling experiment conditions and calibration data,
+metadata, file catalogs and a variety of information systems.  A large part (but not necessarily all) information held
+in the experiment databases is typically derived from the experiment data itself (see  Section~\ref{sec:dunedata}, ``Data'')
+and thus shares some of the same requirement concepts.  However, due to specifics of data handling in this domain, databases
+are considered distinct enough that their requirements are stated separately.  
 
 \subsubsection{Definitions}
 \begin{itemize}
+
 \item \textbf{Database (DB):} A database is a collection of data, organized in a way that supports processes and activities requiring that data.
+
 \item \textbf{RDBMS:} Relational Database Management System.
-\item \textbf{Database server:} A database server is a computer program that provides database services to other computer programs or computers, as defined by the client–server model. Most of the time the server runs on dedicated hardware, in which case the term ``server'' equally applies to that hardware as well.
-\item \textbf{Slave database:} A database in which information is synchronized to a master database, which is considered the authoritative source of data.
-\item \textbf{Master database:} A database which collects and stores information from various sources and serves as the source of data in the master/slave model. A replica residing in a slave may in turn become a master for a different system.
-\item \textbf{Database owner:} A collaborator or group of collaborators responsible for configuring, populating and maintaining a database and making it available to the Collaboration.
+
+\item \textbf{Database server:} A database server is a computer program that provides database services to other computer
+programs or computers, as defined by the client–server model. Most of the time the server runs on dedicated hardware,
+in which case the term ``server'' equally applies to that hardware as well.
+
+\item \textbf{Slave database:} A database in which information is synchronized to a master database,
+which is considered the authoritative source of data.
+
+\item \textbf{Master database:} A database which collects and stores information from various sources
+and serves as the source of data in the master/slave model. A replica residing in a slave may in turn
+become a master for a different system.
+
+\item \textbf{Database owner:} A collaborator or group of collaborators responsible for configuring,
+populating and maintaining a database and making it available to the Collaboration.
+
 \item \textbf{Collaboration database system:} The ensemble of all databases and their servers on which the collaboration relies.
-\item \textbf{Application-specific databases:} a database which is not required to be distributed because of its tight coupling to a specific application. Such databases are exempt from master/slave distribution mechanism as determined by consensus of the Software working group.
-\item \textbf{noSQL:} A collective term referring to a large and diverse group of new database technologies which are built on principles different from RDBMS and may offer advantages in certain application areas.
+
+\item \textbf{Application-specific databases:} a database which is not required to be distributed because of its tight
+coupling to a specific application. Such databases are exempt from master/slave distribution mechanism as determined
+by consensus of the Software working group.
+
+\item \textbf{noSQL:} A collective term referring to a large and diverse group of new database technologies which
+are built on principles different from RDBMS and may offer advantages in certain application areas.
 \end{itemize}
 
 \subsubsection{Issues}
