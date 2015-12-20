@@ -8,23 +8,25 @@ It is required to:
 \begin{itemize}
 \item collect data with a very high uptime (the goal is $>99\%$)
 
-\item collect beam neutrino, atmospheric neutrino and proton  decay candidates (generally all interactions
-with total energy deposition above about 100\,MeV) with a high resolution (smart or no zero-suppression) with no dead-time.
+\item collect beam neutrino, atmospheric neutrino and proton  decay candidate events (generally all interactions
+with total energy deposition above about 100\,MeV) with high resolution and virtually no dead-time.
+%(smart or no zero-suppression) with
 
 \item have the capability to collect interactions with total energy  below $100$\,MeV with some
  low amount of zero-suppression loss.
 
 \item have the ability to trigger at the time of the beam pulses,  irrespective of how little energy is deposited in the detector.
 
-\item collect data with the most favorable zero-suppression possible over a  period of >10\,s (supernova trigger)
+\item provide the Supernova Burst trigger, i.e. collect data with the most favorable zero-suppression possible over a  period of >10\,s
+and identify the characteristic signature of such event.
 
 \item assemble data from sub-detectors into a unified  event for offline analysis.
 \item provide access to the shift operator and others to control and   monitor the data collection and detector status, view online
   histograms and monitor (and provide for offline use) historical  status of measured detector parameters. 
 
 \end{itemize}
-\fxnote{Need to reconsile the no-ZS stance here with ZS elsewhere}
-
+% -mxp- edited out the no-ZS clause for the moment, on 12/20/2015  \fxnote{Need to reconsile the no-ZS stance here with ZS elsewhere}
+\noindent
 This section outlines a conceptual design intended to meet the required performance for the DAQ
 for the DUNE far detector. 
 
@@ -38,11 +40,9 @@ are only coupled by processes running asynchronously (in the same fashion as a b
 This allows one portion of the detector module to be restarted without interrupting
 data collection in the others.
 
-The layout of the DAQ is shown schematically in
-Fig.~\ref{fig:fddaqblock}.  To collect full detail of the
-most important events (deadtimeless detection of all those with energy
-deposition of 100\,MeV and above), while avoiding tricky communication
-to flag neighboring channels to those that have large hits, a model is used
+The layout of the DAQ is shown schematically in Fig.~\ref{fig:fddaqblock}.  To collect full detail of the
+important high-energy events (detection of all those with energy deposition of 100\,MeV and above with virtually no dead time),
+while avoiding tricky communication to flag neighboring channels to those that have large hits, a model is used
 in which the digitised data are collected twice from the initial data
 storage that is associatated with each peice of hardware. 
 
@@ -72,11 +72,12 @@ ring buffer on disk to allow later analysis of supernova candidates.
 
 \subsection{Hardware and Software Components of the DAQ}
 \subsubsection{LArTPC detector readout}
-
-The LArTPC signals are digitized in the cold in a continuous flash-ADC stream at 2\,MHz, (not zero-suppressed)
+An important feature of the Far Detector LArTPC front-end electronics is its placement inside
+the cryostat, i.e. in the environment  with characteristic temperature defined by the liquid argon.
+The LArTPC signals are digitized ``in the cold'' in a continuous flash-ADC stream at 2\,MHz, (not zero-suppressed)
 and serialized on 12,000 high-speed links per 10kt module that exit the cryostat.
 
-The data are received by LArTPC data processors called RCEs \cite{slac_rce_1} (Reconfigurable
+The data are received by LArTPC data processors located outside of the called RCEs \cite{slac_rce_1} (Reconfigurable
 Computing Elements) housed in industry-standard aTCA crates on COB (cluster-on-board)
 motherboards that are designed at SLAC for a wide range of applications.  The RCEs are part of a
 network of field programmable gate arrays (FPGAs) that buffer the full raw data,
@@ -112,8 +113,11 @@ synchronization, inter-process communication, etc.) in a modern
 design that facilitates the efficient use of multicore commodity
 computers running on the Linux computer farms.  The multi-core
 functionality is crucial in the high data-rate environment on DUNE.  
-The detector-specific code is supplied by DUNE groups (this is centered in the UK),
-along with detector-specific triggering (also UK).  The architecture
+The detector-specific code is supplied by DUNE groups
+%(this is centered in the UK),
+along with detector-specific triggering.
+% (also UK). 
+The architecture
 provided by \textit{artdaq} can be tailored for each experiment and is entirely
 suitable for the ``collect-twice'' architecture envisioned for DUNE.
 
@@ -129,11 +133,10 @@ measurements is exported to the host lab to give access for offline
 programs.
 
 \subsubsection{Timing system}
-To acomplish the software-based deadtimeless data
-acquisition in DUNE, it is necessary to synchronize the clock across
-all readout boards.  This is accomplished in two stages, the main
-cavern-wide distribution uses the design from the NO$\nu$A experiments
-which distributes a 64MHz clock, synchronization pulses and
+To acomplish the software-based data acquisition in DUNE without dead time, it is
+necessary to synchronize the clock across all readout boards.  This is accomplished
+in two stages, the main cavern-wide distribution uses the design from the NO$\nu$A
+experiment which distributes a 64MHz clock, synchronization pulses and
 cable-delay correction on RJ45 cables.  The overall clock is
 synchronized using a GPS receiver and transferred from the surface
 over optical fiber.  The synchronization is transferred from the COBs
@@ -160,14 +163,14 @@ cross-checks.
 
 
 
-\subsection{The Time Sequence}
+\subsection{The DAQ Time Sequence}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]{daq-steps.png}
 	\caption{Main DAQ steps displayed relative to the event time.}
 	\label{fig:fddaqtime}
 \end{figure}
-
+\noindent
 The time sequence, trigger deadlines and buffering of the readout are all
 shown in Fig.~\ref{fig:fddaqtime}.  This figure shows time in the
 horizontal direction on a logarithmic scale to indicate how long after
@@ -178,8 +181,8 @@ finish.  There is one level of triggering, with a trigger deadline
 line.  This is long enough that in 99\% of the cases, a message will
 arrive from the Fermilab site to update the predicted time of a
 neutrino spill with the actual time in order that the detector can be
-triggered independently of any signals in the detector.  This
-operation has been used succesfully on MINOS for many years.  
+triggered independently of any signals in the detector.  This approach
+has been used succesfully in MINOS experiment for many years.  
 
 As shown in Fig.~\ref{fig:fddaqtime}, prior to the trigger time and
 independently in each detector module, the detector readout assembles
@@ -190,8 +193,7 @@ of event-builder processes that run in parallel, each accepting all
 the data from the entire 10kt module for a specific time interval and
 performing trigger algorithms on them.  All time intervals are
 processed so that the trigger has no dead time.  The data from the LArTPC and SSP
-are also stored in ring buffers
-  to await collection after an
+are also stored in ring buffers to await collection after an
 affirmative trigger decision --- in the case of the LArTPC, this data
 is not zero suppressed.  The data are built into events in a ``10kt-module
 file'' that is written to disk.  About an hour later, an offline process merges
@@ -204,13 +206,13 @@ data stream during the extended period of a supernova are
 under study: the non-zero-suppressed ring buffers on the current
 design of RCEs are sufficient for 0.4\,s of buffering; the trigger farm can send
 instructions in the trigger messages to manage storage of data in
-these buffers during a supernova. Two possible extensions
-are
+these buffers during a supernova. Two possible extensions are
+
 \begin{itemize}
-\item extend the buffer memory , either on the RCEs or elsewhere in the aTCA crate, or
+\item extend the buffer memory , either on the RCEs or elsewhere in the aTCA crate
 
 \item use the powerful intercommunications between RCEs to cause neighboring
-channels to be kept around the time of a potential supernova event candidate. 
+channels to be kept around the time of a potential supernova event candidate
 
 \end{itemize}
 
@@ -231,7 +233,7 @@ channels to be kept around the time of a potential supernova event candidate.
 %rate of occurence of these events and the expected ``steady-state'' data rate
 %(after the derandomisation provided by the buffering in the front-end
 %computers).
-
+\noindent
 The requirements for handling radiological and other backgrounds (e.g. $^{39}$Ar decays as described
 in~\ref{sec:ar39decays}) are met in this conceptual design by the very high throughput provided by modern
 off-the-shelf components  and the parallelism provided by \textit{artdaq}, which makes the design extendable to avoid bottolenecks.  The triggering
