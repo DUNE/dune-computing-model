@@ -623,6 +623,66 @@ In general, they are also be processed in separate production streams and will r
 distinct calibration procedures.
 
 \subsection{Monte Carlo Data}
-Not unlike the collider experiments, DUNE makes extensive use of Monte Carlo Simulations and issues related to characteristics of the data
-involved must be addressed.
+\subsubsection{Overview}
+DUNE makes extensive use of Monte Carlo (MC) Simulations to optimize it multiple components and subsystems and is as an enabling factor in its physics
+analysis. This area is an essential part of the Computing Model and issues related to characteristics of the Monte Carlo data must be addressed.
+The following simulation areas are of particular interest:
+\begin{itemize}
+\item Beamline and Target simulations
+\item Far Detector characterization
+\item Near Detector Systems R\&D
+\end{itemize}
 
+\noindent
+In addition to the above, DUNE must provide the necessary MC support for its vigorous prototyping program such as for the 35t detector
+at FNAL and protoDUNE at CERN
+(see Sec.~\ref{sec:dune-prototypes} for more details), and this activity is largely aligned with the Far Detector simulations.
+
+In this section the focus is on quantifying the parameters of the data and the requisite CPU requirements will be considered separately.
+
+\subsubsection{Beamline and target MC}
+Optimization of the neutrino beam to be produced at LBNF for DUNE is absolutely essential for the scientific objectives of the experiment
+to be achieved~\cite{cdr_vol2}. Detailed description of this work area is outside of the scope of this document. This work includes
+optimization of the proton beam, target, focusing system, decay pipe and other components, and involve more than one software suite,
+i.e. GEANT4~\cite{geant4} as well as MARS~\cite{mars}.
+
+While the CPU requirements (analyzed separately) are quite substantial for this type of simulations, the amount of data to be managed
+and committed to storage is not. There are two or three distinct simulations campaigns annually (with different versions of software),
+each using O(100GB) of mass storage, so at the time of writing the scale is 1\,TB of data or less annually, based on bookkeeping records.
+
+\subsubsection{Far Detector MC}
+Far Detector simulations are done with multiple goals in mind. For example, the choice of wire plane geometry, e.g. the parameters of the wire
+pitch, need to be evaluated and their effect on the detector performance quantified. Event recontruction in DUNE is a challenge (see
+Appendix section~\ref{sec:reconstruction}) and detailed simulations are needed to estimate various efficiencies and other aspects
+of the detector performance with respect to a variety physics processes.
+
+MC event sizes vary depending on the conditions of the simulation, but on average are estimated to be $\sim$7\,MB per event. At the time
+of writing, the typical scale of data produced during a single Monte Carlo campaign is 2.5\,TB. In a course of a year, roughly six MC campaigns
+are expected to take place, with resulting data volume of $\sim$15\,TB per year.
+
+\subsubsection{Near Detector MC}
+Final technology choices for some core elements of the Near Detector are yet to be made. Estimates show that event sizes will be similar
+for two TPC options being considered: Liquid Argon TPC and gas-based TPC, and they both are in the range of $\sim$5\,MB per event.
+With anticipated three campaigns every four months and ballpark statistics similar to that of the Far Detector simulation campaigns,
+annual volume of data is $\sim$20\,TB.
+
+\subsubsection{Other types of Monte Carlo}
+In addition to the types of Monte Carlo simulations discussed above, there are occasionally studies in other subject areas,
+such as estimating cosmic-ray induced backgrounds to nucleon decay and others. Once again, while doing these calculations
+may require substantial CPU resources, the logic of the application is typically such that most of event selection takes place
+in the application itself, limiting the resulting data volume and requisite storage space. 
+
+\subsubsection{Summary of the MC data volume from different sources}
+Types and sources of data generated in the course of DUNE Monte Carlo studies are summarized in Table~\ref{tab:mc-data}.
+\begin{table}[ht!]
+\centering
+\begin{tabular}{| p{1.8in} | p{2.1in} |}		\hline		
+\textbf{Type/Source} & \textbf{Annual Data Volume, TB}\\ \hline
+Beamline and Target & 1 \\ \hline
+Far Detector & 15 \\ \hline
+Near Detector & 20 \\ \hline
+Others & <1 \\ \hline
+\end{tabular}
+\caption{Summary of Monte Carlo Data Volume Estimates in DUNE.}
+\label{tab:mc-data}
+\end{table}
