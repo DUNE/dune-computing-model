@@ -13,15 +13,16 @@ readiness at the time of writing. Same applies to various analysis software.
 For that reason, the data rate estimations involve some broad assumptions
 and leave open some choices. This is described in more detail in the following subsections.
 
-DUNE contains a number of major detector subsystems. The Liquid Argon TPC will present most challenges from
-the standoint of real-time data processing and triggering, and can potentially dominate the data volume.
+DUNE contains a number of major detector subsystems. The Far Detetor (FD) Liquid Argon TPC will present most
+challenges from the standoint of real-time data processing and triggering, and can potentially dominate the data volume.
 It incorporates the Photon Detector (PD) which while important produces less data so it won't be our focus
-for the purpose of the data rate and volume estimates. There is also the Near
-Detector Systems (see~\ref{sec:nds-params}).
+for the purpose of the data rate and volume estimates. There are also Near
+Detector (ND) Systems (see~\ref{sec:nds-params}) which are complex and for which most data metrics are yet to be developed
+at the time of writing.
 
 \subsection{DUNE Detectors and Subsystems}
 
-\subsubsection{Fundamental Parameters of the LArTPC}
+\subsubsection{Fundamental Parameters of the Far Detector LArTPC}
 \label{sec:fundamental-parameters}
 
 The fundamental TPC parameters most relevant as input to the data rate estimations are summarized in
@@ -132,9 +133,9 @@ It is not anticipated to produce large amounts of data when compared to other de
 
 \subsection{The Far Detector LArTPC Data}
 \label{sec:fd-data-overview}
-\subsubsection{Sources of Data in the TPC}
+\subsubsection{Sources of Data in the FD TPC}
 
-Data being read out from the TPC are the result of a few different classes of interactions and other phenomena,
+Data being read out from the FD TPC are the result of a few different classes of interactions and other phenomena,
 as outlined in table~\ref{tab:dune-data-sources}. Characteristics of these sources will
 be a major factor influencing the rate and volume of data produced in DUNE.
 \begin{table}[ht!]
@@ -439,7 +440,8 @@ and may have implications on DAQ hardware.
 \subsubsection{Nucleon Decay}
 \label{sec:pdk-data}
 In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\nu$ is considered the most promising
-from the discovery point of view. Kaons from free proton decay are expected to have a kinetic
+for DUNE 
+from the discovery point of view \cite{cdr_vol2}. Kaons from free proton decay are expected to have a kinetic
 energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic energy of a kaon
 emitted from an Ar nucleus  is expected to be in the range 0 to 200 MeV~\cite{muon_bkgd_pdk}.
 
@@ -605,9 +607,22 @@ Total & 50.2 \\ \hline
 \caption{Summary of combined DUNE Near Detector system event rate estimations.}
 \label{tab:nds-event-rates}
 \end{table}
-\noindent
+%\noindent
 The projected data rate from the NDS is based on these event rates and occupancy estimated in preliminary Monte Carlo Studies,
 and estimated number of samples to be read out per trigger ($\sim$4000). Preliminary size of each sample is 5B, resulting in an estimate
 of $O(1)$\,MB per second data rate from the NDS. More information will
 be added to these estimates as the R\&D in this area progresses.
 \fxnote{More development needed here and more information from the ND people}
+
+\subsection{Treatement of the Near Detector vs the Far Detector Data}
+There is a small but important detail concerning how the ND and FD data streams are to be treated, and that is they are treated
+separately i.e. not merged into common files.  This is due to the fact that these detectors are effectively looking at different sets
+of events and there is no reason to complicate processing of the data by introducing such dependencies.
+
+In general, they are also be processed in separate production streams and will require different and
+distinct calibration procedures.
+
+\subsection{Monte Carlo Data}
+Not unlike the collider experiments, DUNE makes extensive use of Monte Carlo Simulations and issues related to characteristics of the data
+involved must be addressed.
+

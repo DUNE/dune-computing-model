@@ -9,6 +9,11 @@ to raw data for calibration and any other activities as required by the scientif
 and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
 the model presented here has at  its core distributed data management and Grid and Cloud Computing concepts.
 
+As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of two supporting documents: the
+``Software and Computing Requirements'', which sets forth policies and practices for the DUNE computing sector
+(Sec.\ref{sec:requirements}), and ``DUNE Data Characteristics'' (Sec.\ref{sec:data-characteristics}) which contains information
+necessary for quantifying parameters of the Computing Model.
+
 \subsection{Summary of raw data rate and volume estimates}
 Rate and volume of the data to be produced by DUNE detector systems are the major driver determining the parameters
 of the DUNE computing model. These characteristics  have been presented and discussed in detail in Sec.~\ref{sec:fd-data-overview}.
@@ -65,10 +70,11 @@ Additional Grid sites at participating institutions will have replicas of the da
 Replication of the data will be done as per requirements formulated in \ref{sec:req-raw-data-replication}.
 
 \subsubsection{Data Buffering and Merging at the Far Site}
-Data Acquisition systems will be located in the specially built rooms in the detector vicinity, i.e. deep in the cavern (commonly referred to as 4850L).
-The undergound location is to be connected to surface by 96-strand fiber optic cable, but this does not imply that all strands will be
-utilized at any given time. The scale of bandwidth of an individual fiber is 10gbps. It can be therefore expected that there will be ample headroom
-for data transmission to the surface under a variety of scenarios.
+Data Acquisition systems will be located in the specially built rooms in the detector vicinity,
+i.e. in the cavern deep underground (commonly referred to as 4850L). The undergound location is to be
+connected to surface by 96-strand fiber optic cable, but this does not imply that all strands will be
+utilized at any given time. The scale of bandwidth of an individual fiber is 10gbps. It can be therefore
+expected that there will be ample headroom for data transmission to the surface under a variety of scenarios.
 
 There will be two layers of data buffering: a buffer in DAQ before the data is transmitted to the surface,
 and at the surface facility before the data is transmitted to FNAL which is the primary storage site and the
@@ -81,13 +87,14 @@ they are likely to be read out at full-stream rate (with lax or no zero-suppress
 size of each buffer (the online farm and the surface facility as drawn in section ``A'' of Fig.\ref{fig:DUNEdataflow})
 can therefore be estimated as $\sim$50\,TB.
 
- There are additional considerations due to the modular structure of the DUNE Far Detector
+There are additional considerations due to the modular structure of the DUNE Far Detector
 which is conceived as four individual TPC modules. In order have to have more flexibility and to minimize down time
 and the number of potential single points of failure the DAQ will be segmented into four individual  systems each collecting
 data from their respective module~(see \ref{sec:daq-architecture}). To ensure
-consistency and simplicity of processing, it is desirable to merge the data streams coming from individual detectors' DAQ systems
-at some point so that data is written to files contains readout for the full 4-module DUNE detector. The surface facility is the optimal location
-for the merging to take place since it needs to be equipped with storage and networking equipment for buffering purposes in any scenario.
+consistency and simplicity of processing, it is desirable to merge the data streams coming from individual
+detectors' DAQ systems at some point so that data is written to files contains readout for the full 4-module
+DUNE detector. The surface facility is the optimal location for the merging to take place since it needs to be
+equipped with storage and networking equipment for buffering purposes in any scenario.
 
 \subsection{Data Handling at the Near Site}
 \fxnote{Just a placeholder at this point}
@@ -98,12 +105,42 @@ The Near Site is located within the boundaries of Fermilab and therefore it is e
 Principal types of data in DUNE will include raw and processed data (see \ref{sec:req-data-definitions}),
 the latter term also applying to Monte Carlo data.
 
+\subsubsection{Evolution of Data Distribution at the LHC}
+
+In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,
+since DUNE shares much of the same challenges: potentially significant  volume of data to be collected and processed,
+projected long period of operation of the experiment, and geographically dispersed and diverse research communities joining the Collaboration.
+
+When data management systems for the LHC experiments were designed and deployed around the turn of the century, it had to be done
+against the backdrop of lack of universal access to high bandwidth networks across collaborations and/or substantial cost of such access~\cite{monarc},
+along with reliability issues.
+In order to maximize utilization of intellectual and technical resources spread around the globe, a model was adopted in which the computing resources
+were organized as a hierarchy of Regional Centers, which allowed for tight control and optimization of data transmission. In this hierarchy, the following
+levels were identified:
+\begin{itemize}
+\item Tier-0: CERN
+\item Tier-1: National Center (large scale and expensive facility)
+\item Tier-2: Regional Center (smaller, mostly for analysis, local center of expertise and maintenance)
+\item Tier-3: Workgroup Servers at participating institutions
+\item Tier-4: Individual computers (desktops)
+\end{itemize}
+\noindent
+In this approach, distribution of data and access to it within an experiment is likewise hierarchical, as shown in Fig.\ref{fig:monarc}.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.6\textwidth]{monarc-model.png}
+\includegraphics[width=0.5\textwidth]{monarc-model.png}
 \caption{MONARC model of data distribution.}
 \label{fig:monarc}
 \end{figure}
+Tier-1 centers have assured high bandwidth to CERN (Tier-0) and serve as the basis of further distribution of data
+as required. Tier-2 centers would not be typically involved in large scale production activities and thus have reduced
+network requirements. Smaller Tier-3 facilities would access data via Tier-2 etc.
+
+We observe that at present, these experiments are actually revising their approaches to Data Handling and Workload Management~\cite{lhc_model_update}.
+For the former, there is a marked transition from the strictly hierarchical “tiered” model of data distribution and access (e.g. MONARC) to more flat, agile, scalable and peer-to-peer-like architectures. For the latter, there is more emphasis on access to heterogeneous and sometimes opportunistic resources, facilitated by dynamic software provisioning. Other challenges being addressed in LHC computing include the design and handling of Metadata, and managing computational workflows.
+
+
+\subsubsection{Principles of Data Distribution}
 
 \subsection{DUNE Analysis}
 \subsubsection{Analysis Procedures and Data Flow}
