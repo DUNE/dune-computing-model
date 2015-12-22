@@ -4,7 +4,7 @@ The 35-ton prototype of the DUNE LArTPC has two operating periods, called Phase~
 in 2014, was designed to demonstrate that a sufficiently high electron lifetime is achievable in a non-evacuated
 membrane cryostat. A lifetime of $\sim$3~ms was achieved.  For Phase~II, TPC elements were installed, and
 a data acqusition system developed.  The detector is segmented into four two-sided APA's for eight drift volumes.
-Its total channel count is 2048 wires, 92 photon detector channels reading out six independent photon
+The total channel count consists of 2048 TPC wires, 92 photon detector channels reading out six independent photon
 detection devices, and 97 scintillator paddles arranged outside of the cryostat.
 \fxnote{fix the number of pads}
 
@@ -15,7 +15,7 @@ prototype are:
 \begin{itemize}
 \item  modular TPC elements (multiple APA's instead of just one wire frame in other LArTPC 
 detectors)
-\item wrapped induction wires
+\item wrapped induction-plane wires
 \item photon detectors inside the APA frames
 \item two-sided APA's reading drift volumes with opposing electric fields
 \item gaps between the APA's
@@ -26,24 +26,26 @@ The 35-ton prototype detector is not to be used with a test beam, and instead re
 a particle source used to characterize the detector.  A large amount
 of data is required in order to fully exercise the data acquisition and characterize the 
 performance of the detector under several operating conditions.  Measurement and analysis topics include
+the deterination of:
 \begin{itemize}
-\item  determination of the electron drift velocity
+\item the electron drift velocity
 \item the electron lifetime
 \item the signal and noise characteristics of the TPC channels
 \item the signal and noise characteristics of the photon detectors
 \item distortions due to buildup of space charge
 \end{itemize}
 
-The external trigger paddles will be used to identify samples of cosmic rays that are particularly useful in determining
+External trigger paddles made of plastic scintillator read out by photomultiplier tubes
+will be used to identify samples of cosmic rays that are particularly useful in determining
 detector characteristics.
 
-As of this writing (October 2015), the 35-ton prototype is scheduled to fill with liquid argon
-in December 2015, commission, and take data for two or three months, lasting until early 2016.
+As of this writing (December 2015), the 35-ton prototype is scheduled to fill with liquid argon
+in January 2016, commission, and take data for two or three months, lasting until early to mid 2016.
 The prototype detector will be expected to run in a variety of different operating conditions, as
 the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
 scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
 rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
-at specific distances from the wire planes.  We anticipate of order 100TB of raw data to be collected
+at specific distances from the wire planes.  We anticipate of order 200TB of raw data to be collected
 by the 35-ton prototype during its run, not including processed versions of the data.
 The sections below describe the computing model needed
 to collect and analyze the data from the 35-ton Phase~II prototype.
@@ -71,23 +73,25 @@ physics experiments.
 
 % {\it Artdaq} also provides features for examining data as it is collected for
 %purposes of monitoring the data quality and providing diagnostic tools for shift takers and detector experts.
-
-Two of the DAQ computers each contain 10~TB of buffer disk.  This disk is used to store the first copy of
-the data and monitoring histograms before being transferred to permanent storage.
 %The data are in {\it art}-formatted rootfiles, with compression enabled.
 %The first gateway node has 230~GB of disk space for buffering data, while
 %the second gateway node has a 7~TB buffer disk.
-
 %  These disks on the gateway nodes are also mounted
 %on lbnedaq6 and lbnedaq7, where a cron job can copy the data to the second gateway. 
-
-One of the gateway nodes extracts metadata from each new DAQ file, including metadata obtained from the online
-database, which stores the run configuration.  The metadata is then registered with Fermilab's  SAM system
-(``Sequential Access via Metadata''), and then the data is moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
 %copy the DAQ files to a File Transfer Service (FTS) dropbox.
 %Three dropboxes have currently been set up -- one on dCache, at the location
 %/pnfs/lbne/scratch/lbnepro/dropbox/data, and two on BlueArc disks:  /lbne/data/lbnepro/dropbox/data and
 %/lbne/data2/lbnepro/dropbox/data.
+
+Two of the computers near the detector each contain 10~TB of buffer disk.  This disk is used to store the first copy of
+the data and monitoring histograms before being transferred to permanent storage.
+The first copy is to one of the gateway computers located in the same rack as the DAQ computers.  The gateway computer
+extracts metadata from the DAQ files and also read the online database, which stores run configuration information.
+The metadata is then registered with Fermilab's  SAM system
+(``Sequential Access via Metadata''), and then the data are
+moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
+The gateway computer also runs near-line monitoring processes that filter interesting events for analyses like
+a live-updating electron-lifetime measurement and an event display.
 When the data have been stored in persistent storage and the files are no longer needed online,
 the copies on the DAQ and gateway node can be retired, which is done after validation by checksum and
 total byte count comparison.
@@ -101,9 +105,9 @@ images for display on web servers are produced at the end of a run, and are back
 
 \subsubsection{Offline Computing Model}
 
-Once the data are copied to one of the dropboxes, it is migrated via FTS to Enstore, Fermilab's tape-handling
-system.  A separate copy may also be found in dCache, a large disk pool used in order increase the
-efficiency of access to large datasets which reside on tape.  Files are requested using SAM, which
+Once the data are copied to one of the dropboxes, FTS copies them to tape-backed locations in dCache,
+a large disk pool used to increase the efficiency of access to large datasets on tape.  Enstore is Fermilab's
+tape-handling system.  Files are requested using SAM, which
 issues commands for reading data off of tape and into dCache, where they can be then transferred
 to batch worker nodes or read directly.  
 
@@ -144,7 +148,7 @@ are available via {\tt http://scisoft.fnal.gov}.
 
 \subsubsection{Resource Requirements}
 
-The initial estimate of the amount of data to be collected by the 35-ton Phase~II run is 100~TBytes,
+The initial estimate of the amount of data to be collected by the 35-ton Phase~II run is 200~TBytes,
 although there is significant uncertainty on this number.  The amount of raw data collected
 depends strongly on the running time, the run plan, the zero-suppression strategy, and the
 compressibility of the data.  Noise sources, unstable pedestals, and conservative choices for zero-suppression
