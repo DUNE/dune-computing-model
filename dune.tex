@@ -19,15 +19,16 @@ necessary for quantifying parameters of the Computing Model.
 \subsubsection{Overview}
 Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
 of the Computing Model. Data types and their relationships were considered in Section~\ref{sec:data-characteristics},
-and here a summary and aggregated estimates for the scale of the data will be presented.
+and the material below will presenthere a summary and aggregated estimates for the scale of the data of various types
+and origin.
 
 \subsubsection{Raw Data}
 Characteristics of the data to be produced by DUNE detector systems have been considered in
 Sec.~\ref{sec:data-characteristics}.
 
-At the time of writing estimations for the Far Detector data are better understood compared to other DUNE subsystems,
+At the time of writing estimations for the Far Detector data are better understood when compared to other DUNE subsystems,
 due to better developed geometry and parameters of the LArTPC, technology and configuration choices, and considerations
-presented in subsections~\ref{sec:daq-assumptions},~\ref{sec:zs-data} and \ref{sec:data-compression}.
+presented in subsections~\ref{sec:daq-assumptions} (notes on DAQ),~\ref{sec:zs-data} (Zero Suppression) and \ref{sec:data-compression} (Compression).
 
 A distinguishing characteristic of the data flow in DUNE Far Detector is a significant data reduction factor to be achieved
 in the Far Detector DAQ, as evidenced by the numbers presented in Tables~\ref{tab:full-stream-volume} and \ref{tab:zs-volume}.
@@ -55,7 +56,10 @@ events is not expected to be appreciable compared to other sources.
 The Near Detector is quite different from the Far Detector in all of its characteristics, and it includes a number of subdetectors
 such as Fine-Grained Tracker, Electromagnetic Calorimeter and others (see~\ref{sec:nds-event-rates}). There are a few technology
 options being conisdered and most parameters are still being finalized at the time of writing, so data estimates are very preliminary.
-It is conservatively assumed that the annual volume of these data will be 100\,TB.
+It is
+%conservatively
+assumed that the annual volume of these data will be 100\,TB.
+
 %Current numbers result in annual volume from a few dozen to a hundred TB.
 
 %In summary, it is anticipated that under assumptions presented above the total volume of data in DUNE to be
@@ -69,7 +73,8 @@ as they become more sophisicated. However, at the time of writing there is no re
 will scale over the years.
 
 
-\subsection{Summary Table of Annual Data Volume Estimates}
+\subsection{Summary of Annual Data Volume Estimates}
+\subsubsection{Summary Table}
 Table~\ref{tab:summary-data-table} contains a summary of estimations for various sources
 of data in DUNE, in terms of projected annual volume, which is based on information developed in
 this document up to this point. Where applicable, entries are marked with ZS (Zero-Suppression) or
@@ -95,6 +100,7 @@ FS (Full-Stream).
 	\caption{Summary of annual data volume estimates due to various sources.}
 	\label{tab:summary-data-table}
 \end{table}
+
 Comments to the table:
 \begin{itemize}
 \item ($^*$) Estimates for the raw data ($\nu$ and $\mu$ but not Supernova canidates) assume ``smart'' Zero Suppression, i.e. extended
@@ -105,10 +111,22 @@ MC data are not very efficient, so there is potential for further data reduction
 
 \item Entries for the Derived Data -- ESD/AOD --  include the ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
 \end{itemize}
+\subsubsection{Implications of the Estimates and Possible Variations}
 
 
-\subsection{Far Detector Data Handling}
-\subsubsection{Conceptual Design of Data Flow}
+
+
+\subsection{DUNE Data Management}
+\subsubsection{Far Detector Data Handling}
+%\subsubsection{Conceptual Design of Data Flow}
+\ 
+\\
+\noindent
+\textit{High-Level View of Data Flow} 
+\ 
+\\
+
+\noindent
 A high-level conceptual diagram of the data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}.
 \begin{figure}[h!]
 \centering
@@ -124,8 +142,16 @@ hosting tape storage for the primary copy of all data, as well as distributed di
 It is expected that the Metadata system will also be deployed and operated at FNAL.
 Additional Grid sites at participating institutions will have replicas of the data.
 Replication of the data will be done as per requirements formulated in \ref{sec:req-raw-data-replication}.
+\ 
+\\
 
-\subsubsection{Data Buffering and Merging at the Far Site}
+\noindent
+\textit{Data Buffering at the Far Site} 
+\ 
+\\
+
+
+\noindent
 Data Acquisition systems will be located in the specially built rooms in the detector vicinity,
 i.e. in the cavern deep underground (commonly referred to as 4850L). The undergound location is to be
 connected to surface by 96-strand fiber optic cable, but this does not imply that all strands will be
@@ -142,7 +168,16 @@ presented above, the decisive factor for determining the buffer size will be the
 they are likely to be read out at full-stream rate (with lax or no zero-suppression) (see Table~\ref{tab:zs-volume}). The
 size of each buffer (the online farm and the surface facility as drawn in section ``A'' of Fig.\ref{fig:DUNEdataflow})
 can therefore be estimated as $\sim$50\,TB.
+\ 
+\\
 
+\noindent
+\textit{Data Merging at the Far Site} 
+\ 
+\\
+
+
+\noindent
 There are additional considerations due to the modular structure of the DUNE Far Detector
 which is conceived as four individual TPC modules. In order have to have more flexibility and to minimize down time
 and the number of potential single points of failure the DAQ will be segmented into four individual  systems each collecting
@@ -152,12 +187,12 @@ detectors' DAQ systems at some point so that data is written to files contains r
 DUNE detector. The surface facility is the optimal location for the merging to take place since it needs to be
 equipped with storage and networking equipment for buffering purposes in any scenario.
 
-\subsection{Data Handling at the Near Site}
+\subsubsection{Data Handling at the Near Site}
 \fxnote{Just a placeholder at this point}
 The Near Site is located within the boundaries of Fermilab and therefore it is easier to provide networking and other services for data handling.
 
-\subsection{DUNE Data Management}
-\subsubsection{Evolution of Data Distribution at the LHC}
+
+\subsubsection{LHC Experience with Data Distribution}
 
 In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,
 since DUNE shares much of the same challenges: potentially significant  volume of data to be collected and processed,
