@@ -362,6 +362,13 @@ of a few software components at the time creation of the DUNE Conceptual Design 
 however the final numbers will be revised downward in \ref{sec:fd-data-volume-summary}
 before inclusion into the Computing Model.
 
+\subsubsection{Atmospheric $\nu$}
+\label{sec:atmo-nu}
+Measurements with atmospheric neutrinos are an important (although not primary) science objective in DUNE.
+Estimated of rates for such events are given in~\cite{sciopps,cdr_vol2} and are at the level of $\sim$
+4$\times$10$^3$\,year$^{-1}$ for a 40\,kt detector. Judging by the data in Table~\ref{tab:zs-volume},
+contribution from atmospheric $\nu$ will be less than the smallest entry in this table (beam-$\nu$), so for sake
+of brevity this item will be ignored for purposes of data volume estimations.
 
 \subsubsection{$^{39}$Ar Decays}
 \label{sec:ar39decays}
@@ -411,8 +418,8 @@ in the same APA bringing the added data rate to about 10\% that of the beam-$\nu
 \subsubsection{Supernova Burst}
 \label{sec:snb-data}
 The Supernova Burst (SNB) data is estimated assuming a
-\textit{false-positive} SNB rate of 12 year$^{-1}$ and a readout time of
-10s. It should be emphasized that both these parameters are subject to
+\textit{false-positive} SNB rate of 12~year$^{-1}$ and a readout time of
+10\,s. It should be emphasized that both these parameters are subject to
 modification and are used simply to provide benchmark examples.
 
 The SNB events are predicted to have a unique signature whereby
@@ -438,14 +445,18 @@ and may have implications on DAQ hardware.
 
 \subsubsection{Nucleon Decay}
 \label{sec:pdk-data}
-In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\nu$ is considered the most promising
-for DUNE 
-from the discovery point of view \cite{cdr_vol2}. Kaons from free proton decay are expected to have a kinetic
+In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\bar{\nu}$ is considered the most promising
+for DUNE  from the discovery point of view due to potentially excellent  identification and energy measurement for the $K^+$ \cite{cdr_vol2}.
+Kaons from free proton decay are expected to have a kinetic
 energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic energy of a kaon
 emitted from an Ar nucleus  is expected to be in the range 0 to 200 MeV~\cite{muon_bkgd_pdk}.
 
-Backgrounds for this decay mode do exist and are due for example to cascades
-initiated by cosmic $\mu$ outside of the fiducial volume. It is logical to assume that the rate
+Backgrounds for this decay mode do exist. One such background is due to atmospheric neutrinos,
+but as argued in \ref{sec:atmo-nu} the corresponding event rate would be quite small to have
+a material effect on the volume of data which the focus here.
+
+Another source of background are the cascades initiated by cosmic $\mu$ outside of the fiducial
+volume with a neutral particle causing an interaction in the TPC. It is logical to assume that the rate
 of such event will be a fraction of the cosmic $\mu$ event rate (see Table \ref{tab:zs-volume})
 since they share the same origin. An example of a background process would be a $K_L^0$ getting
 into the LArTPC and participating in a charge exchange reaction to produce a charged kaon.
@@ -458,11 +469,9 @@ these events by a factor of 3 to 5~\cite{kudr_bkgd_pdk}.
 In summary, the rates for such background events are rather low and will
 constitute a few percent of the cosmic $\mu$ events. Given that the event size in this case
 will also be smaller due to lower energy (shorter) tracks, the conclusion is that the data rate
-and volume due to the nucleon decay candidate events won't be appreciable compared to
-other sources of data.
-
-
-% Accorind to recent analysis ~\cite{muon_bkgd_pdk}, the rates for such background events are rather low
+and volume due to the nucleon decay candidate events won't be large compared to
+other sources of data. For purposes of accounting, a nominal \%10 fraction of data volume due
+to cosmic-$\mu$ is assigned to such candidate events.
 
 \subsubsection{Noise}
 
@@ -477,32 +486,32 @@ criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of 
 
 
 \subsubsection{High-Energy Threshold}
+\textit{For the purposes of these estimates the  high-energy (HE) threshold is chosen at the level above 
+the energy scale of the radiological backgrounds relevant for the LArTPC.}
 
-For the purpose of these estimates the  high-energy (HE) threshold is chosen at the level above 
-the energy scale of the radiological backgrounds relevant for the LArTPC.
-%, and set at  10.0MeV.
-%A more careful study is needed to determine a potentially more optimal value for this threshold.
+\ 
+\\
+\noindent
 The data rates with the HE threshold applied are summarized in table~\ref{tab:he-volume}.
+The Nucleon Decay item is based on rough estimates and discussion in \ref{sec:pdk-data}.
+Decays of $^{39}$Ar and SNB candidate are not included since they are both below the HE
+threshold applied to individual channels.
 
-	
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1.2in} | p{0.95in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline	
+\begin{tabular}{| p{1.6in} | p{0.92in} | p{0.74in} | p{1in} | p{0.9in} |}		\hline	
 Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
-$^{39}Ar$ & - & - & - & -\\	\hline
-cosmic-$\mu$ & 0.259Hz & 2.5MB & 647.4 kB/s & 20TB \\ \hline
-beam-$\nu$ & 8770 year$^{-1}$ & 2.5MB & 0.69 kB/s & 22GB \\
+cosmic-$\mu$ & 0.259\,Hz & 2.5\,MB & 647.4\,kB/s & 20\,TB \\ \hline
+beam-$\nu$ & 8770 year$^{-1}$ & 2.5\,MB & 0.69\,kB/s & 22\,GB \\
 \hline
-SNB cand. & - & - & - & -\\ \hline
+Nucleon Decay cand. & - & 2.5\,MB & - & 2\,TB\\ \hline
 \end{tabular}
 \caption{Data rate estimations for activity due to
 various sources above the High-Energy threshold.}
 \label{tab:he-volume}
 \end{table}
 
-
-%\input{annex-rate/generated/he-volume-table}
-
+\noindent
 With the HE threshold in place, activity from the $^{39}$Ar events and any SNB
 candidates will not be visible (i.e. will be rejected in DAQ). Although actual SNB
 events may result in neutrino with energies as high as 100MeV applying such a high
@@ -575,11 +584,11 @@ performance to be realized in the final system (see~\ref{sec:zs-data}), we summa
 the high energy domain in Table~\ref{tab:fd-data-volume-summary}.
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1.2in} | p{0.95in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline	
+\begin{tabular}{| p{1.5in} | p{0.95in} | p{0.75in} | p{0.8in} | p{0.9in} |}		\hline	
 Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
 cosmic-$\mu$ & 0.259Hz & 0.6\,MB & 155.4\,kB/s & 4.8\,TB \\ \hline
-beam-$\nu$ & 8770 year$^{-1}$ & 0.6\,MB & 0.17 kB/s & 5.3\,GB \\
-\hline
+beam-$\nu$ & 8770 year$^{-1}$ & 0.6\,MB & 0.17 kB/s & 5.3\,GB \\ \hline
+Nucleon Decay cand. & - & 0.6\,MB & - & 480\,GB \\ \hline
 \end{tabular}
 \caption{Revised data rate and volume estimations for the High-Energy threshold.}
 \label{tab:fd-data-volume-summary}

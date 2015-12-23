@@ -18,8 +18,9 @@ necessary for quantifying parameters of the Computing Model.
 
 \subsubsection{Overview}
 Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
-of the Computing Model. Data types and their relationships were considered in Section~\ref{sec:data-characteristics},
-and the material below will presenthere a summary and aggregated estimates for the scale of the data of various types
+of the Computing Model. Data rates for different types and their relationships were considered in
+Section~\ref{sec:data-characteristics},
+and the material below will present a summary and aggregated estimates for the scale of the data of various types
 and origin.
 
 \subsubsection{Raw Data}
@@ -73,20 +74,21 @@ as they become more sophisicated. However, at the time of writing there is no re
 will scale over the years.
 
 
-\subsection{Summary of Annual Data Volume Estimates}
-\subsubsection{Summary Table}
+\subsubsection{Summary of Annual Data Volume Estimates}
+%\subsubsection{Summary Table}
 Table~\ref{tab:summary-data-table} contains a summary of estimations for various sources
 of data in DUNE, in terms of projected annual volume, which is based on information developed in
 this document up to this point. Where applicable, entries are marked with ZS (Zero-Suppression) or
-FS (Full-Stream).
+FS (Full-Stream). Atmospheric $\nu$ were not included as discussed in \ref{sec:atmo-nu}.
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{| p{1.56in}| p{1.5in} | p{1.5in} | p{1.2in} |}
+	\begin{tabular}{| p{1.5in}| p{1.75in} | p{1.5in} | p{1.0in} |}
 		\hline
 		\textbf{Data Type} & \textbf{Source} & \textbf{ZS/FS} & \textbf{Volume} \\ \hline
 		Raw & cosmic-$\mu$  & ZS$^*$ \textit{(see comments)}& 4.8\,TB \\	\hline
 		Raw & beam-$\nu$  & ZS$^*$ \textit{(see comments)}& 5.3\,GB  \\	\hline
-		Raw & SNB cand. & FS & 553\,TB \\	\hline \hline \hline
+		Raw & Nucleon Decay Cand.  & ZS$^*$ \textit{(see comments)}& 480\,GB  \\	\hline
+		Raw & SNB candidate & FS & 553\,TB \\	\hline \hline \hline
 		Raw & \textbf{Total Raw} & - & \textbf{558\,TB} \\		\hline \hline \hline
 		MC & Beamline and Target  & - & 1\,TB \\	\hline
 		MC & Far Detector & ZS$^{**}$  \textit{(see comments)}  & 15\,TB \\		\hline
@@ -100,7 +102,6 @@ FS (Full-Stream).
 	\caption{Summary of annual data volume estimates due to various sources.}
 	\label{tab:summary-data-table}
 \end{table}
-
 Comments to the table:
 \begin{itemize}
 \item ($^*$) Estimates for the raw data ($\nu$ and $\mu$ but not Supernova canidates) assume ``smart'' Zero Suppression, i.e. extended
@@ -111,8 +112,10 @@ MC data are not very efficient, so there is potential for further data reduction
 
 \item Entries for the Derived Data -- ESD/AOD --  include the ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
 \end{itemize}
-\subsubsection{Implications of the Estimates and Possible Variations}
 
+\subsubsection{Implications of the Estimates and Possible Variations}
+The estimates summarized in Table~\ref{tab:summary-data-table} have been prepared under of assumptions
+as documented in subsections of Section~\ref{sec:data-characteristics}.
 
 
 
@@ -188,8 +191,12 @@ DUNE detector. The surface facility is the optimal location for the merging to t
 equipped with storage and networking equipment for buffering purposes in any scenario.
 
 \subsubsection{Data Handling at the Near Site}
-\fxnote{Just a placeholder at this point}
-The Near Site is located within the boundaries of Fermilab and therefore it is easier to provide networking and other services for data handling.
+%\fxnote{Just a placeholder at this point}
+The Near Site is located within the boundaries of Fermilab and therefore will have a LAN connection to mass storage
+and other central facilities. Raw data will be buffered in the NDS DAQ. Data transmission will be fully automatic and monitored.
+Metadata will be managed under the same umbrella as the Far Detector data.
+
+%it is easier to provide networking and other services for data handling.
 
 
 \subsubsection{LHC Experience with Data Distribution}
@@ -219,9 +226,12 @@ In this approach, distribution of data and access to it within an experiment is 
 \caption{MONARC model of data distribution.}
 \label{fig:monarc}
 \end{figure}
-Tier-1 centers have assured high bandwidth to CERN (Tier-0) and serve as the basis of further distribution of data
-as required. Tier-2 centers would not be typically involved in large scale production activities and thus have reduced
-network requirements. Smaller Tier-3 facilities would access data via Tier-2 etc.
+Tier-1 centers have assured high bandwidth to CERN (Tier-0) which is typically achieved by establishing a dedicated
+optical fiber connection with properly equipped endpoints. Tier-1 facilities form the the basis of further distribution of data
+as required, in particular serving data to Tier-2.
+
+Tier-2 centers would not be typically engaged in large scale production activities involving raw data and thus
+have reduced network requirements. Smaller Tier-3 facilities would access data via Tier-2 etc.
 
 We observe that at present, these experiments have actually revised the approaches to Data Handling and Workload
 Management adopted in preparation for LHC Run-1~\cite{lhc_model_update}.
@@ -244,7 +254,9 @@ system and distributed data management developments.}
 \end{quotation}
 
 \noindent
-For Workload Management, there is more emphasis on access to heterogeneous and sometimes opportunistic resources, facilitated by dynamic software provisioning. Other challenges being addressed in LHC computing include the design and handling of Metadata, and managing computational workflows.
+For Workload Management, the LHC computing models have evolved to put emphasis on access to heterogeneous and sometimes
+opportunistic resources, facilitated by dynamic software provisioning. Other challenges being addressed in LHC computing include
+the design and handling of Metadata, and managing computational workflows.
 
 
 \subsubsection{Principles of Data Distribution}
