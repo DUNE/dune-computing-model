@@ -310,7 +310,7 @@ writing that the above DAQ characteristics will indeed be implemented in DUNE.
 
 
 
-\subsubsection{Zero-suppressed Data}
+\subsubsection{Zero-Suppressed Data}
 \label{sec:zs-data}
 The Far Detector LArTPC is expected to operate is very low background conditions. In practice
 is means that in each instance the signals of interest (such as induced by reactions of beam neutrinos)
@@ -333,8 +333,6 @@ each extra window is comparable in duration to the peak of the signal above the 
 a rough estimate is that this factor could be on the scale of a factor of 2 or 3. However, given
 that the design of this and other compression algorithms is still ongoing, and for better consistency
 and ease of reference, this is not included in the ZS data estimates presented Table~\ref{tab:zs-volume}.
-The table also does not include the lossless data compression that may be applied
-in addition to the lossy ZS algorithm (see \ref{sec:data-compression}).
 	
 \begin{table}[ht!]
 \centering
@@ -352,16 +350,17 @@ SNB cand. (FS) & 12 year$^{-1}$ & 46.1\,TB & 17.5\,MB/s & 553\,TB \\ \hline
 An additional FS data estimation is given for the Supernova Burst (SNB).}
 \label{tab:zs-volume}
 \end{table}
-\noindent
+
 One other factor that must be considered in any discussion or implementation of ZS is the data design,
-i.e. the method by which the sparse zero-suppressed data is packaged and included into
+i.e. the method and format by which the sparse zero-suppressed data is packaged and included into
 data stream and put into storage. As some examples show (see~\ref{sec:data-compression})
 there can be gross inefficiencies in the data format due to implicit dependencies
 on software components and algorithms used in the applications handling these data.
-Nubmers shown in Table~\ref{tab:zs-volume} for cosmic-$\mu$ and beam-$\nu$
+Numners shown in Table~\ref{tab:zs-volume} for cosmic-$\mu$ and beam-$\nu$
 are therefore a known overestimation. They are presented as they reflect the status
-of a few software components at the time of writing, however the final numbers
-will be revised downward.
+of a few software components at the time creation of the DUNE Conceptual Design Report,
+however the final numbers will be revised downward in \ref{sec:fd-data-volume-summary}
+before inclusion into the Computing Model.
 
 
 \subsubsection{$^{39}$Ar Decays}
@@ -569,7 +568,7 @@ on data presented in Fig.~\ref{fig:data-compression} and
 introducing a ``safety factor'' of 2 since the exact performance
 of the data structures used in the final detactor cannot be precisely predicted at this time.
 
-\subsubsection{High-Threshold data volume summary}
+\subsubsection{High-Threshold data volume summary (revised)}
 \label{sec:fd-data-volume-summary}
 Taking into account arguments presented above, and uncertainties of up to factor of 3 in the Zero Suppression
 performance to be realized in the final system (see~\ref{sec:zs-data}), we summarize data volume estimate for
@@ -610,9 +609,9 @@ Total & 50.2 \\ \hline
 %\noindent
 The projected data rate from the NDS is based on these event rates and occupancy estimated in preliminary Monte Carlo Studies,
 and estimated number of samples to be read out per trigger ($\sim$4000). Preliminary size of each sample is 5B, resulting in an estimate
-of $O(1)$\,MB per second data rate from the NDS. More information will
-be added to these estimates as the R\&D in this area progresses.
-\fxnote{More development needed here and more information from the ND people}
+of $O(1)$\,MB per second data rate from the NDS. It is stated conservatively that the annual NDS data volume will be up to 100\,TB.
+More information will be added to these estimates as the R\&D in this area progresses.
+%\fxnote{More development needed here and more information from the ND people}
 
 \subsection{Treatement of the Near Detector vs the Far Detector Data}
 There is a small but important detail concerning how the ND and FD data streams are to be treated, and that is they are treated
@@ -715,11 +714,17 @@ and contains sufficient information for common analyses.
 \noindent
 There are sometimes additional formats of data defined for specific aspects of the Monte Carlo simulation studies, such as
 event generator output, ``hits'' and others, but at present stage such level of detail in dealing with MC in DUNE is not
-justified by practical considerations.
+justified by practical considerations, and current estimates are based on ``bulk'' file size and scale of Monte Carlo campaigns.
 
 Using this classification it is possible to extrapolate from the scaling of the event size observed at the LHC as the data
 is undergoing transformations in the reconstruction and analysis chain. It is estimated that the ESD event size will be
 $\sim$1.5\,times larger that the raw data, while AOD will be a fraction of $\sim$0.2 of the ESD and thus $\sim$0.3 fraction
 of the raw data.
+% NB. -mxp-
 %ATLAS: ESD -- factor of 3 over raw, AOD -- 10 percent of ESD
 %CMS:    ESD -- factor of 2 over raw, AOD -- 30 percent
+A factor of 1.8 can be therefore used as the initial and very coarse estimate of the ratio of derived data volume to
+the original raw data.
+
+However, an additional consideration must be given to the extremely likely scenario that same data (in any stage of
+its transformation) may be processed a few times, for example with different software releases.

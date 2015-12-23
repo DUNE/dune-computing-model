@@ -15,9 +15,15 @@ As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of t
 necessary for quantifying parameters of the Computing Model.
 
 \subsection{Data rate and volume estimates}
+
+\subsubsection{Overview}
+Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
+of the Computing Model. Data types and their relationships were considered in Section~\ref{sec:data-characteristics},
+and here a summary and aggregated estimates for the scale of the data will be presented.
+
 \subsubsection{Raw Data}
-Characteristics of the data to be produced by DUNE detector systems have been presented and discussed in
-detail in Sec.~\ref{sec:data-characteristics}.
+Characteristics of the data to be produced by DUNE detector systems have been considered in
+Sec.~\ref{sec:data-characteristics}.
 
 At the time of writing estimations for the Far Detector data are better understood compared to other DUNE subsystems,
 due to better developed geometry and parameters of the LArTPC, technology and configuration choices, and considerations
@@ -38,7 +44,9 @@ be recorded without zero suppression in order to capture the characteristically 
 clusters in the detector volume as expected in a supernova burst event. As shown in Table~\ref{tab:zs-volume} (page~\pageref{tab:zs-volume}),
 the resulting volume of data is significant and is currently estimated as just over half a PB annually, given the premise of accepting roughly
 12 false positives per year. While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
-flagged by DAQ as candidate should not be discarded as it can be used to better understand and improve online algorithms.
+flagged by DAQ as candidate should not be discarded immediately even if near-time analysis indicated it was a false positive,
+because such data can be used to better understand and improve online algorithms. For this reason it is assumed that
+such data will be collected, transmitted and committed to storage.
 
 Identifying candidate nucleon decay events will also require algorithms that would set the trigger condition consistent
 with signatures such as $p \rightarrow K^+\nu$. As shown in \ref{sec:pdk-data}, the volume of data due to such candidate
@@ -136,7 +144,7 @@ levels were identified:
 In this approach, distribution of data and access to it within an experiment is likewise hierarchical, as shown in Fig.\ref{fig:monarc}.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\textwidth]{monarc-model.png}
+\includegraphics[width=0.6\textwidth]{monarc-model.png}
 \caption{MONARC model of data distribution.}
 \label{fig:monarc}
 \end{figure}
@@ -144,8 +152,28 @@ Tier-1 centers have assured high bandwidth to CERN (Tier-0) and serve as the bas
 as required. Tier-2 centers would not be typically involved in large scale production activities and thus have reduced
 network requirements. Smaller Tier-3 facilities would access data via Tier-2 etc.
 
-We observe that at present, these experiments are actually revising their approaches to Data Handling and Workload Management~\cite{lhc_model_update}.
-For the former, there is a marked transition from the strictly hierarchical “tiered” model of data distribution and access (e.g. MONARC) to more flat, agile, scalable and peer-to-peer-like architectures. For the latter, there is more emphasis on access to heterogeneous and sometimes opportunistic resources, facilitated by dynamic software provisioning. Other challenges being addressed in LHC computing include the design and handling of Metadata, and managing computational workflows.
+We observe that at present, these experiments have actually revised the approaches to Data Handling and Workload
+Management adopted in preparation for LHC Run-1~\cite{lhc_model_update}.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{un-monarc-model.png}
+\caption{Evolved LHC model of data distribution.}
+\label{fig:un-monarc}
+\end{figure}
+For Data Handling, there is a marked transition from the strictly hierarchical
+“tiered” model of data distribution and access (e.g. MONARC) to more flat, agile, scalable and more peer-to-peer-like
+architectures (see Fig.~\ref{fig:un-monarc}).
+As stated in~\cite{lhc_model_update}
+\begin{quotation}
+\textit{With the technological progress of wide area networks and consequently improved network connectivity ATLAS has
+already in Run-1 gradually moved away from the hierarchical association of Tier-2s to one Tier-1 (MONARC model)
+and is now able to associate workflows between a well-connected Tier-2 and several Tier-1s, based on monitored
+connectivity metrics. This functionality will be further pursued in Run-2 and is being incorporated into the production
+system and distributed data management developments.}
+\end{quotation}
+
+\noindent
+For Workload Management, there is more emphasis on access to heterogeneous and sometimes opportunistic resources, facilitated by dynamic software provisioning. Other challenges being addressed in LHC computing include the design and handling of Metadata, and managing computational workflows.
 
 
 \subsubsection{Principles of Data Distribution}
