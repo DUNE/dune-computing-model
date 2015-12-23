@@ -688,8 +688,8 @@ Others & <1 \\ \hline
 \end{table}
 
 \subsection{Derived Data}
-%Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
-%of the Computing Model. Principal types of data in DUNE will include raw and processed data.
+\label{sec:derived-data}
+\subsubsection{Types of Data}
 According to definition given in \ref{sec:req-data-definitions}, processed data includes the Monte Carlo data and
 also data derived from either raw data or Monte Carlo, such as reconstructed event elements in any stage of
 processing.
@@ -724,7 +724,27 @@ of the raw data.
 %ATLAS: ESD -- factor of 3 over raw, AOD -- 10 percent of ESD
 %CMS:    ESD -- factor of 2 over raw, AOD -- 30 percent
 A factor of 1.8 can be therefore used as the initial and very coarse estimate of the ratio of derived data volume to
-the original raw data.
+the original raw data, which is appropriate to round up to 2.0.
 
-However, an additional consideration must be given to the extremely likely scenario that same data (in any stage of
-its transformation) may be processed a few times, for example with different software releases.
+Regarding the DPD segment of the derived data, no estimates can be provided at this point but it's fair to say that since
+its creation involves a variety of reduction techniques (``skimming'', ``thinning'' etc) the resulting volume will be smaller than
+the AOD. For this reason, contribution from DPD is ignored and not included in these estimates.
+
+\subsubsection{Headroom Factor}
+An additional consideration must be given to the extremely likely scenario that same data (in any stage of
+its transformation) may be processed more than one time, for example with two different software releases for comparison,
+validation or other such reasons. Alternatively, same release maybe used in what it commonly termed ``reprocessing'',
+which is based on new and/or better calibrations and possibly other configuration improvements. Note that this is entirely
+distinct from the notion of replication which will be discussed separately. For efficiency of operations (e.g. minimizing copy
+to and from tape due to insufficient disk space) it is necessary to assume a certain ``headroom'' factor which would allow
+for a few (not necessarily many) versions of the derived data to be disk-resident (including being available via
+network access). While at this stage in the development of DUNE it is impossible to assign any precise number to this
+factor, an assumption will be made that it is 4, such as to allow reprocessing of a sample of raw data by two separate
+software releases.
+
+\subsubsection{Summary}
+A few assumptions have been made regarding the total size of the derived data with respect to the raw data. By counting
+different types and scales of the derived data coarsely based on the LHC experience, a factor of 2 over the raw data can
+be deduced. A further factor of 4 may be necesary to allow for ample space during production with more than version
+of software release and calibration data, for optimal efficiency.
+

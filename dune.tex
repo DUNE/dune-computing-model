@@ -64,12 +64,48 @@ It is conservatively assumed that the annual volume of these data will be 100\,T
 \subsubsection{Monte Carlo Data}
 As discussed in \ref{sec:mc-data-estimates}, the Far and Near Detector simulation is the top contributor to the volume of overall
 Monte Carlo in DUNE, with combined annual output of about 35\,TB of data. Other MC data sources are not appreciable.
-It is reasonable to expect, that this number will grow as more effort becomes available for Monte Carlo studies and
+It is reasonable to expect that this number will grow as more effort becomes available for Monte Carlo studies and
 as they become more sophisicated. However, at the time of writing there is no reliable estimate of how this segment of data
 will scale over the years.
 
 
-\subsection{Summary Table}
+\subsection{Summary Table of Annual Data Volume Estimates}
+Table~\ref{tab:summary-data-table} contains a summary of estimations for various sources
+of data in DUNE, in terms of projected annual volume, which is based on information developed in
+this document up to this point. Where applicable, entries are marked with ZS (Zero-Suppression) or
+FS (Full-Stream).
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{| p{1.56in}| p{1.5in} | p{1.5in} | p{1.2in} |}
+		\hline
+		\textbf{Data Type} & \textbf{Source} & \textbf{ZS/FS} & \textbf{Volume} \\ \hline
+		Raw & cosmic-$\mu$  & ZS$^*$ \textit{(see comments)}& 4.8\,TB \\	\hline
+		Raw & beam-$\nu$  & ZS$^*$ \textit{(see comments)}& 5.3\,GB  \\	\hline
+		Raw & SNB cand. & FS & 553\,TB \\	\hline \hline \hline
+		Raw & \textbf{Total Raw} & - & \textbf{558\,TB} \\		\hline \hline \hline
+		MC & Beamline and Target  & - & 1\,TB \\	\hline
+		MC & Far Detector & ZS$^{**}$  \textit{(see comments)}  & 15\,TB \\		\hline
+		MC & Near Detector & - &20\,TB \\ \hline \hline \hline
+		MC & \textbf{Total MC} & - & \textbf{36\,TB} \\		\hline \hline \hline
+		Derived &  Raw  & - & 4.5\,PB \\	\hline
+		Derived &  MC  & - & 288\,TB \\	\hline  \hline \hline
+		Derived & \textbf{Total Derived} & - & \textbf{4.8\,PB} \\		\hline \hline \hline
+		All & \textbf{Grand Total} & - & \textbf{5.4\,PB} \\		\hline % \hline \hline
+	\end{tabular}
+	\caption{Summary of annual data volume estimates due to various sources.}
+	\label{tab:summary-data-table}
+\end{table}
+Comments to the table:
+\begin{itemize}
+\item ($^*$) Estimates for the raw data ($\nu$ and $\mu$ but not Supernova canidates) assume ``smart'' Zero Suppression, i.e. extended
+window around the peak of the pulse where data is preserved regardless of its instantaneous value (see \ref{sec:zs-data} on page~\pageref{sec:zs-data})
+
+\item ($^{**}$) As discussed in~\ref{sec:data-compression}, at present the zero-suppression algorithms employed in production of the
+MC data are not very efficient, so there is potential for further data reduction
+
+\item Entries for the Derived Data -- ESD/AOD --  include the ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
+\end{itemize}
+
 
 \subsection{Far Detector Data Handling}
 \subsubsection{Conceptual Design of Data Flow}
