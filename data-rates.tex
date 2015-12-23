@@ -623,6 +623,7 @@ In general, they are also be processed in separate production streams and will r
 distinct calibration procedures.
 
 \subsection{Monte Carlo Data}
+\label{sec:mc-data-estimates}
 \subsubsection{Overview}
 DUNE makes extensive use of Monte Carlo (MC) Simulations to optimize it multiple components and subsystems and is as an enabling factor in its physics
 analysis. This area is an essential part of the Computing Model and issues related to characteristics of the Monte Carlo data must be addressed.
@@ -686,3 +687,39 @@ Others & <1 \\ \hline
 \caption{Summary of Monte Carlo Data Volume Estimates in DUNE.}
 \label{tab:mc-data}
 \end{table}
+
+\subsection{Derived Data}
+%Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
+%of the Computing Model. Principal types of data in DUNE will include raw and processed data.
+According to definition given in \ref{sec:req-data-definitions}, processed data includes the Monte Carlo data and
+also data derived from either raw data or Monte Carlo, such as reconstructed event elements in any stage of
+processing.
+
+At the time of writing, the reconstruction chain in DUNE and data formats for its implementation are in initial
+stages of development, therefore in order to be able to produce estimates it is necessary to analyze and extrapolate
+data models and formats used in contemporary large-scale experiments (e.g. the LHC). In doing so, the following elements
+and formats of the derived data are observed to be in common in a few experiments:
+
+\begin{itemize}
+
+\item ESD (Event Summary Data): an object representation which contains the detailed output of the detector reconstruction and is
+produced from the raw data.
+
+\item AOD (Analysis Object Data): an object representation which contains a summary of the reconstructed event,
+and contains sufficient information for common analyses.
+
+\item DPD (Derived Physics Data): reductions of the AOD specific for particular types of analysis.
+
+\end{itemize}
+
+\noindent
+There are sometimes additional formats of data defined for specific aspects of the Monte Carlo simulation studies, such as
+event generator output, ``hits'' and others, but at present stage such level of detail in dealing with MC in DUNE is not
+justified by practical considerations.
+
+Using this classification it is possible to extrapolate from the scaling of the event size observed at the LHC as the data
+is undergoing transformations in the reconstruction and analysis chain. It is estimated that the ESD event size will be
+$\sim$1.5\,times larger that the raw data, while AOD will be a fraction of $\sim$0.2 of the ESD and thus $\sim$0.3 fraction
+of the raw data.
+%ATLAS: ESD -- factor of 3 over raw, AOD -- 10 percent of ESD
+%CMS:    ESD -- factor of 2 over raw, AOD -- 30 percent

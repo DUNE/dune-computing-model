@@ -14,9 +14,10 @@ As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of t
 (Sec.\ref{sec:requirements}), and ``DUNE Data Characteristics'' (Sec.\ref{sec:data-characteristics}) which contains information
 necessary for quantifying parameters of the Computing Model.
 
-\subsection{Summary of raw data rate and volume estimates}
-Rate and volume of the data to be produced by DUNE detector systems are the major driver determining the parameters
-of the DUNE computing model. These characteristics  have been presented and discussed in detail in Sec.~\ref{sec:fd-data-overview}.
+\subsection{Data rate and volume estimates}
+\subsubsection{Raw Data}
+Characteristics of the data to be produced by DUNE detector systems have been presented and discussed in
+detail in Sec.~\ref{sec:data-characteristics}.
 
 At the time of writing estimations for the Far Detector data are better understood compared to other DUNE subsystems,
 due to better developed geometry and parameters of the LArTPC, technology and configuration choices, and considerations
@@ -46,10 +47,21 @@ events is not expected to be appreciable compared to other sources.
 The Near Detector is quite different from the Far Detector in all of its characteristics, and it includes a number of subdetectors
 such as Fine-Grained Tracker, Electromagnetic Calorimeter and others (see~\ref{sec:nds-event-rates}). There are a few technology
 options being conisdered and most parameters are still being finalized at the time of writing, so data estimates are very preliminary.
-Current numbers result in annual volume from a few dozen to a hundred TB.
+It is conservatively assumed that the annual volume of these data will be 100\,TB.
+%Current numbers result in annual volume from a few dozen to a hundred TB.
 
-In summary, it is anticipated that under assumptions presented above the total volume of data in DUNE to be
-committed to storage will be up to 1PB per year of data taking.
+%In summary, it is anticipated that under assumptions presented above the total volume of data in DUNE to be
+%committed to storage will be up to 1PB per year of data taking.
+
+\subsubsection{Monte Carlo Data}
+As discussed in \ref{sec:mc-data-estimates}, the Far and Near Detector simulation is the top contributor to the volume of overall
+Monte Carlo in DUNE, with combined annual output of about 35\,TB of data. Other MC data sources are not appreciable.
+It is reasonable to expect, that this number will grow as more effort becomes available for Monte Carlo studies and
+as they become more sophisicated. However, at the time of writing there is no reliable estimate of how this segment of data
+will scale over the years.
+
+
+\subsection{Summary Table}
 
 \subsection{Far Detector Data Handling}
 \subsubsection{Conceptual Design of Data Flow}
@@ -101,10 +113,6 @@ equipped with storage and networking equipment for buffering purposes in any sce
 The Near Site is located within the boundaries of Fermilab and therefore it is easier to provide networking and other services for data handling.
 
 \subsection{DUNE Data Management}
-\subsubsection{Types of data}
-Principal types of data in DUNE will include raw and processed data (see \ref{sec:req-data-definitions}),
-the latter term also applying to Monte Carlo data.
-
 \subsubsection{Evolution of Data Distribution at the LHC}
 
 In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,
