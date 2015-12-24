@@ -127,21 +127,29 @@ and is mainly included to set the scale).
 \item The requirement that the SNB candidate events are recorded essentially without Zero-Suppression to ensure that low energy
 clusters of ionization spread in the detector volume are captured with proper efficiency.
 
+\item The requirement that the digitized data is being read out from the Far Detector LArTPC and recorded continuously over
+the nominal window of 10\,s (longer recording periods may in fact be desirable).
+
+\item Huge total number of channels in the Far Detector (over 1.5\,million).
+
 \end{itemize}
 
 \noindent
 It is also obvious from Table~\ref{tab:summary-data-table} that the very events that constitute the main science objective of DUNE
-out of a few -- the beam $\nu$ events -- produce a tiny nominal amount of data when compared to other sources.
-It may be helpful then to consider adjustments to the parameters and approaches used in the criteria for data collection, such as
+out of a few -- the beam $\nu$ events -- produce a tiny nominal amount of data when compared to other sources. From the standpoint
+of resource utilization, this may or may not be optimal and further guidance will be needed from the Collaboration.
+
+It may become helpful then to consider adjustments to the parameters and approaches used in the criteria for data collection, such as
 thresholds, ZS algorithms, SNB candidate retention policies etc. The most obvious change that may be done is to make zero suppression
-for the beam $\nu$ significantly more lax. While it will take a carefuly study to quantify the effects of various levels of zero suppression
+for the beam $\nu$ significantly more lax. While it will take a careful study to quantify the effects of various levels of zero suppression
 on the physics performance of the overall system and analysis chain, quanlitatively its clear that lowering the ZS thresholds and/or
 extending the recording window around the peak of the signal has the potential to provide more flexibility in event processing (since
 more can be done offline without loss of information) and improve the resolution of the charge measurement.
 
+Such study appears to be useful in working on the next iteration of the computing model.
 
-\subsection{DUNE Data Management}
-\subsubsection{Far Detector Data Handling}
+\subsection{Data Flow}
+\subsubsection{Far Detector Data}
 %\subsubsection{Conceptual Design of Data Flow}
 \ 
 \\
@@ -151,15 +159,14 @@ more can be done offline without loss of information) and improve the resolution
 \\
 
 \noindent
-A high-level conceptual diagram of the data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}.
+A high-level conceptual diagram of the Far Detector data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}
+(page\,\pageref{fig:DUNEdataflow}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{DUNEdataflow.png}
 \caption{Conceptual Diagram of the Data Flow in DUNE.}
 \label{fig:DUNEdataflow}
 \end{figure}
-
-\noindent
 The top section of the diagram (labeled ``A'') represents systems and data flow at the Far Site.
 The mid-section ``B'' depicts the DUNE data storage network. FNAL is the main data center
 hosting tape storage for the primary copy of all data, as well as distributed disk (such as dCache).
@@ -210,6 +217,20 @@ consistency and simplicity of processing, it is desirable to merge the data stre
 detectors' DAQ systems at some point so that data is written to files contains readout for the full 4-module
 DUNE detector. The surface facility is the optimal location for the merging to take place since it needs to be
 equipped with storage and networking equipment for buffering purposes in any scenario.
+\ 
+\\
+
+\noindent
+\textit{Data Transmission from the Far Site} 
+\ 
+\\
+
+\noindent
+Two horizontal arrows in section ``A'' of the diagram in Fig.\ref{fig:DUNEdataflow} represent the WAN connection of
+the Far Site to FNAL. Looking at the raw data section of Table~\ref{tab:summary-data-table}, one can estimate
+the sustained bandwidth required to transmit all data produced under current set of assumptions as 20\,MB/s (once
+again, transmission of buffered SNB candidate data would take most of this bandwidth while items like beam $\nu$
+will not occupy an appreciable portion of the bandwidth).
 
 \subsubsection{Data Handling at the Near Site}
 %\fxnote{Just a placeholder at this point}
@@ -219,7 +240,7 @@ Metadata will be managed under the same umbrella as the Far Detector data.
 
 %it is easier to provide networking and other services for data handling.
 
-
+\subsection{Data Handling}
 \subsubsection{LHC Experience with Data Distribution}
 
 In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,
@@ -234,8 +255,8 @@ were organized as a hierarchy of Regional Centers, which allowed for tight contr
 levels were identified:
 \begin{itemize}
 \item Tier-0: CERN
-\item Tier-1: National Center (large scale and expensive facility)
-\item Tier-2: Regional Center (smaller, mostly for analysis, local center of expertise and maintenance)
+\item Tier-1: National Center (``large scale and expensive facility'')
+\item Tier-2: Regional Center (``smaller, mostly for analysis, local center of expertise and maintenance'')
 \item Tier-3: Workgroup Servers at participating institutions
 \item Tier-4: Individual computers (desktops)
 \end{itemize}
@@ -280,7 +301,7 @@ opportunistic resources, facilitated by dynamic software provisioning. Other cha
 the design and handling of Metadata, and managing computational workflows.
 
 
-\subsubsection{Principles of Data Distribution}
+\subsubsection{Distributed Data Management}
 
 \subsection{DUNE Analysis}
 \subsubsection{Analysis Procedures and Data Flow}
