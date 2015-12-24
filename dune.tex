@@ -4,24 +4,31 @@
 \subsection{Introduction}
 The main purpose of the Computing Model is to guide the creation of DUNE computing fabric, spanning
 hardware, middleware and various software components. Such fabric would give to all members of the DUNE
-Collaboration unhindered access -- regardless of their location -- to reconstructed data for analysis, to various monitoring facilities,
-to raw data for calibration and any other activities as required by the scientific objectives of the experiment. To meet these goals,
-and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
-the model presented here has at  its core distributed data management and Grid and Cloud Computing concepts.
+and to raw data for calibration and any other activities as required by the scientific objectives of the experiment.
+To meet these goals, and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
+the model presented here is based on distributed data management and Grid and Cloud Computing concepts.
 
 As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of two supporting documents: the
 ``Software and Computing Requirements'', which sets forth policies and practices for the DUNE computing sector
-(Sec.\ref{sec:requirements}), and ``DUNE Data Characteristics'' (Sec.\ref{sec:data-characteristics}) which contains information
-necessary for quantifying parameters of the Computing Model.
+(Section\,\ref{sec:requirements}), and ``DUNE Data Characteristics'' (Section\,\ref{sec:data-characteristics}) which contains information
+necessary for quantifying parameters of the Computing Model. Both documents will be referenced extensively in this section.
+
+Unless stated, no final technology choices are made in this section -- due to a long period of time before the DUNE commissioning,
+this will need to be done at a later date and in compliance with the ``Requirements''. Where appropriate, existing systems are described and
+considered for use in DUNE.
 
 \subsection{Data rate and volume estimates}
 
 \subsubsection{Overview}
-Rate and volume of the various data to be produced in DUNE are the major driver determining the parameters
-of the Computing Model. Data rates for different types and their relationships were considered in
-Section~\ref{sec:data-characteristics},
+Rate and volume of the various data to be produced in DUNE are perhaps the main driver determining the parameters
+of the Computing Model. Data rates for different types and their relationships were considered in Section~\ref{sec:data-characteristics},
 and the material below will present a summary and aggregated estimates for the scale of the data of various types
 and origin.
+
+It is important to keep in mind that estimates presented in Section~\ref{sec:data-characteristics} were developed under ``baseline''
+assumptions necessary for groundwork done in the process of the Conceptual Design Report creation. As DUNE is engaged in R\&D aimed at
+optimal design of the detector and the physics tools, it is likely that these assumptions will be revisited at some point and
+the data rate and volume estimates will need to be revised correspondingly.
 
 \subsubsection{Raw Data}
 Characteristics of the data to be produced by DUNE detector systems have been considered in
@@ -45,10 +52,7 @@ As discussed in subsection \ref{sec:snb-data}, once a SNB trigger condition has 
 be recorded without zero suppression in order to capture the characteristically low energy and scattered ionization
 clusters in the detector volume as expected in a supernova burst event. As shown in Table~\ref{tab:zs-volume} (page~\pageref{tab:zs-volume}),
 the resulting volume of data is significant and is currently estimated as just over half a PB annually, given the premise of accepting roughly
-12 false positives per year. While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
-flagged by DAQ as candidate should not be discarded immediately even if near-time analysis indicated it was a false positive,
-because such data can be used to better understand and improve online algorithms. For this reason it is assumed that
-such data will be collected, transmitted and committed to storage.
+12 false positives per year (at this point a benchmark number used solely to set the scale of the data, as commented in~\ref{sec:snb-data}).
 
 Identifying candidate nucleon decay events will also require algorithms that would set the trigger condition consistent
 with signatures such as $p \rightarrow K^+\nu$. As shown in \ref{sec:pdk-data}, the volume of data due to such candidate
@@ -82,7 +86,7 @@ this document up to this point. Where applicable, entries are marked with ZS (Ze
 FS (Full-Stream). Atmospheric $\nu$ were not included as discussed in \ref{sec:atmo-nu}.
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{| p{1.5in}| p{1.75in} | p{1.5in} | p{1.0in} |}
+	\begin{tabular}{| p{1.2in}| p{1.7in} | p{1.5in} | p{0.65in} |}
 		\hline
 		\textbf{Data Type} & \textbf{Source} & \textbf{ZS/FS} & \textbf{Volume} \\ \hline
 		Raw & cosmic-$\mu$  & ZS$^*$ \textit{(see comments)}& 4.8\,TB \\	\hline
@@ -120,6 +124,9 @@ assumptions as documented in corresponding subsections of Section~\ref{sec:data-
 Even without revisiting much detail, salient features the data volume distribution across various sources are
 obvious. The SNB data are the largest source of data by a large margin. This is due to a combination of factors such as:
 \begin{itemize}
+
+\item The requirement that SNB candidate data in general should not be discarded (see arguments in \ref{sec:snb-data}).
+
 \item The requirement of high sensitivity of DUNE to the Supernova Burst candidate events, which provides motivation
 for the trigger logic to be set at high sensitivity (hence the declared number of expected false positives, which is nominal
 and is mainly included to set the scale).
@@ -141,16 +148,20 @@ of resource utilization, this may or may not be optimal and further guidance wil
 
 It may become helpful then to consider adjustments to the parameters and approaches used in the criteria for data collection, such as
 thresholds, ZS algorithms, SNB candidate retention policies etc. The most obvious change that may be done is to make zero suppression
-for the beam $\nu$ significantly more lax. While it will take a careful study to quantify the effects of various levels of zero suppression
+for the beam $\nu$ substantially more lax. While it will take a careful study to quantify the effects of various levels of zero suppression
 on the physics performance of the overall system and analysis chain, quanlitatively its clear that lowering the ZS thresholds and/or
 extending the recording window around the peak of the signal has the potential to provide more flexibility in event processing (since
-more can be done offline without loss of information) and improve the resolution of the charge measurement.
+more can be done offline without loss of information) and improve the resolution of the charge measurement. Such study appears to
+be useful in working on the next iteration of the computing model.
 
-Such study appears to be useful in working on the next iteration of the computing model.
+% Another issue to address is the SNB candidate retention policies. Proper statistical analysis is required to better quanti
 
 \subsection{Data Flow}
 \subsubsection{Far Detector Data}
-%\subsubsection{Conceptual Design of Data Flow}
+The following description applies to the data attributed to beam neutrinos and to the cosmic ray muons. Due to the vastly
+different scale and rate of occurance of the Supernova Burst candidate events, it is not optimal to include this type data in the same
+data stream with $\nu$ and $\mu$.
+
 \ 
 \\
 \noindent
@@ -233,14 +244,36 @@ again, transmission of buffered SNB candidate data would take most of this bandw
 will not occupy an appreciable portion of the bandwidth).
 
 \subsubsection{Data Handling at the Near Site}
-%\fxnote{Just a placeholder at this point}
+
 The Near Site is located within the boundaries of Fermilab and therefore will have a LAN connection to mass storage
 and other central facilities. Raw data will be buffered in the NDS DAQ. Data transmission will be fully automatic and monitored.
 Metadata will be managed under the same umbrella as the Far Detector data.
 
-%it is easier to provide networking and other services for data handling.
+\subsubsection{Interfaces to FNAL Storage Infrastructure}
+Both the Far Detector and Near Detector Systems will need to interface storage infrastructure at FNAL.
+While technology options and choices may be very different at the time of DUNE commissioning from what they
+are at the time of writing, it is instructuve to review what exists at Fermilab at present, as guidance.
+Elements of this infrastructure relevant to this dicscussion are:
+\begin{itemize}
+\item Enstore: tape drive and tape management system.
 
-\subsection{Data Handling}
+\item SAM: ``Sequential data Access via Meta-data'', a file based data management and access layer between the Storage Management System
+and the data processing layers, developed and maintained at FNAL~\cite{sam_chep12}.
+
+\item dCache: a FNAL instance of a massive distributed storage management system, featuring a virtual filesystem tree with a variety of standard access methods.
+
+\item BlueArc: Mass Storage, disk-based.
+
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{fnal-data-infrastructure-sketch-1.png}
+\caption{Conceptual Diagram of FD and NF interface to storage infrastructure at FNAL.}
+\label{fig:fnal-data-infrastructure}
+\end{figure}
+
+\subsection{Data Management}
 \subsubsection{LHC Experience with Data Distribution}
 
 In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,

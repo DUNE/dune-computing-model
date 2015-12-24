@@ -304,7 +304,8 @@ to avoid collecting and writing the data from ``empty'' parts of each TPC module
 
 \end{itemize}
 
-Based on the current understanding of progress in DAQ R\&D, it is reasonable to assume at the time of
+\noindent
+Based on the current understanding of progress in DAQ R\&D, it is reasonable to expect at the time of
 writing that the above DAQ characteristics will indeed be implemented in DUNE.
 
 
@@ -319,10 +320,10 @@ procedure, and the final choice has not been made. The simplest procedure may be
 as follows: in each channel, all digitized time bins in which the ADC values are below the given threshold
 are removed. More discussion on possible alternative ZS methods and their impact on the data rate are given below.
 
-The nominal ZS threshold is assumed to be the ADC counts equivalent to 0.5\,MeV energy deposited as
-ionization which is collected by a single wire. It is assumed that the application of zero-suppression at this
+For purposes of this discussion, the nominal ZS threshold is set to be the ADC counts equivalent to 0.5\,MeV energy deposited
+as ionization which is collected by a single wire. It is assumed that the application of zero-suppression at this
 threshold completely removes ADC counts due to just noise. % although an estimate of data rates due to noise is given.
-Estimations of different sources of ZS data are summarized in table~\ref{tab:zs-volume}.
+Estimations of different sources of ZS data are summarized in Table~\ref{tab:zs-volume}.
 
 In order to better preserve the shape of the signal waveform digitized and recorded for
 each channel, a more complex strategy may be applied where the data is accepted in additional
@@ -336,7 +337,7 @@ and ease of reference, this is not included in the ZS data estimates presented T
 	
 \begin{table}[ht!]
 \centering
-\begin{tabular}{| p{1.2in} | p{0.9in} | p{0.75in} | p{1in} | p{0.9in} |}		\hline		
+\begin{tabular}{| p{1.2in} | p{0.9in} | p{0.75in} | p{0.8in} | p{0.9in} |}		\hline		
 Source & Event Rate & Event Size & Data Rate & Volume/year \\ \hline
 all $^{39}$Ar & 11.2\,MHz & 150\,B & 1.6 GB/s &  53\,PB \\ \hline
 all in-spill & & & & 159\,TB \\ \hline
@@ -356,7 +357,7 @@ i.e. the method and format by which the sparse zero-suppressed data is packaged 
 data stream and put into storage. As some examples show (see~\ref{sec:data-compression})
 there can be gross inefficiencies in the data format due to implicit dependencies
 on software components and algorithms used in the applications handling these data.
-Numners shown in Table~\ref{tab:zs-volume} for cosmic-$\mu$ and beam-$\nu$
+Numbers shown in Table~\ref{tab:zs-volume} for cosmic-$\mu$ and beam-$\nu$
 are therefore a known overestimation. They are presented as they reflect the status
 of a few software components at the time creation of the DUNE Conceptual Design Report,
 however the final numbers will be revised downward in \ref{sec:fd-data-volume-summary}
@@ -367,7 +368,7 @@ before inclusion into the Computing Model.
 Measurements with atmospheric neutrinos are an important (although not primary) science objective in DUNE.
 Estimated of rates for such events are given in~\cite{sciopps,cdr_vol2} and are at the level of $\sim$
 4$\times$10$^3$\,year$^{-1}$ for a 40\,kt detector. Judging by the data in Table~\ref{tab:zs-volume},
-contribution from atmospheric $\nu$ will be less than the smallest entry in this table (beam-$\nu$), so for sake
+contribution from atmospheric $\nu$ will be less than the smallest entry in this table \mbox{(beam-$\nu$)}, so for sake
 of brevity this item will be ignored for purposes of data volume estimations.
 
 \subsubsection{$^{39}$Ar Decays}
@@ -417,15 +418,46 @@ in the same APA bringing the added data rate to about 10\% that of the beam-$\nu
 
 \subsubsection{Supernova Burst}
 \label{sec:snb-data}
-The Supernova Burst (SNB) data is estimated assuming a
-\textit{false-positive} SNB rate of 12~year$^{-1}$ and a readout time of
-10\,s. It should be emphasized that both these parameters are subject to
+For the purposes of DUNE data volume estimates, the Supernova Burst (SNB)
+data is considered assuming a
+\textit{false-positive} SNB rate of 12~year$^{-1}$ and a Far Detector LArTPC
+readout time of 10\,s.
+
+It should be emphasized that both these parameters (false positive rate and
+the digitization window) are subject to
 modification and are used simply to provide benchmark examples.
 
+For example,  it is clear that the number of accepted false-positive signals
+can't be too low as they affectively constitute sample of the background
+to extremely rare events and it is imperative to characterize and thoroughly
+understand such backgrounds. It is not unconceivable that DUNE will decide
+to record 10$^2$ of such event annually, however as will be shown this
+would result in a large volume of data and will require proper R\&D to be
+implemented.
+
+Likewise, according to a few models, neutrino signal from the SNB can be spread
+in fact as wide as over a 30\,s period, and although it peaks sharply in the first 0.5\,s
+the tail of the flux would still carry valuable physics information. So again,
+the nominal 10\,s window used in this document is a nominal value used to understand
+the scale of the data.
+
 The SNB events are predicted to have a unique signature whereby
-neutrino interactions will produce on order of 1000 events across
-the Far Detector modules over a time around ten seconds and with a
-neutrino spectrum up to 100MeV. Under this circumstances, 
+neutrino interactions will produce on order of 10$^3$ events across
+all of the Far Detector modules over a time period of $\sim$O(10) seconds and with a
+neutrino spectrum up to 100\,MeV. There are a few channels of interaction
+for the SNG neutrino with the target which is $^{40}$Ar. One is elastic
+scattering, which  leads to a modest average signal of $\sim$10\,MeV for
+each single interaction. Others are charged current events which result in signals
+ranging in 10-40 MeV such as:
+\begin{itemize}
+
+\item $\nu_e+^{40}$Ar $\Rightarrow$ e$^-$+$^{40}$K$^*$
+
+\item $\bar{\nu}_e+^{40}$Ar $\Rightarrow$ e$^+$+$^{40}$Cl$^*$
+
+\end{itemize}
+
+Under this circumstances, 
 the most likely source of a false positive SNB trigger may be an upward
 fluctuation in the registered rate of $^{39}$Ar decays.
 It can therefore be assumed that the data volume of a
@@ -438,10 +470,34 @@ as it would potentially impact the SNB neutrinos. Hence, this background
 will dominate the data volume. Contribution to the data volume due to the SNB events
 themselves is not significant.
 
-Further, a lower ZS threshold may be considered for saving such
-candidate SNB occurrences. The possible data rate of SNB candidates is thus bound by the nominal
+Further, a lower ZS threshold (or no ZS at all) may be considered for saving such candidate SNB events.
+Once a candidate is identified, the possible instantaneous data rate is thus bound by the nominal
 ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates requires additional study
 and may have implications on DAQ hardware.
+
+While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
+flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis indicated it was a false positive,
+for the following reasons:
+\begin{itemize}
+
+\item As already sated above, false-positive events need to be studied in detail since the effectively constitute a
+background for a very rare class of events.
+
+\item Apart from the scenario where the SNB neutrino signal is prompt with respect to the electromagnetic signal
+and therefore can be exploited to provide an early warning to astronomers, there are other intruiguing possibilities
+such as non-observation of a $\nu_e$ component of a burst in the presence
+of supernovae (or other astrophysical events) observed in electromagnetic or gravitational wave
+channels \cite{cdr_vol2}.
+
+\item Since a long-timescale, sensitive search yielding no bursts will provide limits on the rate of core-collapse
+supernovae, it may be neccessary to perform careful statistical analysis of potential candidates, which realistically can only
+be done offline.
+
+\item Such data can be used to better understand and improve online algorithms.
+
+\end{itemize}
+
+For these reason it is assumed that such data will be collected, transmitted and committed to storage.
 
 \subsubsection{Nucleon Decay}
 \label{sec:pdk-data}
@@ -449,11 +505,13 @@ In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\bar{\nu}$ i
 for DUNE  from the discovery point of view due to potentially excellent  identification and energy measurement for the $K^+$ \cite{cdr_vol2}.
 Kaons from free proton decay are expected to have a kinetic
 energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic energy of a kaon
-emitted from an Ar nucleus  is expected to be in the range 0 to 200 MeV~\cite{muon_bkgd_pdk}.
+emitted from an $^{40}$Ar nucleus undergoing a nucleon decay event is expected to be in the range
+0 to 200 MeV~\cite{muon_bkgd_pdk}.
 
 Backgrounds for this decay mode do exist. One such background is due to atmospheric neutrinos,
 but as argued in \ref{sec:atmo-nu} the corresponding event rate would be quite small to have
-a material effect on the volume of data which the focus here.
+a material effect on the \textit{volume of data} which the focus here -- discriminating against such
+background in offline is of course a separate issue.
 
 Another source of background are the cascades initiated by cosmic $\mu$ outside of the fiducial
 volume with a neutral particle causing an interaction in the TPC. It is logical to assume that the rate
@@ -476,10 +534,10 @@ to cosmic-$\mu$ is assigned to such candidate events.
 \subsubsection{Noise}
 
 % fixme: is this remotely true?
-The nominal ZS threshold of 0.5MeV is based on an older (historical) requirement of a
-9:1 signal to noise ratio for a 1 MIP. The most likely MIP is 1.8MeV$\times$cm$^{-1}$ or 0.9 MeV
-per wire pitch. This implies an RMS noise requirement equivalent to 0.1 MeV and then the 0.5 MeV
-equivalent ZS threshold represents a $5\sigma$ cut. Across the 1,536,000 channels and the
+The nominal ZS threshold of 0.5\,MeV is based on an older (historical) requirement of a
+9:1 signal to noise ratio for a 1\,MIP. The most likely MIP is 1.8MeV$\times$cm$^{-1}$ or 0.9\,MeV
+per wire pitch. This implies an RMS noise requirement equivalent to 0.1 MeV and then the 0.5\,MeV
+equivalent ZS threshold represents a 5\,$\sigma$ cut. Across the 1,536,000 channels and the
 10,800 samples per readout this gives about 5,000 samples above the nominal ZS threshold.
 Their distributed nature and isolated pattern of appearance make them subject to the same rejection
 criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
@@ -514,7 +572,7 @@ various sources above the High-Energy threshold.}
 \noindent
 With the HE threshold in place, activity from the $^{39}$Ar events and any SNB
 candidates will not be visible (i.e. will be rejected in DAQ). Although actual SNB
-events may result in neutrino with energies as high as 100MeV applying such a high
+events may result in neutrino with energies as high as 100\,MeV applying such a high
 threshold to SNB candidates won't be optimal and is not being considered at this point.
 For this reason, contribution from SNB to these data is not calculated for this threshold setting.
 
@@ -615,7 +673,8 @@ Total & 50.2 \\ \hline
 \caption{Summary of combined DUNE Near Detector system event rate estimations.}
 \label{tab:nds-event-rates}
 \end{table}
-%\noindent
+
+\noindent
 The projected data rate from the NDS is based on these event rates and occupancy estimated in preliminary Monte Carlo Studies,
 and estimated number of samples to be read out per trigger ($\sim$4000). Preliminary size of each sample is 5B, resulting in an estimate
 of $O(1)$\,MB per second data rate from the NDS. It is stated conservatively that the annual NDS data volume will be up to 100\,TB.
@@ -623,6 +682,7 @@ More information will be added to these estimates as the R\&D in this area progr
 %\fxnote{More development needed here and more information from the ND people}
 
 \subsection{Treatement of the Near Detector vs the Far Detector Data}
+\label{sec:near-vs-far-data}
 There is a small but important detail concerning how the ND and FD data streams are to be treated, and that is they are treated
 separately i.e. not merged into common files.  This is due to the fact that these detectors are effectively looking at different sets
 of events and there is no reason to complicate processing of the data by introducing such dependencies.
@@ -644,8 +704,8 @@ The following simulation areas are of particular interest:
 
 \noindent
 In addition to the above, DUNE must provide the necessary MC support for its vigorous prototyping program such as for the 35t detector
-at FNAL and protoDUNE at CERN
-(see Sec.~\ref{sec:dune-prototypes} for more details), and this activity is largely aligned with the Far Detector simulations.
+at FNAL and protoDUNE at CERN (see Sec.~\ref{sec:dune-prototypes} for more details), and this activity is largely aligned with the Far
+Detector simulations.
 
 In this section the focus is on quantifying the parameters of the data and the requisite CPU requirements will be considered separately.
 
@@ -665,9 +725,9 @@ pitch, need to be evaluated and their effect on the detector performance quantif
 Appendix section~\ref{sec:reconstruction}) and detailed simulations are needed to estimate various efficiencies and other aspects
 of the detector performance with respect to a variety physics processes.
 
-MC event sizes vary depending on the conditions of the simulation, but on average are estimated to be $\sim$7\,MB per event. At the time
-of writing, the typical scale of data produced during a single Monte Carlo campaign is 2.5\,TB. In a course of a year, roughly six MC campaigns
-are expected to take place, with resulting data volume of $\sim$15\,TB per year.
+MC event sizes vary depending on the conditions of the simulation, but on average are estimated to be $\sim$7\,MB per event
+with the software configuration used at the time of writing. Current scale of data produced during a single Monte Carlo
+campaign is $\sim$2.5\,TB. In a course of a year, roughly six MC campaigns are expected to take place, with resulting data volume of $\sim$15\,TB per year.
 
 \subsubsection{Near Detector MC}
 Final technology choices for some core elements of the Near Detector are yet to be made. Estimates show that event sizes will be similar
@@ -682,7 +742,8 @@ may require substantial CPU resources, the logic of the application is typically
 in the application itself, limiting the resulting data volume and requisite storage space. 
 
 \subsubsection{Summary of the MC data volume from different sources}
-Types and sources of data generated in the course of DUNE Monte Carlo studies are summarized in Table~\ref{tab:mc-data}.
+Estimates provided here are based on actual resource utilization over a few months at the time of writing, and are subject
+to change. Types and volume of data generated in the course of DUNE Monte Carlo studies are summarized in Table~\ref{tab:mc-data}.
 \begin{table}[ht!]
 \centering
 \begin{tabular}{| p{1.8in} | p{2.1in} |}		\hline		
@@ -699,9 +760,9 @@ Others & <1 \\ \hline
 \subsection{Derived Data}
 \label{sec:derived-data}
 \subsubsection{Types of Data}
-According to definition given in \ref{sec:req-data-definitions}, processed data includes the Monte Carlo data and
-also data derived from either raw data or Monte Carlo, such as reconstructed event elements in any stage of
-processing.
+According to definition given in \ref{sec:req-data-definitions}, ``processed'' data includes the Monte Carlo data and
+also data derived from either raw data or Monte Carlo, such as reconstructed event elements and physics-type objects
+in any stage of processing.
 
 At the time of writing, the reconstruction chain in DUNE and data formats for its implementation are in initial
 stages of development, therefore in order to be able to produce estimates it is necessary to analyze and extrapolate
