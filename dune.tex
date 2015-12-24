@@ -113,10 +113,31 @@ MC data are not very efficient, so there is potential for further data reduction
 \item Entries for the Derived Data -- ESD/AOD --  include the ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
 \end{itemize}
 
-\subsubsection{Implications of the Estimates and Possible Variations}
-The estimates summarized in Table~\ref{tab:summary-data-table} have been prepared under of assumptions
-as documented in subsections of Section~\ref{sec:data-characteristics}.
+\subsubsection{Implications of the Estimates and Possible Optimization of Data Collection Parameters}
+The items summarized in Table~\ref{tab:summary-data-table} have been prepared under a set of specific
+assumptions as documented in corresponding subsections of Section~\ref{sec:data-characteristics}.
 
+Even without revisiting much detail, salient features the data volume distribution across various sources are
+obvious. The SNB data are the largest source of data by a large margin. This is due to a combination of factors such as:
+\begin{itemize}
+\item The requirement of high sensitivity of DUNE to the Supernova Burst candidate events, which provides motivation
+for the trigger logic to be set at high sensitivity (hence the declared number of expected false positives, which is nominal
+and is mainly included to set the scale).
+
+\item The requirement that the SNB candidate events are recorded essentially without Zero-Suppression to ensure that low energy
+clusters of ionization spread in the detector volume are captured with proper efficiency.
+
+\end{itemize}
+
+\noindent
+It is also obvious from Table~\ref{tab:summary-data-table} that the very events that constitute the main science objective of DUNE
+out of a few -- the beam $\nu$ events -- produce a tiny nominal amount of data when compared to other sources.
+It may be helpful then to consider adjustments to the parameters and approaches used in the criteria for data collection, such as
+thresholds, ZS algorithms, SNB candidate retention policies etc. The most obvious change that may be done is to make zero suppression
+for the beam $\nu$ significantly more lax. While it will take a carefuly study to quantify the effects of various levels of zero suppression
+on the physics performance of the overall system and analysis chain, quanlitatively its clear that lowering the ZS thresholds and/or
+extending the recording window around the peak of the signal has the potential to provide more flexibility in event processing (since
+more can be done offline without loss of information) and improve the resolution of the charge measurement.
 
 
 \subsection{DUNE Data Management}
