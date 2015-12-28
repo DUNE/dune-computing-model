@@ -26,9 +26,9 @@ and the material below will present a summary and aggregated estimates for the s
 and origin.
 
 It is important to keep in mind that estimates presented in Section~\ref{sec:data-characteristics} were developed under ``baseline''
-assumptions necessary for groundwork done in the process of the Conceptual Design Report creation. As DUNE is engaged in R\&D aimed at
-optimal design of the detector and the physics tools, it is likely that these assumptions will be revisited at some point and
-the data rate and volume estimates will need to be revised correspondingly.
+assumptions necessary for groundwork done in the process of developing the DUNE Conceptual Design Report (CDR).
+As DUNE is engaged in R\&D aimed at optimal design of the detector and the physics tools, it is likely that these assumptions will be
+revisited at some point and the data rate and volume estimates will need to be revised correspondingly.
 
 \subsubsection{Raw Data}
 Characteristics of the data to be produced by DUNE detector systems have been considered in
@@ -125,7 +125,7 @@ Even without revisiting much detail, salient features the data volume distributi
 obvious. The SNB data are the largest source of data by a large margin. This is due to a combination of factors such as:
 \begin{itemize}
 
-\item The requirement that SNB candidate data in general should not be discarded (see arguments in \ref{sec:snb-data}).
+\item The requirement that SNB candidate data in general should not be discarded (see justification in \ref{sec:snb-data}).
 
 \item The requirement of high sensitivity of DUNE to the Supernova Burst candidate events, which provides motivation
 for the trigger logic to be set at high sensitivity (hence the declared number of expected false positives, which is nominal
@@ -137,7 +137,7 @@ clusters of ionization spread in the detector volume are captured with proper ef
 \item The requirement that the digitized data is being read out from the Far Detector LArTPC and recorded continuously over
 the nominal window of 10\,s (longer recording periods may in fact be desirable).
 
-\item Huge total number of channels in the Far Detector (over 1.5\,million).
+\item Large total number of channels in the Far Detector (over 1.5\,million).
 
 \end{itemize}
 
@@ -158,17 +158,12 @@ be useful in working on the next iteration of the computing model.
 
 \subsection{Data Flow}
 \subsubsection{Far Detector Data}
-The following description applies to the data attributed to beam neutrinos and to the cosmic ray muons. Due to the vastly
-different scale and rate of occurance of the Supernova Burst candidate events, it is not optimal to include this type data in the same
-data stream with $\nu$ and $\mu$.
-
 \ 
 \\
 \noindent
 \textit{High-Level View of Data Flow} 
 \ 
 \\
-
 \noindent
 A high-level conceptual diagram of the Far Detector data flow in DUNE in presented in Fig.\ref{fig:DUNEdataflow}
 (page\,\pageref{fig:DUNEdataflow}).
@@ -184,6 +179,7 @@ hosting tape storage for the primary copy of all data, as well as distributed di
 It is expected that the Metadata system will also be deployed and operated at FNAL.
 Additional Grid sites at participating institutions will have replicas of the data.
 Replication of the data will be done as per requirements formulated in \ref{sec:req-raw-data-replication}.
+
 \ 
 \\
 
@@ -191,8 +187,6 @@ Replication of the data will be done as per requirements formulated in \ref{sec:
 \textit{Data Buffering at the Far Site} 
 \ 
 \\
-
-
 \noindent
 Data Acquisition systems will be located in the specially built rooms in the detector vicinity,
 i.e. in the cavern deep underground (commonly referred to as 4850L). The undergound location is to be
@@ -217,8 +211,6 @@ can therefore be estimated as $\sim$50\,TB.
 \textit{Data Merging at the Far Site} 
 \ 
 \\
-
-
 \noindent
 There are additional considerations due to the modular structure of the DUNE Far Detector
 which is conceived as four individual TPC modules. In order have to have more flexibility and to minimize down time
@@ -228,6 +220,40 @@ consistency and simplicity of processing, it is desirable to merge the data stre
 detectors' DAQ systems at some point so that data is written to files contains readout for the full 4-module
 DUNE detector. The surface facility is the optimal location for the merging to take place since it needs to be
 equipped with storage and networking equipment for buffering purposes in any scenario.
+
+\ 
+\\
+\noindent
+\textit{SNB vs Other Types of Data} 
+\ 
+\\
+\noindent
+According to estimates presented in Table~\ref{tab:summary-data-table} the scale of the SNB candidate date  is vastly larger than
+that of beam-$\nu$ and cosmic-$\mu$ events. In addition to size there are other differences -- while data from these other classes of events
+can be expected to be coming at a steady (and low) rate, the SNB candidate event will result in large burst of data both in terms of
+instantaneous rate and the volume to be collected during the O(1,s) readout window activated by the SNB trigger logic in DAQ.
+There are a few reasons to handle the SNB data stream separately from other data.
+
+First, it may be desirable to run a near-time
+analysis on portions of the SNB data to determine the veracity of the SNB trigger decision. This can be done at the Far Site surface facility
+and is subject to pending R\&D.
+%For this to be practical, transmission of the data from 4850L to the surface will need to be done
+%at the maximum rate possible.
+It is envisioned that in the event of the SNB trigger the DAQ system will put all other logic ``on hold''
+in order to ensure full bandwidth and local (DAQ) computing resources are fully dedicated to caputring these data.
+%Having multiple strands of optic fiber (as stipulated in current engineering plans) will be crucial to ensure that the data can arrive
+%to the surface at almost the same rate as it is produced
+
+Second, having a substantially more modest data stream containing beam neutrino and cosmic ray
+events will make processing and distribution of these data to the Collaboration a lot quicker and more efficient.
+
+Finally, there are simply 
+no clear benefits of merging the SNB candidates with the rest of the data. It is assumed in this section that it is to be handled
+separately e.g. kept in separate datasets.
+%The following description applies to the data attributed to beam neutrinos and to the cosmic ray muons.
+%Due to the vastly different scale and rate of occurance of the Supernova Burst candidate events, it is not optimal to include this type data in the same
+%data stream with $\nu$ and $\mu$.
+
 \ 
 \\
 
@@ -235,7 +261,6 @@ equipped with storage and networking equipment for buffering purposes in any sce
 \textit{Data Transmission from the Far Site} 
 \ 
 \\
-
 \noindent
 Two horizontal arrows in section ``A'' of the diagram in Fig.\ref{fig:DUNEdataflow} represent the WAN connection of
 the Far Site to FNAL. Looking at the raw data section of Table~\ref{tab:summary-data-table}, one can estimate
@@ -272,6 +297,29 @@ and the data processing layers, developed and maintained at FNAL~\cite{sam_chep1
 \caption{Conceptual Diagram of FD and NF interface to storage infrastructure at FNAL.}
 \label{fig:fnal-data-infrastructure}
 \end{figure}
+
+\subsection{Production}
+\subsubsection{First-pass Production}
+First-pass
+%ESD
+production will take place at FNAL after the data is received and catalogued in SAM.
+As mentioned above, SNB candidate data will be handled separately (reside in datasets separate from
+other types of data) and for this reason will require dedicated production runs.
+
+The low rate of the beam-$\nu$ and cosmic-$\mu$ triggers (see Table \ref{tab:zs-volume}) allows for
+prompt first-pass reconstruction to be handled at FNAL as soon as these data are received, using the
+``best available'' calibration data. At the time of writing
+a number of reconstruction techniques are being considered for use in DUNE and the range of CPU requirements
+for this production step is still fairly wide, however given that the number of cosmic-$\mu$ candidates will be roughly $\sim$10$^3$ per hour
+it can be expected that Fermigrid should be able to provide the necessary resources. 
+Data structures and formats such as ESD and AOD-types are still in development at the time of writing.
+
+\subsubsection{Calibrations and Reprocessing}
+Calibration procedures are briefly described in~\ref{sec:daq-calibrations}. Since cosmic muon events present in the data
+are a crucial element for cross-checks and verifying the energy scale for TPC measurements, calibrations will depend on
+the first-pass production in what is essentially an iterative process.
+
+Once a set of  refined calibration data is produced, reprocessing will take place at FNAL and other participating institutions.
 
 \subsection{Data Management}
 \subsubsection{LHC Experience with Data Distribution}
