@@ -86,22 +86,23 @@ this document up to this point. Where applicable, entries are marked with ZS (Ze
 FS (Full-Stream). Atmospheric $\nu$ were not included as discussed in \ref{sec:atmo-nu}.
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{| p{1.2in}| p{1.7in} | p{1.5in} | p{0.65in} |}
+	\begin{tabular}{| p{1.2in}| p{1.73in} | p{1.5in} | p{0.62in} |}
 		\hline
 		\textbf{Data Type} & \textbf{Source} & \textbf{ZS/FS} & \textbf{Volume} \\ \hline
 		Raw & cosmic-$\mu$  & ZS$^*$ \textit{(see comments)}& 4.8\,TB \\	\hline
 		Raw & beam-$\nu$  & ZS$^*$ \textit{(see comments)}& 5.3\,GB  \\	\hline
 		Raw & Nucleon Decay Cand.  & ZS$^*$ \textit{(see comments)}& 480\,GB  \\	\hline
-		Raw & SNB candidate & FS & 553\,TB \\	\hline \hline \hline
-		Raw & \textbf{Total Raw} & - & \textbf{558\,TB} \\		\hline \hline \hline
+		Raw & SNB Cand. (12\,year$^{-1}$) & FS & 553\,TB \\	\hline \hline % \hline
+		Raw & Near Detector & ZS & 100\,TB \\	\hline \hline \hline
+		Raw & \textbf{Total Raw} & - & \textbf{658\,TB} \\		\hline \hline \hline
 		MC & Beamline and Target  & - & 1\,TB \\	\hline
 		MC & Far Detector & ZS$^{**}$  \textit{(see comments)}  & 15\,TB \\		\hline
 		MC & Near Detector & - &20\,TB \\ \hline \hline \hline
 		MC & \textbf{Total MC} & - & \textbf{36\,TB} \\		\hline \hline \hline
-		Derived &  Raw  & - & 4.5\,PB \\	\hline
+		Derived &  Raw  & - & 5.2\,PB \\	\hline
 		Derived &  MC  & - & 288\,TB \\	\hline  \hline \hline
-		Derived & \textbf{Total Derived} & - & \textbf{4.8\,PB} \\		\hline \hline \hline
-		All & \textbf{Grand Total} & - & \textbf{5.4\,PB} \\		\hline % \hline \hline
+		Derived & \textbf{Total Derived} & - & \textbf{5.8\,PB} \\		\hline \hline \hline
+		All & \textbf{Grand Total} & - & \textbf{6.5\,PB} \\		\hline % \hline \hline
 	\end{tabular}
 	\caption{Summary of annual data volume estimates due to various sources.}
 	\label{tab:summary-data-table}
@@ -114,7 +115,8 @@ window around the peak of the pulse where data is preserved regardless of its in
 \item ($^{**}$) As discussed in~\ref{sec:data-compression}, at present the zero-suppression algorithms employed in production of the
 MC data are not very efficient, so there is potential for further data reduction
 
-\item Entries for the Derived Data -- ESD/AOD --  include the ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
+\item Entries for the Derived Data -- ESD/AOD --  include the multiplicative ``headroom factor'' of 4 (see justification in \ref{sec:derived-data})
+on top of extrapolated factor of 2 which is approximate ratio of the volume of derived data to raw data (\ref{sec:derived-data-factor}).
 \end{itemize}
 
 \subsubsection{Implications of the Estimates and Possible Optimization of Data Collection Parameters}
@@ -276,8 +278,10 @@ Metadata will be managed under the same umbrella as the Far Detector data.
 
 \subsubsection{Interfaces to FNAL Storage Infrastructure}
 Both the Far Detector and Near Detector Systems will need to interface storage infrastructure at FNAL.
+File catalog and Metadata requriements are listed in~\ref{sec:file-catalog-req}~and~\ref{sec:metadata-req}.
 While technology options and choices may be very different at the time of DUNE commissioning from what they
-are at the time of writing, it is instructuve to review what exists at Fermilab at present, as guidance.
+are at the time of writing, it is instructuve to review what exists at Fermilab at present as one possibility of the
+configuration to be utilized by DUNE..
 Elements of this infrastructure relevant to this dicscussion are:
 \begin{itemize}
 \item Enstore: tape drive and tape management system.
@@ -298,8 +302,31 @@ and the data processing layers, developed and maintained at FNAL~\cite{sam_chep1
 \label{fig:fnal-data-infrastructure}
 \end{figure}
 
+\noindent
+A key part of interaction of the DUNE data transport system and storage infrastructure at FNAL is generation and management of
+Metadata. In the illustration given in Fig.~\ref{fig:fnal-data-infrastructure} this functionality resides in ``SAM'' (or its future equivalent).
+When a unit of data arrives and is deposited in the designated ``dropbox'' to be picked up by SAM services for placement into mass storage,
+appropriate metadata is generated according to specifications and added to SAM database.
+
+\subsubsection{Raw Data Replication}
+Requirements for raw data replication are listed in~\ref{sec:req-raw-data-replication}. Sites with appropriate characteristics (e.g. storage capacity, network access bandwidth etc)
+shall be selected for purpose of raw data replication before DUNE commissioning and to allow sufficient time for integration testing.
+
+Raw data for both Far and Near Detector Subsystems will be replicated.
+
 \subsection{Production}
-\subsubsection{First-pass Production}
+\subsubsection{Production Streams}
+Three distinct production streams can be identified in DUNE:
+\begin{itemize}
+\item Far Detector beam-$\nu$, cosmic-$\mu$ and nucleon decay candidate events (all in shared datasets)
+
+\item Far Detector Supernova Burst candidate events (in separate datasets)
+
+\item Near Detector Systems data (in separate datasets)
+\end{itemize}
+
+\subsubsection{First-pass Production (Far Detector Data)}
+
 First-pass
 %ESD
 production will take place at FNAL after the data is received and catalogued in SAM.
@@ -309,21 +336,70 @@ other types of data) and for this reason will require dedicated production runs.
 The low rate of the beam-$\nu$ and cosmic-$\mu$ triggers (see Table \ref{tab:zs-volume}) allows for
 prompt first-pass reconstruction to be handled at FNAL as soon as these data are received, using the
 ``best available'' calibration data. At the time of writing
-a number of reconstruction techniques are being considered for use in DUNE and the range of CPU requirements
+a number of reconstruction techniques are being considered for use in DUNE (see Appendix~\ref{sec:reconstruction})
+and the range of CPU requirements
 for this production step is still fairly wide, however given that the number of cosmic-$\mu$ candidates will be roughly $\sim$10$^3$ per hour
-it can be expected that Fermigrid should be able to provide the necessary resources. 
-Data structures and formats such as ESD and AOD-types are still in development at the time of writing.
+it can be expected that Fermigrid should be able to provide the necessary resources. Assuming 
+that it would take O(10\,min) of CPU time on a typical worker node to reconstruct an event of medium complexity
+(as is the case with a few software tools currently in use),
+a farm of 1,000 worker nodes will be capable of processing data at same rate as it is received.
 
-\subsubsection{Calibrations and Reprocessing}
+Data structures and formats such as ESD and AOD-types are still in development at the time of writing so no separate
+description of these in the production chain can be produced.
+
+\subsubsection{Calibrations and Reprocessing (Far Detector Data)}
 Calibration procedures are briefly described in~\ref{sec:daq-calibrations}. Since cosmic muon events present in the data
 are a crucial element for cross-checks and verifying the energy scale for TPC measurements, calibrations will depend on
 the first-pass production in what is essentially an iterative process.
 
 Once a set of  refined calibration data is produced, reprocessing will take place at FNAL and other participating institutions.
+Aside from reprocessing runs producing more precise data due to better calibrations, it will be necessary to repeat processing
+for different reasons, such as introduction of new software releases, their testing and validation etc.
+As stated in comments to Table~\ref{tab:summary-data-table} on page~\pageref{tab:summary-data-table}, the storage requirements estimations in this table include
+a ``headroom factor'' of 4 to effectively account for storage necessary for reprocessing.
+
+\subsubsection{Production for the Near Detector Systems Data}
+The Near Detector Systems in DUNE feature considerable complexity of design and operations, and set ambitious goals
+for precision measurement of both momenta (via tracking in the magnetic field) and energy (via calororimetry). This leads to
+potentially complex calibrations. While based on same general principles as production for the Far Detector, the NDS processing
+will be done in separate production streams. While not much detail is known about the eventual choice of data formats and algorithms for
+the NDS, it is reasonable to assume that same approach (first-pass at the data and then reprocessing based on refined calibration)
+will be used as for the Far Detector.
+
+
+\subsection{DUNE Analysis}
+\subsubsection{Analysis Procedures and Data Flow}
+As mentioned above, the SNB candidate data stands apart from other sources of data and will be assigned
+a separate processing and analysis chain. Assuming the nominal rate
+of false positives of 12 per year, it is estmated that roughly 50\,TB of SNB candidate data will need to be processed
+monthly (see Table~\ref{tab:zs-volume}). Once an analysis pass is done with a candidate event, it can be expected
+that the event can be committed to permanent storage on tape.
+
+The Far Detector datasets outside of the SNB category will be dominated by cosmic muon events and nucleon decay candidates.
+As indicated in Table~\ref{tab:summary-data-table}, the associated data volume is modest and of the order of 40\,TB annually.
+On this scale the data can be shipped to member institutions using a variety of methods for analysis (see~\ref{sec:data-mgt}).
+
+Handling the Near Detector data will be somewhat more challenging to a larger projected volume: $\sim$100\,TB of raw data annualy
+as per Table~\ref{tab:summary-data-table}, and some eight times more than that if one models the storage requirements for NDS on
+same basis as for the Far Detector (extrapolation of the derived data volume plus the ``headroom factor'' for reprocessing).
+
+\subsubsection{Distribution of Analysis Workload}
+Since it can be expected that the data volume out
+
+
+
+\subsection{Simulation}
+Producing simulated data is the type of workload that can be handled efficiently by data centers at DUNE member institutions.
+Such data must be made avaialbe for all of Collaboration. Estimates of the MC data and data derived from it are also given
+in Table~\ref{tab:summary-data-table}.
+
+%\subsubsection{The Analysis Model}
+%\subsubsection{Distributed Analysis}
 
 \subsection{Data Management}
+\label{sec:data-mgt}
 \subsubsection{LHC Experience with Data Distribution}
-
+\label{sec:data-monarc}
 In formulating the architecture for data distribution in DUNE, it is helpful to study the experience of the LHC experiments,
 since DUNE shares much of the same challenges: potentially significant  volume of data to be collected and processed,
 projected long period of operation of the experiment, and geographically dispersed and diverse research communities joining the Collaboration.
@@ -383,11 +459,6 @@ the design and handling of Metadata, and managing computational workflows.
 
 
 \subsubsection{Distributed Data Management}
-
-\subsection{DUNE Analysis}
-\subsubsection{Analysis Procedures and Data Flow}
-\subsubsection{The Analysis Model}
-\subsubsection{Distributed Analysis}
-
-\subsection{Simulation}
-\subsection{Calibration}
+For its Distributed Data Management, DUNE will use the experience gained by the LHC experiments (\ref{sec:data-monarc}) and will
+take the same direction of its evolution. In practice this means the ``data in the network'' approach adopted by ATLAS in the form of its FAX system,
+and the AAA system created by CMS.
