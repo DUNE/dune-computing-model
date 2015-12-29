@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%  DUNE COMPUTING MODEL. Start of work October2015.    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\topmargin=-0.5in
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.2in
+\textheight=9.25in
+
+\usepackage[dvips]{graphics}
+\usepackage[nomargin,inline,marginclue,draft]{fixme}
+\usepackage{rotating}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage{enumerate}
+
+%\usepackage[titletoc]{appendix}
+
+\usepackage{multirow}
+
+%% draftwatermark causes infinite loop on SL6's ancient TeXLive
+\usepackage[firstpage]{draftwatermark}
+\usepackage{lipsum}
+\usepackage{tikz}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[blocks,affil-it]{authblk}
+
+% experimental - for diameter symbol etc
+\usepackage{wasysym}
+
+\RequirePackage{lineno}
+
+\bibliographystyle{plain}
+\bibliographystyle{unsrt}
+
+\usepackage{graphicx, subfigure}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black,bookmarks=true]{hyperref}
+
+% Depth can be adjusted, and 3 may seem excessive, but when set to 2, a lot of interesting detail in TOC is lost.
+\setcounter{tocdepth}{3}
+
+
+\begin{document}
+
+%\linenumbers
+
+\title{Computing Model for DUNE Experiment}
+
+\date{\today}
+
+
+\maketitle
+
+%\centerline{submitted on behalf of the DUNE collaboration}
+
+\SetWatermarkText{DRAFT}
+\SetWatermarkLightness{0.9}
+\SetWatermarkScale{3}
+
+
+%\begin{abstract} \end{abstract}
+
+% --- executive summary section ---
+\newpage
+%\centerline{\textbf{\centerline{\bf{\Large {Executive Summary}}}}} 
+%\input{execsum}
+
+%++++++++++++++++++++++++++++++++++++++++
+% TOC and lists of tables and figures
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+
+%++++++++++++ MAIN DOCUMENT +++++++++++++++
+\newpage
+\input{introduction}
+
+\newpage
+\input{data-rates}
+
+\newpage
+\input{daq}
+
+\newpage
+\input{daq-nd}
+
+
+%%%----- THE COMPUTING MODEL -----
+%%% NB: contains a section on prototypes, and a separate section on DUNE computing model
+\newpage
+\input{computing_model}
+
+\newpage
+\input{appendix-new-layout}
+
+\newpage
+\input{bibliography}
+
+\end{document}
