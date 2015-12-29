@@ -145,7 +145,7 @@ the nominal window of 10\,s (longer recording periods may in fact be desirable).
 
 \noindent
 It is also obvious from Table~\ref{tab:summary-data-table} that the very events that constitute the main science objective of DUNE
-out of a few -- the beam $\nu$ events -- produce a tiny nominal amount of data when compared to other sources. From the standpoint
+out of a few -- the beam-$\nu$ events -- produce a tiny nominal amount of data when compared to other sources. From the standpoint
 of resource utilization, this may or may not be optimal and further guidance will be needed from the Collaboration.
 
 It may become helpful then to consider adjustments to the parameters and approaches used in the criteria for data collection, such as
@@ -307,16 +307,21 @@ and the data processing layers, developed and maintained at FNAL~\cite{sam_chep1
 A key part of interaction of the DUNE data transport system and storage infrastructure at FNAL is generation and management of
 Metadata. In the illustration given in Fig.~\ref{fig:fnal-data-infrastructure} this functionality resides in ``SAM'' (or its future equivalent).
 When a unit of data arrives and is deposited in the designated ``dropbox'' to be picked up by SAM services for placement into mass storage,
-appropriate metadata is generated according to specifications and added to SAM database.
+appropriate metadata is generated according to prepared specifications and added to SAM database.
 
 An important feature of dCache storage at FNAL is that it is available to the outside world via the so-called ``xrootd door''. Having a standard
 access method to substantial amount of storage located at FNAL allows for creation of powerful tools for sharing and distribution of data in DUNE.
 
-\subsubsection{Raw Data Replication}
-Requirements for raw data replication are listed in~\ref{sec:req-raw-data-replication}. Sites with appropriate characteristics (e.g. storage capacity, network access bandwidth etc)
-shall be selected for purpose of raw data replication before DUNE commissioning and to allow sufficient time for integration testing.
+\subsubsection{Raw Data Replication and Retention}
+Requirements for raw data replication are listed in~\ref{sec:req-raw-data-replication}. Sites with appropriate characteristics
+(e.g. storage capacity, network access bandwidth etc) shall be selected for purpose of raw data replication before DUNE
+commissioning and to allow sufficient time for integration testing.
+Raw data for both Far and Near Detector Subsystems will be replicated. There will be no less than one full copy of raw
+data and likely two. A replica does not need to reside at a single data center in its entirety, i.e. replicas will be allowed to span
+more than one data center. To be effective replication must rely on proper management of Metadata, so it makes sense
+for FNAL to be the center of worldwide data replication in DUNE.
 
-Raw data for both Far and Near Detector Subsystems will be replicated.
+Policies regarding retention of raw data shall be set in accordance with \ref{sec:req-raw-data-retention}.
 
 \subsection{Production}
 \subsubsection{Production Streams}
@@ -396,7 +401,8 @@ involve larger amounts of data and it may become necessary to provide distribute
 experiments have deployed, via their respective Workload Management Systems (\ref{sec:dune-wms}).
 
 \subsection{Simulation}
-Producing simulated data is the type of workload that can be handled efficiently by data centers at DUNE member institutions.
+Producing simulated data is the type of workload that can be handled efficiently by data centers at DUNE member institutions
+since it puts less stringent requirements on the bandwidth available to the site.
 Such data must be made avaialbe for all of Collaboration. Estimates of the MC data and data derived from it are also given
 in Table~\ref{tab:summary-data-table}.
 
@@ -470,7 +476,12 @@ For its Distributed Data Management, DUNE will use the experience gained by the 
 take the same direction of its evolution. In practice this means the ``data in the network'' approach adopted by ATLAS in the form of its FAX system,
 and the AAA system created by CMS.
 
-\subsubsection{Workload Management}
+
+\subsubsection{Databases}
+Requirements for DUNE Databases have been described in \ref{sec:req-db}.
+
+
+\subsection{Workload Management}
 \label{sec:dune-wms}
 For DUNE requirements to its Workload Management System please see \ref{sec:req-wms}. There are a few systems currently used by various experiments which
 differ in the following aspects:
@@ -487,16 +498,42 @@ due to corrupted or otherwise missing data and other such conditions.
 
 \end{itemize}
 
-
-Examples of widely deployed WMS include:
+\noindent
+A few examples of widely deployed WMS include:
 \begin{itemize}
 
-\item Dirac WMS~\cite{dirac_wms}.
+\item Dirac (Distributed Infrastructure with Remote Agent Control) WMS~\cite{dirac_wms} used at CERN by LHCb.
 
 \item PanDA (``Production and Distributed Analysis'') \cite{panda_chep13}, which forms the backbone of ATLAS processing and has been used in other experiments such as AMS.
+PanDA has scaled up to manage O(10$^6$) Grid jobs daily, upgraded to use a fine-grained workflow management system, added an event service to
+make it easier to use short-term opportunistics resource and a host of other features. A distinguishing feature of PanDA is sophisticated and powerful
+monitoring system which allows efficient troubleshooting and optimal degree of control over execution of workflows.
 
 \item GlideinWMS \cite{glideinwms_chep13} used in CMS and a variety of projects in other disciplines via the Open Science Grid Consortium.
 
 \item Alien \cite{alien} deployed for the Alice experiment at the LHC.
 
 \end{itemize}
+
+\noindent
+FNAL has successfully deployed a Grid toolkit named \textit{jobsub} \cite{jobsub_chep13}, which has been used for a number of years to facilitate users' access to
+Grid facilities at FNAL and at other grid sites, such as those participating in the Open Science Grid Consortium \cite{osg}. It integrates FNAL-local access via
+HTCondor facilities with GlideinWMS extensions to reach available resources elsewhere.
+
+Where needed, \textit{jobsub} leverages the CVMFS network file system for software provisioning and the \textit{ifdh} data handling tool which integrates
+with SAM, dCache, Amason S3 etc.
+
+\subsection{Offline Software}
+\subsubsection{Overview}
+
+For s detailed presentation of requirements to DUNE offline software please see Section~\ref{sec:req-software}.
+A few items worth mentioning here are achitectural compliance, revision control and release methodology, code review and documentation etc.
+DUNE will have to create a ``supported platform'' policy which will define the mechanisms by which platforms are selected for support, retired from
+supported status and what level of support and methods for its delivery will be provided.
+
+\subsubsection{Release managememt and Comtinuous Integration}
+At the time of writing DUNE is already investing effort in managing releases of the LArSoft software. Continuous Integration (CI) services are provided
+by FNAL's Scientific Computing Division, and in particular Jenkins \cite{jenkins} system is utilized for CI.
+
+\subsubsection{Software provisioning}
+
