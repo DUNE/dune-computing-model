@@ -7,22 +7,21 @@ for estimations of the data rates in DUNE.
 %In cases when derived parameters need to be generated based on these inputs this is accomplished using
 %the software package \textit{dune-params}\cite{duneparams}
 %developed specifically for this purpose. As the inputs and estimations are refined the results presented in this annex can be regenerated at will.
-Buffering, triggering and readout strategy and algorithms of the DAQ
+The buffering, triggering, readout strategy and algorithms of the DAQ
 are complex R\&D items and are far from their final design and state of
-readiness at the time of writing. Same applies to various analysis software.
-For that reason, the data rate estimations involve some broad assumptions
+readiness at the time of writing.  The same applies to various analysis software.
+For that reason, the data rate estimations involve broad assumptions
 and leave open some choices. This is described in more detail in the following subsections.
 
-DUNE contains a number of major detector subsystems. The Far Detetor (FD) Liquid Argon TPC will present most
+Of the DUNE detector systems, the Far Detetor (FD) Liquid Argon TPC will present the most
 challenges from the standoint of real-time data processing and triggering, and can potentially dominate the data volume.
-It incorporates the Photon Detector (PD) which while important produces less data so it won't be our focus
-for the purpose of the data rate and volume estimates. There are also Near
-Detector (ND) Systems (see~\ref{sec:nds-params}) which are complex and for which most data metrics are yet to be developed
-at the time of writing.
+The FD's Photon Detector (PD) produces less data so it won't be the focus
+for the purpose of the data rate and volume estimates.  The Near
+Detector (ND) (see~\ref{sec:nds-params}) is complex and most data metrics are yet to be developed for it.
 
 \subsection{DUNE Detectors and Subsystems}
 
-\subsubsection{Fundamental Parameters of the Far Detector LArTPC}
+\subsubsection{Parameters of the Far Detector LArTPC}
 \label{sec:fundamental-parameters}
 
 The fundamental TPC parameters most relevant as input to the data rate estimations are summarized in
@@ -63,7 +62,7 @@ Two of the parameters listed above (``drifts/readout'' and ``readout time'') nee
 The nominal readout time of 5.4ms is chosen such that additional time windows are covered just before and just
 after the nominal $t_0$ (trigger) window. The value of 5.4\,ms is 2.4 times larger than the nominal drift of 2.25\,ms,
 and it's listed in the table as the ``drifts/readout'' factor. This factor is not calculated precisely but was chosen based
-on the experience with the 35t prototype (Sec.\ref{sec:35t}). The motivation behind this exta readout it to capture
+on experience with the 35t prototype (Sec.\ref{sec:35t}). The motivation behind this exta readout it to capture
 potential activity in the TPC just before and just after the event of interest, so as to characterize this extraneous
 ionization which for example can manifest itself as track segments due to cosmic rays background. It is quite
 possible that the readout time will be revised as the final detector design is progressing, however the value of 5.4\,ms
@@ -71,12 +70,11 @@ was fixed in this document as nominal, in order to provide consistency of variou
 
 \subsubsection{The Photon Detector}
 \label{sec:pd}
-The Photon Detector (PD) which is built into the Far Detector LArTPC takes advantage of the fact that Liquid Argon
-is an excellent scintillating medium.
-The most significant requirements for the PD include determination of $t_0$ of an event relative to the TPC timing ---
-resolution better than 1\,$\mu$s (event position resolution along drift direction of a few mm), and sufficient light
-collection efficiency to allow triggering on neutrinos coming from a supernova, with the capability of detecting neutrinos with energies as
-low as 20\,MeV.
+The PD must detect light from all desired physics processes in the FD: beam, atmospheric, and supernova neutrino interactions,
+nucleon decay events and cosmic rays.  The $t_0$ resolution of an event relative to the TPC timing is required to be
+better than 1\,$\mu$s.  The PD is required to be fully efficient for nucleon decay events in the fiducial volume, though a
+more difficult constraint is the desire to maximize its efficiency to measure the time of supernova neutrino interactions.
+It is anticipated that a significant amount of background rate will arise from radioactive decays near the photon detectors.
 
 Light produced by Liquid Argon Stintillation is collected from the TPC volume by the wavelength shifter and transported
 by the light guide to the Silicon Photo-Multiplier (SiPMs) mounted at its end. A single whole assembly is mounted on each  APA frame.
@@ -87,14 +85,14 @@ of the FPGA processing allows for a significant amount of customization of the S
 
 \subsubsection{The Near Detector Systems}
 \label{sec:nds-params}
-For sake of brevity, only basic information will be provided for the Near Detector Systems (NDS) which are under active development
-at the time of writing and for which there is no final design yet. The main NDS components are:
+Only basic information is provided here for the Near Detector Systems (NDS) which are under active development
+and for which there is no final design yet. The main NDS components are:
 \begin{itemize}
 \item Near neutrino detector (NND), and its major component, the Fine-Grained Tracker
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-In the reference design at the time of writing, the Fine-Grained Tracker (FGT) near consists of a straw-tube
+In the reference design~\cite{cdr_vol4_docdb},, the Fine-Grained Tracker (FGT) near consists of a straw-tube
 tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimeter (ECAL), all placed inside of a 0.4\,T dipole magnet.
 
 \begin{table}[ht!]
@@ -166,19 +164,20 @@ be a major factor influencing the rate and volume of data produced in DUNE.
 	\label{tab:dune-data-sources}
 \end{table}
 
-Not included in this table are two of the more exotic sources of signal, the Supernova Burst and Nucleon decay.
-Due to their rare (and generally speaking, potential) occurance and differing characeristics they will be considered separately
-in~\ref{sec:snb-data} and \ref{sec:pdk-data}.
+Not included in this table are two of the more exotic sources of signal, supernova burst and nucleon decay events.
+These events have different signatures, rates, and background sources from other events.  
+They are considered separately in~\ref{sec:snb-data} and \ref{sec:pdk-data}.  
 
 \subsubsection{Segments of the Dynamic Range of the TPC signals}
 
-Signals produced by individual wires in the DUNE TPC will have a substantial
-dynamic range. For example, $\beta$-decay of naturally occurring isotope $^{39}$Ar has the endpoint of
-565\,keV, whereas signals due to interactions of energetic neutrinos can produce signals
-equivalent up to a few MeV energy deposition in a given channel depending on the event topology.
+Signals detected by individual wires in the DUNE TPC will have a substantial
+dynamic range. For example, the maximum energy of an electron emitted in the $\beta$-decay of the naturally occurring isotope 
+$^{39}$Ar is 565\,keV, whereas particles produced in energetic neutrino interactions can produce signals
+corresponding to energy depositions of a few to several MeV in a given channel depending on the particle type, its momentum,
+and the angle of its path with respect to the wire.
 
 Each segment of the dynamic range will reflect certain types of events and this
-be characterized by a respective data rate. For a systematic approach to estimates
+is characterized by a respective data rate. For a systematic approach to estimates
 and to reflect the physics of the detector, it is helpful to consider three such segments when characterizing the LArTPC data.
 To set the scale for these segments we can assign ``thresholds''corresponding to each of them.
 The threshold values can be applied to signals on ``per-wire'' basis and defined for example
@@ -187,12 +186,13 @@ These are not meant to be precise values used in data collection and are given h
 Using this concept the dynamic range can be considered with three distinct settings:
 \begin{description}
 	
-\item[full-stream] The full-stream \textbf{(FS)} threshold means \textit{there is no threshold at all}, i.e.
-FS data is effectively read out in every time bin (as defined by the ADC clock) and from every channel.
+\item[full-stream] The full-stream \textbf{(FS)} threshold means there is no threshold at all, i.e.
+FS data is read out in every time bin of the ADC clock and from every channel.
 
 \item[zero-suppressed] The zero-suppression \textbf{(ZS)} threshold is an ADC value (in a single time bin,
 on a single wire) roughly corresponding to ionization charge due to a 0.5\,MeV energy deposition.
-All bins with ADC counts below this threshold are discarded from the data stream.
+Bins with ADC counts below this threshold are discarded from the data stream, although ZS algorithms include
+the ability to read time bins before and after samples that are above threshold in order to improve charge resolution.
 
 \item[high-energy] A high-energy \textbf{(HE)} threshold is assumed to be high enough so that
   that all electronics noise signals from radioactive decays are suppressed but low
@@ -210,9 +210,10 @@ $^{39}$Ar decays rejection.
 \subsubsection{Full-stream Data}
 
 Full-stream (FS) data corresponds to reading all data in every ADC channel without
-application of any threshold. Estimating the corresponding rate is a calculation based on
-known parameters as it does not depend on the activity in the detector or the noise
-level of the electronics. As its name implies, it is the most voluminous type of data
+application of any threshold.  The corresponding rate does not depend on the 
+activity in the detector or the noise
+level of the electronics, although these factors affect the performance of data compression.
+It is the most voluminous type of data
 that can be generated by the TPC. The parameters which apply to this data are given in
 table~\ref{tab:full-stream-parameters}.
 
@@ -282,7 +283,7 @@ is an array of \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
 readout speeds, considerable real-time computing power and flexibility of system configuration.
 
 In addition to considerations of various signal sources, the data rate estimates depend on capabilities of the DAQ system,
-in particular as they apply to data compression and rejection of radiological background.
+the data compression algorithms and radiological background rejection techniques.
 Examples of relevant DAQ capabilities to be considered are:
 
 \begin{itemize}
@@ -300,13 +301,13 @@ in the RCEs to the data sent to the data farm.
 
 \item Detection of Regions of Interest (ROI) for high-threshold events, e.g. identifying the APAs
 which register the signal of an energetic lepton resulting from a beam neutrino interaction, so as
-to avoid collecting and writing the data from ``empty'' parts of each TPC module.
+to avoid collecting and writing the data from ``empty'' parts of each detector module.
 
 \end{itemize}
 
 \noindent
-Based on the current understanding of progress in DAQ R\&D, it is reasonable to expect at the time of
-writing that the above DAQ characteristics will indeed be implemented in DUNE.
+Based on the current understanding of progress in DAQ R\&D, it is reasonable to expect 
+that the above DAQ characteristics will indeed be implemented in DUNE.
 
 
 
@@ -314,22 +315,23 @@ writing that the above DAQ characteristics will indeed be implemented in DUNE.
 \subsubsection{Zero-Suppressed Data}
 \label{sec:zs-data}
 The Far Detector LArTPC is expected to operate is very low background conditions. In practice
-is means that in each instance the signals of interest (such as induced by reactions of beam neutrinos)
-will only present in a fraction of channels. There are options in choosing the exact zero-suppression (ZS)
-procedure, and the final choice has not been made. The simplest procedure may be implemented
+this means that in each instance the signals of interest (such as induced by reactions of beam neutrinos)
+will only be present in a very small fraction of channels. There are options in choosing the exact zero-suppression (ZS)
+procedure, and the final choice has not been made. The simplest procedure is
 as follows: in each channel, all digitized time bins in which the ADC values are below the given threshold
 are removed. More discussion on possible alternative ZS methods and their impact on the data rate are given below.
 
 For purposes of this discussion, the nominal ZS threshold is set to be the ADC counts equivalent to 0.5\,MeV energy deposited
 as ionization which is collected by a single wire. It is assumed that the application of zero-suppression at this
-threshold completely removes ADC counts due to just noise. % although an estimate of data rates due to noise is given.
+threshold completely removes ADC counts due to noise. % although an estimate of data rates due to noise is given.
 Estimations of different sources of ZS data are summarized in Table~\ref{tab:zs-volume}.
 
 In order to better preserve the shape of the signal waveform digitized and recorded for
 each channel, a more complex strategy may be applied where the data is accepted in additional
-time windows before and after the ``main'' pulse which exceeds the nominal ZS threshold. This
-is a subject of R\&D at the time of writing. Obviously, implementation of such scheme will lead
-to an increase in the recorded data volume compared to the minimalistic version. Assuming that
+time windows before and after a pulse which exceeds the ZS threshold.  For symmetry, samples on neighboring
+wires can be included as well, though this latter feature is more difficult to implement.
+Zero-suppression algorithms are a subject of R\&D at the time of writing.   Adding neighboring time bins
+and/or channels will increase in the recorded data volume compared to the minimal version. Assuming that
 each extra window is comparable in duration to the peak of the signal above the threshold,
 a rough estimate is that this factor could be on the scale of a factor of 2 or 3. However, given
 that the design of this and other compression algorithms is still ongoing, and for better consistency
@@ -352,23 +354,23 @@ An additional FS data estimation is given for the Supernova Burst (SNB).}
 \label{tab:zs-volume}
 \end{table}
 
-One other factor that must be considered in any discussion or implementation of ZS is the data design,
-i.e. the method and format by which the sparse zero-suppressed data is packaged and included into
-data stream and put into storage. As some examples show (see~\ref{sec:data-compression})
+The data design, i.e. the method and format by which the sparse zero-suppressed data is packaged and included into
+data stream and put into storage, must be considered.
+As examples show (see~\ref{sec:data-compression})
 there can be gross inefficiencies in the data format due to implicit dependencies
 on software components and algorithms used in the applications handling these data.
 Numbers shown in Table~\ref{tab:zs-volume} for cosmic-$\mu$ and beam-$\nu$
 are therefore a known overestimation. They are presented as they reflect the status
-of a few software components at the time creation of the DUNE Conceptual Design Report,
+of software components available for the DUNE Conceptual Design Report,
 however the final numbers will be revised downward in \ref{sec:fd-data-volume-summary}
 before inclusion into the Computing Model.
 
 \subsubsection{Atmospheric $\nu$}
 \label{sec:atmo-nu}
-Measurements with atmospheric neutrinos are an important (although not primary) science objective in DUNE.
+Measurements with atmospheric neutrinos are an important (although not a primary) science objective in DUNE.
 Estimated of rates for such events are given in~\cite{sciopps,cdr_vol2} and are at the level of $\sim$
 4$\times$10$^3$\,year$^{-1}$ for a 40\,kt detector. Judging by the data in Table~\ref{tab:zs-volume},
-contribution from atmospheric $\nu$ will be less than the smallest entry in this table \mbox{(beam-$\nu$)}, so for sake
+contribution from atmospheric $\nu$ will be less than the smallest entry in this table \mbox{(beam-$\nu$)}, so for the sake
 of brevity this item will be ignored for purposes of data volume estimations.
 
 \subsubsection{$^{39}$Ar Decays}
