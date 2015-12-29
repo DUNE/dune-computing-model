@@ -393,7 +393,7 @@ Based on the likely value of shaping time to be set for the electronics (1-3\,${
 the resulting waveform will be spread over $\sim$10\,$\mu$s or $\sim$20 samples. Because offline signal
 processing is sensitive to tails of waveforms, even more time samples may be required.
 Finally, it is assumed that due to localization of charge a single collection wire and two induction
-wires in each view will register an appreciable signal.
+wires will register an appreciable signal for each decay.
 
 Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
 due to scale of the DUNE TPC the $^{39}$Ar background can generate a very large volume
@@ -401,7 +401,7 @@ of data which is of little interest and far in excess of what can be potentially
 calibration. Recording these data s not justified given their relative lack
 of physics importance, so some mitigation is required and will be developed. The simplest solution
 is to increase the ZS threshold to be above the decay endpoint.
-This may have a negative effect on detector performance due to removing small energy
+This will have a negative effect on detector performance due to the removal of small energy
 depositions associated with larger events and thus will only be
 considered if absolutely required to mitigate the rate.
 
@@ -423,25 +423,9 @@ in the same APA bringing the added data rate to about 10\% that of the beam-$\nu
 For the purposes of DUNE data volume estimates, the Supernova Burst (SNB)
 data is considered assuming a
 \textit{false-positive} SNB rate of 12~year$^{-1}$ and a Far Detector LArTPC
-readout time of 10\,s.
-
-It should be emphasized that both these parameters (false positive rate and
-the digitization window) are subject to
-modification and are used simply to provide benchmark examples.
-
-For example,  it is clear that the number of accepted false-positive signals
-can't be too low as they affectively constitute sample of the background
-to extremely rare events and it is imperative to characterize and thoroughly
-understand such backgrounds. It is not unconceivable that DUNE will decide
-to record 10$^2$ of such event annually, however as will be shown this
-would result in a large volume of data and will require proper R\&D to be
-implemented.
-
-Likewise, according to a few models, neutrino signal from the SNB can be spread
-in fact as wide as over a 30\,s period, and although it peaks sharply in the first 0.5\,s
-the tail of the flux would still carry valuable physics information. So again,
-the nominal 10\,s window used in this document is a nominal value used to understand
-the scale of the data.
+readout time of 10\,s.  These parameters are arbitrary and may be optimized later in order
+to maximize DUNE's physics capability.  False-positive SNB readouts will be used to constrain
+background rates for SNB triggers passing full selection requirements.
 
 The SNB events are predicted to have a unique signature whereby
 neutrino interactions will produce on order of 10$^3$ events across
@@ -459,9 +443,8 @@ ranging in 10-40 MeV such as:
 
 \end{itemize}
 
-Under this circumstances, 
-the most likely source of a false positive SNB trigger may be an upward
-fluctuation in the registered rate of $^{39}$Ar decays.
+A likely source of a false positive SNB trigger may be an upward
+fluctuation in the registered rate of $^{39}$Ar or other radioactive decays.
 It can therefore be assumed that the data volume of a
 false-positive SNB trigger is dominated by $^{39}$Ar decays.
 
@@ -469,21 +452,22 @@ In order to ensure optimal efficiency of detection for the SNB neutrinos,
 an  additional trigger stream must be put in place in which
 reduction of $^{39}$Ar background (such as described in \ref{sec:ar39decays}) will not be employed,
 as it would potentially impact the SNB neutrinos. Hence, this background 
-will dominate the data volume. Contribution to the data volume due to the SNB events
+will dominate the data volume. The contribution to the data volume due to the SNB events
 themselves is not significant.
 
-Further, a lower ZS threshold (or no ZS at all) may be considered for saving such candidate SNB events.
-Once a candidate is identified, the possible instantaneous data rate is thus bound by the nominal
+Further, a lower ZS threshold (or no ZS at all) may be considered for saving such candidate SNB events, as the
+collection of signals from nuclear de-excitation photons may be useful in separating signals from backgrounds.
+Once a candidate supernova burst is identified, the possible instantaneous data rate is thus bound by the nominal
 ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates requires additional study
-and may have implications on DAQ hardware.
+and will have implications on DAQ hardware and software design.
 
 While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
 flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis indicated it was a false positive,
 for the following reasons:
 \begin{itemize}
 
-\item As already sated above, false-positive events need to be studied in detail since the effectively constitute a
-background for a very rare class of events.
+\item False-positive events need to be studied in detail in order to determine the background
+rates for a very rare class of events.
 
 \item Apart from the scenario where the SNB neutrino signal is prompt with respect to the electromagnetic signal
 and therefore can be exploited to provide an early warning to astronomers, there are other intruiguing possibilities
@@ -503,17 +487,18 @@ For these reason it is assumed that such data will be collected, transmitted and
 
 \subsubsection{Nucleon Decay}
 \label{sec:pdk-data}
-In the hypothetical nucleon decay event, the mode $p \rightarrow K^+\bar{\nu}$ is considered the most promising
-for DUNE  from the discovery point of view due to potentially excellent  identification and energy measurement for the $K^+$ \cite{cdr_vol2}.
+The decay mode $p \rightarrow K^+\bar{\nu}$ is considered the most promising
+for DUNE  from the discovery point of view due to the excellent  
+identification and energy measurement for the $K^+$ \cite{cdr_vol2}.
 Kaons from free proton decay are expected to have a kinetic
 energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic energy of a kaon
 emitted from an $^{40}$Ar nucleus undergoing a nucleon decay event is expected to be in the range
 0 to 200 MeV~\cite{muon_bkgd_pdk}.
 
-Backgrounds for this decay mode do exist. One such background is due to atmospheric neutrinos,
-but as argued in \ref{sec:atmo-nu} the corresponding event rate would be quite small to have
-a material effect on the \textit{volume of data} which the focus here -- discriminating against such
-background in offline is of course a separate issue.
+Backgrounds for this decay mode do exist and must be constrained with data measurements.
+One such background is due to atmospheric neutrinos,
+but as argued in \ref{sec:atmo-nu} the corresponding event rate has a negligible impact on the
+data volume which the focus here.
 
 Another source of background are the cascades initiated by cosmic $\mu$ outside of the fiducial
 volume with a neutral particle causing an interaction in the TPC. It is logical to assume that the rate
@@ -543,6 +528,10 @@ equivalent ZS threshold represents a 5\,$\sigma$ cut. Across the 1,536,000 chann
 10,800 samples per readout this gives about 5,000 samples above the nominal ZS threshold.
 Their distributed nature and isolated pattern of appearance make them subject to the same rejection
 criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
+The presence of a strong source of common-mode noise will invalidate this reasoning and can dominate
+the data volume without some sort of mitigation.  Readout of neighboring channels can provide meausurements
+of common-mode noise components which can be subtracted from signals offline.  These strategies are not
+included in this current computing model.
 
 
 \subsubsection{High-Energy Threshold}
