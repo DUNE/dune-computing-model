@@ -2,25 +2,43 @@
 \subsubsection{Overview}
 
 For s detailed presentation of requirements to DUNE offline software please see Section~\ref{sec:req-software}.
-A few items worth mentioning which will be pursued in DUNE are achitectural compliance, revision control and release methodology,
-code review and documentation etc. DUNE will have to create a ``supported platform'' policy which will define the mechanisms by
+A few important items which will be pursued in DUNE are achitectural compliance, code review, revision control, release methodology,
+ and documentation. Due to the large size of the Collaboration and diversity of its distributed
+ computing resources DUNE will have to create a ``supported platform'' policy which will define the mechanisms by
 which platforms are selected for support, retired from
 supported status and what level of support and methods for its delivery will be provided.
 
-Just as the vast majority of other physics experiments in HEP and Intensity Frontier, DUNE relies on the ROOT\cite{root}
-system as the foundation of a wide spectrum of its software.
+Just like the vast majority of other physics experiments in HEP and Intensity Frontier, DUNE relies on the ROOT\cite{root}
+system as the foundation of a wide spectrum of its software. It forms the basis for the \textit{art} framework\cite{art},
+\textit{artdaq} -- a DAQ framework which is an extension of \textit{art},
+and LArSoft -- a software suite for simulation and reconstruction of
+events in Liquid Argon TPC, which also also built on top of \textit{art}.
 
-\subsubsection{Release managememt and Comtinuous Integration}
-At the time of writing DUNE is already investing effort in managing releases of the LArSoft software. Continuous Integration (CI) services are provided
+GEANT 4~\cite{geant4} is used in a variety of application in DUNE as the main simulation engine, and it integrated
+into LArSoft and other simulation tools. MARS is used for estimation of complex radiological backgrounds and for
+beam line simulation.
+
+\subsubsection{Release managememt and Continuous Integration}
+At the time of writing DUNE is already investing effort in managing releases of the LArSoft software.
+Continuous Integration (CI) services are provided
 by FNAL's Scientific Computing Division, and in particular Jenkins \cite{jenkins} system is utilized for CI.
+
+One of the challenges in managing DUNE software is active use of LArSoft across a few experiments in the
+Intensity Frontier, which constantly leads to new requirements, features and otherwise results in updates
+of the design and interfaces of this software suite. Different branches may have compatibility issues.
 
 \subsubsection{Software provisioning}
 DUNE (like its predecessor LBNE) is using a few different methods to deploy its software on sites outside of FNAL,
 both for interactive use by delvelopers and researchers and to provision software to  Worker Nodes
-in batch system configuration.
+in batch system configuration. Currently products like \textit{art} and LArSoft can be built from source (including
+the components they depend on, e.g. ROOT) using utilities created and maintained by the FNAL Scientific Computing
+Division. This method can be used to make this software available on a cluster or interactive workstations outside
+of FNAL.
 
 DUNE is following the common trend of delivering software via the networks, in particular experience has been gained with
 CernVM-FS (Cern-VM File System, commonly called CVMFS) \cite{cvmfs}. It is a network file system based on HTTP and
 optimized to deliver experiment software in a fast, scalable,
 and reliable way. It was originally designed to decouple the life cycle management of the application software releases
-from the operating system of a specific configuration of a Virtual Machine, ``CERNVM''. Now it is often used on
+from the operating system of a specific configuration of a Virtual Machine, ``CERNVM''. Now it is often used independently
+from its original purpose and has proven itself as efficient tool for software delivery to worker nodes in systems and locations
+where complete installation (``build'') of DUNE software is not practical or desirable.
