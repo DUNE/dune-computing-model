@@ -46,6 +46,7 @@ triggered by a beam particle. Ionization from these tracks will create signals w
 component being a small fraction of the data.
 
 \subsubsection{Zero Suppression and Compression}
+\label{sec:protodune-zs}
 Given the number of channels, the readout window duration and the ADC clock frequency, it's easy to see that recording the ``full stream'' of data
 in protoDUNE would be an enormous challenge and far beyond the resources that can be allocated to the experiment. What's more important,
 even in the conditions of the cosmic muon background, at any given time during the readout window only a fraction of wires will carry signals
@@ -56,8 +57,8 @@ and noting the significant amount of cosmic ray background at sea level.
 %  As was shown in Sec.~\ref{calibration},
 As already mentioned in \ref{sec:protodune-data-volume}, due to nominal values of the cosmic ray muon flux and the parameters of the protoDUNE TPC,
 there is expected to be on average $\sim$23 cosmic muon track segments per readout window and on top of the actual beam event.
-Given that a 4 GeV Minimum Ionizing Particle (MIP) will produce on average 80~kbyte of data, the resulting number of particles in
-a readout window will result in the readout of 6~MB per beam event. 
+Given that a 4\,GeV Minimum Ionizing Particle (MIP) will produce on average 80\,kB of data, the resulting number of particles in
+a readout window will result in the readout of 6\,MB per beam event. 
 
 %This assumes that you have 80~kbyte per 4 GeV mip and that cosmic muons at the surface have an averagae enegy of 4 GeV
 %Multiply by (68 muons + 1 beam particle) we get 5.5 MB. This is based on 600kB zero suppressed readout of 3 drift windows in 35 t for 2048 channels. 
@@ -108,15 +109,15 @@ Since overlay of cosmic ray muons over beam events is stochastic in nature, the 
 %electron of 4GeV/c momentum MC calculations indicate an average event size of $\sim$2MB, after zero-suppression.
 %This is less than 1\% of the estimate quoted above. 
 
-\fxnote{please review the event size and statistics once more}
+% \fxnote{please review the event size and statistics once more}
 The total particle statistics in the preliminary run plan
 % (Table~\ref{tab:RunPlan})
  is approximately 5M events in total.  Taking into account the data load per event,
 this leads to the estimate of $\sim$500 TB of nominal data volume to be collected in this experiment. 
 
-In summary, we expect that tape storage of $O(1 $PB$)$ size will be required and a somewhat more modest disk space for raw data staging at CERN, for replication purposes.  We envisage storing the primary copy of raw data at CERN, with replicas at additional locations. 
+In summary, we expect that tape storage of O(1\,PB) size will be required and a somewhat more modest disk space for raw data staging at CERN, for replication purposes.  We envisage storing the primary copy of raw data at CERN, with replicas at additional locations. 
 %
-Processed and Monte Carlo data placement will require additional resources that are addressed in Section \ref{dataprocess}.
+Processed and Monte Carlo data placement will require additional resources that are addressed in Section \ref{sec:protodune-dataprocess}.
 
 
 \subsubsection{Data transmission and distribution}
@@ -161,7 +162,7 @@ with the Open Science Grid Consortium.
 
 
 \subsubsection{Data processing}
-\label{dataprocess}
+\label{sec:protodune-dataprocess}
 
 In addition to the raw data preparations being made for offline data handling, processing and storage.
 The offline data can be classified as follows:
