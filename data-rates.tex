@@ -21,10 +21,10 @@ Detector (ND) (see~\ref{sec:nds-params}) is complex and most data metrics are ye
 
 \subsection{DUNE Detectors and Subsystems}
 
-\subsubsection{Parameters of the Far Detector LArTPC}
+\subsubsection{Parameters of the Far Detector LArTPC (reference design)}
 \label{sec:fundamental-parameters}
 
-The fundamental TPC parameters most relevant as input to the data rate estimations are summarized in
+The parameters of the reference TPC design (single-phase) most relevant as input to the data rate estimations are summarized in
 table~\ref{tab:fundamental-parameters}.
 
 \begin{table}[ht!]
@@ -82,17 +82,53 @@ The SiPMs are read out using shielded twisted-pair cables and the signal is pass
 Processor). Digitized data is processed by a  Field-Programmable Gate Array (FPGA). The use
 of the FPGA processing allows for a significant amount of customization of the SSP operation.
 
+\subsubsection{Parameters of the Far Detector LArTPC (alternative design)}
+Parameters of the alternative (dual-phase) LArTPC design are presented below in Table~\ref{tab:alt-fundamental-parameters}.
+The alternative design can use a cryostat design similar or identical  to the reference one. The sensitive element of the detector
+are Charge-Readout planes (CRP), and amplification of the ionization charges in the extremely pure
+argon gas is achieved by using micro-pattern avalanche gas detectors (see~\cite{cdr_vol2} for more technical detail).
+
+In the current version of the alternative detector design the photon detection capability is achieved by placing a large number
+of cryogenic PMTs inside the LArTPC volume.
+
+\label{sec:alt-fundamental-parameters}
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{| p{2.5in} | p{1in} |}
+		\hline
+		\textbf{Parameter} & \textbf{Value} \\ \hline
+
+%Full height & 12.0\,m \\ \hline
+%Full width & 12\,m \\ \hline
+Full length & 60\,m \\ \hline
+Detectors & 4.0 \\ \hline
+channel/CRP & 1920 \\ \hline
+CRP/detector & 80 \\ \hline
+Active height & 12.0\,m \\ \hline
+Active width  & 12.0\,m \\ \hline
+Drift distance & 12.0\,m \\ \hline
+Drift velocity & 1.6\,mm/$\mu$s \\ \hline
+Drift time & 7.5\,ms \\ \hline
+bytes/sample & 1.5 \\ \hline
+sample rate & 2.5\,MHz \\ \hline
+\# drifts/readout & 1.0 \\ \hline
+readout time & 7.5\,ms \\ \hline
+samples/readout & 18750 \\ \hline
+	\end{tabular}
+	\caption{Basic parameters of the alternative Far Detector design.}
+	\label{tab:alt-fundamental-parameters}
+\end{table}
 
 \subsubsection{The Near Detector Systems}
 \label{sec:nds-params}
 Only basic information is provided here for the Near Detector Systems (NDS) which are under active development
-and for which there is no final design yet. The main NDS components are:
+and for which there is no final design yet. According to the reference design, the main NDS components are:
 \begin{itemize}
 \item Near neutrino detector (NND), and its major component, the Fine-Grained Tracker
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-In the reference design~\cite{cdr_vol4_docdb},, the Fine-Grained Tracker (FGT) near consists of a straw-tube
+In the reference design~\cite{cdr_vol4_docdb}, the Fine-Grained Tracker (FGT) near consists of a straw-tube
 tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimeter (ECAL), all placed inside of a 0.4\,T dipole magnet.
 
 \begin{table}[ht!]
@@ -210,7 +246,9 @@ $^{39}$Ar decays rejection.
 \subsubsection{Full-stream Data}
 
 Full-stream (FS) data corresponds to reading all data in every ADC channel without
-application of any threshold.  The corresponding rate does not depend on the 
+application of any threshold, meaning that data will stream out of each channel
+with frequency defined by the ADC clock. For this reason,
+the corresponding rate does not depend on the 
 activity in the detector or the noise
 level of the electronics, although these factors affect the performance of data compression.
 It is the most voluminous type of data
@@ -379,7 +417,7 @@ Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the d
 due to the following:
 \begin{itemize}
 \item The end point of the $^{39}$Ar $\beta$-decay is at 565\,keV and about
-25\% of the beta spectrum is above the ZS threshold \cite{ar39endpoint}.
+25\% of the beta spectrum is above the nominal ZS threshold \cite{ar39endpoint}.
 
 \item The expected decay rate of $^{39}$Ar is approximately one decay per second per kilogram of natural Ar\cite{ar39bkg}.
 \end{itemize}
