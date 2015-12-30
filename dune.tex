@@ -524,17 +524,5 @@ HTCondor facilities with GlideinWMS extensions to reach available resources else
 Where needed, \textit{jobsub} leverages the CVMFS network file system for software provisioning and the \textit{ifdh} data handling tool which integrates
 with SAM, dCache, Amason S3 etc.
 
-\subsection{Offline Software}
-\subsubsection{Overview}
-
-For s detailed presentation of requirements to DUNE offline software please see Section~\ref{sec:req-software}.
-A few items worth mentioning here are achitectural compliance, revision control and release methodology, code review and documentation etc.
-DUNE will have to create a ``supported platform'' policy which will define the mechanisms by which platforms are selected for support, retired from
-supported status and what level of support and methods for its delivery will be provided.
-
-\subsubsection{Release managememt and Comtinuous Integration}
-At the time of writing DUNE is already investing effort in managing releases of the LArSoft software. Continuous Integration (CI) services are provided
-by FNAL's Scientific Computing Division, and in particular Jenkins \cite{jenkins} system is utilized for CI.
-
-\subsubsection{Software provisioning}
+\input{offline}
 
