@@ -83,15 +83,16 @@ Processor). Digitized data is processed by a  Field-Programmable Gate Array (FPG
 of the FPGA processing allows for a significant amount of customization of the SSP operation.
 
 \subsubsection{Parameters of the Far Detector LArTPC (alternative design)}
+\label{sec:alt-fundamental-parameters}
 Parameters of the alternative (dual-phase) LArTPC design are presented below in Table~\ref{tab:alt-fundamental-parameters}.
-The alternative design can use a cryostat design similar or identical  to the reference one. The sensitive element of the detector
+The alternative design can use a cryostat design with dimensions and parameters similar or identical  to the reference one.
+The sensitive element of the detector
 are Charge-Readout planes (CRP), and amplification of the ionization charges in the extremely pure
 argon gas is achieved by using micro-pattern avalanche gas detectors (see~\cite{cdr_vol2} for more technical detail).
 
 In the current version of the alternative detector design the photon detection capability is achieved by placing a large number
 of cryogenic PMTs inside the LArTPC volume.
 
-\label{sec:alt-fundamental-parameters}
 \begin{table}[ht!]
 	\centering
 	\begin{tabular}{| p{2.5in} | p{1in} |}
@@ -100,9 +101,9 @@ of cryogenic PMTs inside the LArTPC volume.
 
 %Full height & 12.0\,m \\ \hline
 %Full width & 12\,m \\ \hline
-Full length & 60\,m \\ \hline
+Full length & 60.0\,m \\ \hline
 Detectors & 4.0 \\ \hline
-channel/CRP & 1920 \\ \hline
+channel/CRP & 1,920 \\ \hline
 CRP/detector & 80 \\ \hline
 Active height & 12.0\,m \\ \hline
 Active width  & 12.0\,m \\ \hline
@@ -112,8 +113,9 @@ Drift time & 7.5\,ms \\ \hline
 bytes/sample & 1.5 \\ \hline
 sample rate & 2.5\,MHz \\ \hline
 \# drifts/readout & 1.0 \\ \hline
-readout time & 7.5\,ms \\ \hline
-samples/readout & 18750 \\ \hline
+Readout time & 7.5\,ms \\ \hline
+Samples/readout & 18,750 \\ \hline
+Total \# of channels & 614,400  \\ \hline
 	\end{tabular}
 	\caption{Basic parameters of the alternative Far Detector design.}
 	\label{tab:alt-fundamental-parameters}
@@ -316,9 +318,9 @@ of recording data in DUNE.
 
 \subsubsection{Potential capabilities of the Far Detector TPC DAQ system}
 \label{sec:daq-assumptions}
-For more detail on the DUNE Data Acquisition see Section~\ref{sec:daq}. One of its central components
-is an array of \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1}, which offer very high
-readout speeds, considerable real-time computing power and flexibility of system configuration.
+For more detail on the DUNE Data Acquisition for the reference (single-phase) design see Section~\ref{sec:daq}.
+One of its central components is an array of \textit{Reconfigurable Cluster Elements} (RCE)~\cite{slac_rce_1},
+which offer very high readout speeds, considerable real-time computing power and flexibility of system configuration.
 
 In addition to considerations of various signal sources, the data rate estimates depend on capabilities of the DAQ system,
 the data compression algorithms and radiological background rejection techniques.
@@ -437,7 +439,9 @@ Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
 due to scale of the DUNE TPC the $^{39}$Ar background can generate a very large volume
 of data which is of little interest and far in excess of what can be potentially useful for data QA and
 calibration. Recording these data s not justified given their relative lack
-of physics importance, so some mitigation is required and will be developed. The simplest solution
+of physics importance, so some mitigation is required and will be developed.
+
+The simplest solution
 is to increase the ZS threshold to be above the decay endpoint.
 This will have a negative effect on detector performance due to the removal of small energy
 depositions associated with larger events and thus will only be
@@ -500,8 +504,8 @@ ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates 
 and will have implications on DAQ hardware and software design.
 
 While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
-flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis indicated it was a false positive,
-for the following reasons:
+flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis indicated it was
+likely a false positive, for the following reasons:
 \begin{itemize}
 
 \item False-positive events need to be studied in detail in order to determine the background
@@ -515,7 +519,7 @@ channels \cite{cdr_vol2}.
 
 \item Since a long-timescale, sensitive search yielding no bursts will provide limits on the rate of core-collapse
 supernovae, it may be neccessary to perform careful statistical analysis of potential candidates, which realistically can only
-be done offline.
+be done offline and with a dataset of sufficient size.
 
 \item Such data can be used to better understand and improve online algorithms.
 
@@ -581,10 +585,11 @@ equivalent ZS threshold represents a 5\,$\sigma$ cut. Across the 1,536,000 chann
 10,800 samples per readout this gives about 5,000 samples above the nominal ZS threshold.
 Their distributed nature and isolated pattern of appearance make them subject to the same rejection
 criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
+
 The presence of a strong source of common-mode noise will invalidate this reasoning and can dominate
 the data volume without some sort of mitigation.  Readout of neighboring channels can provide meausurements
 of common-mode noise components which can be subtracted from signals offline.  These strategies are not
-included in this current computing model.
+included in the  current Computing Model.
 
 
 \subsubsection{High-Energy Threshold}
@@ -679,7 +684,7 @@ on data presented in Fig.~\ref{fig:data-compression} and
 introducing a ``safety factor'' of 2 since the exact performance
 of the data structures used in the final detactor cannot be precisely predicted at this time.
 
-\subsubsection{High-Threshold data volume summary (revised)}
+\subsubsection{Summary of the Revised High-Energy Threshold Data Volume}
 \label{sec:fd-data-volume-summary}
 Taking into account arguments presented above, and uncertainties of up to factor of 3 in the Zero Suppression
 performance to be realized in the final system (see~\ref{sec:zs-data}), we summarize data volume estimate for
@@ -696,7 +701,18 @@ Nucleon Decay cand. & - & 0.6\,MB & - & 480\,GB \\ \hline
 \label{tab:fd-data-volume-summary}
 \end{table}
 
-
+\subsubsection{A Note on Estimations for the Alternative Far Detector Design}
+As stated in the introduction to this document, the focus of the present Computing Model
+is on the reference design for both Far and Near detectors, so no detailed calculations will
+be provided in this version for the data rate estimations for the alternative design. It is
+instructive however to examine the fundamental parameters of the dual-phase design
+such as presented in Table~\ref{tab:alt-fundamental-parameters} from the point of view of
+extrapolation -- in comparison to the reference design. Clearly the dual-phase design features
+a longer electron drift time and longer readout window. At the same time the channel count
+is $\sim$2.5 times smaller than in the single-phase TPC. ADC digitization frequency is similar in both cases.
+Qualitatively, this translates in a similar full-stream data rate (in terms of order of magnitude) 
+in either design. Characteristics of zero-suppression in the dual-phase LArTPC will need further
+study though.
 
 \subsection{The Near Detector Data}
 \label{sec:nds-event-rates}
@@ -727,28 +743,29 @@ More information will be added to these estimates as the R\&D in this area progr
 
 \subsection{Treatement of the Near Detector vs the Far Detector Data}
 \label{sec:near-vs-far-data}
-There is a small but important detail concerning how the ND and FD data streams are to be treated, and that is they are treated
-separately i.e. not merged into common files.  This is due to the fact that these detectors are effectively looking at different sets
-of events and there is no reason to complicate processing of the data by introducing such dependencies.
-
-In general, they are also be processed in separate production streams and will require different and
-distinct calibration procedures.
+The Far and Near detectors are effectively looking at different sets of events
+(since there is no event-level correlation in the respective recorded data), so
+there is no reason to complicate logistics and processing of the data by introducing dependencies
+across these different datasets and/or merge data in common files. The ND and FD data streams will be treated and processed separately
+ and will require different and distinct calibration procedures.
 
 \subsection{Monte Carlo Data}
 \label{sec:mc-data-estimates}
 \subsubsection{Overview}
-DUNE makes extensive use of Monte Carlo (MC) Simulations to optimize it multiple components and subsystems and is as an enabling factor in its physics
-analysis. This area is an essential part of the Computing Model and issues related to characteristics of the Monte Carlo data must be addressed.
-The following simulation areas are of particular interest:
+DUNE makes extensive use of Monte Carlo (MC) Simulations to design and optimize its multiple components and
+subsystems and also is an enabling factor in its physics analysis. This area is an essential part of the Computing Model
+and issues related to characteristics of the Monte Carlo data must be addressed.
+The following simulation areas include the following in no particular order:
 \begin{itemize}
 \item Beamline and Target simulations
+\item Reconstruction Techniques for the Far Detector
 \item Far Detector characterization
 \item Near Detector Systems R\&D
 \end{itemize}
 
 \noindent
-In addition to the above, DUNE must provide the necessary MC support for its vigorous prototyping program such as for the 35t detector
-at FNAL and protoDUNE at CERN (see Sec.~\ref{sec:dune-prototypes} for more details), and this activity is largely aligned with the Far
+In addition to the above, DUNE must provide the necessary MC support for its prototyping program such as for the 35t detector
+at FNAL and protoDUNE at CERN (see Sec.\ref{sec:dune-prototypes} for more details), and this activity is largely aligned with the Far
 Detector simulations.
 
 In this section the focus is on quantifying the parameters of the data and the requisite CPU requirements will be considered separately.
