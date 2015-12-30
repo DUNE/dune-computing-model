@@ -14,10 +14,15 @@ For that reason, the data rate estimations involve broad assumptions
 and leave open some choices. This is described in more detail in the following subsections.
 
 Of the DUNE detector systems, the Far Detetor (FD) Liquid Argon TPC will present the most
-challenges from the standoint of real-time data processing and triggering, and can potentially dominate the data volume.
-The FD's Photon Detector (PD) produces less data so it won't be the focus
-for the purpose of the data rate and volume estimates.  The Near
-Detector (ND) (see~\ref{sec:nds-params}) is complex and most data metrics are yet to be developed for it.
+challenges from the standpoint of real-time data processing and triggering, and can potentially dominate the data volume
+(see \ref{summary-annual-volume}).
+Based on the parameters of the Photon Detector integrated into the TPC it is expected to produce
+significantly less data so it won't be the focus for the purpose of the data rate and volume estimates.
+
+Based on the reference design of the Near Detector (\ref{sec:nds-params}) it is estimated that
+the annual volume of data in this design will be substantial, and certainly far larger than data due to beam
+neutrinos in the Far Detector, but not to the extent that this becomes a challenge for the modern type of inftrastructure
+(see~\ref{sec:nds-event-rates}).
 
 \subsection{DUNE Detectors and Subsystems}
 
@@ -85,10 +90,13 @@ of the FPGA processing allows for a significant amount of customization of the S
 \subsubsection{Parameters of the Far Detector LArTPC (alternative design)}
 \label{sec:alt-fundamental-parameters}
 Parameters of the alternative (dual-phase) LArTPC design are presented below in Table~\ref{tab:alt-fundamental-parameters}.
+The drift distance is much larger than in the reference design.
+
 The alternative design can use a cryostat design with dimensions and parameters similar or identical  to the reference one.
 The sensitive element of the detector
 are Charge-Readout planes (CRP), and amplification of the ionization charges in the extremely pure
 argon gas is achieved by using micro-pattern avalanche gas detectors (see~\cite{cdr_vol2} for more technical detail).
+Ionization pattern is recorded in 2D by the CRP, as opposed to three sets of wire planes in the reference design.
 
 In the current version of the alternative detector design the photon detection capability is achieved by placing a large number
 of cryogenic PMTs inside the LArTPC volume.
@@ -240,6 +248,7 @@ the ability to read time bins before and after samples that are above threshold 
 
 \end{description}
 
+\noindent
 The categories thus introduced will be considered in more details in the following sections, for example
 see \ref{sec:zs-data} for a discussion of Zero Suppression and \ref{sec:ar39decays} for a discussion of
 $^{39}$Ar decays rejection.
@@ -314,6 +323,11 @@ volume that the DUNE DAQ is capable of producing (purely in theory).
 \textit{These numbers are not meant to imply ongoing recording of full-stream
 data to permanent storage} and are only given to better define the problem and initial parameters
 of recording data in DUNE.
+
+However, for certain very rare events such as Supernova Burst full-stream
+recording may be implemented for a period of time spanning a few seconds (\ref{sec:snb-data}). It
+will be shown that this may have significant implications for the projected annual data volume and
+on some characteristics of the Computing Model.
 
 
 \subsubsection{Potential capabilities of the Far Detector TPC DAQ system}
@@ -537,9 +551,9 @@ the Photon Detector. Critically important is the issue of radiological backgroun
 $^{39}$Ar will effectively set the lower limit on visible energy for solar $\nu$ detecttion to $\sim$1\,MeV (see~\ref{sec:ar39decays}).
 The total expected rate of solar $\nu$ in the full 40\,kt DUNE LArTPC is $\sim$100 events per day.
 
-This is obviously a very challenging measurement and vigorous R\&D program will be required to make it a possibility in DUNE.
-At the time of writing, there is not enough information to be productively used in formulating the Computing Model, so for the
-purpose of data estimates this source of data will be omitted.
+This is obviously a very challenging measurement and a vigorous R\&D program will be required to make it a
+possibility in DUNE. At the time of writing, there is not enough information to be productively used as input to
+the Computing Model, so for the purpose of data estimates this source of data will be omitted.
 
 
 \subsubsection{Nucleon Decay}
