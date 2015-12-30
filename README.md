@@ -1,5 +1,10 @@
 # DUNE Computing Model
 
+## Editor's notes
+The layout of the document was changed in late December 2015: significant parts of it such as the "Requirements" and sections on computing for the DUNE prototypes were all moved to the appendix with the purpose to make it more readable.
+
+The "head" latex source is not "dune-cm-new-layout".
+
 ## Overview
 This repository contains materials of the DUNE Computing Model. The Computing Model
 document serves the following needs:
