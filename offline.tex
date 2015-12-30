@@ -2,12 +2,25 @@
 \subsubsection{Overview}
 
 For s detailed presentation of requirements to DUNE offline software please see Section~\ref{sec:req-software}.
-A few items worth mentioning here are achitectural compliance, revision control and release methodology, code review and documentation etc.
-DUNE will have to create a ``supported platform'' policy which will define the mechanisms by which platforms are selected for support, retired from
+A few items worth mentioning which will be pursued in DUNE are achitectural compliance, revision control and release methodology,
+code review and documentation etc. DUNE will have to create a ``supported platform'' policy which will define the mechanisms by
+which platforms are selected for support, retired from
 supported status and what level of support and methods for its delivery will be provided.
+
+Just as the vast majority of other physics experiments in HEP and Intensity Frontier, DUNE relies on the ROOT\cite{root}
+system as the foundation of a wide spectrum of its software.
 
 \subsubsection{Release managememt and Comtinuous Integration}
 At the time of writing DUNE is already investing effort in managing releases of the LArSoft software. Continuous Integration (CI) services are provided
 by FNAL's Scientific Computing Division, and in particular Jenkins \cite{jenkins} system is utilized for CI.
 
 \subsubsection{Software provisioning}
+DUNE (like its predecessor LBNE) is using a few different methods to deploy its software on sites outside of FNAL,
+both for interactive use by delvelopers and researchers and to provision software to  Worker Nodes
+in batch system configuration.
+
+DUNE is following the common trend of delivering software via the networks, in particular experience has been gained with
+CernVM-FS (Cern-VM File System, commonly called CVMFS) \cite{cvmfs}. It is a network file system based on HTTP and
+optimized to deliver experiment software in a fast, scalable,
+and reliable way. It was originally designed to decouple the life cycle management of the application software releases
+from the operating system of a specific configuration of a Virtual Machine, ``CERNVM''. Now it is often used on
