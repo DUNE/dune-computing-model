@@ -13,8 +13,16 @@ is being prototyped and extensive simulations will be required.
 that there will be fluctuating resource requirements (mainly CPU) for MC and reconstruction in the course of R\&D
 as the algorithms are improved over the years.
 
-
 \end{itemize}
+
+\noindent
+As many hardware and software components in DUNE are under active development,
+and the final data model has not yet being created, there are necessarily large uncertainties in any resource requirement estimates
+at the time of writing. It is however helpful to review current understanding of the general scale of number so as to provide some
+guidance for DUNE resource need going forward.
+
+In the following, ``best effort'' estimates are presented for resources required by the DUNE prototype work,  R\&D for the final DUNE
+and ballpart values for what DUNE will need at the start of operations.
 
 \subsection{Prototypes}
 \subsubsection{35t}
@@ -40,18 +48,48 @@ Eastimates of protoDUNE storage requirements are fiven in \ref{sec:protodune-zs}
 In summary, the requirements are:
 \begin{itemize}
 
-\item Raw data on disk: $\sim$200\,TB
+\item Raw data on disk: $\sim$500\,TB
 
-\item Disk space to support reconstruction: $\sim$400\,TB
+\item Raw data committed to permanent tape storage: $\sim$500\,TB
 
-\item Raw data committed to permanent tape storage: $\sim$100\,TB
+\item Disk space for staging data at CERN before transmission: $\sim$100\,TB
+
+\item Disk space at FNAL to support reconstruction: $\sim$1\,PB
 
 \item MC data on disk: $\sim$100\,TB
 
-\item CPU for reconstruction: $\sim4\times10^6$\,hours scaled to a ``standard'' Fermigrid node. This translates into $\sim$500 Worker Nodes
+\item CPU for reconstruction: $\sim$O(1000) Worker Nodes
 committed over a period of one year in order to get the data processed during that time.
 
 \end{itemize}
 
 \subsection{DUNE}
-\ref{summary-annual-volume}
+\subsubsection{Data Volume and Storage Requirements}
+Projections for various sources of data in DUNE and associated data volumes are given in
+Table \ref{tab:summary-data-table} with comments provided in \ref{summary-annual-volume}.
+Under assumptions given throughout Section \ref{sec:data-characteristics} and further detailed
+in \ref{sec:data-rate-and-volume-estimates}, the synopsis is as follows:
+\begin{itemize}
+
+\item Recording Supernova Burst candidate events and preserving them for detaiedl analysis (which is necessary to take
+full advantage of this unique capability in DUNE) will result in excess of $\sim$500\,TB of raw data annually, under the assumption
+of 12 false positives per year. This is the largest single source of raw data in DUNE.
+
+\item The Near Detector Systems are the second largest source of data with initial estimates of $\sim$100\,TB of raw data annualy.
+
+\item Beam neutrino events, cosmic muon events and proton decay events combined are expected to produce
+much less raw data than the leading sources, on the scale of  $\sim$5\,TB. Possible implications of this fact
+are discussed in \ref{sec:implications-of-data-estimates} on page \pageref{sec:implications-of-data-estimates}.
+
+\item MC data on disk: $\sim$40\,TB (annual).
+
+\item Ratio of derived data to its source (whether its raw or MC) is assumed to be 2 based on extrapolation from other experiments.
+
+\item An additional factor of 4 (the ``headroom'') is required to support reprocessing of the data (such as with improved calibrations etc)
+and running two concurrent releases of DUNE software.
+
+\end{itemize}
+
+In summary, the estimated total storage requirement is estimated as $\sim$6\,PB.
+
+\subsubsection{CPU Requirements}
