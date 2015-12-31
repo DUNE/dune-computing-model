@@ -13,7 +13,7 @@ readiness at the time of writing.  The same applies to various analysis software
 For that reason, the data rate estimations involve broad assumptions
 and leave open some choices. This is described in more detail in the following subsections.
 
-Of the DUNE detector systems, the Far Detetor (FD) Liquid Argon TPC will present the most
+Of the DUNE detector systems, the Far Detector (FD) Liquid Argon TPC will present the most
 challenges from the standpoint of real-time data processing and triggering, and can potentially dominate the data volume
 (see \ref{summary-annual-volume}).
 Based on the parameters of the Photon Detector integrated into the TPC it is expected to produce
@@ -21,7 +21,7 @@ significantly less data so it won't be the focus for the purpose of the data rat
 
 Based on the reference design of the Near Detector (\ref{sec:nds-params}) it is estimated that
 the annual volume of data in this design will be substantial, and certainly far larger than data due to beam
-neutrinos in the Far Detector, but not to the extent that this becomes a challenge for the modern type of inftrastructure
+neutrinos in the Far Detector, but not to the extent that this becomes a challenge for the modern type of infrastructure
 (see~\ref{sec:nds-event-rates}).
 
 \subsection{DUNE Detectors and Subsystems}
@@ -34,13 +34,14 @@ table~\ref{tab:fundamental-parameters}.
 
 \begin{table}[ht!]
 	\centering
+	\caption{Parameters of the DUNE Far Detector LArTPC.}
+	\label{tab:fundamental-parameters}
 	\begin{tabular}{| p{2.5in} | p{1in} |}
 		\hline
 		\textbf{Parameter} & \textbf{Value} \\ \hline
-		Full height (single module) & 12.0\,m \\ \hline
-		Full width (single module) & 14.5\,m \\ \hline
-		Full length (single module) & 58.0\,m \\ \hline
-		\# of detector modules & 4 \\ \hline
+		Module height & 12.0\,m \\ \hline
+		Module width  & 14.5\,m \\ \hline
+		Module length  & 58.0\,m \\ \hline
 		\hline
 		channels per APA & 2,560 \\ \hline
 		APAs per module & 150 \\ \hline
@@ -56,18 +57,17 @@ table~\ref{tab:fundamental-parameters}.
 		sample rate & 2.0\,MHz \\ \hline
 		samples/readout & 10,800 \\
 		\hline \hline
+		\# of detector modules & 4 \\ \hline
 		Total \# of channels & 1,536,000 \\
 		\hline
 	\end{tabular}
-	\caption{Fundamental parameters of DUNE Far Detector LArTPC.}
-	\label{tab:fundamental-parameters}
 \end{table}
 
 Two of the parameters listed above (``drifts/readout'' and ``readout time'') need an additional comment.
 The nominal readout time of 5.4ms is chosen such that additional time windows are covered just before and just
 after the nominal $t_0$ (trigger) window. The value of 5.4\,ms is 2.4 times larger than the nominal drift of 2.25\,ms,
 and it's listed in the table as the ``drifts/readout'' factor. This factor is not calculated precisely but was chosen based
-on experience with the 35t prototype (Sec.\ref{sec:35t}). The motivation behind this exta readout it to capture
+on experience with the 35t prototype (Sec.\ref{sec:35t}). The motivation behind this extra readout it to capture
 potential activity in the TPC just before and just after the event of interest, so as to characterize this extraneous
 ionization which for example can manifest itself as track segments due to cosmic rays background. It is quite
 possible that the readout time will be revised as the final detector design is progressing, however the value of 5.4\,ms
@@ -81,7 +81,7 @@ better than 1\,$\mu$s.  The PD is required to be fully efficient for nucleon dec
 more difficult constraint is the desire to maximize its efficiency to measure the time of supernova neutrino interactions.
 It is anticipated that a significant amount of background rate will arise from radioactive decays near the photon detectors.
 
-Light produced by Liquid Argon Stintillation is collected from the TPC volume by the wavelength shifter and transported
+Light produced by Liquid Argon Scintillation is collected from the TPC volume by the wavelength shifter and transported
 by the light guide to the Silicon Photo-Multiplier (SiPMs) mounted at its end. A single whole assembly is mounted on each  APA frame.
 The SiPMs are read out using shielded twisted-pair cables and the signal is passed to the module called SSP (the SiPM Signal
 Processor). Digitized data is processed by a  Field-Programmable Gate Array (FPGA). The use
@@ -138,7 +138,7 @@ and for which there is no final design yet. According to the reference design, t
 \item Beamline Measurement System (BLM)
 \end{itemize}
 \ 
-In the reference design~\cite{cdr_vol4_docdb}, the Fine-Grained Tracker (FGT) near consists of a straw-tube
+In the reference design~\cite{cdr_vol4_docdb}, the Fine-Grained Tracker (FGT) near detector consists of a straw-tube
 tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimeter (ECAL), all placed inside of a 0.4\,T dipole magnet.
 
 \begin{table}[ht!]
@@ -257,9 +257,7 @@ $^{39}$Ar decays rejection.
 \subsubsection{Full-stream Data}
 
 Full-stream (FS) data corresponds to reading all data in every ADC channel without
-application of any threshold, meaning that data will stream out of each channel
-with frequency defined by the ADC clock. For this reason,
-the corresponding rate does not depend on the 
+the application of any threshold. The corresponding rate does not depend on the 
 activity in the detector or the noise
 level of the electronics, although these factors affect the performance of data compression.
 It is the most voluminous type of data
@@ -365,7 +363,6 @@ that the above DAQ characteristics will indeed be implemented in DUNE.
 
 
 
-
 \subsubsection{Zero-Suppressed Data}
 \label{sec:zs-data}
 The Far Detector LArTPC is expected to operate is very low background conditions. In practice
@@ -373,7 +370,8 @@ this means that in each instance the signals of interest (such as induced by rea
 will only be present in a very small fraction of channels. There are options in choosing the exact zero-suppression (ZS)
 procedure, and the final choice has not been made. The simplest procedure is
 as follows: in each channel, all digitized time bins in which the ADC values are below the given threshold
-are removed. More discussion on possible alternative ZS methods and their impact on the data rate are given below.
+are removed.  The start time bin and a block length need to be supplied for each group of consecutive time bins over threshold
+that is recorded.  More discussion on possible alternative ZS methods and their impact on the data rate are given below.
 
 For purposes of this discussion, the nominal ZS threshold is set to be the ADC counts equivalent to 0.5\,MeV energy deposited
 as ionization which is collected by a single wire. It is assumed that the application of zero-suppression at this
@@ -381,7 +379,7 @@ threshold completely removes ADC counts due to noise. % although an estimate of 
 Estimations of different sources of ZS data are summarized in Table~\ref{tab:zs-volume}.
 
 In order to better preserve the shape of the signal waveform digitized and recorded for
-each channel, a more complex strategy may be applied where the data is accepted in additional
+each channel, a more complex strategy may be applied where the data are accepted in additional
 time windows before and after a pulse which exceeds the ZS threshold.  For symmetry, samples on neighboring
 wires can be included as well, though this latter feature is more difficult to implement.
 Zero-suppression algorithms are a subject of R\&D at the time of writing.   Adding neighboring time bins
@@ -408,7 +406,7 @@ An additional FS data estimation is given for the Supernova Burst (SNB).}
 \label{tab:zs-volume}
 \end{table}
 
-The data design, i.e. the method and format by which the sparse zero-suppressed data is packaged and included into
+The data design, i.e. the method and format by which the sparse zero-suppressed data are packaged and included into
 data stream and put into storage, must be considered.
 As examples show (see~\ref{sec:data-compression})
 there can be gross inefficiencies in the data format due to implicit dependencies
@@ -424,7 +422,7 @@ before inclusion into the Computing Model.
 Measurements with atmospheric neutrinos are an important (although not a primary) science objective in DUNE.
 Estimated of rates for such events are given in~\cite{sciopps,cdr_vol2} and are at the level of $\sim$
 4$\times$10$^3$\,year$^{-1}$ for a 40\,kt detector. Judging by the data in Table~\ref{tab:zs-volume},
-contribution from atmospheric $\nu$ will be less than the smallest entry in this table \mbox{(beam-$\nu$)}, so for the sake
+contribution from atmospheric neutrino events will be less than the smallest entry in this table \mbox{(beam-$\nu$)}, so for the sake
 of brevity this item will be ignored for purposes of data volume estimations.
 
 \subsubsection{$^{39}$Ar Decays}
@@ -433,25 +431,24 @@ Decays of naturally occurring isotope $^{39}$Ar could potentially dominate the d
 due to the following:
 \begin{itemize}
 \item The end point of the $^{39}$Ar $\beta$-decay is at 565\,keV and about
-25\% of the beta spectrum is above the nominal ZS threshold \cite{ar39endpoint}.
+25\% of the beta spectrum is above the nominal ZS threshold~\cite{ar39endpoint}.
 
 \item The expected decay rate of $^{39}$Ar is approximately one decay per second per kilogram of natural Ar\cite{ar39bkg}.
 \end{itemize}
 \noindent
-Due to relatively low energy, ionization due to $^{39}$Ar decays is very localized.
-It is reasonable to assume that spatial dispersion of the charge will be no larger than the wire pitch
-in the direction perpedicular to the drift, and for the most part no larger than the distance drifted
-during one ADC ``time bin''.
+The ionization due to $^{39}$Ar decays is very localized, less than a wire pitch in the direction perpendicular
+to the drift and  and for the most part no larger than the distance drifted
+during one ADC time bin in the direction parallel to the drift.
 
 Based on the likely value of shaping time to be set for the electronics (1-3\,${\mu}s$),
 the resulting waveform will be spread over $\sim$10\,$\mu$s or $\sim$20 samples. Because offline signal
-processing is sensitive to tails of waveforms, even more time samples may be required.
+processing is sensitive to the tails of waveforms, even more time samples may be required.
 Finally, it is assumed that due to localization of charge a single collection wire and two induction
 wires will register an appreciable signal for each decay.
 
 Based on preliminary estimates such as given in table~\ref{tab:zs-volume},
 due to scale of the DUNE TPC the $^{39}$Ar background can generate a very large volume
-of data which is of little interest and far in excess of what can be potentially useful for data QA and
+of data which is of little interest and far in excess of what is needed for data quality assurance and
 calibration. Recording these data s not justified given their relative lack
 of physics importance, so some mitigation is required and will be developed.
 
@@ -518,21 +515,21 @@ ZS $^{39}$Ar rate and the FS rate. The exact strategy for saving SNB candidates 
 and will have implications on DAQ hardware and software design.
 
 While the main goal of the SNB trigger is to provide a close to real-time Supernova Burst alert, the data
-flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis indicated it was
-likely a false positive, for the following reasons:
+flagged by DAQ as candidate should not be discarded immediately (if at all) even if near-time analysis
+classifies it as a false positive, for the following reasons:
 \begin{itemize}
 
 \item False-positive events need to be studied in detail in order to determine the background
 rates for a very rare class of events.
 
-\item Apart from the scenario where the SNB neutrino signal is prompt with respect to the electromagnetic signal
-and therefore can be exploited to provide an early warning to astronomers, there are other intruiguing possibilities
+\item Apart from the scenario in which the SNB neutrino signal is prompt with respect to the electromagnetic signal
+and therefore can be exploited to provide an early warning to astronomers, there are other intriguing possibilities
 such as non-observation of a $\nu_e$ component of a burst in the presence
 of supernovae (or other astrophysical events) observed in electromagnetic or gravitational wave
 channels \cite{cdr_vol2}.
 
 \item Since a long-timescale, sensitive search yielding no bursts will provide limits on the rate of core-collapse
-supernovae, it may be neccessary to perform careful statistical analysis of potential candidates, which realistically can only
+supernovae, it may be necessary to perform careful statistical analysis of potential candidates, which realistically can only
 be done offline and with a dataset of sufficient size.
 
 \item Such data can be used to better understand and improve online algorithms.
@@ -548,7 +545,7 @@ Signatures of solar neutrinos in DUNE are elastic scattering on electrons as wel
 $^{40}$Ar~\cite{cdr_vol2}: $\nu_e+^{40}$Ar $\Rightarrow$ e$^-$+$^{40}$K$^*$. Potential for measurements
 with solar neutrinos will depend on the ability to detect a low energy electron, which includes the issue of light collection by
 the Photon Detector. Critically important is the issue of radiological background -- for example, decays of naturally occurring
-$^{39}$Ar will effectively set the lower limit on visible energy for solar $\nu$ detecttion to $\sim$1\,MeV (see~\ref{sec:ar39decays}).
+$^{39}$Ar will effectively set the lower limit on visible energy for solar $\nu$ detection to $\sim$1\,MeV (see~\ref{sec:ar39decays}).
 The total expected rate of solar $\nu$ in the full 40\,kt DUNE LArTPC is $\sim$100 events per day.
 
 This is obviously a very challenging measurement and a vigorous R\&D program will be required to make it a
@@ -566,7 +563,7 @@ energy of 106\,MeV, and after accounting for effects in the nucleus the kinetic 
 emitted from an $^{40}$Ar nucleus undergoing a nucleon decay event is expected to be in the range
 0 to 200 MeV~\cite{muon_bkgd_pdk}.
 
-Backgrounds for this decay mode do exist and must be constrained with data measurements.
+Backgrounds for this decay mode must be constrained with data measurements.
 One such background is due to atmospheric neutrinos,
 but as argued in \ref{sec:atmo-nu} the corresponding event rate has a negligible impact on the
 data volume which the focus here.
@@ -575,10 +572,11 @@ Another source of background are the cascades initiated by cosmic $\mu$ outside 
 volume with a neutral particle causing an interaction in the TPC. It is logical to assume that the rate
 of such event will be a fraction of the cosmic $\mu$ event rate (see Table \ref{tab:zs-volume})
 since they share the same origin. An example of a background process would be a $K_L^0$ getting
-into the LArTPC and participating in a charge exchange reaction to produce a charged kaon.
-The relatively low cross-section of the charge exchange reaction (on the $\sim$mb scale) will already cause
-suppression of this source of signal compared to the muon rate. Further, estimates show that
-applying a requirement that energy deposition is less than 1-2GeV (which is possible to accomplish
+into the LArTPC and participating in a charge-exchange reaction to produce a charged kaon.
+The relatively low cross-section of the charge-exchange reaction (on the $\sim$mb scale) 
+suppresses the rate of this source of fake signal compared to the muon rate. Further, estimates show that
+applying a requirement that energy deposition is less than 1-2~GeV (which is possible to accomplish
+
 in the DAQ system without sacrificing efficiency of nucleon decay detection) will further reduce
 these events by a factor of 3 to 5~\cite{kudr_bkgd_pdk}.
 % combined with muon flux estimates lead to
@@ -586,7 +584,7 @@ In summary, the rates for such background events are rather low and will
 constitute a few percent of the cosmic $\mu$ events. Given that the event size in this case
 will also be smaller due to lower energy (shorter) tracks, the conclusion is that the data rate
 and volume due to the nucleon decay candidate events won't be large compared to
-other sources of data. For purposes of accounting, a nominal \%10 fraction of data volume due
+other sources of data. For purposes of accounting, a nominal 10\% fraction of data volume due
 to cosmic-$\mu$ is assigned to such candidate events.
 
 \subsubsection{Noise}
@@ -601,9 +599,9 @@ Their distributed nature and isolated pattern of appearance make them subject to
 criteria as $^{39}$Ar, therefore this factor can be ignored for the purposes of data volume estimates.
 
 The presence of a strong source of common-mode noise will invalidate this reasoning and can dominate
-the data volume without some sort of mitigation.  Readout of neighboring channels can provide meausurements
+the data volume without some sort of mitigation.  Readout of neighboring channels can provide measurements
 of common-mode noise components which can be subtracted from signals offline.  These strategies are not
-included in the  current Computing Model.
+included in the current Computing Model.
 
 
 \subsubsection{High-Energy Threshold}
@@ -679,9 +677,9 @@ plots, the change in uncompressed event size is only a minor function of event m
 particle types. This is likely to be due to LArSoft saving additional overhead for all
 channels, even those that have been fully zero-suppressed.
 
-The simulation used to create these estimated included a detector module with
+The simulation used to create these estimated modeled a detector module with
 300,000 wires. The fact that the channel count in the full reference detector is
-some 5 times larger will not change these estimates by a considerable margin
+approximately five times larger will not change these estimates by a considerable margin
 since it is assumed that DAQ/online systems will be capable of
 not only of zero-suppression and compression, but also of suppression
 of diffuse radiological backgrounds (see~\ref{sec:daq-assumptions}).
@@ -695,12 +693,12 @@ background).
 We then select the uncompressed event size to be 2.5\,MB and
 the compressed event size of 0.2\,MB based
 on data presented in Fig.~\ref{fig:data-compression} and
-introducing a ``safety factor'' of 2 since the exact performance
-of the data structures used in the final detactor cannot be precisely predicted at this time.
+introducing a safety factor of two since the exact performance
+of the data structures used in the final detector cannot be precisely predicted at this time.
 
 \subsubsection{Summary of the Revised High-Energy Threshold Data Volume}
 \label{sec:fd-data-volume-summary}
-Taking into account arguments presented above, and uncertainties of up to factor of 3 in the Zero Suppression
+Taking into account arguments presented above, and uncertainties of up to factor of three in the Zero Suppression
 performance to be realized in the final system (see~\ref{sec:zs-data}), we summarize data volume estimate for
 the high energy domain in Table~\ref{tab:fd-data-volume-summary}.
 \begin{table}[ht!]
@@ -755,13 +753,15 @@ of $O(1)$\,MB per second data rate from the NDS. It is stated conservatively tha
 More information will be added to these estimates as the R\&D in this area progresses.
 %\fxnote{More development needed here and more information from the ND people}
 
-\subsection{Treatement of the Near Detector vs the Far Detector Data}
+\subsection{Treatment of the Near Detector vs the Far Detector Data}
 \label{sec:near-vs-far-data}
-The Far and Near detectors are effectively looking at different sets of events
-(since there is no event-level correlation in the respective recorded data), so
-there is no reason to complicate logistics and processing of the data by introducing dependencies
-across these different datasets and/or merge data in common files. The ND and FD data streams will be treated and processed separately
- and will require different and distinct calibration procedures.
+The near detector and far detector data streams are expected to be separated -- the data will not be merged into common files.
+In general, they are also be processed in separate production streams and will require different and
+distinct calibration procedures.  A detailed spill-by-spill accounting of events in the ND will be required in order to
+normalize the integrated flux for the time that the FD is taking data, and weighted by the fiducial mass of the FD at the
+time of data taking.  Correlations between the event counts seen in
+the ND and the FD on a spill-by-spill basis owing to the different fluxes on each spill can be studied without merging the
+raw or processed data streams.
 
 \subsection{Monte Carlo Data}
 \label{sec:mc-data-estimates}
@@ -796,7 +796,7 @@ each using O(100GB) of mass storage, so at the time of writing the scale is 1\,T
 
 \subsubsection{Far Detector MC}
 Far Detector simulations are done with multiple goals in mind. For example, the choice of wire plane geometry, e.g. the parameters of the wire
-pitch, need to be evaluated and their effect on the detector performance quantified. Event recontruction in DUNE is a challenge (see
+pitch, need to be evaluated and their effect on the detector performance quantified. Event reconstruction in DUNE is a challenge (see
 Appendix section~\ref{sec:reconstruction}) and detailed simulations are needed to estimate various efficiencies and other aspects
 of the detector performance with respect to a variety physics processes.
 
@@ -891,7 +891,7 @@ software releases.
 \label{sec:derived-data-factor}
 A few assumptions have been made regarding the total size of the derived data with respect to the raw data. By counting
 different types and scales of the derived data coarsely based on the LHC experience, a factor of 2 over the raw data can
-be deduced. A further factor of 4 may be necesary to allow for ample space during production with more than version
+be deduced. A further factor of 4 may be necessary to allow for ample space during production with more than version
 of software release and calibration data, for optimal efficiency. In summary, it is assumed for purposes of current estimates
 that a total factor of 8 needs to be applied to the size of raw data to give the ballpark value of storage requirements for
 the derived data.
