@@ -145,7 +145,7 @@ tracking detector (STT), $\mu$-identifiers (MuID) and electromagnetic calorimete
 \centering
 \begin{tabular}{| p{2in} | p{1.5in} |}		\hline		
 \textbf{Item} & \textbf{Specification} \\ \hline
-Straw Tube Geometry & $\diameter$1\,cm$\times$3.5\,m length \\ \hline
+Straw Tube Geometry & 1\,cm$ (diameter)\times$3.5\,m (length) \\ \hline
 Number of straw tubes & 107,520\\ \hline
 Straw tubes per plane & 336 \\ \hline
 Planes per module & 4 \\ \hline
@@ -163,7 +163,7 @@ NDS are presented in Table~\ref{tab:nds-params}.
 \centering
 \begin{tabular}{| p{1in} | p{1in} | p{1in} |}		\hline		
 \textbf{Detector} & \textbf{Mass} & \textbf{Channels} \\ \hline
-SST & 8t & 215,040 \\ \hline
+STT & 8t & 215,040 \\ \hline
 ECAL & 93t & 52,224 \\ \hline
 MuID & 100t & 165,888 \\ \hline
 \end{tabular}
@@ -219,14 +219,14 @@ They are considered separately in~\ref{sec:snb-data} and \ref{sec:pdk-data}.
 Signals detected by individual wires in the DUNE TPC will have a substantial
 dynamic range. For example, the maximum energy of an electron emitted in the $\beta$-decay of the naturally occurring isotope 
 $^{39}$Ar is 565\,keV, whereas particles produced in energetic neutrino interactions can produce signals
-corresponding to energy depositions of a few to several MeV in a given channel depending on the particle type, its momentum,
+corresponding to energy depositions of up to several MeV in a given channel depending on the particle type, its momentum,
 and the angle of its path with respect to the wire.
 
 Each segment of the dynamic range will reflect certain types of events and this
 is characterized by a respective data rate. For a systematic approach to estimates
 and to reflect the physics of the detector, it is helpful to consider three such segments when characterizing the LArTPC data.
 To set the scale for these segments we can assign ``thresholds''corresponding to each of them.
-The threshold values can be applied to signals on ``per-wire'' basis and defined for example
+The threshold values can be applied to signals on a ``per-wire'' basis and defined for example
 in terms of ADC values (reflecting the collected charge, which can be translated to units like MeV with proper calibration).
 These are not meant to be precise values used in data collection and are given here for orientation purposes only.
 Using this concept the dynamic range can be considered with three distinct settings:
