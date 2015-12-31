@@ -2,65 +2,58 @@
 \label{sec:computing_model}
 
 \subsection{Introduction}
-The main purpose of the Computing Model is to guide the creation of DUNE computing fabric, spanning
-hardware, middleware and various software components. Such fabric would give to all members of the DUNE
-and to raw data for calibration and any other activities as required by the scientific objectives of the experiment.
+
+The main purpose of the Computing Model described here is to guide the allocation and organization of computing
+resources for the DUNE collaboration.  These resources include hardware, middleware, and various software components.
+The resources must be provided and arranged so that DUNE collaborators will be able to meet the scientific objectives
+of the experiment.  Collaborators must be able to access raw data, perform calibrations, simulate the detector
+response, extract physics results from the data, and predict future performance.
 To meet these goals, and in fulfillment of the data access requirements (\ref{sec:rules-of-access-to-data})
 the model presented here is based on distributed data management and Grid and Cloud Computing concepts.
 
-As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of two supporting documents: the
-``Software and Computing Requirements'', which sets forth policies and practices for the DUNE computing sector
-(Section\,\ref{sec:requirements}), and ``DUNE Data Characteristics'' (Section\,\ref{sec:data-characteristics}) which contains information
-necessary for quantifying parameters of the Computing Model. Both documents will be referenced extensively in this section.
-
-Unless stated, no final technology choices are made in this section -- due to a long period of time before the DUNE commissioning,
-this will need to be done at a later date and in compliance with the ``Requirements''. Where appropriate, existing systems are described and
-considered for use in DUNE.
+As stated in \ref{sec:modelrole}, the Computing Model is built on the basis of the software and computing requirements
+which are given in Appendix~\ref{sec:requirements}, and the data characteristics which are detailed in Section~\ref{sec:data-characteristics}.
+The detector design choices evaluated here are those in the DUNE Conceptual Design Report (CDR)~\cite{cdr_vol2,cdr_vol4_docdb}.
 
 \subsection{Data rate and volume estimates}
 \label{sec:data-rate-and-volume-estimates}
 \subsubsection{Overview}
-Rate and volume of the various data to be produced in DUNE are perhaps the main driver determining the parameters
+The rate and volume of the various data to be produced in DUNE as well as their access patterns, are the main drivers determining the parameters
 of the Computing Model. Data rates for different types and their relationships were considered in Section~\ref{sec:data-characteristics},
-and the material below will present a summary and aggregated estimates for the scale of the data of various types
+and the material below presents a summary and aggregated estimates for the scale of the data of various types
 and origin.
 
-It is important to keep in mind that estimates presented in Section~\ref{sec:data-characteristics} were developed under ``baseline''
-assumptions necessary for groundwork done in the process of developing the DUNE Conceptual Design Report (CDR).
-As DUNE is engaged in R\&D aimed at optimal design of the detector and the physics tools, it is likely that these assumptions will be
-revisited at some point and the data rate and volume estimates will need to be revised correspondingly.
-
 \subsubsection{Raw Data}
-Characteristics of the data to be produced by DUNE detector systems have been considered in
+The characteristics of the data to be produced by DUNE detector systems have been considered in
 Sec.~\ref{sec:data-characteristics}.
 
-At the time of writing estimations for the Far Detector data are better understood when compared to other DUNE subsystems,
-due to better developed geometry and parameters of the LArTPC, technology and configuration choices, and considerations
-presented in subsections~\ref{sec:daq-assumptions} (notes on DAQ),~\ref{sec:zs-data} (Zero Suppression) and \ref{sec:data-compression} (Compression).
+The Far Detector design is well advanced, and the characteristics of its data are better understood than those of other
+DUNE subsystems.  Details can be found in subsections~\ref{sec:daq-assumptions} (notes on DAQ),~\ref{sec:zs-data} 
+(Zero Suppression) and \ref{sec:data-compression} (Compression).
 
 A distinguishing characteristic of the data flow in DUNE Far Detector is a significant data reduction factor to be achieved
 in the Far Detector DAQ, as evidenced by the numbers presented in Tables~\ref{tab:full-stream-volume} and \ref{tab:zs-volume}.
-The key assumption in this is the capability of DAQ to distinguish low energy signals  due to $^{39}$Ar decays spread
-across the volume of the detector from more interesting physics phenomena (see~\ref{sec:ar39decays}).
+The key assumption in this is the capability of DAQ to distinguish low-energy signals due to $^{39}$Ar and other radiological decays spread
+across the volume of the detector from more interesting phenomena (see~\ref{sec:ar39decays}).
 This and similar capabilities will be provided
 by deploying appropriate algorithms on the DAQ RCE and online farm utilizing about a hundred computers (estimated).
-Estimates of volume of data due to high-energy interaction (cosmic $\mu$ and beam neutrinos) are presented in
+Estimates of volume of data due to high-energy interactions (cosmic-ray muons and beam neutrinos) are presented in
 Table~\ref{tab:fd-data-volume-summary} (page \pageref{tab:fd-data-volume-summary}) and are quite modest.
 
-Processing required to identify candidate SNB and nucleon decay events will also be handled by the DAQ system and its online farm.
+The processing required to identify candidate SNB and nucleon decay events will also be handled by the DAQ system and its online farm.
 As discussed in subsection \ref{sec:snb-data}, once a SNB trigger condition has been established, the data must
-be recorded without zero suppression in order to capture the characteristically low energy and scattered ionization
-clusters in the detector volume as expected in a supernova burst event. As shown in Table~\ref{tab:zs-volume} (page~\pageref{tab:zs-volume}),
+be recorded without zero suppression in order to capture the characteristically low-energy, dispersed ionization
+clusters in the detector volume expected in a supernova burst event. As shown in Table~\ref{tab:zs-volume} (page~\pageref{tab:zs-volume}),
 the resulting volume of data is significant and is currently estimated as just over half a PB annually, given the premise of accepting roughly
 12 false positives per year (at this point a benchmark number used solely to set the scale of the data, as commented in~\ref{sec:snb-data}).
 
 Identifying candidate nucleon decay events will also require algorithms that would set the trigger condition consistent
 with signatures such as $p \rightarrow K^+\nu$. As shown in \ref{sec:pdk-data}, the volume of data due to such candidate
-events is not expected to be appreciable compared to other sources.
+events is not expected to be appreciable compared with other sources.
 
 The Near Detector is quite different from the Far Detector in all of its characteristics, and it includes a number of subdetectors
-such as Fine-Grained Tracker, Electromagnetic Calorimeter and others (see~\ref{sec:nds-event-rates}). There are a few technology
-options being conisdered and most parameters are still being finalized at the time of writing, so data estimates are very preliminary.
+such as Fine-Grained Tracker, Electromagnetic Calorimeter and others (see~\ref{sec:nds-event-rates}). There are other technology
+options being conisdered, and most parameters are still being optimized at the time of writing, so data estimates for the ND are very preliminary.
 It is
 %conservatively
 assumed that the annual volume of these data will be 100\,TB.
@@ -72,7 +65,7 @@ assumed that the annual volume of these data will be 100\,TB.
 
 \subsubsection{Monte Carlo Data}
 As discussed in \ref{sec:mc-data-estimates}, the Far and Near Detector simulation is the top contributor to the volume of overall
-Monte Carlo in DUNE, with combined annual output of about 35\,TB of data. Other MC data sources are not appreciable.
+Monte Carlo in DUNE, with a combined annual output of about 35\,TB of data. Other MC data sources are not appreciable.
 It is reasonable to expect that this number will grow as more effort becomes available for Monte Carlo studies and
 as they become more sophisicated. However, at the time of writing there is no reliable estimate of how this segment of data
 will scale over the years.
