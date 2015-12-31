@@ -1,4 +1,5 @@
 \section{Resource Requirements}
+\label{sec:resource-requirements}
 \subsection{Overview}
 The computing requirements of the DUNE experiment will evolve significantly between the time of writing
 and comissioning of the full set of DUNE detector systems, for the following reasons:
@@ -90,6 +91,39 @@ and running two concurrent releases of DUNE software.
 
 \end{itemize}
 
-In summary, the estimated total storage requirement is estimated as $\sim$6\,PB.
+In summary, the estimated total storage requirement is estimated as $\sim$6\,PB (annual).
 
 \subsubsection{CPU Requirements}
+At the time of writing, Monte Carlo studies in DUNE result the following CPU utliziation pattern is observed according to Grid monitoring data:
+\begin{itemize}
+
+\item Far Detector MC: 6 campaign per year, 40\,k CPU*hrs each, total $\sim$240\,k\,CPU*hrs
+
+\item Near Detector MC: 3 campaigns per year, 40\,k CPU*hrs each, total $\sim$120\,k\,CPU*hrs
+
+\item Beam Simulations MC: 3 campaigns per year, 200\,k CPU*hrs each, total $\sim$600\,k\,CPU*hrs
+
+\item MARS group MC: same scale as Beam Simulations, i.e. $\sim$600\,k\,CPU*hrs
+
+\end{itemize}
+
+\noindent
+Total CPU budget for Monte Carlo is therefore approximately 1.5\,million CPU hours per year and this number
+should be considered as basis for extrapolation going forward.
+
+Situation with CPU power for reconstruction is much less clear due to the fact that this software has not yet been fully
+developed at the time of writing and only rough prototypes exit. Judging from the event rates presented in this document,
+reconstruction of the Near Detector will be a larger challenge than processing beam-$\nu$ and cosmic-$\mu$ events due
+to relative complexity of the ND design and operating principle, and to an appreciable event rate
+(see \ref{sec:fd-data-volume-summary} and \ref{sec:nds-event-rates}). Accepting the nominal ND event rate to be 50\,Hz,
+and assuming a $\sim$1\,min per event reconstruction time purely as an order of magnitude estimate device, it can be estimated
+that a few thousand Worker Nodes will need to be dedicated to the Near Detector data production, just to keep up with the nominal
+data rate. This leads to a rough estimate of at least 30\,million\,CPU*hrs annually.
+
+Reconstruction of the Supernova Burst candidate events presents more challenges with data logistics (due to the very large size
+of the readout package) than with reconstruction since the total number of potential neutrinos in a single event is still O(10$^2$).
+Currently the concusion is that the resulting CPU requirements will be substantially less than those for the Near Detector.
+
+
+
+
