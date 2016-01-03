@@ -2,12 +2,12 @@
 \label{sec:resource-requirements}
 \subsection{Overview}
 The computing requirements of the DUNE experiment will evolve significantly between the time of writing
-and comissioning of the full set of DUNE detector systems, for the following reasons:
+and the comissioning of the full set of DUNE detector systems, for the following reasons:
 \begin{itemize}
-\item In short and medium term, active work will continue on DUNE prototypes, the ``35t prototype'' and protoDUNE
+\item In the short and medium terms, active work will continue on DUNE prototypes, the ``35t prototype'' and protoDUNE
 (see Sections~\ref{sec:35t} and \ref{sec:protodune} correspondingly).
 
-\item Amount of R\&D work for the Near Detector is significant and it can be expected to ramp up as offline software
+\item The amount of R\&D work for the Near Detector is significant and it can be expected to ramp up as offline software
 is being prototyped and extensive simulations will be required.
 
 \item Investigation of optimal reconstruction methods for LArTPC is ongoing and far from complete. This means
@@ -18,7 +18,7 @@ as the algorithms are improved over the years.
 
 \noindent
 As many hardware and software components in DUNE are under active development,
-and the final data model has not yet being created, there are necessarily large uncertainties in any resource requirement estimates
+and the final data model has not yet been created, there are necessarily large uncertainties in the resource requirement estimates
 at the time of writing. It is however helpful to review current understanding of the general scale of number so as to provide some
 guidance for DUNE resource need going forward.
 
@@ -31,13 +31,13 @@ Estimates for resource requirements for the 35t prototype are given in \ref{sec:
 In summary, the requirements are:
 \begin{itemize}
 
-\item Raw data on disk: $\sim$200\,TB
+\item Raw data: $\sim$200\,TB, to be stored permanently on tape
 
-\item Disk space to support reconstruction: $\sim$400\,TB
+\item Storage needed to support reconstruction: $\sim$400\,TB
 
-\item Raw data committed to permanent tape storage: $\sim$100\,TB
+%\item Raw data committed to permanent tape storage: $\sim$100\,TB
 
-\item MC data on disk: $\sim$100\,TB
+\item Storage needed for Monte Carlo samples: $\sim$100\,TB
 
 \item CPU for reconstruction: $\sim4\times10^6$\,hours scaled to a ``standard'' Fermigrid node. This translates into $\sim$500 Worker Nodes
 committed over a period of one year in order to get the data processed during that time.
@@ -49,13 +49,13 @@ Eastimates of protoDUNE storage requirements are fiven in \ref{sec:protodune-zs}
 In summary, the requirements are:
 \begin{itemize}
 
-\item Raw data on disk: $\sim$500\,TB
+\item Raw data: $\sim$500\,TB, to be stored permanently on tape
 
-\item Raw data committed to permanent tape storage: $\sim$500\,TB
+%\item Raw data committed to permanent tape storage: $\sim$500\,TB
 
 \item Disk space for staging data at CERN before transmission: $\sim$100\,TB
 
-\item Disk space at FNAL to support reconstruction: $\sim$1\,PB
+\item Storage space at FNAL to support reconstruction: $\sim$1\,PB
 
 \item MC data on disk: $\sim$100\,TB
 
@@ -72,7 +72,7 @@ Under assumptions given throughout Section \ref{sec:data-characteristics} and fu
 in \ref{sec:data-rate-and-volume-estimates}, the synopsis is as follows:
 \begin{itemize}
 
-\item Recording Supernova Burst candidate events and preserving them for detaiedl analysis (which is necessary to take
+\item Recording Supernova Burst candidate events and preserving them for detailed analysis (which is necessary to take
 full advantage of this unique capability in DUNE) will result in excess of $\sim$500\,TB of raw data annually, under the assumption
 of 12 false positives per year. This is the largest single source of raw data in DUNE.
 
@@ -82,7 +82,7 @@ of 12 false positives per year. This is the largest single source of raw data in
 much less raw data than the leading sources, on the scale of  $\sim$5\,TB. Possible implications of this fact
 are discussed in \ref{sec:implications-of-data-estimates} on page \pageref{sec:implications-of-data-estimates}.
 
-\item MC data on disk: $\sim$40\,TB (annual).
+\item MC data: $\sim$40\,TB (annual).
 
 \item Ratio of derived data to its source (whether its raw or MC) is assumed to be 2 based on extrapolation from other experiments.
 
@@ -97,7 +97,7 @@ In summary, the estimated total storage requirement is estimated as $\sim$6\,PB 
 At the time of writing, Monte Carlo studies in DUNE result the following CPU utliziation pattern is observed according to Grid monitoring data:
 \begin{itemize}
 
-\item Far Detector MC: 6 campaign per year, 40\,k CPU*hrs each, total $\sim$240\,k\,CPU*hrs
+\item Far Detector MC: 6 campaigns per year, 40\,k CPU*hrs each, total $\sim$240\,k\,CPU*hrs
 
 \item Near Detector MC: 3 campaigns per year, 40\,k CPU*hrs each, total $\sim$120\,k\,CPU*hrs
 
@@ -108,8 +108,8 @@ At the time of writing, Monte Carlo studies in DUNE result the following CPU utl
 \end{itemize}
 
 \noindent
-Total CPU budget for Monte Carlo is therefore approximately 1.5\,million CPU hours per year and this number
-should be considered as basis for extrapolation going forward.
+The total CPU budget for Monte Carlo is therefore approximately 1.5\,million CPU hours per year and this number
+should be considered as the basis for extrapolation going forward.
 
 Situation with CPU power for reconstruction is much less clear due to the fact that this software has not yet been fully
 developed at the time of writing and only rough prototypes exit. Judging from the event rates presented in this document,
