@@ -3,7 +3,7 @@
 
 \subsection{Overview}
 
-The scope of the DAQ and Monitoring work area includes the design, procurement, fabrication, testing, delivery and installation.
+The scope of the DAQ and Monitoring work area includes the design, procurement, fabrication, testing, delivery and installation of the components required to acquire data and assure its quality.
 It is required to:
 \begin{itemize}
 \item collect data with a very high uptime (the goal is $>99\%$)
@@ -17,8 +17,10 @@ with total energy deposition above about 100\,MeV) with high resolution and virt
 
 \item have the ability to trigger at the time of the beam pulses,  irrespective of how little energy is deposited in the detector.
 
-\item provide the Supernova Burst trigger, i.e. collect data with the most favorable zero-suppression possible over a  period of >10\,s
-and identify the characteristic signature of such event.
+\item provide the Supernova Burst trigger, i.e. collect data with the most favorable zero-suppression possible over a  period of 10 to 30 seconds,
+and identify the characteristic signature of such events.  It is a goal to measure as many properties
+of a supernova burst as possible -- the arrival time, the 
+number of neutrino interactions and their energy spectrum.
 
 \item assemble data from sub-detectors into a unified  event for offline analysis.
 \item provide access to the shift operator and others to control and   monitor the data collection and detector status, view online
@@ -33,16 +35,16 @@ for the DUNE far detector.
 
 \subsection{The DAQ Architecture}
 \label{sec:daq-architecture}
-To reduce downtime considerably (i.e. time periods when none of the DUNE modules are collecting data, which impacts supernova detection)
+To reduce the expected downtime (i.e. time periods when none of the DUNE modules are collecting data, which impacts supernova detection)
 and to allow the DAQ technology in the different 10\,kt sections to be entirely different if desired, the DUNE DAQ employs a decoupled 
-design. The synchronization, triggering, data collection and run-state in the different 10kt modules are completely independent in real time and
+design. The synchronization, triggering, data collection and run state in the separate 10kt modules are independent in real time and
 are only coupled by processes running asynchronously (in the same fashion as a batch queue) in the hour or so after data collection.
 This allows one portion of the detector module to be restarted without interrupting
 data collection in the others.
 
-The layout of the DAQ is shown schematically in Fig.~\ref{fig:fddaqblock}.  To collect full detail of the
-important high-energy events (detection of all those with energy deposition of 100\,MeV and above with virtually no dead time),
-while avoiding tricky communication to flag neighboring channels to those that have large hits, a model is used
+The layout of the DAQ is shown schematically in Fig.~\ref{fig:fddaqblock}.  To collect all of the relevant data for
+high-energy interactions
+while avoiding the large amount of communication required to flag neighboring channels to those that have large hits, a model is used
 in which the digitised data are collected twice from the initial data
 storage that is associatated with each peice of hardware. 
 
@@ -57,7 +59,7 @@ storage that is associatated with each peice of hardware.
 The first collection supplies a centralized software-based trigger farm continuously with
 zero-suppressed information (a threshold on each channel detects hits above the noise level, also see \ref{sec:zs-data}).  
 The second collection reads the full data at the times and in the regions %of interest that have been 
-selected by the trigger. This is similar to the multi-level triggering in a collider experiment,
+selected by the trigger. This is similar to the trigger strategy in a collider experiment,
 but with only one level of triggering. The software trigger farm also
 records the continuous stream of zero-suppressed hits in an archival
 ring buffer on disk to allow later analysis of supernova candidates.
@@ -70,7 +72,7 @@ ring buffer on disk to allow later analysis of supernova candidates.
 \end{figure}
 
 \noindent
-Such architecture also allows to fulfill the requirement for the nucleon decay detection set forth in the DUNE Conceptual Design Report,
+This architecture also fulfills the requirement for nucleon decay detection set forth in the DUNE Conceptual Design Report,
 which is ``The Far Detector DAQ must enable continuous recording of data, outside of any beam gate, and retain enough information from
 the front end (including photon system) through the DAQ chain to enable a trigger on events of interest'' \cite{cdr_vol2}.
 
@@ -81,10 +83,10 @@ the cryostat, i.e. in the environment  with characteristic temperature defined b
 The LArTPC signals are digitized ``in the cold'' in a continuous flash-ADC stream at 2\,MHz, (not zero-suppressed)
 and serialized on 12,000 high-speed links per 10kt module that exit the cryostat.
 
-The data are received by LArTPC data processors located outside of the called RCEs \cite{slac_rce_1} (Reconfigurable
+The data are received by LArTPC data processors located outside of cryostat the called RCEs \cite{slac_rce_1} (Reconfigurable
 Computing Elements) housed in industry-standard aTCA crates on COB (cluster-on-board)
-motherboards that are designed at SLAC for a wide range of applications.  The RCEs are part of a
-network of field programmable gate arrays (FPGAs) that buffer the full raw data,
+motherboards that are designed at SLAC for a wide range of applications.  The RCEs contain
+field-programmable gate arrays (FPGAs) that buffer the full raw data,
 zero-suppress it for passing to the trigger and accept requests for
 data-fetching from the trigger.  The FPGAs in the RCEs are from the
 Xilinx Zynq family and contain a full Linux processor system on the
@@ -113,7 +115,7 @@ electronics.
 
 The \textit{artdaq} toolkit developed at  Fermilab supplies the real-time
 data collection functionality (buffering, matching event parts,
-synchronization, inter-process communication, etc.) in a modern
+synchronization, interprocess communication, etc.) in a modern
 design that facilitates the efficient use of multicore commodity
 computers running on the Linux computer farms.  The multi-core
 functionality is crucial in the high data-rate environment on DUNE.  
@@ -144,7 +146,7 @@ experiment which distributes a 64MHz clock, synchronization pulses and
 cable-delay correction on RJ45 cables.  The overall clock is
 synchronized using a GPS receiver and transferred from the surface
 over optical fiber.  The synchronization is transferred from the COBs
-to the electronics in the cryostat over the same cabling as provides
+to the electronics in the cryostat over the same cabling that provides
 the data links.
 
 \subsubsection{Calibration system}
@@ -154,13 +156,13 @@ At the time of writing, the calibration system is in the R\&D stage and its desi
 evolve as the experiment is being built. Very roughly, there will be three stages:
 \begin{enumerate}
 
-\item Pedestal and charge-injection pulser events are used to calibrate and
-remove drifting of the individual electronic channel responses.
+\item Pedestal and charge-injection pulser events are used to calibrate 
+the drifting of the individual electronic channel responses.
 
-\item External UV lasers are directed into the cryostat through glass-tube
-ports, and swivelling mirrors select the trajectories of the beams
+\item External UV lasers are directed into the cryostat through glass tube
+ports, and swiveling mirrors select the trajectories of the beams
 through the cryostat to provide calibration of the field
-non-uniformities and attenuation.
+non-uniformities, deterctor alignment and signal attenuation.
 
 \item Cosmic-ray muons are used for the determination of the energy scale and for calibration
 cross-checks.
@@ -198,24 +200,24 @@ readout (\ref{sec:pd}) send zero-suppressed data, suitable for triggering, to a 
 of event-builder processes that run in parallel, each accepting all
 the data from the entire 10kt module for a specific time interval and
 performing trigger algorithms on them.  All time intervals are
-processed so that the trigger has no dead time.  The data from the LArTPC and SSP
+processed so that the trigger has no dead time.  The data from the RCEs and SSPs
 are also stored in ring buffers to await collection after an
-affirmative trigger decision --- in the case of the LArTPC, this data
-is not zero suppressed.  The data are built into events in a ``10kt-module
+trigger decision --- in the case of the data from the RCEs, 
+zero-suppression is not applied.  The data are built into events in a ``10kt-module
 file'' that is written to disk.  About an hour later, an offline process merges
 the data from the separate 10-kt module files and archives them at the host lab.
 
 To maximize data collection for a supernova, the continuous
-zero-suppressed trigger data is kept in a large buffer area on disk.
-Ways to collect data that are cropped more gently than the zero-suppressed 
+zero-suppressed trigger data are kept in a large buffer area on disk.
+Ways to collect data that are compressed with less loss than the zero-suppressed 
 data stream during the extended period of a supernova are
-under study: the non-zero-suppressed ring buffers on the current
-design of RCEs are sufficient for 0.4\,s of buffering; the trigger farm can send
+under study.  The non-zero-suppressed ring buffers on the current
+design of RCEs are sufficient for 0.4\,s of buffering. The trigger farm can send
 instructions in the trigger messages to manage storage of data in
 these buffers during a supernova. Two possible extensions are
 
 \begin{itemize}
-\item extend the buffer memory , either on the RCEs or elsewhere in the aTCA crate
+\item extend the buffer memory, either on the RCEs or elsewhere in the aTCA crate
 
 \item use the powerful intercommunications between RCEs to cause neighboring
 channels to be kept around the time of a potential supernova event candidate
@@ -242,7 +244,7 @@ channels to be kept around the time of a potential supernova event candidate
 \noindent
 The requirements for handling radiological and other backgrounds (e.g. $^{39}$Ar decays as described
 in~\ref{sec:ar39decays}) are met in this conceptual design by the very high throughput provided by modern
-off-the-shelf components  and the parallelism provided by \textit{artdaq}, which makes the design extendable to avoid bottolenecks.  The triggering
+off-the-shelf components  and the parallelism provided by \textit{artdaq}, which makes the design extendable to avoid bottlenecks.  The triggering
 allows the zero-suppression to be tuned to optimise for the final
 level of noise, while retaining the maximum level of information for
 the important physics events.
