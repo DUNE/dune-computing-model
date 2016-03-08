@@ -3,7 +3,9 @@
 ## Editor's notes
 The layout of the document was changed in late December 2015: significant parts of it such as the "Requirements" and sections on computing for the DUNE prototypes were all moved to the appendix with the purpose to make it more readable.
 
-The "head" latex source is not "dune-cm-new-layout".
+The "head" latex source is not "dune-computing-model".
+
+As of Spring 2016, major updates are being done to the prototype sections of the document (NP02 and NP04).
 
 ## Overview
 This repository contains materials of the DUNE Computing Model. The Computing Model
@@ -22,7 +24,7 @@ which produced two document of interest:
 * Potential reliance on HPC for difficult reconstruction cases
 
 ## Computing Model as a "Living Document"
-The initial draft of the Computing Model will be completed in the Fall of 2015. It is meant to be a "living document" which will change as DUNE goes through the R&D, prototyping and other stages in its evolution.
+The initial draft of the Computing Model was completed in the Fall of 2015. It is meant to be a "living document" which will change as DUNE goes through the R&D, prototyping and other stages in its evolution.
 
 ## Known Unknowns
 The work on DAQ and other DUNE online systems is just starting in 2015. While there is valuable understanding being gained already, it is not feasible at this point to produce reliable estimates for data reduction factors to be achieved in DAQ. This situation is likely to persist for quite some time as progress is made in R&D. In the meantime, it is helpful to consider the DUNE Computing Model under two sets of assumptions, i.e. assuming a significant (an order of magnitude) data reduction factor in one case and a "bad case" scenario where there is only a factor of two achieved over nominal values.
