@@ -3,7 +3,8 @@
 ## Editor's notes
 The layout of the document was changed in late December 2015: significant parts of it such as the "Requirements" and sections on computing for the DUNE prototypes were all moved to the appendix with the purpose to make it more readable.
 
-The "head" latex source is not "dune-computing-model".
+The "head" latex source is now "dune-computing-model". Previously
+used "new-layout" designation for a few files has been removed in early March 2016, and obsoleted files (before the "new layout came to be) were renamed to "-old" for clarity.
 
 As of Spring 2016, major updates are being done to the prototype sections of the document (NP02 and NP04).
 
