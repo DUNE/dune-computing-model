@@ -3,7 +3,7 @@
 
 The Deep Underground Neutrino Experiment (DUNE) will provide a unique, world-leading program
 for the exploration of key questions at the forefront of particle physics and astrophysics~\cite{sciopps,cdr_vol2}.
-The two primary components of the DUNE experimental apparatus are:
+The two primary detector systems of the DUNE experimental apparatus are:
 
 \begin{enumerate}
 
@@ -13,6 +13,7 @@ Detector} deep underground and 1,300 km downstream from the source of neutrinos 
 
 \end{enumerate}
 
+\noindent
 Three options for the DUNE Near Detector are under consideration.  The first of these is a Fine-Grained tracker (FGT) with
 an electromagnetic calorimeter and muon identification.  This detector has a channel count of ${\cal O}(10^{5})$.  It is
 the reference design, described in the Conceptual Design Report, Vol.~4~\cite{cdr_vol4_docdb}.  The second option is a liquid argon
@@ -30,12 +31,13 @@ The second option for the Far Detector is the dual-phase LArTPC, in which ioniza
 drift  in Liquid Argon, reach the surface and are extracted into the gaseous portion of the detector,
 due to specially designed electrostatic field configuration. Amplification in the gaseous phase
 is achieved, opening possibility for an improved signal to noise ratio.
-
-This document will focus on the reference (single-phase) design of the Far Detector LArTPC, and will be updated
-as the design evolves.
-
+%This document will focus on the reference (single-phase) design of the Far Detector LArTPC, and will be updated
+%as the design evolves.
 More details on the physics, design and operation of DUNE detectors 
-may be found in the DUNE Conceptual Design Report Vol.4 ~\cite{cdr_vol4_docdb}. 
+may be found in the DUNE Conceptual Design Report Vol.4 ~\cite{cdr_vol4_docdb}.
+
+Last but not least, the DUNE Collaboration is engaged in a large-scale, ambitious and important detector prototyping
+activity as detailed in Sec.~\ref{sec:timeline}.
 
 
 \subsection{About this Document}
@@ -78,19 +80,25 @@ The benefit of having the \textit{Requirements} in place is that they reflect a 
 its computing sector and its components, thus fostering cooperation and better integrations of systems and components in DUNE.
 
 \subsection{Timeline and Evolution of the Computing Model}
+\label{sec:timeline}
 According to current plans, DUNE will be commissioned in mid-2020s. The decade before the commissioning will be quite busy
 for DUNE, which is currently in the stage of broad and active R\&D effort, supported by the development of appropriate 
 software tools in each area. Extensive simulations are being performed to support design decisions pertaining to the Liquid 
 Argon TPC as well as a number of other detector elements and subsystems (cf. the proposed Near Detector, the Photon Detector, 
-the target complex etc). Background characterization, event reconstruction techniques, and studies of systematic 
-uncertainties are all under active development.
-
-At the time of writing a high priority in DUNE is assigned to two LArTPC prototypes:
+the target complex etc). Signal processing techniques, background characterization, data reduction, event reconstruction,
+and studies of systematic  uncertainties are all under active development. Each of these items impacts the Computing Model
+which will naturally evolve as more detailed knowledge and information becomes available. In addition, DUNE is actively 
+involved in construction and operation of the following LArTPC prototypes:
 \begin{itemize}
-\item The ``35t prototype'' --- a Liquid Argon TPC situated at FNAL which will start taking cosmic ray data in 2016
+
+\item The ``35t prototype'' --- a Liquid Argon TPC containing 35t of cryogenic medium and situated at FNAL.
+At the time of writing (2016) it is taking cosmic ray data.
+
 \item The ``Full Scale'' prototype (``protoDUNE/NP04'') to be placed in a test beam at CERN, 
 scheduled for commissioning in 2017 and actual data taking in early 2018
+
 \end{itemize}
+
 \noindent
 Although commissioning and operation of the complete experiment is still years away, DUNE is
 already engaged in a substantial program with significant computing needs. The
