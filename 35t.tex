@@ -1,12 +1,11 @@
 \label{sec:35t}
-\subsubsection{Overview}
+\subsection{Overview}
 The 35-ton prototype of the DUNE LArTPC has two operating periods, called Phase~I and Phase~II.  Phase~I, which took place
 in 2014, was designed to demonstrate that a sufficiently high electron lifetime is achievable in a non-evacuated
 membrane cryostat. A lifetime of $\sim$3~ms was achieved.  For Phase~II, TPC elements were installed, and
 a data acqusition system developed.  The detector is segmented into four two-sided APA's for eight drift volumes.
 The total channel count consists of 2048 TPC wires, 92 photon detector channels reading out six independent photon
-detection devices, and 97 scintillator paddles arranged outside of the cryostat.
-\fxnote{fix the number of pads}
+detection devices, and scintillator paddles arranged outside of the cryostat.
 
 The purposes of Phase~II of the 35-ton run include continued demonstration of a suffcientnly high electron
 lifetime with TPC hardware present in the cryostat, and characterization of the detector performace.
@@ -22,7 +21,8 @@ detectors)
 \item cold electronics similar to the Far Detector's design
 \end{itemize}
 
-The 35-ton prototype detector is not to be used with a test beam, and instead relies on cosmic rays as
+\noindent
+The 35-ton prototype detector was not to designed be used with a test beam, and instead relies on cosmic rays as
 a particle source used to characterize the detector.  A large amount
 of data is required in order to fully exercise the data acquisition and characterize the 
 performance of the detector under several operating conditions.  Measurement and analysis topics include
@@ -35,22 +35,22 @@ the deterination of:
 \item distortions due to buildup of space charge
 \end{itemize}
 
+\noindent
 External trigger paddles made of plastic scintillator read out by photomultiplier tubes
 will be used to identify samples of cosmic rays that are particularly useful in determining
 detector characteristics.
 
-As of this writing (December 2015), the 35-ton prototype is scheduled to fill with liquid argon
-in January 2016, commission, and take data for two or three months, lasting until early to mid 2016.
+The prototype was commissioned in January 2016,  and is scheduled to take data for a few months.
 The prototype detector will be expected to run in a variety of different operating conditions, as
 the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
 scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
 rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
-at specific distances from the wire planes.  We anticipate of order 200TB of raw data to be collected
+at specific distances from the wire planes.  Estimates indicate that $\sim$200\,TB of raw data will be collected
 by the 35-ton prototype during its run, not including processed versions of the data.
 The sections below describe the computing model needed
 to collect and analyze the data from the 35-ton Phase~II prototype.
 
-\subsubsection{Online Computing Model}
+\subsection{Online Computing Model}
 
 Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
 and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCE's), each of which
@@ -103,7 +103,7 @@ images for display on web servers are produced at the end of a run, and are back
 %These are copied to a NFS disk for web display.  This web disk area is mounted on both of the gateway nodes.  The online
 %monitoring histograms and files are backed up to permanent storage.
 
-\subsubsection{Offline Computing Model}
+\subsection{Offline Computing Model}
 
 Once the data are copied to one of the dropboxes, FTS copies them to tape-backed locations in dCache,
 a large disk pool used to increase the efficiency of access to large datasets on tape.  Enstore is Fermilab's
@@ -146,7 +146,7 @@ In addition to distributing pre-built code on CVMFS, both pre-built libraries an
 are available via {\tt http://scisoft.fnal.gov}.
 
 
-\subsubsection{Resource Requirements}
+\subsection{Resource Requirements}
 \label{sec:35t-resource-requirements}
 The initial estimate of the amount of data to be collected by the 35-ton Phase~II run is 200\,TBytes,
 although there is significant uncertainty on this number.  The amount of raw data collected

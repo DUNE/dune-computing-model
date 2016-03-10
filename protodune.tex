@@ -1,21 +1,20 @@
 \label{sec:protodune}
-\subsubsection{Overview}
+\subsection{Overview}
 
-The name ``protoDUNE'' was given to the ``full-scale'' single-phase LArTPC prototype to be deployed at CERN in 2017.
-In December of 2015 it was given the official designation as a CERN experiment ``NP04''.
-There will be 15,360 channels in the protoDUNE LArTPC, corresponding to the proposed configuration of six Anode Plane Assemblies with 2,560 channels each.
-Each channel will be instrumented with a shaping amplifier and a 12-bit ADC operating at 2MHz digitization frequency.
+The name ``protoDUNE'' applies to two ``full-scale'' LArTPC prototypes to be deployed at CERN in 2017 and scheduled
+to take data in 2018. In December of 2015 the dual-phase prototype was given the official designation as a CERN experiment ``NP02'',
+and the single-phase was designated as ``NP04''.
 
-ProtoDUNE is designed for measurements with a test beam provided by a purpose-built target and beamline complex at CERN SPS,
-and will serve to validate various DUNE technology aspects before proceeding with the construction of the principal DUNE detector.
-ProtoDUNE will also provide an important platform for realistic LArTPC detector characterization (e.g. PID, shower response etc) utilizing
+The protoDUNE program is designed for measurements with a test beam provided by a purpose-built target and beamline complex at the
+CERN SPS, and will help validate various DUNE technology aspects before proceeding with the construction of the principal DUNE detector
+at SURF. It will also provide an important platform for realistic LArTPC detector characterization (e.g. PID, shower response etc) utilizing
 controlled conditions of a test-beam experimental setup.
 
-In contrast to DUNE which will be well shielded at its underground location, cosmic-ray muons have a very large impact on the
-protoDUNE data rate and volume due to the large detector dimensions and surface operation.
-It is foreseen that the total amount of data to be produced in protoDUNE will be of the
-order of 1PB (including comissioning runs with cosmic rays). Processing these data and conducting
-Monte Carlo studies connected to the experiment require substantial resources and planning.
+%In contrast to the ``final'' DUNE detectors  which will be well shielded at SURF underground location, cosmic-ray muons will have a very
+%large impact on the protoDUNE data rate and volume due to the large detector dimensions and surface operation.
+As will be explained in the following sections of this document, it is foreseen that the total amount of data to be produced
+by the protoDUNE detectors will be of the order of a few petabytes (including comissioning runs with cosmic rays). Processing
+these data and conducting Monte Carlo studies connected to the experiment requires substantial resources and planning.
 
 The experiment will leverage elements of technology developed for the 35t LArTPC prototype at Fermilab (see~\ref{sec:35t}).
 This includes components of the front-end electronics, design of data acquisition and some other systems.
@@ -28,7 +27,11 @@ National Energy Research Scientific Computing Center (NERSC) facility are being 
 for better redundancy and more efficient access to the data from a greater number of locations.
 
 
-\subsubsection{Event size estimate and data volume}
+%There will be 15,360 channels in the protoDUNE LArTPC, corresponding to the proposed configuration of six Anode Plane Assemblies with 2,560 channels each.
+%Each channel will be instrumented with a shaping amplifier and a 12-bit ADC operating at 2MHz digitization frequency.
+
+
+\subsection{Event size estimate and data volume}
 \label{sec:protodune-data-volume}
 In addition to the Liquid Argon TPC, protoDUNE will include photon detectors as well as other detectors such as muon counters, trigger and PID systems,
 beam instrumentation, and other systems.
@@ -48,7 +51,7 @@ component being a small fraction of the data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTANT %%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Zero Suppression and Compression}
+\subsection{Zero Suppression and Compression}
 \label{sec:protodune-zs}
 Given the number of channels, the readout window duration and the ADC clock frequency, it's easy to see that recording the ``full stream'' of data
 in protoDUNE would be an enormous challenge, far beyond the resources that can be allocated to the experiment. What's more important,
@@ -128,7 +131,7 @@ CERN, for replication purposes.  We envisage storing the primary copy of raw dat
 Processed and Monte Carlo data placement will require additional resources that are addressed in Section \ref{sec:protodune-dataprocess}.
 
 
-\subsubsection{Data transmission and distribution}
+\subsection{Data transmission and distribution}
 Moving data to remote locations outside of CERN is subject to a number of requirements that include
 automation, monitoring, error checking and recovery. 
 
@@ -138,7 +141,7 @@ experience is Spade, which was first used in IceCube~\cite{spade_icecube} and th
 enhanced and successfully utilized in the Daya Bay experiment~\cite{spade_dayabay}.  Another such tool is Fermilab's File Transfer Service FTS~\cite{fts}.
 
 
-\subsubsection{Databases}
+\subsection{Databases}
 Databases will be required to store Run Logs, Slow Control records and detector conditions, as well as (offline) calibration information.
 
 Most database servers will need to be local to the experiment (i.e. at CERN) in order to reduce latency, guarantee reliability and minimize
@@ -147,7 +150,7 @@ The volume of data stored in these databases is expected to be modest and of the
 %Talk to Jon Paley who is in charge of the 35t DB.  He did not have a size for DUNE, but he did have a number for NOvA.  He suggested that the 40kton DUNE will have the same number of channels as NOvA and the NOvA DB uses 200 GB per year.  We should use significantly less.  100 GB is signficantly less than total requested disk space.
 
 
-\subsubsection{Computing and software}
+\subsection{Computing and software}
 
 %\subsubsection{Distributed Processing}
 %\label{distr_proc}
@@ -171,7 +174,7 @@ utilized in addition to Fermilab's computing resources. As an example, we have h
 with the Open Science Grid Consortium.
 
 
-\subsubsection{Data processing}
+\subsection{Data processing}
 \label{sec:protodune-dataprocess}
 
 In addition to the raw data preparations being made for offline data handling, processing and storage.
@@ -203,7 +206,7 @@ that  a few hundred TB of continuously available disk space will be needed. It i
 a few~PB of storage at Fermilab to ensure optimal data availability and  processing efficiency. 
 % Not clear whether we should be asking for a few PB of disk space at Fermilab
 
-\subsubsection{Data distribution}
+\subsection{Data distribution}
 We foresee that data analysis (both experimental data and Monte Carlo) will be performed by collaborators residing in many 
 institutions and geographically dispersed. In our
 estimate above, we mostly outline storage space requirements for the
@@ -224,7 +227,7 @@ Copies for a significant portion of raw and derived data are planed to be hosted
 These two institutions have substantial expertise  in the field of data handling and processing at scale and will serve as ``hubs'' for data archival and distribution.
 
 
-\subsubsection{Software infrastructure}
+\subsection{Software infrastructure}
 
 The protoDUNE effort will benefit from utilizing simulation toolkits, tracking and other reconstruction
 that have and continue to be developed for DUNE, the 35 t detector and the short baseline program at Fermilab as well as the 
