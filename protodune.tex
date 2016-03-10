@@ -16,12 +16,13 @@ As will be explained in the following sections of this document, it is foreseen 
 by the protoDUNE detectors will be of the order of a few petabytes (including comissioning runs with cosmic rays). Processing
 these data and conducting Monte Carlo studies connected to the experiment requires substantial resources and planning.
 
-The experiment will leverage elements of technology developed for the 35t LArTPC prototype at Fermilab (see~\ref{sec:35t}).
-This includes components of the front-end electronics, design of data acquisition and some other systems.
+To ensure reliable capture of experimental data in protoDUNE, it is optimal to follow the mode of operation of the LHC experiments.
+The data is buffered at the site of the experiment first (``in the pit'') and the buffer capacity must be sufficient for taking
+data over a 72\,hrs period according to CERN policies. It is then transmitted to the CERN Central Services and committed to
+mass storage systems which include a large capacity disk (``EOS'') and the ``CASTOR'' tape system. The tape copy
+represents the ``custodial copy'' which is not meant for direct use in production but mostly for data preservation.
 
-To ensure reliable capture of experimental data in protoDUNE, it is optimal to first stage it on disk at CERN (as opposed to direct transmission
-from protoDUNE DAQ to data centers elsewhere). After that, the data are to be committed to tape storage also at CERN (as a custodial copy),
-and replicated to data centers in the US. For the latter, Fermilab will be the primary site, keeping both a tape copy of the data and providing
+From EOS, the data are replicated to data centers in the US. For the latter, Fermilab will be the primary site, keeping both a tape copy of the data and providing
 sufficient disk storage for production and analysis activities. Data centers at Brookhaven National Laboratory (BNL) and the
 National Energy Research Scientific Computing Center (NERSC) facility are being considered as additional locations for the data
 for better redundancy and more efficient access to the data from a greater number of locations.
@@ -30,8 +31,11 @@ for better redundancy and more efficient access to the data from a greater numbe
 %There will be 15,360 channels in the protoDUNE LArTPC, corresponding to the proposed configuration of six Anode Plane Assemblies with 2,560 channels each.
 %Each channel will be instrumented with a shaping amplifier and a 12-bit ADC operating at 2MHz digitization frequency.
 
+\subsection{Single-Phase protoDUNE (NP04)}
+The experiment will leverage elements of technology developed for the 35t LArTPC prototype at Fermilab (see Appendix~\ref{sec:35t}).
+This includes components of the front-end electronics, design of data acquisition and some other systems.
 
-\subsection{Event size estimate and data volume}
+\subsubsection{Event size estimate and data volume}
 \label{sec:protodune-data-volume}
 In addition to the Liquid Argon TPC, protoDUNE will include photon detectors as well as other detectors such as muon counters, trigger and PID systems,
 beam instrumentation, and other systems.
@@ -51,7 +55,7 @@ component being a small fraction of the data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTANT %%%%%%%%%%%%%%%%%%%%%%
-\subsection{Zero Suppression and Compression}
+\subsubsection{Zero Suppression and Compression}
 \label{sec:protodune-zs}
 Given the number of channels, the readout window duration and the ADC clock frequency, it's easy to see that recording the ``full stream'' of data
 in protoDUNE would be an enormous challenge, far beyond the resources that can be allocated to the experiment. What's more important,
