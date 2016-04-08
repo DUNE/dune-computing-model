@@ -5,19 +5,18 @@ The 35-ton prototype of the DUNE single-phase LArTPC had two operating periods, 
 
 \item Phase\,I, which took place in 2014, was designed to demonstrate that a sufficiently high electron
 lifetime is achievable in a non-evacuated membrane cryostat. A lifetime of $\sim$3\,ms was achieved.
-For Phase\,II, TPC elements were installed, and a Data Acqusition system developed and deployed. 
+
+\item For Phase\,II, TPC elements were installed, and a Data Acqusition system developed and deployed. 
 The detector is segmented into four two-sided APA's for eight drift volumes. The total channel count
 consists of 2048 TPC wires, 92 photon detector channels reading out six independent photon
 detection devices, and scintillator paddles arranged outside of the cryostat.
 
-\item Phase\,II concluded in 2016 and included continued demonstration of an adequate electron
-lifetime with TPC hardware present in the cryostat, and characterization of the detector performace.
-
 \end{itemize}
 
 \noindent
-The unique elements of the DUNE Far Detector design which are replicated in the 35-ton
-prototype are:
+Phase\,II concluded in 2016 and included continued demonstration of an adequate electron
+lifetime with TPC hardware present in the cryostat, and characterization of the detector performance.
+The unique elements of the DUNE Far Detector design which are replicated in this prototype are:
 \begin{itemize}
 \item  modular TPC elements (multiple APA's), and wrapped induction-plane wires
 \item photon detectors mounted inside the APA frames
@@ -27,117 +26,93 @@ prototype are:
 
 \noindent
 The 35-ton prototype detector was not to designed be used with a test beam, and instead relies on cosmic rays as
-a particle source used to characterize the detector.  A large amount
-of data is required in order to fully exercise the data acquisition and characterize the 
-performance of the detector under several operating conditions.  Measurement and analysis topics include
-the deterination of:
+a particle source used to characterize the detector.
+%A large amount of data is required in order to fully exercise the data acquisition and characterize the 
+%performance of the detector under several operating conditions.
+ Measurement and analysis topics include the deterination of:
 \begin{itemize}
-\item the electron drift velocity
-\item the electron lifetime
-\item the signal and noise characteristics of the TPC channels
-\item the signal and noise characteristics of the photon detectors
-\item distortions due to buildup of space charge
+\item the electron drift velocity and lifetime
+\item the signal and noise characteristics of the TPC as well of the photon detectors
+\item distortions due to buildup of space charge in the TPC volume
 \end{itemize}
 
 \noindent
-External trigger paddles made of plastic scintillator read out by photomultiplier tubes
-will be used to identify samples of cosmic rays that are particularly useful in determining
+External scintillator trigger paddles 
+served to identify samples of cosmic rays that are particularly useful in determining
 detector characteristics.
 
-The prototype was commissioned in January 2016,  and is scheduled to take data for a few months.
-The prototype detector will be expected to run in a variety of different operating conditions, as
-the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
-scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
-rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
-at specific distances from the wire planes.  Estimates indicate that $\sim$200\,TB of raw data will be collected
-by the 35-ton prototype during its run, not including processed versions of the data.
-The sections below describe the computing model needed
-to collect and analyze the data from the 35-ton Phase~II prototype.
+%The prototype was commissioned in January 2016,  and is scheduled to take data for a few months.
+%The prototype detector will be expected to run in a variety of different operating conditions, as
+%the impact of varying bias voltages on the cathodes and each wire plane are studied, as well as
+%scans over the gap-deflector voltage, and pump speeds to determine the effect on purity.  Some cosmic
+%rays are particuarly useful in characterizing the detector performance, such as horizontal cosmics
+%at specific distances from the wire planes.
+
+Approximately 200\,TB of raw data has been collected by the 35-ton prototype in Phase\,II, not including processed versions of the data.
+The sections below describe the computing model utilized to collect and analyze these data.
 
 \subsection{Online Computing Model}
 
 Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
-and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCE's), each of which
-processes the data from 128 channels.  The RCE's format the data, apply trigger decisions, and send the
-data along ethernet connections to the DAQ computers.  The RCE's perform zero suppression for
+and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCEs), each of which
+processes the data from 128 channels.  The RCEs format the data, apply trigger decisions, and send the
+data along ethernet connections to the DAQ computers.  The RCEs perform zero suppression for
 much of the data to be collected.
 
-% -mxp- Immaterial for this section
-%The performance of the zero-suppression algorithm depends on the noise and other artifacts of the data, such as the rate of stuck bits.
-
-Data from the photon detectors are assembled
-by SSP's (Silicon Photomultiplier Signal Processor), and sent from there via ethernet connections to the DAQ computers.  The
-triggering is implemented in the so-called ``Penn Board'', which inputs signals from the scintillator paddles.  Data
+Data from the photon detectors are assembled by SSP (Silicon Photomultiplier Signal Processor),
+and sent from there via ethernet connections to the DAQ computers.  The triggering is implemented
+in the so-called ``Penn Board'', which inputs signals from the scintillator paddles.  Data
 from the Penn Board is also included in the event data stream.
 
 There are seven DAQ server nodes, which are connected to each other via a private network, as well as two gateway nodes. 
-These two gateway nodes are also connected via a 1gbps link to the Fermilab campus network thus providing the way
-to ship out the data. The DAQ nodes run {\it artdaq}, a distributed application for acquiring, assembling and storing data from high-energy
-physics experiments. 
+These two gateway nodes are also connected via a 1\,Gbps link to the FNAL campus network. The DAQ nodes run {\it artdaq},
+a distributed application for acquiring, assembling and storing data from high-energy physics experiments. 
 
-% {\it Artdaq} also provides features for examining data as it is collected for
-%purposes of monitoring the data quality and providing diagnostic tools for shift takers and detector experts.
-%The data are in {\it art}-formatted rootfiles, with compression enabled.
-%The first gateway node has 230~GB of disk space for buffering data, while
-%the second gateway node has a 7~TB buffer disk.
-%  These disks on the gateway nodes are also mounted
-%on lbnedaq6 and lbnedaq7, where a cron job can copy the data to the second gateway. 
-%copy the DAQ files to a File Transfer Service (FTS) dropbox.
-%Three dropboxes have currently been set up -- one on dCache, at the location
-%/pnfs/lbne/scratch/lbnepro/dropbox/data, and two on BlueArc disks:  /lbne/data/lbnepro/dropbox/data and
-%/lbne/data2/lbnepro/dropbox/data.
-
-Two of the computers near the detector each contain 10~TB of buffer disk.  This disk is used to store the first copy of
-the data and monitoring histograms before being transferred to permanent storage.
-The first copy is to one of the gateway computers located in the same rack as the DAQ computers.  The gateway computer
-extracts metadata from the DAQ files and also read the online database, which stores run configuration information.
-The metadata is then registered with Fermilab's  SAM system
-(``Sequential Access via Metadata''), and then the data are
-moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
-The gateway computer also runs near-line monitoring processes that filter interesting events for analyses like
-a live-updating electron-lifetime measurement and an event display.
+Two of the computers near the detector each contain 10\,TB of buffer disk.  This disk is used to store the first copy of
+the data and monitoring histograms before being transferred to permanent storage. The data is copied
+to one of the gateway computers located in the same rack as the DAQ computers.  The gateway computer
+extracts metadata from the DAQ files and also reads the online configuration database, and 
+metadata registeratopm takes place with Fermilab's  SAM system (``Sequential Access via Metadata'').
+Then the data are moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
+The gateway computer also runs near-line monitoring processes and an event display.
 When the data have been stored in persistent storage and the files are no longer needed online,
 the copies on the DAQ and gateway node can be retired, which is done after validation by checksum and
 total byte count comparison.
 
 Online monitoring processing is included in the {\it artdaq} suite, with experiment-specific modules
 provided by the DUNE 35-ton collaboration.  Histograms are stored as root files and also
-images for display on web servers are produced at the end of a run, and are backed up to a permanent storage.
+images for display on web servers are produced at the end of a run, and are backed up
+to a permanent storage.
 
-%These are copied to a NFS disk for web display.  This web disk area is mounted on both of the gateway nodes.  The online
-%monitoring histograms and files are backed up to permanent storage.
 
 \subsection{Offline Computing Model}
 
 Once the data are copied to one of the dropboxes, FTS copies them to tape-backed locations in dCache,
 a large disk pool used to increase the efficiency of access to large datasets on tape.  Enstore is Fermilab's
-tape-handling system.  Files are requested using SAM, which
-issues commands for reading data off of tape and into dCache, where they can be then transferred
-to batch worker nodes or read directly.  
-
+tape-handling system.  Files are requested using SAM, which issues commands for reading data off of tape
+and into dCache, where they can be then transferred to batch worker nodes or read directly.  
 The online database is replicated offline, and the offline replica handles queries.  A conditions database
 stores calibration parameters such as pedestals and gains.
 
-Offline jobs first unpack the data and then split the data into events that are convenient to analyze.
-Depending on the run mode, the data records produced by the DAQ may correspond to as many as ten
-drift times or longer, while offline reconstruction and even event visualization is more convenient with
-smaller slices of time.  Events then are defined by the offline event-slicer, whose behavior is configurable
-depending on the type of events sought.  DAQ records in adjacent time slices may be ``stitched'' together
-to form offline events that span DAQ records.  Standard LArSoft data calibration and reconstruction tools
-as described in the DUNE CDR will then run on the data, producing both reconstructed event data and an
-analysis tree consisting of high-level objects which are easy to interpret by analysis teams measuring
-the performance of the detector.
+%Offline jobs first unpack the data and then split the data into events that are convenient to analyze.
+%Depending on the run mode, the data records produced by the DAQ may correspond to as many as ten
+%drift times or longer, while offline reconstruction and even event visualization is more convenient with
+%smaller slices of time.  Events then are defined by the offline event-slicer, whose behavior is configurable
+%depending on the type of events sought.  DAQ records in adjacent time slices may be ``stitched'' together
+%to form offline events that span DAQ records.  Standard LArSoft data calibration and reconstruction tools
+%as described in the DUNE CDR will then run on the data, producing both reconstructed event data and an
+%analysis tree consisting of high-level objects which are easy to interpret by analysis teams measuring
+%the performance of the detector.
 
-Some runs, which use ``scope mode'', will collect data that is unusual for LArSoft to analyze.  A small subset
-of channels is intended to be read out continously for a very long time, of order seconds, in order to measure
+Some runs (in the ``scope mode'') collected data that is not well suited for LArSoft to analyze.  A small subset
+of channels was read out continously for a very long time, of order seconds, in order to measure
 low-frequency noise and look for electronics effects that may take longer than a normal readout window.
-These data can be exported to standalone programs for purposes of producing the appropriate deliverables.
 
-The primary data store will be Fermilab's enstore tape system, with access via SAM and tape staging in
-dCache.  Directly reading tapes by jobs are not permitted.  Data will be transferred to local disk on grid
-worker nodes via ifdh tools.  Data in dCache will also be available via XRootD and other protocols.
+The primary data store is the  FNAL Enstore tape system, with access via SAM and tape staging in
+dCache.  Directly reading tapes by jobs are not permitted.  Data are transferred to local disk on grid
+worker nodes using standard FNAL tools.  Data in dCache will also be available via XRootD and other protocols.
 
-The primary reconstruction is expected to be done using FermiGrid computing resources.  The capability
+The primary reconstruction is done using FermiGrid computing resources.  The capability
 of using OSG compute nodes is planned.  The DUNE simulation and reconstruction software, along with the
 dependencies LArSoft, root, GEANT4, and other packages, are all copied to CVMFS repositories for use on
 OSG nodes.  If the CPU requirements become large and urgent, then the tools are in place to start using
