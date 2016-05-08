@@ -73,7 +73,7 @@ the data and monitoring histograms before being transferred to permanent storage
 to one of the gateway computers located in the same rack as the DAQ computers.  The gateway computer
 extracts metadata from the DAQ files and also reads the online configuration database, and 
 metadata registeratopm takes place with Fermilab's  SAM system (``Sequential Access via Metadata'').
-Then the data are moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL.
+Then the data are moved to permanent storage utilizing the ``dropbox'' functionality of the File Transfer Service at FNAL (F-FTS).
 The gateway computer also runs near-line monitoring processes and an event display.
 When the data have been stored in persistent storage and the files are no longer needed online,
 the copies on the DAQ and gateway node can be retired, which is done after validation by checksum and
@@ -87,7 +87,8 @@ to a permanent storage.
 
 \subsection{Offline Computing Model}
 
-Once the data are copied to one of the dropboxes, FTS copies them to tape-backed locations in dCache,
+Once the data are copied to one of the dropboxes, the F-FTS (data management system developed at FNAL)
+copies them to tape-backed locations in dCache,
 a large disk pool used to increase the efficiency of access to large datasets on tape.  Enstore is Fermilab's
 tape-handling system.  Files are requested using SAM, which issues commands for reading data off of tape
 and into dCache, where they can be then transferred to batch worker nodes or read directly.  
@@ -109,7 +110,7 @@ of channels was read out continously for a very long time, of order seconds, in 
 low-frequency noise and look for electronics effects that may take longer than a normal readout window.
 
 The primary data store is the  FNAL Enstore tape system, with access via SAM and tape staging in
-dCache.  Directly reading tapes by jobs are not permitted.  Data are transferred to local disk on grid
+dCache.  Directly reading tapes by jobs is not permitted.  Data are transferred to local disk on grid
 worker nodes using standard FNAL tools.  Data in dCache will also be available via XRootD and other protocols.
 
 The primary reconstruction is done using FermiGrid computing resources.  The capability
@@ -134,7 +135,6 @@ The amount of data collected by the 35-ton Phase\,II run is approximately 200\,T
 %thresholds and leading and trailing sampling times will increase the data volume.
 %The expected volume of raw data to be stored on tape is approximately 100 TBytes, though as much as a factor
 %of four may be stored depending on the abovementioned unknowns.
-
 The reconstruction of each event takes less than one minute of CPU time.  The rate at which
 a CPU core can process data has not evolved much in the last seven years.  An estimate of approximately
 4\,Million CPU hours per year is needed to reconstruct and analyze 35-ton data.  Storage adequate for
