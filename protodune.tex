@@ -405,14 +405,14 @@ However, the system to move the data from the experiment-local storage to EOS wi
 and be subject to the requirement that there is minumum interference between the real-time processing
 taking place on site and data transfer to EOS.
 
-\subsection{Express Streams and other ``Prompt Use''}
+\subsubsection{Express Streams and other ``Prompt Use''}
 \label{sec:prompt}
 
 While raw data files are available on EOS they can be
 used for a number of purposes, such as express streams and
 other prompt processing for monitoring and QA purposes,
-and also as data source for production taking place at CERN.
-Specifics of the latter have not been  worked out at the time of writing
+and also as a data source for production taking place at CERN, which is under preliminary
+consideration. Specifics of the latter have not been  worked out at the time of writing
 and will be one of the work areas prior to \pd commissioning.
 An example of data flow is shown in Fig.~\ref{fig:prompt}.
 
@@ -433,7 +433,7 @@ locations which will be resolved through the DUNE XRootD redirector or
 through cache layers such as the ``Stash Cache'' system employed by
 the Open Science Grid.
 
-\subsection{Data Catalog}
+\subsubsection{Data Catalog}
 \label{sec:sam}
 
 Underlying FTS will be a fully featured data management layer
@@ -449,7 +449,7 @@ low latency connections between the servers and the (offline analysis)
 clients that will query the catalogs from these zones.  Similar
 scalable proxy and cache layers can be instantiated in other regions as required.
 
-\subsection{Deletion and Cleanup}
+\subsubsection{Deletion and Cleanup}
 \label{sec:cleanup}
 
 An FTS instance handles the ``cleanup'' of its input dropbox, with
@@ -477,9 +477,9 @@ dropbox or to allow investigation of recent log files.
 
 
  
-\section{Technical Requirements to the FTS Components}
+\subsection{Technical Requirements to the FTS Components}
 
-\subsection{Outage and Backlog Considerations}
+\subsubsection{Outage and Backlog Considerations}
 \label{sec:backlog}
 As already mentioned in Sec.\ref{sec:daq_interface},
 CERN policies require that an experiment is capable of storing data locally (in the vicinity of the apparatus as opposed to CERN Central
@@ -492,7 +492,7 @@ rate of file registration and other transactions, buffer areas and certain other
 This will be reflected in some of the estimates presented below.
 
 
-\subsection{Data Throughput}
+\subsubsection{Data Throughput}
 
 The data management system must perform in a way that allows to fully leverage the underlying hardware and networking infrastructure
 upon which  it is running.  In the case of the \pd experiments the FTS system will be capable of operating at a sustained data processing and transfer
@@ -510,7 +510,7 @@ of the lesser of: two times 16\,Gb/s (80\% of theoretical network bandwidth) or 
 of the buffer farms
 (during simultaneous write operations, if the DAQ computing models requires this mixed access mode) under the standard \pd operations.
 
-\subsection{Transaction Throughput}
+\subsubsection{Transaction Throughput}
 
 In terms of transaction handling,  the data management system must be capable of efficiently using the data
 catalog and infrastructure in order to meet or exceed the rate at which files or other data
@@ -529,7 +529,7 @@ select data samples are captured, registered in the file catalog and shipped out
 Since this use case is still subject to the nominal cap of 20\,Gbps bandwidth of the network connection
 to the CERN central services, the order of magnitude estimates are same as for NP02 in terms of transaction rate.
 
-\subsection{Transaction Tracking}
+\subsubsection{Transaction Tracking}
 The data management system must be able to perform simultaneous end-to-end tracking
 of all files that are in state of transit the system prior to being written/verified in the archival storage,
 without impacting or interrupting data taking. 
@@ -545,7 +545,7 @@ where at least 10$^4$ of these files are undergoing ``active'' registration/tran
 In other words, $\sim$10\,k of the files are being actively
 managed and their status is constantly updated while the remainder are ``waiting'' in the designated dropbox location.
 
-\subsection{Transfer Latency}
+\subsubsection{Transfer Latency}
 The file transfer and management systems are designed to operate asynchronously with other components of the \pd DAQ
 and other online systems.
 Due to the polling models employed in this asynchronous model, many operations do not have fixed temporal relations to other events in the DAQ,
@@ -575,8 +575,8 @@ through a polling interval.  Once queued for handling the actual file transport 
 schedule the files for transmission and will properly balance and throttle the site to site traffic and will properly conform to the CERN
  computing environment.  Latencies at this stage are well understood based on the experience that the LHC experiments have with WLCG FTS.  
 
-\section{Data Management System Interfaces}
-\subsection{Overview}
+\subsection{Data Management System Interfaces}
+\subsubsection{Overview}
 The modular design of the data handling system will provide considerable flexibility in its ability to adapt to different requirements
 for interfacing  both data input and output systems.  In the \pd experiment the most important interfaces are to be established with
 \begin{itemize}
@@ -588,7 +588,7 @@ for interfacing  both data input and output systems.  In the \pd experiment the 
 \noindent
  Details of these interfaces are presented below.
 
-\subsection{The DAQ Interface}
+\subsubsection{The DAQ Interface}
 The interface between the core DAQ system and the data handling system is made at the DAQ’s disk buffer farm.
 When the final stage event builders have completed the assembly of a file, the file will be handed off to the data handling system
 by the DAQ by placing the file into a designated ``dropbox'' area on the target file system.  For POSIX compliant file systems,
@@ -608,7 +608,7 @@ The organization of the FTS dropbox area(s) will be configured to support the vo
 sustained outage (of non-DAQ systems) of no less than 3 days plus the time required to register/process the volume of data
 that would be generated during the outage (i.e. ``the recovery time'' required to clear a backlog).
 
-\subsection{The EOS Interface}
+\subsubsection{The EOS Interface}
 The interface between the data handling system and the EOS storage system will be made through the APIs
 provided by the standard protocols already supported by both the EOS system and the SAM data handling system.
 In particular the XRootD protocol will be the primary API used for the interaction between the system, with secondary
@@ -616,7 +616,7 @@ support for the gridftp, webdav and srm protocol APIs.  The EOS system will be d
 system as a standard storage element and will have files stored on it registered and mapped within SAM the replica
 catalog to the well defined access URIs. 
 
-\subsection{The CASTOR Interface}
+\subsubsection{The CASTOR Interface}
 The interface between the data handling system and the CASTOR archival storage system for file ingest will be made through the
 APIs provided by the standard protocols already supported by both the CASTOR system and the SAM data handling system.
 In particular these system both already support the xrootd protocol, gridftp and srm.  The CASTOR API to query the tape archive
@@ -628,19 +628,19 @@ to permit optimized retrieval.  Custom modules/utilities will be developed as ne
 additional support for the CASTOR system in performing certain operations (i.e. bulk queries or monitoring operations).
 These modules/utilities will be distributed as part of the core SAM distribution.
 
-\subsection{The dCache/Enstore Interface}
+\subsubsection{The dCache/Enstore Interface}
 The interface between the SAM data handling system and the dCache/Enstore archival storage system is already fully defined and supported.
  The interface fully supports standard access protocols including xrootd, gridftp, webdav and srm as well as the proprietary \textit{dcap} protocol
 and a specialized NFS implementation that provides limited basic read access for hosts with local mounts of the dCache system.
 The SAM system has modules that optimize data access based on Enstore tape location information.  This interface is in wide scale
 production use across many experiments including NO$\nu$A, $\mu$BooNE, the DUNE 35t prototype, MINOS and others.
 
-\subsection{The SAN/NAS Interface}
+\subsubsection{The SAN/NAS Interface}
 Generalized SAN and NAS systems when acting as data sources (input) will be integrated to the data handling system through their
 POSIX style interface if available.  When enabled as data sinks (output) for the data handling system, a front end data server(s)
 running standard access protocols in the form of xrootd or gridftp will be utilized.  These will then be mapped into SAM as standard storage locations.
   
-\subsection{Generalized Protocol Support Interfaces}
+\subsubsection{Generalized Protocol Support Interfaces}
 The data handling system provides a file delivery and transfer layer which acts to provide protocol abstraction
 to the end users (i.e. provides a consistent command interface) and provides a protocol bridge when performing
 transfer operations between dissimilar storage systems (i.e. cross protocol transfers).  The ``Intensity Frontier
@@ -672,8 +672,8 @@ applications.  This is a standard distribution method used to to distribute the 
 as well as Fermi-SAM client utilities. 
 \end{description}
 
-\section{Data Replication, Registration and Catalogs}
-\subsection{Replication}
+\subsection{Data Replication, Registration and Catalogs}
+\subsubsection{Replication}
 \label{sec:replication}
 The data handling system must be able to manipulate multiple replicas of the data across storage systems and locations, in order
 to optimally utilize computing resources for production purposes, and make processed data readily available to researchers in
@@ -706,7 +706,7 @@ performed using the same SAM tool suites and strategy for handling registered an
 elements with the SAM data catalog and will then be able to use the replication tools to clone the relevant data to their site. 
 \end{description}
 
-\subsection{File Registration}
+\subsubsection{File Registration}
 
 Registering files or other forms of data with the SAM catalog require a set of ``meta information'' about the files.  This information is used to allow detailed searches to be performed to select specific data for analysis.  This metadata is broken into two general types ``Base Metadata'' and ``Physics Metadata'' which can be provided at the time of file registration, or modified later.  These metadata are composed of:
 \begin{description}
@@ -717,7 +717,7 @@ Registering files or other forms of data with the SAM catalog require a set of `
 \noindent
 The experiment must provide a method for determining or generating the metadata (i.e. an external program that can be run on a file, or a python module that extracts information from a filename, etc…)  and that method will be invoked by the data handling system when it encounters appropriate files.  The output of the method used must conform to a suitable format supported by the F-FTS and SAM systems.  The systems support JSON formatted files and python dictionaries for direct upload to the data catalogs.  
 
-\subsection{Data and Replica Catalogs}
+\subsubsection{Data and Replica Catalogs}
 
 The data management system for \pd will leverage the DUNE experiment’s SAM data catalog.
  The underlying resources of this catalog and its software are capable of, and sized to support,
@@ -734,7 +734,7 @@ data handling system performs the translation of locations into actual access UR
 or requested protocol schema for a given storage system (i.e. the system maps the location onto the method
 for how you retrieve the file).
 
-\section{Data Transfer Technology}
+\subsection{Data Transfer Technology}
 
 The data management system for \pd will support, through its use the SAM tool suite,  data transfers to and from CERN,
 FNAL and other site’s storage elements using a combination of protocols supported by the specific site's storage resources.
@@ -752,7 +752,7 @@ specific to local access methods on POSIX file systems.
 
 The file transport layer uses a modular design with an abstraction layer so that new protocols or access methods can be added to the system without changes to the other interface layers.  The system can also select or prioritize the replica source location and access protocol based on destination characteristics (i.e. it can prefer a local cache copy of a file to a replica that is at a transatlantic location)  The system will also support offloading of transfers to 3rd party transport systems (e.g. WLCG FTS) to properly balance the resources of different WAN connections and site resources.
 
-\section{Hardware Requirements}
+\subsection{Hardware Requirements}
 Specifications of the hardware required to implement the systems as described above will be developed at a later date, along with a more detailed
 design. It is anticipated that a few computers will be required to support the function of FTS instances at CERN. Regional proxies to support efficient operation
 of the SAM data catalogs will be placed in Europe and North America.
