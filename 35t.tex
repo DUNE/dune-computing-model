@@ -16,7 +16,7 @@ detection devices, and scintillator paddles arranged outside of the cryostat.
 \noindent
 Phase\,II concluded in 2016 and included continued demonstration of an adequate electron
 lifetime with TPC hardware present in the cryostat, and characterization of the detector performance.
-The unique elements of the DUNE Far Detector design which are replicated in this prototype are:
+The unique elements of the DUNE Far Detector single-phase design which are replicated in this prototype are:
 \begin{itemize}
 \item  modular TPC elements (multiple APA's), and wrapped induction-plane wires
 \item photon detectors mounted inside the APA frames
@@ -51,7 +51,7 @@ detector characteristics.
 Approximately 200\,TB of raw data has been collected by the 35-ton prototype in Phase\,II, not including processed versions of the data.
 The sections below describe the computing model utilized to collect and analyze these data.
 
-\subsection{Online Computing Model}
+\subsection{Online Computing Model for the 35t Prototype}
 
 Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
 and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCEs), each of which
@@ -85,7 +85,7 @@ images for display on web servers are produced at the end of a run, and are back
 to a permanent storage.
 
 
-\subsection{Offline Computing Model}
+\subsection{Offline Computing Model 35t Prototype}
 
 Once the data are copied to one of the dropboxes, the F-FTS (data management system developed at FNAL)
 copies them to tape-backed locations in dCache,

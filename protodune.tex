@@ -2,7 +2,7 @@
 \subsection{Overview}
 
 The name ``protoDUNE'' applies to two ``full-scale'' LArTPC prototypes to be deployed at CERN in 2017 and scheduled
-to take data in 2018. In December of 2015 the dual-phase prototype was given the official designation as a CERN experiment
+to take data in 2018. The dual-phase prototype was given the official designation as a CERN experiment
 \textbf{NP02}, and the single-phase was designated as \textbf{NP04}.
 
 The protoDUNE program is designed for measurements with a test beam provided by a purpose-built target and beamline complex at the
@@ -13,7 +13,7 @@ controlled conditions of a test-beam experimental setup.
 %In contrast to the ``final'' DUNE detectors  which will be well shielded at SURF underground location, cosmic-ray muons will have a very
 %large impact on the protoDUNE data rate and volume due to the large detector dimensions and surface operation.
 As will be explained in the following sections of this document, it is foreseen that the total amount of data to be produced
-by the protoDUNE detectors will be of the order of a few petabytes (including comissioning runs with cosmic rays). Processing
+by the two protoDUNE detectors can be as high as a few petabytes (including comissioning runs with cosmic rays). Processing
 these data and conducting Monte Carlo studies connected to the experiment requires substantial resources and planning.
 
 To ensure reliable capture of experimental data in protoDUNE, it is optimal to follow the mode of operation of the LHC experiments.
@@ -221,8 +221,8 @@ major data centers like CERN and Fermilab. When it comes to making these data av
 technology has been evolving rapidly in the past few years, and solutions have been found to mitigate performance drops due to remote data access, by implementing caching and other techniques.
 \end{itemize}
 
-In order to act on the latter item, we plan to implement a global XRootD redirector, which will make it possible to transparently access data from anywhere.
-A concrete technical feature of storage at Fermilab is the dCache network which has substantial capacity and can be leveraged
+\noindent In order to act on the latter item, we plan to implement a global XRootD redirector, which will make it possible to transparently access data from anywhere.
+A crucial technical feature of storage at FNAL is the dCache network which has substantial capacity and can be leveraged
 for the needs of the protoDUNE data analysis. This dCache instance is equipped with a XRootD ``door'' which makes it accessible to the outside world, subject
 to proper configuration, authentication and authorization.
 
