@@ -752,9 +752,99 @@ specific to local access methods on POSIX file systems.
 
 The file transport layer uses a modular design with an abstraction layer so that new protocols or access methods can be added to the system without changes to the other interface layers.  The system can also select or prioritize the replica source location and access protocol based on destination characteristics (i.e. it can prefer a local cache copy of a file to a replica that is at a transatlantic location)  The system will also support offloading of transfers to 3rd party transport systems (e.g. WLCG FTS) to properly balance the resources of different WAN connections and site resources.
 
-\subsection{Hardware Requirements}
-Specifications of the hardware required to implement the systems as described above will be developed at a later date, along with a more detailed
-design. It is anticipated that a few computers will be required to support the function of FTS instances at CERN. Regional proxies to support efficient operation
-of the SAM data catalogs will be placed in Europe and North America.
+\subsection{RDMS Hardware Requirements}
+Specifications of the hardware required to implement the Raw Data Management Systems (RDMS) as described above will be developed at a later date,
+along with a more detailed design. It is anticipated that a few computers will be required to support the function of FTS instances at CERN.
+Regional proxies to support efficient operation of the SAM data catalogs will be placed in Europe and North America.
+
+\subsection{Computing and software}
+
+%\subsubsection{Distributed Processing}
+%\label{distr_proc}
+
+FNAL provides the bulk of computational power to DUNE via Fermigrid and other facilities. 
+We plan to leverage these resources to process the data coming from the protoDUNE test.
+
+One of the principal goals will be quick validation of the data collected in each measurement, in
+order to be able to make adjustments during the run as necessary. 
+This is common practice in other experiments which have "express streams" to assess data quality~\cite{atlas_express}.
+
+
+Given that tracking, reconstruction and other algorithms are in a stage of development with significant improvements
+and optimizations expected, the required scale of CPU power needed to process the data are rough estimates.
+The estimates we have at this point range from 10 to 100 seconds required by a typical worker node to reconstruct
+a single event.  This means that theoretically a few thousand cores are made available to protoDUNE through Grid facilities,
+it will be possible to ensure timely processing of these data (i.e. at about same rate as it is produced). This, however, is not
+currently a set goal.
+
+To ensure adequate computing capacity, we envisage a distributed computing model where Grid resources are
+utilized in addition to Fermilab's computing resources. As an example, we have had good experience working
+with the Open Science Grid Consortium.
+
+
+\subsection{Data processing}
+\label{sec:protodune-dataprocess}
+
+In addition to the raw data preparations being made for offline data handling, processing and storage.
+The offline data can be classified as follows:
+\begin{itemize}
+\item Monte Carlo data, which will contain multiple event samples to cover various event types and other conditions during the measurements
+with protoDUNE
+
+\item Data derived from Monte Carlo events, and produced with a variety of tracking and pattern recognition algorithms
+in order to create a basis for the detector characterization
+
+\item Intermediate calibration files, derived from calibration data
+
+\item Processed experimental data, which will likely exist in several parallel branches corresponding to different reconstruction
+algorithms being applied, with the purpose of evaluating the performance of the different algorithms.
+\end{itemize}
+
+\noindent In the latter, there will likely be more than one processing step, thus multiplying the data volume. 
+The derived data will at most contain a fraction of the raw data in order to keep the data manageable,
+hence the size of the processed data will likely be smaller than the input (the raw data). 
+Given the consideration presented above, and numbers in Table\,\ref{fig:det_perf}
+on page~\pageref{fig:det_perf} we will plan for
+$\sim$ $O($1 PB$)$ of tape storage to keep the processed data. 
+For efficient processing, disk storage will be necessary
+to stage a considerable portion of both raw data (inputs) and one or a few steps in processing (outputs).
+
+Extrapolating from our previous experience running Monte Carlo for the former LBNE Far Detector, it is estimated
+that  a few hundred TB of continuously available disk space will be needed. It is expected that protoDUNE will require
+a few~PB of storage at Fermilab to ensure optimal data availability and  processing efficiency. 
+% Not clear whether we should be asking for a few PB of disk space at Fermilab
+
+\subsection{Data distribution}
+We foresee that data analysis (both experimental data and Monte Carlo) will be performed by collaborators residing in many 
+institutions and geographically dispersed. In our
+estimate above, we mostly outline storage space requirements for the
+major data centers like CERN and Fermilab. When it comes to making these data available to collaborators, we will utilize a combination of the following:
+\begin{itemize}
+\item Managed replication of data in bulk, performed with tools like SAM, FTS and Spade. Copies will be made according to wishes and capabilities of participating institutions.
+\item Network-centric federated storage, based on XRootD. This allows for agile, just-in-time delivery of data to worker nodes and workstations over the network. This
+technology has been evolving rapidly in the past few years, and solutions have been found to mitigate performance drops due to remote data access, by implementing caching and other techniques.
+\end{itemize}
+
+\noindent In order to act on the latter item, we plan to implement a global XRootD redirector, which will make it possible to transparently access data from anywhere.
+A crucial technical feature of storage at FNAL is the dCache network which has substantial capacity and can be leveraged
+for the needs of the protoDUNE data analysis. This dCache instance is equipped with a XRootD ``door'' which makes it accessible to the outside world, subject
+to proper configuration, authentication and authorization.
+
+
+Copies for a significant portion of raw and derived data are planed to be hosted at NERSC and also at Brookhaven National Laboratory.
+These two institutions have substantial expertise  in the field of data handling and processing at scale and will serve as ``hubs'' for data archival and distribution.
+
+
+\subsection{Software infrastructure}
+
+The protoDUNE effort will benefit from utilizing simulation toolkits, tracking and other reconstruction
+that have and continue to be developed for DUNE, the 35 t detector and the short baseline program at Fermilab as well as the 
+neutrino platform development efforts and in particular the WA105 experiment.
+
+The software tools will need to be portable, well maintained and validated. To ensure that this happens,
+we plan to establish close cooperation among participating laboratories and other research institutions.
+
+
+
 
 
