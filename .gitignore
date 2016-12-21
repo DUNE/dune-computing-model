@@ -14,7 +14,7 @@
 # *.ps
 # *.eps
 dune-computing-model.pdf
-
+comp_model_summary.pdf
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
 *.bcf

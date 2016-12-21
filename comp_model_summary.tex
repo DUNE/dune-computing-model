@@ -1,0 +1,65 @@
+\documentclass[pdftex,12pt,letter]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[pdftex,pdfpagelabels,bookmarks,hyperindex,hyperfigures]{hyperref}
+
+\newcommand{\pd}{protoDUNE\xspace}
+%\newcommand{\pdsp}{pD/SP\xspace}
+\newcommand{\xrd}{XRootD\xspace}
+\newcommand{\expname}{\textit{NP04}\xspace}
+\newcommand{\eXpname}{\textit{NP02}\xspace}
+
+\title{Brief Summary of the Computing Model for DUNE and \pd}
+\date{\today}
+\author{M. Potekhin and B. Viren}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent  This note describes  the salient points of the Computing Model of the DUNE experiment and its the Single-Phase prototype (\pd/\expname).
+\end{abstract}
+
+%%%%%%%%%%%%%
+\section{The Documents}
+
+The document titled ``Computing Model for the DUNE Experiment'' is kept as entry 914 in FNAL's DocDB system.
+It includes the computing model for \pd experiments \eXpname and \expname in Appendix D.
+
+The Computing Model is formulated as a way to address the \textit{Software and Computing Requirements},
+which it includes as Appendix B. The Requirements predate the Computing Model and are assumed to represent
+the consensus of what DUNE wants its computing sector to be organized and operated, including
+a number of policies.
+
+More recently, a number of supporting documents have been developed such as \cite{docdb1086},\cite{docdb1212},\cite{docdb1811}
+which address certain implementation issues for \pd computing.
+
+
+
+\begin{thebibliography}{1}
+\bibitem{docdb914}
+{DUNE DocDB 914: \textit{ Computing Model for the DUNE Experiment}}\\
+\url{http://docs.dunescience.org:8080/cgi-bin/ShowDocument?docid=914}
+
+\bibitem{docdb1086}
+{DUNE DocDB 1086: \textit{ protoDUNE/SP data scenarios with full stream (spreadsheet)}}\\
+\url{http://docs.dunescience.org:8080/cgi-bin/ShowDocument?docid=1086}
+
+
+\bibitem{docdb1212}
+{DUNE DocDB 1212: \textit{Design of the Data Management System for the protoDUNE Experiment}}\\
+\url{http://docs.dunescience.org:8080/cgi-bin/ShowDocument?docid=1212}
+
+
+\bibitem{docdb1811}
+{DUNE DocDB 1811: \textit{Prompt Processing System Requirements for the Single-Phase protoDUNE}}\\
+\url{http://docs.dunescience.org:8080/cgi-bin/ShowDocument?docid=1811}
+\end{thebibliography}
+
+
+\end{document}
