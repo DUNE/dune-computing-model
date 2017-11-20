@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%  DUNE COMPUTING MODEL. Start of work October2015.    %%%%%%%%%%%%%%%%
+%%%%%%%  The 35t COMPUTING MODEL. Start of work November 2017, separating %%%%%%%%%%
+%% this material from the main DUNE COMPUTING MODEL which previous contains this as an appendix    %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{article}
@@ -26,7 +27,7 @@
 \usepackage{multirow}
 
 %% draftwatermark causes infinite loop on SL6's ancient TeXLive
-\usepackage[firstpage]{draftwatermark}
+% \usepackage[firstpage]{draftwatermark}
 \usepackage{lipsum}
 \usepackage{tikz}
 
@@ -59,7 +60,7 @@
 
 %\linenumbers
 
-\title{Computing Model for the DUNE Experiment}
+\title{Computing Model for the 35t Prototype of the DUNE Experiment}
 
 \date{\today}
 
@@ -68,13 +69,23 @@
 \centerline{The DUNE Collaboration}
 
 
-\SetWatermarkText{DRAFT}
-\SetWatermarkLightness{0.9}
-\SetWatermarkScale{3}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkLightness{0.9}
+%\SetWatermarkScale{3}
 
 \vspace{2cm}
 
-\input{abstract}
+
+\begin{abstract}
+
+\noindent  The 35t prototype built and operated by the DUNE
+Collaboration was an important milestone in the development
+of the DUNE Far Detector. The measurements were completed
+in early 2016 and the analysis phase was mostly completed
+in late 2017. This document aims to systemize and preserve useful
+information about the computing model of this prototype program.
+\end{abstract}
+
 
 
 % --- executive summary section ---
@@ -85,17 +96,17 @@
 %++++++++++++++++++++++++++++++++++++++++
 % TOC and lists of tables and figures
 \newpage
-\tableofcontents
-\newpage
-\listoftables
-\newpage
-\listoffigures
+%\tableofcontents
+%\newpage
+%\listoftables
+%\newpage
+%\listoffigures
 
 
 %++++++++++++ MAIN DOCUMENT +++++++++++++++
 \newpage
 
-\subsection{Overview}
+\section{Overview}
 The 35-ton prototype of the DUNE single-phase LArTPC had two operating periods, called Phase\,I and Phase\,II.
 Operations ended in early 2016.
 \begin{itemize}
@@ -137,7 +148,7 @@ detector characteristics.
 Approximately 200\,TB of raw data has been collected by the 35-ton prototype in Phase\,II, not including processed versions of the data.
 The sections below describe the computing model utilized to collect and analyze these data.
 
-\subsection{Online Computing Model for the 35t Prototype}
+\section{Online Computing Model for the 35t Prototype}
 
 Custom cold electronics attached to the TPC wires amplify the incoming signal, shape it in time,
 and digitize it.  These data are sent to sixteen Recofigurable Cluster Elements (RCEs), each of which
@@ -171,7 +182,7 @@ images for display on web servers are produced at the end of a run, and are back
 to a permanent storage.
 
 
-\subsection{Offline Computing Model 35t Prototype}
+\section{Offline Computing Model 35t Prototype}
 
 Once the data are copied to one of the dropboxes, the F-FTS (data management system developed at FNAL)
 copies them to tape-backed locations in dCache,
@@ -212,7 +223,7 @@ In addition to distributing pre-built code on CVMFS, both pre-built libraries an
 are available via {\tt http://scisoft.fnal.gov}.
 
 
-\subsection{Resource Requirements}
+\section{Resource Requirements}
 \label{sec:35t-resource-requirements}
 The amount of data collected by the 35-ton Phase\,II run is approximately 200\,TB. 
 %The amount of raw data collected

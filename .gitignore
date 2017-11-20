@@ -111,6 +111,7 @@ sympy-plots-for-*.tex/
 .DS_Store
 CERNproto.pdf
 35t.pdf
+protodune.pdf
 .lock-waf*
 .waf-*
 build
