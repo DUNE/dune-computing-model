@@ -1,4 +1,100 @@
-\label{sec:35t}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%  DUNE COMPUTING MODEL. Start of work October2015.    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\topmargin=-0.5in
+\oddsidemargin=0in
+\evensidemargin=0in
+\textwidth=6.2in
+\textheight=9.25in
+
+\usepackage[dvips]{graphics}
+\usepackage[nomargin,inline,marginclue,draft]{fixme}
+\usepackage{rotating}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage{enumerate}
+
+%\usepackage[titletoc]{appendix}
+
+\usepackage{multirow}
+
+%% draftwatermark causes infinite loop on SL6's ancient TeXLive
+\usepackage[firstpage]{draftwatermark}
+\usepackage{lipsum}
+\usepackage{tikz}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[blocks,affil-it]{authblk}
+
+\usepackage{xspace}
+
+
+\newcommand{\pd}{protoDUNE\xspace}
+\newcommand{\filesize}{5\,GB\xspace}
+
+% experimental - for diameter symbol etc
+\usepackage{wasysym}
+
+\RequirePackage{lineno}
+
+\bibliographystyle{plain}
+\bibliographystyle{unsrt}
+
+\usepackage{graphicx, subfigure}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black,bookmarks=true]{hyperref}
+
+% Depth can be adjusted, and 3 may seem excessive, but when set to 2, a lot of interesting detail in TOC is lost.
+\setcounter{tocdepth}{3}
+
+
+\begin{document}
+
+%\linenumbers
+
+\title{Computing Model for the DUNE Experiment}
+
+\date{\today}
+
+\maketitle
+
+\centerline{The DUNE Collaboration}
+
+
+\SetWatermarkText{DRAFT}
+\SetWatermarkLightness{0.9}
+\SetWatermarkScale{3}
+
+\vspace{2cm}
+
+\input{abstract}
+
+
+% --- executive summary section ---
+\newpage
+%\centerline{\textbf{\centerline{\bf{\Large {Executive Summary}}}}} 
+%\input{execsum}
+
+%++++++++++++++++++++++++++++++++++++++++
+% TOC and lists of tables and figures
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+
+%++++++++++++ MAIN DOCUMENT +++++++++++++++
+\newpage
+
 \subsection{Overview}
 The 35-ton prototype of the DUNE single-phase LArTPC had two operating periods, called Phase\,I and Phase\,II.
 Operations ended in early 2016.
@@ -131,3 +227,4 @@ a CPU core can process data has not evolved much in the last seven years.  An es
 two versions of reconstruction, which contain copies of the raw data, should be available at any given time.
 Simulation samples are expected to be of a similar size or smaller than the data sample, as many anaysis
 topics will be data-driven in order to characterize detector performance.
+\end{document}
