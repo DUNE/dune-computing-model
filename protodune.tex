@@ -77,7 +77,7 @@
 \begin{abstract}
 
 \noindent  The \textit{\pd} program initiated by the DUNE Collaboration with strong support from CERN
-will operate two large scale Liquid Argon TPC prototypes at CERN in 2018 (for the single- and dual-phase
+will operate two large scale Liquid Argon TPC prototypes at the CERN SPS in 2018 (for the single- and dual-phase
 versions of the detector). It is characterized by substantial data rates and volume as
 well as considerable requirement to computing resources necessary to process the experimental data.
 This document describes the Computing Model developed for the \pd program.
@@ -107,8 +107,9 @@ It also has the potential to be an important platform for realistic Liquid Argon
 (e.g. PID, shower response, etc.) utilizing controlled conditions of a test-beam experimental setup. The name ``\pd'' currently applies to two
 full-scale LArTPC prototypes based on two different technologies --- single-phase (SP) and dual-phase (DP) TPCs.
 The ``full-scale'' designation is used to describe the fact that the prototypes
-contain important (and large) structural and readout elements built according to the specifications
-of the eventual full detector (including the size).
+contain crucial (and large) structural and readout elements built according to the specifications
+of the eventual full detector. For example, the Anode Plane Assemblies used in the Single-Phase prototype will be
+of the same contruction and size as planned for the DUNE Far Detertor.
 
 The ``single-phase''  LArTPC functions without amplification in the medium (liquid Argon) and is in essence a very large ionization chamber
 equipped with a large number of readout electrodes (wires), each with its own electronics chain. In this design, the front-end electronics is
@@ -120,8 +121,8 @@ on top of the detector where they multiply according to principles of proportion
 in the sense they explore different technologie and approaches to optimization of the Liquid Argon detector characteristics.
 
 Both  proposals have been approved and the dual-phase prototype was given the official designation as a CERN experiment \textbf{NP02},
-while the single-phase was designated as \textbf{NP04}. They will be built and deployed at CERN in 2017 and scheduled to take data in 2018.
-The prototypes will be placed in a specially constructed large-scale extension of the existing experimental hall located in the CERN North Area.
+while the single-phase was designated as \textbf{NP04}. They are built and deployed at CERN in 2017 and scheduled to take data in 2018.
+The prototypes are housed in a specially constructed extension of the existing experimental hall located in the CERN North Area.
 Each prototype will be provided a dedicated optical fiber network connection to the CERN central storage facilities located in the West Area
 campus of CERN. The nominal bandwidth of these dedicated network connections will be 20\,Gbps for each experiment.
 % The motivations for this specific choice of nominal bandwidth will be presented in the following sections.
@@ -129,15 +130,32 @@ campus of CERN. The nominal bandwidth of these dedicated network connections wil
 % ----------------------------------------------------------
 \section{\pd Glossary}
 \begin{description}
+
 \item{\textbf{CASTOR}} archival tape storage at CERN
+
 \item{\textbf{Enstore}} archival tape storage at FNAL
-\item{\textbf{EOS}}  high-performance distributed disk storage system at CERN
+
+\item{\textbf{EOS}}  high-performance distributed disk storage system at CERN, built on XRootD
+
 \item{\textbf{F-FTS}} Fermilab File Transfer Service
-\item{\textbf{NP02}} The dual-phase part of the \pd program
-\item{\textbf{NP04}} The single-phase part of the \pd program
-\item{\textbf{DQM}} Quality Assurance (mostly applied to the recorded data in this context)
+
+\item{\textbf{FUSE}} Software which allows to mount EOS on a computer node such that it is similar to a POSIX file system
+
+\item{\textbf{NP02}} The dual-phase part of the \pd program, a.k.a \pd-DP
+
+\item{\textbf{NP04}} The single-phase part of the \pd program, a.k.a \pd-SP
+
+\item{\textbf{DQM}} Data Quality Monitoring, a process and an assortment of algorithms used to ascertain
+the condition of the detector and its basic performance with more detail than is possible in the DAQ monitoring
+
+\item{\textbf{Prompt Processing System}} The system used to run algorithms for Data Quality Monitoring, which
+aims to operate with a short turnaround time so as to provide actionable information to the experiment operators;
+the \pd prompt processing system if often abbreviated as p3s.
+
 \item{\textbf{RDMS}} Raw Data Management System
+
 \item{\textbf{SAM}} Metadata and File Catalog at FNAL, interfacing mass storage
+
 \end{description}
 
 
@@ -166,7 +184,7 @@ of the \pd raw data, while zero suppression is considered a separate option that
 
 It is foreseen that the total amount of data to be produced by the \pd detectors will be of the order of a few
 petabytes (including commissioning runs with cosmic rays). Instantaneous and average data rates in the data transmission chain are expected to be
-substantial (see \ref{sec:np02_online_processing} and \ref{sec:np04_data_rate}).
+substantial (see sections \ref{sec:np02_online_processing} and \ref{sec:np04_data_rate}).
 For these reasons, capturing data streams generated by the protoDUNE DAQ systems, buffering of the data, performing fast DQM analysis,
 and transporting the data to sites external to CERN for processing (e.g. FNAL, BNL, etc.) requires significant resources and adequate planning.
 
@@ -181,15 +199,11 @@ and transporting the data to sites external to CERN for processing (e.g. FNAL, B
 
 \noindent
 Conceptual diagram of the raw data flow in \pd is presented in Fig.\ref{fig:raw_concept}. It shows the general logic
-of data flow, and does not include specific assumptions about what system will be used to actually move the data.
-It also reflects the central role of EOS in the \pd raw data management scheme. This is motivated by the experience
+of data flow and also reflects the central role of EOS in the \pd raw data management scheme. This is motivated by the experience
 and architecture of the LHC experiments. EOS serves as the staging area from which the data gets committed to CASTOR
 and from which it is transmitted to a number of endpoints including principal data centers such as FNAL and others.
 It is also used to provide input to DQM and other express processing streams at CERN (which fall into the ``prompt use'' category).
 This scheme assumes that there is no conceptual difference between NP02 and NP04 in terms of the general pattern of data flow.
-
-Data centers at BNL and NERSC are placed in this diagram for illustration purposes. Any other institution possessing adequate
-resources can participate in this data distriburtion scheme if desired.
 
 
 \section{Prioritization}
