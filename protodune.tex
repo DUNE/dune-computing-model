@@ -117,9 +117,11 @@ The ``single-phase''  LArTPC functions without amplification in the medium (liqu
 equipped with a large number of readout electrodes (wires), each with its own electronics chain. In this design, the front-end electronics is
 situated within the cryostat in order to minimize noise (the so-called ``cold electronics design'').
 
-In the ``dual-phase''  TPC ionization
-electrons are extracted from the liquid into the gaseous phase of Argon, and drift in Argon gas towards a specially designed 2D structure
-on top of the detector where they multiply according to principles of proportional chamber operation. The two designs are complementary
+%In the ``dual-phase''  TPC ionization
+%electrons are extracted from the liquid into the gaseous phase of Argon, and drift in Argon gas towards a specially designed 2D structure
+%on top of the detector where they multiply according to principles of proportional chamber operation. 
+In the ``dual-phase''  TPC electrons are drift in the liquid ,  extracted from the liquid to the gas phase, and multiplied in avalanches with micro-pattern detectors (Large Electron Multiplier). 
+The two designs are complementary
 in the sense they explore different technologie and approaches to optimization of the Liquid Argon detector characteristics.
 
 Both  proposals have been approved and the dual-phase prototype was given the official designation as a CERN experiment \textbf{NP02},
@@ -153,6 +155,8 @@ techniques such as Huffman algorithm and others.
 
 \textbf{At the time of writing it is assumed that only the lossless algorithms will be applied during the compression
 of the \pd raw data.}
+NP02 will not apply  zero suppression to the data. Due to the good S/N ratio with the RMS noise at the level of 1-2 ADC counts lossless compression is applied 
+allowing compressing the charge readout data flow by a factor 10.
 %, while zero suppression is considered a separate option that may be implemented when taking a portion of the data.
 
 It is foreseen that the total amount of data to be produced by the \pd detectors will be of the order of a few
@@ -179,7 +183,7 @@ As shown in the diagram, EOS serves as the staging area from which the data gets
 and from which it is transmitted to a number of endpoints including principal data centers such as FNAL and others.
 This architecture is motivated by the proven design of data handling systems in the LHC experiments.
 
-EOS is also used as staging area for to Data Quality Monitoring (DQM) processing which takes place in Tier-0.
+EOS is also used by NP04 as staging area for to Data Quality Monitoring (DQM) processing which takes place in Tier-0.
 % and other express processing streams at CERN
 % (which fall into the ``prompt'' category).
 % This scheme assumes that there is no conceptual difference between NP02 and NP04 in terms of the general pattern of data flow.
@@ -197,7 +201,8 @@ EOS is also used as staging area for to Data Quality Monitoring (DQM) processing
 
 \section{RDMS Requirements}
 \subsection{A Note on the File Size}
-At the time of writing, the raw data file size in protoDUNE  is assumed to be \filesize (nominally). A few metrics in the data management area depend of this
+At the time of writing, the raw data file size in protoDUNE  is assumed to be \filesize (nominally) for NP04.
+NP02 will write file of 3GB, by grouping 200 events. A few metrics in the data management area depend of this
 parameter, for example the total number of files produced by the experiment, rate of file registration in the database etc. This can be adjusted
 later as needed and is used here primarily for estimation purposes.
 
@@ -213,9 +218,12 @@ experiment site and CERN central storage facilities, or an issue with the centra
 On top of that, NP02 has substantial additional requirements as explained below.
 \begin{description}
 
-\item[NP02] The planned buffer depth is rather large (petabyte scale), in order to enable a substantial amount of
-processing locally at the site of the experiment, in accordance with the existing plans (see section~\ref{sec:np02_online_processing}).
-The CPU is provided by the so-called ``neut'' cluster provided by the CERN Neutrino Platform and located in the immediate vicinity of the NP02 detector.
+\item[NP02] The storage servers already installed in EHN1  correspond to 1.44PB of disk space, 1PB of disk space available after RAID redundancy.
+The system has a data bandwidth of 20GB/s.
+This space allows storing more than 3 days of data.
+%The planned buffer depth is rather large (petabyte scale), in order to enable a substantial amount of
+%processing locally at the site of the experiment, in accordance with the existing plans (see section~\ref{sec:np02_online_processing}).
+The CPU is provided by the so-called ``neut'' cluster provided by the CERN Neutrino Platform and located in EHN1, near the the immediate vicinity of the NP02 detector.
 
 \item[ NP04] The single-phase experiment is equipped with a more modest Online Buffer with no provision for large-scale
 local processing.
@@ -271,12 +279,9 @@ be taken for each beam event trigger, in order to perform various calibrations.
 %and serves as an active staging area for local processing. This has a number of consequences such as the need to plan
 %for simulataneous read and write operations on the same storage system, taking place at a considerable rate.
 
-\subsection{NP02 Data Volume}
-Outline of the online processing plans for NP02 is presented in Sec.\,\ref{sec:np02_online_processing}.
-As follows from this description, and in constrast to NP04, data will not be streaming to mass storage at
-the same average rate as it is produced in the detector systems, and instead recorded selections of data
-will be transferred to EOS and external sites from time to time in a managed manner, based on operators' decision.
-The pattern of this transfer is not yet defined. Nominal total volume of data to be preserved is 2.5\,PB.
+
+
+
 
 %Data volume and rate for NP04 is presented in Sec.\,\ref{sec:np04_data_rate} for three
 %different scenarios.
@@ -312,6 +317,34 @@ At the time of writing, the nominal number of triggers to be recorded in NP04 is
 Combined with the readout size quoted in Table\,\ref{tab:np04_data_rate}, this leads to
 the estimate of 3\,PB for the total data volume for beam events.
 
+\subsection{NP02 Data rates and  volume}
+\label{sec:np02_data_rate}
+The outline of the online processing plans for NP02 is presented in Sec.\,\ref{sec:np02_online_processing}.
+%As follows from this description, and in constrast to NP04, data will not be streaming to mass storage at
+%the same average rate as it is produced in the detector systems, and instead recorded selections of data
+%will be transferred to EOS and external sites from time to time in a managed manner, based on operators' decision.
+%The pattern of this transfer is not yet defined. Nominal total volume of data to be preserved is 2.5\,PB.
+NP02 will not use zero skipping.A SPS supercycle will last 50 seconds, with 2 spills of 4.8 seconds each.
+The beam trigger rate during spills will be 100Hz. Cosmic data will be taken during off-splii time l, with a low rate (O(1Hz)).
+Taking into account the  latest beam request for 2018,  NP02 data volume  is   presented  inTable~\ref{tab:np02_data_rate}.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}[h]{l|r}
+\hline
+     Compressed, non-zero-suppressed event size & 15.9 MB\\
+    Average beam data flow to offline data storage &   305.3 MB/s  \\
+    Average off-spills cosmic data flow to offline data storage &   12.4 MB/s\\
+    Planned total statistics of beam triggers in 30 beam days with 50\% efficiency&25M\\
+    Planned overall storage size of beam events&   0.4 PB\\
+   Cosmic rays in 30  beam days&  2.1  M\\
+   Planned storage size for cosmic rays during beam period&  0.04 PB\\
+   Requested (in 2016) overall storage envelope for ProtoDUNE-DP&0.7 PB \\
+    \hline
+  \end{tabular}
+ \caption{NP02 data volume}
+  \label{tab:np02_data_rate}
+\end{table}
 
 \subsection{Functional Requirements for Data Management}
 \label{sec:func_reqs}
@@ -343,37 +376,39 @@ given the expected data rates
 
 % ----------------------------------------------------------
 \section{Outline of the NP02 online processing plans}
-\fxnote{Maxim - this will require perhaps a total rewrite by the NP02 team}
-\ \\
+
 \label{sec:np02_online_processing}
-The online processing in NP02 will be sized in order to process all beam data produced at the nominal rate of 100\,Hz. 
 
-The idea is to disentangle $\sim$70 cosmic ray tracks overlapping each beam event in the $\pm$4ms around the beam trigger
-and to exploit the light readout information in order to reconstruct the real drift coordinates of these tracks.
-Then one or two tracks per event satisfying certain requirements such as track length and angle are selected for the monitoring and
-data DQM tasks. The idea is to use them first for purity assessment and once the purity is determined to measure the gain in all
-channels. By accumulating information from many events the system can provide an online monitoring of the status of the detector
-and data quality. Also subject to monitoring will be some event parameters which are representative of the different kind of events and
-beam energies.
-% in order to check that the samples do not change with time during data taking.
+The DAQ system for ProtoDUNE-SP is based on AMC digitization cards hosted in microTCA (uTCA) crates. 
+The number of readout channels amounts to 7680 channels for the charge readout system and 36 channels for the light readout system.
+The charge readout is made via anode strips of 3 m length and 3 mm pitch organized in two orthogonal collection views. 
+A drift window in the charge readout system corresponds to 4 ms and it is made of 10k 400 ns samples per channel at 12 bits. 
+The light readout system produces, during beam spills, data at 14 bits summed in 400 ns samples covering a total of two drift windows
+ (4 ms before and 4ms after the beam trigger time) in order to disentangle cosmic ray overlaps and to correlate for them the light readout to the charge readout information.
+ The charge readout digitization cards (64 channels per card) are hosted in groups of 10 in 12 uTCA crates.
+Zero suppression is deliberately not applied to the charge readout data but the entire content of each drift window is transmitted.
+ Due to the good S/N ratio, with a noise RMS at the level of 1-2 ADC counts, lossless compression is applied on the charge readout digitization cards 
+allowing compressing the data flow by a factor 10.
+Raw data are written by the events builders in files of about 3 GB size, grouping 200 events, and channeled by the DAQ back-end in an 
+online storage/computing facility hosted in the counting room at EHN1. The file size has been chosen in order to have good W/R
+ performance on the high bandwidth distributed file system based on a local EOS implementation. A fast online reconstruction based on QSCAN
+ is applied to all events. It allows selecting for each beam trigger a couple of suitable overlapped cosmic ray tracks (out of about 70 overlaps per drift window). 
+These selected tracks have correct angular and length requirements in order to be exploited to measure on real time the purity of liquid argon and, 
+once the signal losses due the electrons lifetime are corrected, the gain of the LEMs operating on dual phase. 
+The online storage/processing system is part of the DAQ system and not of the offline computing.
+ It includes a local distributed storage system based on EOS and an automatic batch processing system exploiting local CPU resources.
+ The operation on the online processing ensures to keep under control the detector during beam 
+data taking and guarantees the detector conditions and the data quality of the large sample of beam interactions which has
+ to be acquired and stored on real time but which may be analyzed over a much longer time-scale.
+A smaller scale online processing system is already operative since the Fall 2016 on the 3x1x1 detector,
+ including all the machinery for the DAQ interface, the high bandwidth distributed storage, data processing, 
+data handling and final transfer on the central CERN EOS and CASTOR system. Data integrity  is preserved by performing
+checksum between all points of data transfer. 
 
-In the above the following assumptions are made which are based on a few known features of dual phase:
-\begin{itemize}
-\item easy reconstruction due to only two collection views and high signal-to-noise
-\item reasonable number of readout channels (7680)
-\item use of existing QSCAN software for fast reconstruction
-\item data compression factor of at least 10
-\end{itemize}
 
-\noindent This kind of online data treatment is  different with respect to what one would perform
-more generally offline. The use of the CERN batch system for this online analysis is not foreseen.
+ 
 
-In general, the data produced by the online processing system will not be saved to mass storage for presevation, with
-the exception of small subsets for purpose such as the online event display and others. Statistical information will be gathered by
-the monitoring software and saved from time to time.
 
-Design of the data and workflow management required to make possible processing strategy outlined above is work in progress
-at the time of writing.
 
 % ----------------------------------------------------------
 
@@ -461,11 +496,9 @@ it makes possible prompt use of the files residing in EOS, as explained below.
 \end{figure}
 
 \subsection{FTS instances in NP02}
-NP02 will also rely on FTS to transfer data from EOS to tape and remote sites such as FNAL,
+NP02 will also rely on FTS only to transfer data from EOS to tape and remote sites such as FNAL,
 so the block ``FTS-2'' in the diagram presented in the diagram in Fig.~\ref{fig:ftsinstances} will still be in place.
-However, the system to move the data from the experiment-local storage to EOS will be specified at a later date,
-and be subject to the requirement that there is minumum interference between the real-time processing
-taking place on site and data transfer to EOS.
+The system to move the data from the experiment-local storage to EOS is based on xrdcp.
 
 \subsection{Data provisioning for DQM}
 \label{sec:prompt}
