@@ -503,7 +503,7 @@ The system to move the data from the experiment-local storage to EOS is based on
 \subsection{Data provisioning for DQM}
 \label{sec:prompt}
 
-Prompt processing will be performed at CERN on a subset of the raw
+Data Quality Monitoring (previously termed Prompt processing) will be performed at CERN on a subset of the raw
 data to support commissioning and ongoing data quality monitoring.
 A method tested in an early ``Data Challenge'' involved a FTS instance
 making a ``side copy'' of the data to a directory serving as the DQM ``inbox''.
@@ -846,7 +846,7 @@ Regional proxies to support efficient operation of the SAM data catalogs will be
 %\label{distr_proc}
 
 FNAL provides the bulk of computational power to DUNE via Fermigrid and other facilities. 
-We plan to leverage these resources to process the data coming from the protoDUNE test.
+We plan to leverage these resources to process the data coming from the protoDUNE test. In addition CERN is providing some dedicated resources including a full copy of the raw data on tape, compute nodes and disk caching areas via EOS.
 
 One of the principal goals will be quick validation of the data collected in each measurement, in
 order to be able to make adjustments during the run as necessary. 
@@ -898,6 +898,26 @@ Extrapolating from our previous experience running Monte Carlo for the former LB
 that  a few hundred TB of continuously available disk space will be needed. It is expected that protoDUNE will require
 a few~PB of storage at Fermilab to ensure optimal data availability and  processing efficiency. 
 % Not clear whether we should be asking for a few PB of disk space at Fermilab
+
+\subsection{Computing at the CERN Tier-0}
+
+The protoDUNE computing model includes the CERN Tier-0. CERN provides resources as part of the support for the Neutrino Program and collaboration with DUNE for use by protoDUNEs and DUNE. The Tier-0 resource is used for particular functions in the computing model (with the data management and data quality monitoring as described earlier in this document):
+\begin{itemize}
+\item Disk data caching on EOS for buffering, processing and analysis
+\item Data archiving to tape through CASTOR
+\item Data quality monitoring specifically for protoDUNE Single Phase  
+\item Simulation and production resources managed through the centralized production service
+\item Event simulation, software development and data analysis for scientists and engineers locally resident at CERN
+\end{itemize}
+Support for the core services is from the CERN IT Division.  To support the shared use of the disk and compute resources: 
+\begin{itemize}
+\item The experiment defines, applies and monitors batch policies and prioritizations for sharing of the resources between the different DUNE/ProtoDUNE activities. 
+\item CERN IT policies support application of these policies as well as opportunistic use of additional compute cycles using Condor user accounting groups. 
+\end{itemize}
+During protoDUNE detector commissioning, cosmic ray and beam data taking priority will be given to the DQM disk and CPU needs.  
+
+\section{Data Analysis}
+Analysis of the data from protoDUNE is done by individual users or groups via either production tools to used distributed resources - when a significant amount of computing or storage is needed - or running on the scientists local laptop or facility resources (e.g. university clusters). Event data is accessed using the SAM meta-data catalogs. Guidance will be available on the meta-data to be used for storing and cataloging outputs to be shared with the group or collaboration. Software can be installed from the central CVMFS distribution system.  
 
 \section{Data distribution}
 We foresee that data analysis (both experimental data and Monte Carlo) will be performed by collaborators residing in many 
