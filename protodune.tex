@@ -197,6 +197,24 @@ EOS is also used by NP04 as staging area for to DQM processing which takes place
 %In NP04, data samples will be processed for DQM purposes on the CERN batch facility (and perhaps at FNAL if low latency can be
 %achieved for data transmission). The latter can be thought of as a more sophisticated monitoring done in near-time in addition to the in
 %situ monitoring done with DAQ, which implies a ``few minutes'' scale of processing.
+\subsection{Timeline Definitions}
+
+The different periods in the ProtoDUNEs lifecycle can affect components of the computing and software model. We define the periods for reference:
+
+\begin{itemize}
+\item  Beam Data Taking Operations during accelerator beam time.
+\item  Cosmic Ray data acquisition that occurs during both accelerator beam and non-beam time.
+\item Commissioning periods that are focused on exercising the systems in preparation for Cosmic Ray and Beam Data Taking.
+\item Post data-taking after accelerator beam time that includes cosmic ray operations after beam time as well as when no new data is being acquired. 
+\end{itemize}
+
+Offline Processing has defined periods of:
+\begin {itemize} 
+\item Keep up event data processing during beam and cosmic ray operations. 
+\item Event data processing and reprocessing after beam and cosmic ray operations.
+\item Simulations before, during and after data and cosmic ray operations
+\item Data Analysis which needs to occur long after data and cosmic ray operations have finished.
+\end{itemize}
 
 
 \section{RDMS Requirements}
@@ -949,6 +967,9 @@ as documented in the DUNE Computing Model.
 
 The software tools will need to be portable, well maintained and validated. To ensure that this happens,
 we plan to establish close cooperation among participating laboratories and other research institutions.
+
+\subsection{Validation and Metrics}
+A variety of validation and metrics activities are included in the computing model. These span from automated Continuous Integration (CI) runs when the software releases are made to reference reconstruction output histograms and plots that are  compared and discussed between each release and as new algorithms are included. 
 
 
 \newpage
