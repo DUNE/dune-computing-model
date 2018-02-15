@@ -226,13 +226,31 @@ There are two LArTPC apparatuses to be used in beam test: single-phase (NP04) an
 \subsection{Hardware Resources)
 The Neutrino Platform (NP) computing cluster (so-called ``npcmp'') located in EHN1, near the the immediate vicinity of the NP02 detector, consists of about 300 nodes, serving as an integral role to the CERN Neutrino platform R&D projects. It represents an effort to foster fundamental research in the field of Neutrino physics as it provides data processing facility. These nodes are DELL Poweredge 1950 machines each with 16 cores. A part of these machines have a 2 TB hard disk that makes them suitable also for storing data for different jobs. 
 Featuring Intel Xeon processors, the servers offer the power and performance that we will need in Data Processing and Quality Monitoring.
-The software build process is CPU intensive, and the build tools in use allow parallelization to many cores. A build machine with at least 16 cores is desirable. The number of cores that can be profitably used by a build machine depends on the I/O capabilities to the disks storing applications. Since the build node should not be used to run programs, even to test built code, then the code must reside on shared disks.
-
-We cannot begin to over emphasize the need for data processinbg and quality monitoring coupled with automating system configurations
-and remote monitoring of the cluster. To achieve these, a software stack has been chosen to
+The software build process is CPU intensive, and the build tools in use allow parallelization to many cores. A build machine with at least 16 cores is desirable. The number of cores that can be profitably used by a build machine depends on the I/O capabilities to the disks storing applications. Since the build node should not be used to run programs, even to test built code, then the code must reside on shared disks. We cannot begin to over emphasize the need for data processinbg and quality monitoring coupled with automating system configurations and remote monitoring of the cluster. To achieve these, a software stack has been chosen to
 implement automatic propagation of configurations across all the nodes in the cluster.
+For a fully operational cluster these tasks must be carried out; implementation and monitoring of all the necessary web-paged tools for the DQM cluster operational monitoring, including: frontend configuration, server nodes and users monitoring, job monitoring, batch process monitoring, sites availability, data management and transfers between CERN-EOS and EHN1 and the outside world.
 
-\subsection{Workload Management Systems}
+\subsection{Puppet and Workload Management Systems}
+There is an evident need for an automated configuration management system for our cluster. To manage the machines hosted in EHN1, some
+virtual machine (VM) are hosted on CERN OpenStack Cloud infrastructure. The whole system is already integrated in the CERN Puppet Orchestration. The open source Puppet helps to describe machine configurations in a declarative language, bring machines to a desired state and keep them there through automation. The deployment type of Puppet in this cluster was agent/master architecture. Puppet was used with Foreman, an open source tool that helps with the management of servers by an easy interaction with Puppet to automate tasks and application deployment. Foreman provides a robust web interface that allows us to provision, configure cluster nodes and leverage its External Node Classifier (ENC) and reporting capabilities to ease the management of Puppet.
+
+\subsubsection{Puppet Architecture}
+According to the proposed topology of the system we created the following architecture. 
+The main challenge we encountered was that the system will use physical and virtual machines, but a good management of the host groups and environments can solve this problem. For the main host group we created a new environment, lbd branch, and there we tested all the features for the cluster.
+
+\begin{figure}[tbh]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/ehn1-puppet.png}
+  \caption{EHN1- cluster system architecture.}
+  \label{fig:ehn1-puppet}
+\end{figure}
+
+All nodes in the npcmp host group are all part of the same service, they have common configuration and are managed by the same group of people (np-cmp-admin e-group). The whole npcmp host group is managed by the Puppet Master.
+Each host group and sub-host group is managed through the Puppet manifest. A puppet run occurs each hour in all the nodes. The manifests are stored using the Git version control system.
+ The workers sub-host group contains all the physical machines that are part of the clus- ter and that will run all compute-intensive jobs. In a future HTCondor infrastructure, these machines will be the workers of the system. We use the workers2 sub-host group for testing new modules for our system.
+The development sub-host group is split in more sub-host groups. The front-end sub-host group is the interface between the users of the system. It can be extended to an interactive interface in which the user will constantly monitor his jobs. The balance sub-host group is used for the load balancing under the alias npcmp.cern.ch. The last sub-host group, HTC will be used as a HTCondor Master - negotiator for the jobs submitted in the cluster.
+
+\subsubsection{Workload Management Systems}
 Workload management is the process of distributing the different workloads that a system handles. 
 The workload manager of the system fulfills these expectations by controlling access
 of the workload to system resources through prioritization or other algorithms specified by the
@@ -241,6 +259,7 @@ execution units or servers.
 The data rate and volume will be substantial and we need an architecture that can be scalable and handle a big computing power. 
 The main goal is the implementation of a pilot-based mechanism for computational payload deployment. Neutrino Platfrom Computing group worked in configuring and designing the architecture for the cluster of computers that are located in the EHN1 hall, for their future
 use in the experiments.
+
 
 
 
