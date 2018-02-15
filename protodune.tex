@@ -216,6 +216,34 @@ Offline Processing has defined periods of:
 \item Data Analysis which needs to occur long after data and cosmic ray operations have finished.
 \end{itemize}
 
+\section{Computing Infrastructure at EHN1}
+\subsection{Neutrino Platform and ProtoDUNE} 
+Working in the neutrino sector is a worldwide priority promising physics beyond the Standard Model (BSM). 
+The Deep Underground Neutrino Experiment, DUNE, is a proposed international neutrino experiment. 
+The protoDUNE program is designed to test and validate the technologies and design that will be applied to the construction of the DUNE. The CERN Neutrino Platform's R&D facility is located in a test-beam hall (EHN1 hall) on CERN's Prevessin site.
+There are two LArTPC apparatuses to be used in beam test: single-phase (NP04) and dual-phase (NP02).
+
+\subsection{Hardware Resources)
+The Neutrino Platform (NP) computing cluster (so-called ``npcmp'') located in EHN1, near the the immediate vicinity of the NP02 detector, consists of about 300 nodes, serving as an integral role to the CERN Neutrino platform R&D projects. It represents an effort to foster fundamental research in the field of Neutrino physics as it provides data processing facility. These nodes are DELL Poweredge 1950 machines each with 16 cores. A part of these machines have a 2 TB hard disk that makes them suitable also for storing data for different jobs. 
+Featuring Intel Xeon processors, the servers offer the power and performance that we will need in Data Processing and Quality Monitoring.
+The software build process is CPU intensive, and the build tools in use allow parallelization to many cores. A build machine with at least 16 cores is desirable. The number of cores that can be profitably used by a build machine depends on the I/O capabilities to the disks storing applications. Since the build node should not be used to run programs, even to test built code, then the code must reside on shared disks.
+
+We cannot begin to over emphasize the need for data processinbg and quality monitoring coupled with automating system configurations
+and remote monitoring of the cluster. To achieve these, a software stack has been chosen to
+implement automatic propagation of configurations across all the nodes in the cluster.
+
+\subsection{Workload Management Systems}
+Workload management is the process of distributing the different workloads that a system handles. 
+The workload manager of the system fulfills these expectations by controlling access
+of the workload to system resources through prioritization or other algorithms specified by the
+system administrator. It also ensures that workloads are distributed properly among available
+execution units or servers.
+The data rate and volume will be substantial and we need an architecture that can be scalable and handle a big computing power. 
+The main goal is the implementation of a pilot-based mechanism for computational payload deployment. Neutrino Platfrom Computing group worked in configuring and designing the architecture for the cluster of computers that are located in the EHN1 hall, for their future
+use in the experiments.
+
+
+
 
 \section{RDMS Requirements}
 \subsection{A Note on the File Size}
@@ -236,19 +264,18 @@ experiment site and CERN central storage facilities, or an issue with the centra
 On top of that, NP02 has substantial additional requirements as explained below.
 \begin{description}
 
-\item[NP02] The storage servers already installed in EHN1  correspond to 1.44PB of disk space, 1PB of disk space available after RAID redundancy.
+\item[NP02] The storage servers already installed in EHN1 correspond to 1.44PB of disk space, 1PB of disk space available after RAID redundancy.
 The system has a data bandwidth of 20GB/s.
 This space allows storing more than 3 days of data.
 %The planned buffer depth is rather large (petabyte scale), in order to enable a substantial amount of
 %processing locally at the site of the experiment, in accordance with the existing plans (see section~\ref{sec:np02_online_processing}).
-The CPU is provided by the so-called ``neut'' cluster provided by the CERN Neutrino Platform and located in EHN1, near the the immediate vicinity of the NP02 detector.
+The CPU is provided by the ``npcmp'' cluster.
 
 \item[ NP04] The single-phase experiment is equipped with a more modest Online Buffer with no provision for large-scale
 local processing.
 \end{description}
 
 \noindent
-
 
 \subsection{Data rates and buffering in NP04}
 \label{sec:np04_data_rate}
@@ -422,11 +449,6 @@ A smaller scale online processing system is already operative since the Fall 201
  including all the machinery for the DAQ interface, the high bandwidth distributed storage, data processing, 
 data handling and final transfer on the central CERN EOS and CASTOR system. Data integrity  is preserved by performing
 checksum between all points of data transfer. 
-
-
- 
-
-
 
 % ----------------------------------------------------------
 
@@ -1015,10 +1037,7 @@ the \pd prompt processing system if often abbreviated as p3s.
 
 \bibitem{sciopps} ``The Long-Baseline Neutrino Experiment: Exploring Fundamental Symmetries of the Universe'',  \url{http://arxiv.org/abs/1307.7335}
 
-
 \bibitem{surf} Sanford Underground Research Facility: \url{http://www.sanfordlab.org/}
-
-
 
 \bibitem{atlas_express} ``Prompt reconstruction of LHC collision data with the ATLAS reconstruction software'' N.Barlow et al, \textit{Journal of Physics: Conference Series 331 (2011) 032004}
 
